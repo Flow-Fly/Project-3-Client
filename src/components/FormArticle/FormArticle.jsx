@@ -8,7 +8,9 @@ import {Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 export class FormArticle extends Component {
     
     state={
+        //This action prop needs to come from the parent element if you set Create it will create new post, if edit then it will update one
         action:this.props.action,
+        idToUpdate:"",
         title:"",
         content:"",
         type:"Web Dev",
@@ -56,7 +58,7 @@ export class FormArticle extends Component {
                     </FormGroup>
 
                     <FormGroup className='form-group'>
-                        <Label className="label" htmlFor="content">Title</Label>
+                        <Label className="label" htmlFor="content">Description</Label>
                         <Input  type="textarea"
                                 className='input'
                                 rows="5" 

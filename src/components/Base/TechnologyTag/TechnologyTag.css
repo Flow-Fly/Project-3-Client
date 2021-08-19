@@ -1,0 +1,10 @@
+.TechnologyTagDiv{
+    background-color: red;
+    color: white;
+    font-size: 0.8rem;
+    margin: 0 0.1rem;
+}
+
+.TechnologyTagDiv span{
+    margin: 0.1rem;
+}
