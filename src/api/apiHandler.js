@@ -58,12 +58,26 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  getUser(userId){
+  // getUser(userId){
+  //   return service
+  //     .get("/api/users/" + userId)
+  //     .then((res) => res.data)
+  //     .catch(errorHandler);
+  // },
+
+  getMessages(roomId){
     return service
-      .get("/api/users/" + userId)
-      .then((res) => res.data)
-      .catch(errorHandler);
+    .get("/api/messages/" + roomId)
+    .then((res) => res.data)
+    .catch(errorHandler);
   },
+
+  submitMessage(message){
+    return service
+    .post("/api/messages/", message)
+    .then((res) => res.data)
+    .catch(errorHandler);
+  }
 };
 
 export default apiHandler;

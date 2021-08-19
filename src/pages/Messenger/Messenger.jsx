@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Room from './Room/Room'
+import Message from './Message/Message'
 import apiHandler from '../../api/apiHandler'
 import { withUser } from '../../components/Auth/withUser'
 import './Messenger.css'
@@ -11,12 +12,14 @@ class Messenger extends Component {
 
         this.state = {
             rooms: [],
-            currentChat: null,
-            messages: []
+            currentRoom: null,
+            messages: [],
+            writtingMessage : ''
         }
         
         this.user = this.props.context.user
         this.openRoom = this.openRoom.bind(this)
+        this.submitMessage = this.submitMessage.bind(this)
     }
 
     async componentDidMount(){
@@ -29,8 +32,30 @@ class Messenger extends Component {
         }
     }
 
-    openRoom(id){
-        this.setState({currentChat: id})
+    async openRoom(id){
+        console.log(id)
+        const messages = await apiHandler.getMessages(id)
+
+        this.setState({
+            currentRoom: id,
+            messages: messages}, () => console.log(this.state))
+    }
+
+    async submitMessage(e){  
+        e.preventDefault()
+
+        const message = {
+            room: this.state.currentRoom,
+            sender : this.user._id,
+            content: this.state.writtingMessage
+        }
+
+        const newMessage = await apiHandler.submitMessage(message)
+
+        this.setState({
+            messages: [...this.state.messages, newMessage],
+            writtingMessage:''
+        })
     }
 
     render() {
@@ -38,27 +63,40 @@ class Messenger extends Component {
         return (
             <div className="messenger">
                 <div className="chatMenu">
-                    {this.state.rooms ? 
+                    {this.state.rooms ?  //Je voulais test guard sur le length mais cannot read property of undefiened ??
                         this.state.rooms.map(room => {
                             return (
-                                <div onClick={() => this.openRoom(room._id)}>
-                                    <Room key={room._id} room={room} me={this.user} />
+                                <div key={room._id} onClick={() => this.openRoom(room._id)}>
+                                    <Room room={room} me={this.user} />
                                 </div>
                             )
                         }) : ''}
                 </div>
 
-                {!this.state.currentChat ? <div>Select to room to start chatting</div> :
-                    (<div className="chatBox">
-                    <div className="chatBoxMessages">
-                        
-                    </div>
-                    <div className="chatBoxWritting">
-                        <textarea className="chatBoxInput" placeholder="Write your message ..."></textarea>
-                        <button className="ChatSendMessage">Send</button>
-                    </div>
+                {!this.state.currentRoom ? <div>Select to room to start chatting</div> : (
+                    <div className="chatBox">
+                        {!this.state.messages ? '' : (
+                            <div className="chatBoxMessages">
+                                {this.state.messages.map(message => {
+                                    return (
+                                        <Message key={message._id} message={message}/>
+                                    )
+                                })}
+                            </div>
+                        )}    
 
-                    </div>)}
+                        <div className="chatBoxWritting">
+                            <textarea 
+                                className="chatBoxInput" 
+                                placeholder="Write your message ..."
+                                onChange={e => this.setState({writtingMessage: e.target.value})}
+                                value={this.state.writtingMessage}
+                                ></textarea>
+                            <button className="ChatSendMessage" onClick={this.submitMessage}>Send</button>
+                        </div>
+
+                    </div>
+                )}
                 
             </div>
         )
