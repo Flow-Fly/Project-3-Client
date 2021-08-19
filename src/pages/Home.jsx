@@ -1,4 +1,5 @@
 import React from "react";
+import Button from '../components/Base/Button/Button'
 
 class Home extends React.Component {
   render() {
