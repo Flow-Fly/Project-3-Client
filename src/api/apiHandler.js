@@ -50,6 +50,20 @@ const apiHandler = {
   //     .then((res) => res.data)
   //     .catch(errorHandler);
   // },
+
+  getRooms(userId){
+    return service
+      .get("/api/rooms/" + userId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getUser(userId){
+    return service
+      .get("/api/users/" + userId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };
 
 export default apiHandler;
