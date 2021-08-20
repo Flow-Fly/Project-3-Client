@@ -1,0 +1,33 @@
+
+:root{
+    --mainLightBlueColor:#00B4FF;
+    --mainLightBlueColorHover:#007cb1;
+    --cadetBlue:#35A4B2;
+    --blueMansel:#008B9C;
+    --greenSheen:#77C0BB;
+    --orangeYellowCrayola:#FFD26F;
+    --peachCrayola:#FFCDA8;
+    --linen:#FEF3E9;
+}
+
+.articleForm-container{
+    border:1px solid var(--mainLightBlueColor);
+    padding:0.3rem; 
+    max-width: 400px;
+    border-radius: 0.4rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.articleForm-container .form-group{
+    margin:0.25rem 0.25rem;
+}
+
+.articleForm-container Form{
+    display: flex;
+    flex-direction: column;
+}
+
+.articleForm-container Button{
+    align-self: center;
+}

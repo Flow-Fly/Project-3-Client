@@ -1,0 +1,20 @@
+.avatar{
+    border: solid 2px #00B4FF;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.avatar.small{
+    width: 40px;
+    height: 40px;
+}
+
+.avatar.big{
+    width: 128px;
+    height: 128px;
+}
+
+.avatar img{
+    width: 100%;
+    height: auto;
+}

@@ -1,0 +1,4 @@
+.messenger{
+    display: flex;
+    flex-direction: row;
+}
