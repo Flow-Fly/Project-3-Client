@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import FeedJobCard from '../Job/FeedJobCard';
 import apiHandler from '../../api/apiHandler';
+import Button from '../Base/Button/Button';
+import './FeedJobContent.css';
 
 export class FeedJobContent extends Component {
   state = {
@@ -21,15 +23,15 @@ export class FeedJobContent extends Component {
 
   render() {
     if (this.state.jobsInfo === []) {
-      return <div>Loading...</div>;
+      return <div className="FeedJobContent">Loading...</div>;
     }
 
     return (
-      <div>
+      <div className="FeedJobContent">
+        <Button>Share a job</Button>
         {this.state.jobs.map((job) => {
           return <FeedJobCard key={job._id} job={job} />;
         })}
-        {/* <p>Job Content</p> */}
       </div>
     );
   }
