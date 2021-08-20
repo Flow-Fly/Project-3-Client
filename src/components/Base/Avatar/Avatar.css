@@ -1,17 +1,27 @@
+.avatarWrapper{
+    position: relative;
+}
+
 .avatar{
-    border: solid 2px #00B4FF;
+    border: solid 3px #00B4FF;
     border-radius: 50%;
     overflow: hidden;
 }
 
 .avatar.small{
-    width: 40px;
-    height: 40px;
+    width: 3.5rem;
+    height: 3.5rem;
 }
 
 .avatar.big{
-    width: 128px;
-    height: 128px;
+    width: 5rem;
+    height: 5rem;
+}
+
+.avatar.tiny{
+    border: solid 2px #00B4FF;
+    width: 2rem;
+    height: 2rem;
 }
 
 .avatar img{

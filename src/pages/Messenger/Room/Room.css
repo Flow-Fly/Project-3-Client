@@ -1,0 +1,29 @@
+.roomCard{
+    padding: 1rem 2rem;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.roomCard:hover{
+    cursor: pointer;
+}
+
+.roomName{
+    display: inline-block;
+    margin-left: 1rem;
+    font-size: 600;
+}
+
+.online{
+    position: absolute;
+    border-radius: 50%;
+    background-color: limegreen;
+    width: 15px;
+    height: 15px;
+    bottom: .8%;
+    right: .8%;
+    z-index: 10;
+}
