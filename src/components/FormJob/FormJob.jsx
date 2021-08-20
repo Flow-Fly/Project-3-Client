@@ -117,7 +117,7 @@ export class FormJob extends Component {
                                     })
                                 }
                             
-                            </div>
+                        </div>
                         </div>
                     </FormGroup>
 
