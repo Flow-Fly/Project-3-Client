@@ -1,14 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './TechnologyTag.css'
 
-export class TechnologyTag extends Component {
-    render() {
-        return (
+
+function TechnologyTag(props) {
+    return (
             <div className='TechnologyTagDiv'>
-                <span>{this.props.technology}</span>
+                <span>{props.technology}</span>
+                <span className='deleteTag' onClick={props.remove}>X</span>
             </div>
-        )
-    }
+    )
 }
 
 export default TechnologyTag
+
+            

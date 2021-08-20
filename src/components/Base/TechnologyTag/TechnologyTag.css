@@ -1,10 +1,46 @@
+:root{
+    --mainLightBlueColor:#00B4FF;
+    --mainLightBlueColorHover:#007cb1;
+    --cadetBlue:#35A4B2;
+    --blueMansel:#008B9C;
+    --greenSheen:#77C0BB;
+    --orangeYellowCrayola:#FFD26F;
+    --peachCrayola:#FFCDA8;
+    --linen:#FEF3E9;
+}
+
 .TechnologyTagDiv{
-    background-color: red;
+    background-color: var(--mainLightBlueColor);
     color: white;
     font-size: 0.8rem;
-    margin: 0 0.1rem;
+    margin: 0.1rem 0.1rem;
+    padding: 0.1rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.15s ease-in-out;
+    border:1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.TechnologyTagDiv:hover {
+    background-color: var(--mainLightBlueColorHover);
+    cursor: pointer;
 }
 
 .TechnologyTagDiv span{
     margin: 0.1rem;
+    font-weight: bolder;
+}
+
+.TechnologyTagDiv .deleteTag{
+    margin: 0.1rem;
+    font-weight: bolder;
+    padding: 0 0.1rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.TechnologyTagDiv .deleteTag:hover{
+    margin: 0.1rem;
+    font-weight: bolder;
+    background-color: darkblue;
 }
