@@ -1,0 +1,77 @@
+:root{
+    --mainLightBlueColor:#00B4FF;
+    --mainLightBlueColorHover:#007cb1;
+    --cadetBlue:#35A4B2;
+    --blueMansel:#008B9C;
+    --greenSheen:#77C0BB;
+    --orangeYellowCrayola:#FFD26F;
+    --peachCrayola:#FFCDA8;
+    --linen:#FEF3E9;
+}
+
+.feedContainer{
+    border:1px solid var(--mainLightBlueColor);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    /* For testing */
+    width:500px;
+    height:300px;
+    /* width: 100%; */
+    background: #f1f1f1;
+    border-radius: 0.4rem;
+    margin: 0.5rem;
+    overflow:hidden;
+}
+
+.feedTabs{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    overflow:hidden;
+    position: relative;
+}
+
+.feedContentWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.tabs {
+    padding: 15px;
+    text-align: center;
+    width: 50%;
+    background: white;
+    cursor: pointer;
+    border-bottom: 1px solid var(--mainLightBlueColor);
+    position: relative;
+    overflow:hidden;
+    
+  }
+
+  .active  {
+    background: white;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .active::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: -5%;
+    
+    width: 110%;
+    border-radius: 0.4rem;
+    height: 5px;
+    background: var(--mainLightBlueColor);
+  }
+
+  .tabs.left{
+    border-right: 1px solid var(--mainLightBlueColor);
+  }
+
+  .tabs.right{
+    border-left: 1px solid var(--mainLightBlueColor);
+  }

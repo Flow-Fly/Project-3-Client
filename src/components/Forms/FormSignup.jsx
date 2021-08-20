@@ -67,7 +67,7 @@ class FormSignup extends Component {
         password: value,
         passwordSafe: false,
         feedback: {
-          error: 'Please provide a strong password',
+          error: 'Your password must contain 8 characters, atleast a number and a punctuation',
         },
       });
     } else {
@@ -280,24 +280,24 @@ class FormSignup extends Component {
               />
             </FormGroup>
                 {/* Display some feedback to the user when needed */}
-            <div className="feedback">
+            <div className="feedback" >
               {this.state.feedback?.message && (
-                <p
-                  style={{
-                    color: color,
-                  }}
-                >
+                <div style={{
+                  color: color,
+                }}>
                   {this.state.feedback.message}
-                </p>
+
+                </div>
+                
               )}
               {this.state.feedback?.error && (
-                <p
+                <div
                   style={{
                     color: color,
                   }}
                 >
                   {this.state.feedback.error}
-                </p>
+                </div>
               )}
             </div>
             {this.state.canSubmit ? (

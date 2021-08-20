@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import JobCard from './JobCard';
+import apiHandler from '../../api/apiHandler';
 
 export class JobsList extends Component {
   state = {
@@ -8,8 +8,8 @@ export class JobsList extends Component {
   };
 
   componentDidMount() {
-    axios
-      .get('http://localhost:4000/jobs')
+    apiHandler
+      .getJobs()
       .then((res) => {
         this.setState({
           jobs: res.data,
@@ -18,13 +18,33 @@ export class JobsList extends Component {
       .catch((err) => console.log(err));
   }
 
+  // deleteJob = (jobId) => {
+  //   apiHandler.deleteJob(jobId).then(() => {
+  //     const jobs = [...this.state.jobs].filter((job) => job._id !== jobId);
+  //     this.setState({ jobs });
+  //   });
+  // };
+
+  // onJobSelete = (jobId) => {
+  //   const selectedJob = this.state.jobs.find((job) => job._id === jobId);
+  //   this.setState({ selectedJob: selectedJob });
+  // };
+
   render() {
+    // if (this.state.jobs === undefined) {
+    //   return <div>Loading...</div>;
+    // } else {
     return (
       <div>
         {this.state.jobs.map((job) => {
           return (
             <div key={job._id}>
-              <JobCard key={job._id} {...job} />
+              <JobCard
+                key={job._id}
+                {...job}
+                handleDelete={this.deleteJob}
+                handleEdit={this.onJobSelete}
+              />
               {/* <p>{job.company}</p>
               <p>{job.location}</p>
               <p>{job.creator}</p> */}
@@ -33,6 +53,7 @@ export class JobsList extends Component {
         })}
       </div>
     );
+    // }
   }
 }
 
