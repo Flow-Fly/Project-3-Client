@@ -4,7 +4,8 @@ import { withUser } from '../Auth/withUser';
 import apiHandler from '../../api/apiHandler';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
-import './FormSignup.css';
+import './FormSign.css';
+import utils from '../../utils/helpers'
 
 const initialState = {
   canSubmit: false,
@@ -14,10 +15,6 @@ const initialState = {
   lastName: '',
   email: '',
   password: '',
-  phoneNumber: '',
-  graduationYear: '',
-  location: '',
-  type: '',
   confirmation: '',
 };
 
@@ -37,11 +34,10 @@ class FormSignup extends Component {
   state = { ...initialState };
 
   handleChange = (event) => {
-    let value =
-      event.target.type === 'file' ? event.target.files[0] : event.target.value;
+    const value = utils.titleMe(event.target.value);
 
     const key = event.target.name;
-    if (key === 'graduationYear') value = Number(value);
+    
     this.setState({ [key]: value });
   };
 
@@ -57,6 +53,7 @@ class FormSignup extends Component {
       });
   };
 
+  //  Make sure the User provide a secure enough password
   handlePassword = (e) => {
     const regex =
       /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
@@ -84,6 +81,7 @@ class FormSignup extends Component {
     }
   };
 
+  // Make sure the password and the confirmation are equals, display a non disabled button
   handleConfirm = (e) => {
     if (this.state.password === e.target.value && this.state.passwordSafe) {
       e.target.style.boxShadow = 'inset 0px 0px 2px 3px #21C078';
@@ -281,7 +279,7 @@ class FormSignup extends Component {
                 required
               />
             </FormGroup>
-
+                {/* Display some feedback to the user when needed */}
             <div className="feedback">
               {this.state.feedback?.message && (
                 <p
