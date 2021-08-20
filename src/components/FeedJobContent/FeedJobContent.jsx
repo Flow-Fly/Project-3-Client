@@ -7,6 +7,7 @@ import './FeedJobContent.css';
 export class FeedJobContent extends Component {
   state = {
     jobs: [],
+    displayAddJobForm: false,
   };
 
   async componentDidMount() {
@@ -17,7 +18,12 @@ export class FeedJobContent extends Component {
       console.log(error);
     }
   }
-  componentWillUnmount() {
+
+  handleAddJob = (job) => {
+    // this.setState({ jobs: [...this.state.jobs, job] });
+  };
+
+  async componentWillUnmount() {
     console.log(' FeedJobContent component unmounting');
   }
 
@@ -28,7 +34,7 @@ export class FeedJobContent extends Component {
 
     return (
       <div className="FeedJobContent">
-        <Button>Share a job</Button>
+        <Button onClick={this.handleAddJob}>Share a job</Button>
         {this.state.jobs.map((job) => {
           return <FeedJobCard key={job._id} job={job} />;
         })}

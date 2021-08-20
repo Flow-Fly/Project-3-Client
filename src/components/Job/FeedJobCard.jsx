@@ -18,14 +18,14 @@ const FeedJobCard = (props) => {
   return (
     <div>
       <div className="FeedJobCard">
-        <h5>{job.title}</h5>
+        <h6>{job.title}</h6>
         <ul key={job._id}>
           <li>
             <b>{job.company}</b>
           </li>
           <li>
             {job.location} |{' '}
-            {job.contractType !== undefined ? job.contractType : '...'} |
+            {job.contractType !== undefined ? job.contractType : '...'} |{' '}
             {job.level}
           </li>
         </ul>
