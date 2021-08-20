@@ -5,6 +5,7 @@ import apiHandler from '../../api/apiHandler';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import './FormSign.css';
+import utils from '../../utils/helpers'
 
 const initialState = {
   canSubmit: false,
@@ -33,7 +34,7 @@ class FormSignup extends Component {
   state = { ...initialState };
 
   handleChange = (event) => {
-    const value = event.target.value;
+    const value = utils.titleMe(event.target.value);
 
     const key = event.target.name;
     
