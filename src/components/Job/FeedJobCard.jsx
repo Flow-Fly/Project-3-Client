@@ -1,32 +1,35 @@
 import React from 'react';
-import Button from '../Base/Button/Button';
+// import Button from '../Base/Button/Button';
 
 const FeedJobCard = (props) => {
-  const {
-    _id,
-    title,
-    company,
-    location,
-    contractType,
-    handleDelete,
-    handleEdit,
-    // type,
-    // description,
-    // technologies,
-    // remote,
-    // creator,
-    // link,
-    // level,
-  } = props;
+  const job = props.job;
+  // console.log('job', job);
+
+  // const {
+  //   // _id,
+  //   title,
+  //   company,
+  //   location,
+  //   contractType,
+  //   // handleDelete,
+  //   // handleEdit,
+  //   // type,
+  //   // description,
+  //   // technologies,
+  //   // remote,
+  //   // creator,
+  //   // link,
+  //   // level,
+  // } = props;
 
   return (
     <div>
       <div>
-        <h5>{title}</h5>
+        <h5>{job.title}</h5>
         <ul>
-          <li>{company}</li>
+          <li>{job.company}</li>
           <li>
-            {location} | {contractType}
+            {job.location} | {job.contractType}
           </li>
         </ul>
 

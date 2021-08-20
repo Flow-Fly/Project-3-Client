@@ -9,7 +9,7 @@ export class FeedJobContent extends Component {
 
   async componentDidMount() {
     try {
-      const jobsInfo = await apiHandler.getJobs();
+      let jobsInfo = await apiHandler.getJobs();
       this.setState({ jobs: jobsInfo });
     } catch (error) {
       console.log(error);
@@ -26,10 +26,10 @@ export class FeedJobContent extends Component {
 
     return (
       <div>
-        {this.state.jobsInfo.map((job) => {
-          return <FeedJobCard key={job._id} post={job} />;
+        {this.state.jobs.map((job) => {
+          return <FeedJobCard key={job._id} job={job} />;
         })}
-        <p>Job Content</p>
+        {/* <p>Job Content</p> */}
       </div>
     );
   }

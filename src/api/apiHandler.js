@@ -90,7 +90,7 @@ const apiHandler = {
   //Requests related to jobs
   getJobs() {
     return service
-      .get('/jobs')
+      .get('/jobs/')
       .then((res) => res.data)
       .catch(errorHandler);
   },
