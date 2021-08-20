@@ -1,0 +1,15 @@
+.form-container {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-group {
+    margin-bottom: .5em;
+}
+
+.feedback {
+    max-width: 80%;
+}

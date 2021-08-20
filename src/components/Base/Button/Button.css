@@ -26,3 +26,9 @@
     background-color: var(--mainLightBlueColorHover);
     cursor: pointer;
 }
+
+.Button:disabled {
+    background-color: #557a8a;
+    color:#86a1be
+
+}
