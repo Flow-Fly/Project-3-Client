@@ -14,7 +14,7 @@ export class FormJob extends Component {
         idToUpdate:"",
         title:"",
         description:"",
-        technologies:[""],
+        technologies:[],
         currentTechnology:"",
         location:"",
         remote:false,
@@ -29,12 +29,10 @@ export class FormJob extends Component {
     handleCreate=(event)=>{
         event.preventDefault();
         const formData=new FormData();
-        console.log("create button clicked")
     }
     handleUpdate=(event)=>{
         event.preventDefault();
         const formData=new FormData();
-        console.log("update button clicked")
     }
 
     //To handle input change on the form
@@ -49,16 +47,24 @@ export class FormJob extends Component {
     }
 
     technoLogiesPressed=(event)=>{
-        if(event.key==="Enter"){
+        let str = this.state.currentTechnology.replaceAll(" ","");
+        
+        if(event.key==="Enter" && str!==""){
 
-            let technologiesTemp = [...this.state.technologies];
+        let technologiesTemp = [...this.state.technologies];
         technologiesTemp.push(event.target.value);
         this.setState({
             technologies: technologiesTemp,
             currentTechnology:"",
-        },()=>{console.log(this.state.technologies)})
+        })
         }
                
+    }
+
+    removeTechnology =(index)=>{
+        let technologiesTemp=[...this.state.technologies];
+        technologiesTemp.splice(index,1);
+        this.setState({technologies:technologiesTemp});
     }
 
     render() {
@@ -93,14 +99,7 @@ export class FormJob extends Component {
                     <FormGroup className='form-group'>
                         <Label className="label" htmlFor="currentTechnology">Technologies</Label>
                         <div id="technologyWrapper">
-                            <div id="TechnologyTagsDiv">
-                                {
-                                    this.state.technologies.map((technology)=>{
-                                        return <TechnologyTag technology={technology}/>
-                                    })
-                                }
                             
-                            </div>
                         <Input  className='input'
                                 id="currentTechnology"
                                 name="currentTechnology"
@@ -108,9 +107,17 @@ export class FormJob extends Component {
                                 onChange={this.handleChange}
                                 onKeyPress={this.technoLogiesPressed}
                                 type="text"
-                                placeholder="Technologies...Press ente rafter each one">
+                                placeholder="Technologies...Press enter after each one">
 
                         </Input>
+                        <div id="TechnologyTagsDiv" >
+                                {
+                                    this.state.technologies.map((technology,index)=>{
+                                        return <TechnologyTag key={index} technology={technology} remove={()=>{this.removeTechnology(index)}}/>
+                                    })
+                                }
+                            
+                        </div>
                         </div>
                     </FormGroup>
 
