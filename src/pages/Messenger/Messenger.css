@@ -1,4 +1,102 @@
 .messenger{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+    height: calc(100vh - 70px);
+}
+
+.roomsList{
+    width: 30%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.noRoom{
+    font-size: 1.5rem;
+    padding: 5rem 2rem;
+    color: grey;
+}
+
+.chatBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 40%;
+    height: 100%;
+    margin-left: 2rem;
+}
+
+
+.chatBoxWritting, .chatBoxInput{
+    width: 100%;
+}
+
+.chatBoxWritting{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+}
+
+.chatBoxInput{
+    height: 13vh;
+    margin-bottom: 1rem ;
+    margin-top: 2rem;
+    border: none;
+    border-top: solid 1px #2D354C;
+    resize: none;
+    outline: none;
+    padding: 1rem .5rem;
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(45, 53, 76, .7) rgba(45, 53, 76, .15); 
+}
+
+.chatBoxInput::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.chatBoxInput::-webkit-scrollbar-track {
+    background: rgba(45, 53, 76, .15);
+}
+
+.chatBoxInput::-webkit-scrollbar-thumb {
+    background-color: rgba(45, 53, 76, .7);;
+    border-radius: 20px;
+    border:none;
+}
+
+.chatBoxInput:focus{
+    border-top: solid 1px #00B4FF;
+}
+
+.chatBoxMessagesWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+    height: max-content;
+    padding-right: .5rem;
+}
+
+.chatBoxMessages{
+    height: calc(100vh - 70px - 13vh);
+    overflow-y: auto;
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(45, 53, 76, .7) rgba(45, 53, 76, .15); 
+}
+
+.chatBoxMessages::-webkit-scrollbar {
+    width: 8px;
+}
+  
+.chatBoxMessages::-webkit-scrollbar-track {
+    background: rgba(45, 53, 76, .15);
+}
+
+.chatBoxMessages::-webkit-scrollbar-thumb {
+    background-color: rgba(45, 53, 76, .7);;
+    border-radius: 20px;
+    border:none;
 }
