@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import JobCard from './JobCard';
 
 export class JobsList extends Component {
   state = {
@@ -21,7 +22,14 @@ export class JobsList extends Component {
     return (
       <div>
         {this.state.jobs.map((job) => {
-          return <div key={job._id}>{job.title}</div>;
+          return (
+            <div key={job._id}>
+              <JobCard key={job._id} {...job} />
+              {/* <p>{job.company}</p>
+              <p>{job.location}</p>
+              <p>{job.creator}</p> */}
+            </div>
+          );
         })}
       </div>
     );
