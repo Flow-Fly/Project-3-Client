@@ -1,0 +1,29 @@
+:root{
+    --mainLightBlueColor:#00B4FF;
+    --mainLightBlueColorHover:#007cb1;
+    --cadetBlue:#35A4B2;
+    --blueMansel:#008B9C;
+    --greenSheen:#77C0BB;
+    --orangeYellowCrayola:#FFD26F;
+    --peachCrayola:#FFCDA8;
+    --linen:#FEF3E9;
+}
+
+.FeedPostCard{
+    width: 100%;
+    border:1px solid var(--mainLightBlueColor);
+    padding:0.2rem;
+    margin:0.3rem 0;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.FeedPostCard img{
+    height:200px;
+}
+
+.postCardType{
+    
+    align-self: flex-end;
+}

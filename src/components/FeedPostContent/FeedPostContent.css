@@ -1,0 +1,16 @@
+:root{
+    --mainLightBlueColor:#00B4FF;
+    --mainLightBlueColorHover:#007cb1;
+    --cadetBlue:#35A4B2;
+    --blueMansel:#008B9C;
+    --greenSheen:#77C0BB;
+    --orangeYellowCrayola:#FFD26F;
+    --peachCrayola:#FFCDA8;
+    --linen:#FEF3E9;
+}
+
+.FeedPostContent{
+    width: 100%;
+    
+    
+}
