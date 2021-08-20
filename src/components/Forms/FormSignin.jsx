@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
 import { withUser } from "../Auth/withUser";
+import { Form, FormGroup, Label, Input } from 'reactstrap';
+import Button from '../Base/Button/Button';
+import './FormSign.css'
 
 class FormSignin extends Component {
   state = {
@@ -36,14 +39,41 @@ class FormSignin extends Component {
     }
 
     return (
-      <form onChange={this.handleChange} onSubmit={this.handleSubmit}>
-        <h2>Signin</h2>
-        <label htmlFor="email">Email</label>
-        <input type="email" id="email" name="email" />
-        <label htmlFor="password">Password</label>
-        <input type="password" id="password" name="password" />
-        <button>Submit</button>
-      </form>
+      <>
+      <div className="form-container">
+        <Form className='form' onSubmit={this.handleSubmit}>
+
+          <FormGroup>
+            <Label className='label' htmlFor='email'>Email: </Label>
+              <Input className='input'
+              id='email'
+              name='email'
+              value={this.state.email}
+              onChange={this.handleChange}
+              type='email'
+              placeholder='Email'
+              required
+              />
+            
+          </FormGroup>
+          <FormGroup>
+            <Label className='label' htmlFor='password'>Password: </Label>
+              <Input className='input'
+              id='password'
+              name='password'
+              value={this.state.password}
+              onChange={this.handleChange}
+              type='password'
+              placeholder='Password'
+              required
+              />
+            
+          </FormGroup>
+          <Button>Sign In</Button>
+        </Form>
+      </div>
+      
+      </>
     );
   }
 }
