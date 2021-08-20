@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import Avatar from '../../../components/Base/Avatar/Avatar'
+import './Room.css'
 
 class Room extends Component {
     constructor(props){
@@ -16,9 +18,13 @@ class Room extends Component {
 
     render() {
         return (
-            <div className='room'>
+            <div className='roomCard'>
+                <Avatar size="small" url={this.state.friend?.profileImg}>
+                    <div className="online"></div>
+                </Avatar>
                 <span className='roomName'>
-                    {this.state.friend ? this.state.friend.email : 'Room'}</span>
+                    {this.state.friend ? this.state.friend.firstName + ' ' + this.state.friend.lastName : 'Room'}
+                </span>
             </div>
         )
     }
