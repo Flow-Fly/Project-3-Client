@@ -34,7 +34,12 @@ class FormSignup extends Component {
   state = { ...initialState };
 
   handleChange = (event) => {
-    const value = utils.titleMe(event.target.value);
+    let value = null
+    if (event.target.name === 'firstName' || event.target.name === 'lastName') {
+      value = utils.titleMe(event.target.value)
+    } else {
+      value = event.target.value
+    }
 
     const key = event.target.name;
     
