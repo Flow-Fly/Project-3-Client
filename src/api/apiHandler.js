@@ -1,4 +1,5 @@
 import axios from 'axios';
+//import { getHeapCodeStatistics } from "v8";
 
 const service = axios.create({
   baseURL: process.env.REACT_APP_BACKEND_URL,
@@ -58,12 +59,19 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  // getUser(userId){
-  //   return service
-  //     .get("/api/users/" + userId)
-  //     .then((res) => res.data)
-  //     .catch(errorHandler);
-  // },
+  getUser(userId) {
+    return service
+      .get('/api/users/' + userId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getUsers() {
+    return service
+      .get('/api/users')
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
   getMessages(roomId) {
     return service
@@ -79,6 +87,7 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
+  //Requests related to jobs
   getJobs() {
     return service
       .get('/jobs')
@@ -110,6 +119,48 @@ const apiHandler = {
   deleteJob(jobId) {
     return service
       .delete(`/jobs/${jobId}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  //Requests related to the post
+
+  //Get all posts
+  getAllPost() {
+    return service
+      .get('/posts/')
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  //Create New post
+  createNewPost(newPost) {
+    return service
+      .post('/posts/', newPost)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  //Get one posts
+  getOnePost(postId) {
+    return service
+      .get('/posts/' + postId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  //Update one post
+  updateOnePost(postId) {
+    return service
+      .patch('/posts/' + postId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  //Delete one posts
+  deleteOnePost(postId) {
+    return service
+      .delete('/posts/' + postId)
       .then((res) => res.data)
       .catch(errorHandler);
   },

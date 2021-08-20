@@ -11,19 +11,22 @@ export class JobsList extends Component {
     apiHandler
       .getJobs()
       .then((res) => {
+        // console.log('mounting');
+        console.log(res);
         this.setState({
-          jobs: res.data,
+          jobs: res,
         });
       })
       .catch((err) => console.log(err));
   }
 
-  // deleteJob = (jobId) => {
-  //   apiHandler.deleteJob(jobId).then(() => {
-  //     const jobs = [...this.state.jobs].filter((job) => job._id !== jobId);
-  //     this.setState({ jobs });
-  //   });
-  // };
+  handleDelete = (jobId) => {
+    console.log('click');
+    apiHandler.deleteJob(jobId).then(() => {
+      const jobs = [...this.state.jobs].filter((job) => job._id !== jobId);
+      this.setState({ jobs });
+    });
+  };
 
   // onJobSelete = (jobId) => {
   //   const selectedJob = this.state.jobs.find((job) => job._id === jobId);

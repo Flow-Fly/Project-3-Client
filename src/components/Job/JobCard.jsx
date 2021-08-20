@@ -3,11 +3,11 @@ import Button from '../Base/Button/Button';
 
 const JobCard = (props) => {
   const {
+    _id,
     title,
     company,
     location,
     contractType,
-    _id,
     handleDelete,
     handleEdit,
     // type,
