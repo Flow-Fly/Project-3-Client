@@ -79,25 +79,40 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  //   getJobs(){
-  //     return service.get('/jobs').then((res)=>res.data).catch(errorHandler)
-  //   }
+  getJobs() {
+    return service
+      .get('/jobs')
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-  //   getJobs(){
-  //     return service.get(`/jobs/${jobId}`).then((res)=>res.data).catch(errorHandler);
-  //   }
+  getJob(jobId) {
+    return service
+      .get(`/jobs/:${jobId}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-  //   addJob(){
-  //     return service.post('/jobs', data).then((res)=>res.data).catch(errorHandler);
-  //   }
+  addJob(data) {
+    return service
+      .post('/jobs', data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-  //   updateJob(jobId, data){
-  //     return service.patch(`/jobs/${jobId}`).then((res)=>res.data).catch(errorHandler);
-  //   }
+  updateJob(jobId, data) {
+    return service
+      .patch(`/jobs/${jobId}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-  //   deleteJob(jobId){
-  // return service.delete(`/jobs/${jobId}`).then((res)=>res.data).catch(errorHandler)
-  //   }
+  deleteJob(jobId) {
+    return service
+      .delete(`/jobs/${jobId}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };
 
 export default apiHandler;
