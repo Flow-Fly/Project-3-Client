@@ -5,6 +5,7 @@ import apiHandler from '../../api/apiHandler';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import './FormSign.css';
+import utils from '../../utils/helpers'
 
 const initialState = {
   canSubmit: false,
@@ -33,7 +34,7 @@ class FormSignup extends Component {
   state = { ...initialState };
 
   handleChange = (event) => {
-    const value = event.target.value;
+    const value = utils.titleMe(event.target.value);
 
     const key = event.target.name;
     
@@ -66,7 +67,7 @@ class FormSignup extends Component {
         password: value,
         passwordSafe: false,
         feedback: {
-          error: 'Please provide a strong password',
+          error: 'Your password must contain 8 characters, atleast a number and a punctuation',
         },
       });
     } else {
@@ -279,24 +280,24 @@ class FormSignup extends Component {
               />
             </FormGroup>
                 {/* Display some feedback to the user when needed */}
-            <div className="feedback">
+            <div className="feedback" >
               {this.state.feedback?.message && (
-                <p
-                  style={{
-                    color: color,
-                  }}
-                >
+                <div style={{
+                  color: color,
+                }}>
                   {this.state.feedback.message}
-                </p>
+
+                </div>
+                
               )}
               {this.state.feedback?.error && (
-                <p
+                <div
                   style={{
                     color: color,
                   }}
                 >
                   {this.state.feedback.error}
-                </p>
+                </div>
               )}
             </div>
             {this.state.canSubmit ? (
