@@ -17,13 +17,20 @@
     font-size: 600;
 }
 
-.online{
+.status{
     position: absolute;
     border-radius: 50%;
-    background-color: limegreen;
     width: 15px;
     height: 15px;
     bottom: .8%;
     right: .8%;
     z-index: 10;
+}
+
+.online{
+    background-color: limegreen;
+}
+
+.offline{
+    background-color: rgba(45, 53, 76)
 }

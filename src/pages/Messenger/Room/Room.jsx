@@ -16,11 +16,16 @@ class Room extends Component {
         this.setState({friend})
     }
 
+    isConnected(){
+        if(!this.state.friend || !this.props.connectedUsers) return 
+        return this.props.connectedUsers.some(user => user._id === this.state.friend._id)
+    }
+
     render() {
         return (
             <div className='roomCard'>
                 <Avatar size="small" url={this.state.friend?.profileImg}>
-                    <div className="online"></div>
+                    <div className={this.isConnected() ? "status online" : "status offline"}></div>
                 </Avatar>
                 <span className='roomName'>
                     {this.state.friend ? this.state.friend.firstName + ' ' + this.state.friend.lastName : 'Room'}
