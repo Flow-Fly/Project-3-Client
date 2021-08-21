@@ -19,14 +19,18 @@ class Messenger extends Component {
             writtingMessage : '',
             socket: null,
             connectedUsers: [],
-            receivedMessage: null
+            receivedMessage: null,
+            newFriend: '',
+            addingFriendError: null
         }
         
         this.scrollChatRef = React.createRef()
 
+        this.timeout= null
         this.user = this.props.context.user
         this.openRoom = this.openRoom.bind(this)
         this.submitMessage = this.submitMessage.bind(this)
+        this.addFriend = this.addFriend.bind(this)
     }
 
     async componentDidMount(){
@@ -74,6 +78,7 @@ class Messenger extends Component {
     }
 
     componentWillUnmount(){
+        clearTimeout(this.timeout)
         this.socket.emit('disconnected')
     }
 
@@ -126,11 +131,72 @@ class Messenger extends Component {
         if(e.key === 'Enter' && e.shiftKey) return this.submitMessage(e)
     }
 
+    addFriend = async e => {
+        if(e.key !== 'Enter') return 
+
+        try{
+            
+            const newFriend = await apiHandler.getUserByMail(this.state.newFriend)
+            if(!newFriend.length){
+
+                this.setState({
+                    addingFriendError: "This user doesn't exist",
+                    newFriend: ''
+                })
+                
+                return this.timeout = setTimeout(() => {
+                    this.setState({addingFriendError : ''})
+                }, 3000)
+
+            } 
+ 
+            const room = await apiHandler.createRoom(this.user._id, newFriend[0]._id)
+            
+            if(room.message){
+                this.setState({
+                    addingFriendError: room.message,
+                    newFriend: ''
+                })
+
+                this.timeout = setTimeout(() => {
+                    this.setState({addingFriendError : ''})
+                }, 3000)
+
+                return this.openRoom(room.room[0])
+            }
+            else{
+                console.log(room)
+                this.setState({
+                    rooms: [...this.state.rooms, room],
+                    newFriend: ''
+                })
+                return this.openRoom(room)
+            }
+        }
+        catch(err){
+            console.log(err)
+        }
+        
+    }
+
     render() {
 
         return (
             <div className="messenger">
                 <div className="roomsList">
+                        <div className="addFriend">
+                            <input className="addFriendInput"
+                                type="text" 
+                                placeholder='Find a friend with email'
+                                onKeyDown={this.addFriend} 
+                                onChange={e => this.setState({newFriend: e.target.value})} 
+                                value={this.state.newFriend}
+                                onFocus={e => e.target.placeholder = ''}
+                                onBlur={e => e.target.placeholder = 'Find a friend with email'}
+                                />
+                             <span className='errorMsg'>{this.state.addingFriendError}</span> 
+                             {/* Would be nice to have a fadeIn/fadeOut animation */}
+                        </div>
                         {this.state.rooms.map(room => {
                             return (
                                 <div key={room._id} onClick={() => this.openRoom(room)}>

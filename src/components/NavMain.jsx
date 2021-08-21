@@ -26,7 +26,12 @@ const NavMain = (props) => {
       </NavLink>
       <ul className="nav-list">
         {context.isLoggedIn && (
-          <React.Fragment>
+          <React.Fragment>  
+            <li>
+              <NavLink to="/messenger">
+                Messenger
+              </NavLink>
+            </li>
             <li>
               <NavLink to="/profile">
                 {context.user && context.user.email}
