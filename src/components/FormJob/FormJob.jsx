@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import Button from '../Base/Button/Button';
-import apiHandler from '../../api/apiHandler';
+// import apiHandler from '../../api/apiHandler';
 import './FormJob.css';
 import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import TechnologyTag from '../Base/TechnologyTag/TechnologyTag';
+
 //Form component to be used either for creating an article or editing it
 export class FormJob extends Component {
   state = {
     //This action prop needs to come from the parent element if you set Create it will create new post, if edit then it will update one
-    action: this.props.action,
-    idToUpdate: '',
     title: '',
     description: '',
     technologies: [],
@@ -22,14 +21,36 @@ export class FormJob extends Component {
     company: '',
     type: 'Web Dev',
   };
+
+  componentDidMount() {
+    if (this.props.job) {
+      this.setState({
+        title: this.props.job.title,
+        description: this.props.job.description,
+        technologies: this.props.job.technologies,
+        currentTechnology: this.props.job.currentTechnology,
+        location: this.props.job.location,
+        remote: this.props.job.remote,
+        link: this.props.job.link,
+        contractType: this.props.job.contractType,
+        level: this.props.job.level,
+        company: this.props.job.company,
+        type: this.props.job.type,
+      });
+    }
+  }
+
   handleCreate = (event) => {
     event.preventDefault();
-    const formData = new FormData();
+    // const formData = new FormData();
+    this.props.onSubmit();
   };
+
   handleUpdate = (event) => {
     event.preventDefault();
-    const formData = new FormData();
+    this.props.onSubmit(this.state);
   };
+
   //To handle input change on the form
   handleChange = (event) => {
     let key = event.target.name;
@@ -43,6 +64,7 @@ export class FormJob extends Component {
       [key]: value,
     });
   };
+
   technoLogiesPressed = (event) => {
     let str = this.state.currentTechnology.replaceAll(' ', '');
     if (event.key === 'Enter' && str !== '') {
@@ -54,11 +76,13 @@ export class FormJob extends Component {
       });
     }
   };
+
   removeTechnology = (index) => {
     let technologiesTemp = [...this.state.technologies];
     technologiesTemp.splice(index, 1);
     this.setState({ technologies: technologiesTemp });
   };
+
   render() {
     return (
       <div className="jobForm-container">
@@ -139,7 +163,7 @@ export class FormJob extends Component {
           </FormGroup>
           <FormGroup className="form-group">
             <Label className="label" htmlFor="remote">
-              Location
+              Remote
             </Label>
             <Input
               className="input"
@@ -166,7 +190,7 @@ export class FormJob extends Component {
           </FormGroup>
           <FormGroup className="form-group">
             <Label className="label" htmlFor="contractType">
-              Type
+              Contract Type
             </Label>
             <Input
               type="select"
@@ -185,7 +209,7 @@ export class FormJob extends Component {
           </FormGroup>
           <FormGroup className="form-group">
             <Label className="label" htmlFor="level">
-              Type
+              Level
             </Label>
             <Input
               type="select"
@@ -195,7 +219,7 @@ export class FormJob extends Component {
               value={this.state.level}
               onChange={this.handleChange}
             >
-              <option value={this.state.type}>{this.state.type}</option>
+              <option value={this.state.level}>{this.state.level}</option>
               <option value="experienced">experienced</option>
               <option value="senior">senior</option>
               <option value="expert">expert</option>
@@ -220,16 +244,17 @@ export class FormJob extends Component {
               <option value="All">All</option>
             </Input>
           </FormGroup>
-          {this.state.action === 'create' ? (
-            <Button onClick={this.handleCreate}>Create Job Listing</Button>
-          ) : this.state.action === 'edit' ? (
-            <Button onClick={this.handleUpdate}>Submit Changes</Button>
+          {this.props.action === 'create' ? (
+            <Button onClick={this.handleCreate}>Share a new job</Button>
+          ) : this.props.action === 'edit' ? (
+            <Button onClick={this.handleUpdate}>Submit changes</Button>
           ) : (
-            <div>bumm</div>
+            <div>???</div>
           )}
         </Form>
       </div>
     );
   }
 }
+
 export default FormJob;
