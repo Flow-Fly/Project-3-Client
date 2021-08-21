@@ -8,17 +8,16 @@ function Message(props) {
 
     const isMine = () => {
         const sender = props.message.sender._id || props.message.sender
-        return sender === props.context.user._id ? 'mine' : ''
+        return sender === props.context.user._id 
     }
     
-
     return (
-        <div className={`messageComponent ${isMine()}`}>
+        <div className={`messageComponent ${isMine() ? 'mine' : ''}`}>
             
-            <div className={`messageContentWrapper ${isMine()}`}>
-                <Avatar size='tiny' url={props.message.sender.profileImg || props.context.user.profileImg}/>
-                <div className={`message ${isMine()}`}>
-                    <div className={`messageContent ${isMine()}`}>
+            <div className={`messageContentWrapper ${isMine() ? 'mine' : ''}`}>
+                <Avatar size='tiny' url={isMine() ? props.context.user.profileImg : props.message.sender.profileImg}/>
+                <div className={`message ${isMine() ? 'mine' : ''}`}>
+                    <div className={`messageContent ${isMine() ? 'mine' : ''}`}>
                         {props.message.content}
                     </div>
                     <div className="messageTimer">

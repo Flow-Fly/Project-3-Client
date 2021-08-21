@@ -85,6 +85,7 @@
     overflow-y: auto;
     scrollbar-width: thin; 
     scrollbar-color: rgba(45, 53, 76, .7) rgba(45, 53, 76, .15); 
+    scroll-behavior: smooth;
 }
 
 .chatBoxMessages::-webkit-scrollbar {
