@@ -5,7 +5,8 @@ import apiHandler from '../../api/apiHandler';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import './FormSign.css';
-import utils from '../../utils/helpers'
+import utils from '../../utils/helpers';
+import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
 
 const initialState = {
   canSubmit: false,
@@ -34,10 +35,15 @@ class FormSignup extends Component {
   state = { ...initialState };
 
   handleChange = (event) => {
-    const value = utils.titleMe(event.target.value);
+    let value = null;
+    if (event.target.name === 'firstName' || event.target.name === 'lastName') {
+      value = utils.titleMe(event.target.value);
+    } else {
+      value = event.target.value;
+    }
 
     const key = event.target.name;
-    
+
     this.setState({ [key]: value });
   };
 
@@ -67,7 +73,8 @@ class FormSignup extends Component {
         password: value,
         passwordSafe: false,
         feedback: {
-          error: 'Your password must contain 8 characters, atleast a number and a punctuation',
+          error:
+            'Your password must contain 8 characters, atleast a number and a punctuation',
         },
       });
     } else {
@@ -279,16 +286,16 @@ class FormSignup extends Component {
                 required
               />
             </FormGroup>
-                {/* Display some feedback to the user when needed */}
-            <div className="feedback" >
+            {/* Display some feedback to the user when needed */}
+            <div className="feedback">
               {this.state.feedback?.message && (
-                <div style={{
-                  color: color,
-                }}>
+                <div
+                  style={{
+                    color: color,
+                  }}
+                >
                   {this.state.feedback.message}
-
                 </div>
-                
               )}
               {this.state.feedback?.error && (
                 <div
@@ -306,6 +313,12 @@ class FormSignup extends Component {
               <Button disabled>Sign up</Button>
             )}
           </Form>
+
+          <div className="passports">
+            <a href="http://localhost:4000/api/auth/google">
+              <img src={google} alt="google auth" />
+            </a>
+          </div>
         </div>
       </>
     );

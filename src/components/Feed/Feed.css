@@ -16,7 +16,6 @@
     position: relative;
     /* For testing */
     width:500px;
-    height:300px;
     /* width: 100%; */
     background: #f1f1f1;
     border-radius: 0.4rem;
@@ -37,6 +36,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    padding:0.3rem;
 }
 
 .tabs {

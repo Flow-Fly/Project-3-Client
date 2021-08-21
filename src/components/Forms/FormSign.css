@@ -29,3 +29,11 @@
     box-shadow: inset 2px 2px 4px rgba(83, 83, 83, 0.26);
     background-color: var(--linen);
 }
+
+.form-container .passports {
+    display: flex;
+}
+
+.passports img {
+    cursor: pointer;
+}
