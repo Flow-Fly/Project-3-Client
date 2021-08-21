@@ -56,7 +56,7 @@ export class FeedJobContent extends Component {
         <Button onClick={this.showAddJobForm}>Share a job</Button>
         {/* toggle add job form */}
         {this.state.displayAddJobForm ? (
-          <FormJob className="addJobForm" />
+          <FormJob action="create" className="addJobForm" />
         ) : null}
 
         {this.state.jobs.map((job) => {

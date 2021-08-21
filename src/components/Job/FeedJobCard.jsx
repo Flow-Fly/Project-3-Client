@@ -15,6 +15,7 @@ class FeedJobCard extends Component {
     this.setState({ showJobDetails: !this.state.showJobDetails });
   };
 
+  //show jobForm, action = "edit"
   cancelEdit = () => {
     this.setState({ showJobForm: false });
   };
@@ -57,11 +58,9 @@ class FeedJobCard extends Component {
 
     return (
       <div className="FeedJobCard">
-        <h6>
-          {this.props.job.title}
-          <Button onClick={this.startEdit}>Edit</Button>
-          <Button onClick={this.props.onDelete}>Delete</Button>
-        </h6>
+        <h6>{this.props.job.title}</h6>
+        <Button onClick={this.startEdit}>Edit</Button>
+        <Button onClick={this.props.onDelete}>Delete</Button>
         <ul key={this.props.job._id}>
           <li>
             <b>{this.props.job.company}</b>
