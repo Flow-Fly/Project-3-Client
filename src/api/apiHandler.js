@@ -50,7 +50,7 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  // Users related 
+  //Users related
   getUser(userId) {
     return service
       .get('/api/users/' + userId)
@@ -58,16 +58,16 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  // getUsers() {
-  //   return service
-  //     .get('/api/users')
-  //     .then((res) => res.data)
-  //     .catch(errorHandler);
-  // },
-
-  getUserByMail(email){
+  getUsers() {
     return service
-      .get('/api/users/user?email='+email)
+      .get('/api/users')
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getUserByMail(email) {
+    return service
+      .get('/api/users/user?email=' + email)
       .then((res) => res.data)
       .catch(errorHandler);
   },
@@ -80,11 +80,11 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  createRoom(senderId, receiverId){
+  createRoom(senderId, receiverId) {
     return service
-    .post('/api/rooms/', {senderId, receiverId})
-    .then((res) => res.data)
-    .catch(errorHandler);
+      .post('/api/rooms/', { senderId, receiverId })
+      .then((res) => res.data)
+      .catch(errorHandler);
   },
 
   getMessages(roomId) {

@@ -1,0 +1,22 @@
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
+}
+
+.jobDetailsCard {
+  width: 100%;
+  border: 1px solid var(--mainLightBlueColor);
+  padding: 0.2rem 4rem;
+  margin: 0.3rem 0;
+  border-radius: 0.3rem;
+  text-align: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* align-items: center; */
+}
