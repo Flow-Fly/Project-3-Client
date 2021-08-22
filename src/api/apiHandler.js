@@ -28,8 +28,9 @@ const apiHandler = {
     return service
       .post('/api/auth/signin', userInfo)
       .then((res) => {
-        console.log('logged in') 
-        return res.data})
+        console.log('logged in');
+        return res.data;
+      })
       .catch(errorHandler);
   },
 
@@ -37,10 +38,12 @@ const apiHandler = {
     return service
       .get('/api/users/me')
       .then((res) => {
-        console.log(`%c${res.data.email} is logged in`,
-          "display: inline-block ; border: 3px solid red ; border-radius: 7px ; " +
-          "padding: 10px ; margin: 20px ;")
-        return res.data
+        console.log(
+          `%c${res.data.email} is logged in`,
+          'display: inline-block ; border: 3px solid red ; border-radius: 7px ; ' +
+            'padding: 10px ; margin: 20px ;'
+        );
+        return res.data;
       })
       .catch(errorHandler);
   },
@@ -127,7 +130,7 @@ const apiHandler = {
 
   updateJob(jobId, data) {
     return service
-      .patch(`/jobs/${jobId}`)
+      .patch(`/jobs/${jobId}`, data)
       .then((res) => res.data)
       .catch(errorHandler);
   },

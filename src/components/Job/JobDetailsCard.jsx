@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../Job/JobDetailsCard.css';
 
+// only a part of job details
 export class JobDetailsCard extends Component {
   render() {
     return (
@@ -12,6 +13,15 @@ export class JobDetailsCard extends Component {
           <li>Job shared by: {this.props.job.creator?.email}</li>
           <li>Job link: {this.props.job.link}</li>
         </ul>
+
+        {
+          <p
+            onClick={this.props.onClose}
+            style={{ textAlign: 'center', fontSize: '0.6em' }}
+          >
+            Close
+          </p>
+        }
       </div>
     );
   }
