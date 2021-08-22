@@ -14,7 +14,7 @@ const NavMain = (props) => {
       .logout()
       .then(() => {
         context.removeUser();
-        this.props.history.push('/')
+        props.history.push('/')
       })
       .catch((error) => {
         console.log(error);
