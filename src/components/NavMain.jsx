@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { withUser } from "../components/Auth/withUser";
+import { withRouter } from "react-router";
 import apiHandler from "../api/apiHandler";
 
 import "../styles/NavMain.css";
@@ -13,6 +14,7 @@ const NavMain = (props) => {
       .logout()
       .then(() => {
         context.removeUser();
+        this.props.history.push('/')
       })
       .catch((error) => {
         console.log(error);
@@ -57,4 +59,4 @@ const NavMain = (props) => {
   );
 };
 
-export default withUser(NavMain);
+export default withRouter(withUser(NavMain));

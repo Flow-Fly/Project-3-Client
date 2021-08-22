@@ -34,7 +34,12 @@ const apiHandler = {
   isLoggedIn() {
     return service
       .get('/api/users/me')
-      .then((res) => res.data)
+      .then((res) => {
+        console.log(`%c${res.data.email} is logged in`,
+          "display: inline-block ; border: 3px solid red ; border-radius: 7px ; " +
+          "padding: 10px ; margin: 20px ;")
+        return res.data
+      })
       .catch(errorHandler);
   },
 
@@ -45,13 +50,13 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  //Users related 
-  // getUser(userId) {
-  //   return service
-  //     .get('/api/users/' + userId)
-  //     .then((res) => res.data)
-  //     .catch(errorHandler);
-  // },
+  // Users related 
+  getUser(userId) {
+    return service
+      .get('/api/users/' + userId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
   // getUsers() {
   //   return service
