@@ -82,9 +82,33 @@ const apiHandler = {
     .catch(errorHandler);
   },
 
-  getMessages(roomId) {
+  addNotifications(roomId, receiverId) {
     return service
-      .get('/api/messages/' + roomId)
+      .patch('api/rooms/notifications/add', {
+        roomId,
+        receiverId
+      })
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  deleteNotifications(roomId, receiverId) {
+    return service
+      .patch('api/rooms/notifications/delete', {
+        roomId,
+        receiverId
+      })
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getMessages(roomId, skip, limit) {
+    return service
+      .post('/api/messages/' + roomId, 
+        {
+          firstMessageIndex: skip,
+          depth: limit
+        })
       .then((res) => res.data)
       .catch(errorHandler);
   },

@@ -1,7 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { withUser } from "../components/Auth/withUser";
+import { withUser } from "./Auth/withUser";
 import apiHandler from "../api/apiHandler";
+
 
 import "../styles/NavMain.css";
 
@@ -28,8 +29,9 @@ const NavMain = (props) => {
         {context.isLoggedIn && (
           <React.Fragment>  
             <li>
-              <NavLink to="/messenger">
+              <NavLink className="messengerNav" to="/messenger">
                 Messenger
+                <span className="notifications">3</span>
               </NavLink>
             </li>
             <li>

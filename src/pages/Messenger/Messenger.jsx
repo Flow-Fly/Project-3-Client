@@ -26,11 +26,13 @@ class Messenger extends Component {
         
         this.scrollChatRef = React.createRef()
 
+        this.messagesLoaded = false
         this.timeout= null
         this.user = this.props.context.user
         this.openRoom = this.openRoom.bind(this)
         this.submitMessage = this.submitMessage.bind(this)
         this.addFriend = this.addFriend.bind(this)
+        this.loadMessages = this.loadMessages.bind(this)
     }
 
     async componentDidMount(){
@@ -47,6 +49,10 @@ class Messenger extends Component {
         })
 
         this.socket.on('receive', data => {
+
+            if(!this.state.currentRoom) return 
+            if(!this.state.currentRoom.members.find(m => m._id === data.senderId)) return
+
             this.setState({
                 receivedMessage : {
                     sender : {
@@ -58,7 +64,7 @@ class Messenger extends Component {
             }, () => {
                 this.setState({
                     messages: [...this.state.messages, this.state.receivedMessage]
-                }) 
+                }, () => this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight) 
             })
         })
         
@@ -72,10 +78,11 @@ class Messenger extends Component {
         }
     }
 
-    componentDidUpdate(prevProps, prevState){
-        if(!this.state.currentRoom) return 
-        return this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
-    }
+    // componentDidUpdate(prevProps, prevState){
+    //     if(!this.state.currentRoom) return 
+    //     if(this.state.messages[0] === prevState.messages[0]) return 
+    //     return this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
+    // }
 
     componentWillUnmount(){
         clearTimeout(this.timeout)
@@ -84,11 +91,16 @@ class Messenger extends Component {
 
     async openRoom(room){
         try{
-            const messages = await apiHandler.getMessages(room._id)
+            //getMessages(roomId, firstMessageIndex, depth)
+            const messages = await apiHandler.getMessages(room._id, 0, 20)
     
             this.setState({
                 currentRoom: room,
-                messages: messages})
+                messages: messages}, () => {
+                    this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight
+                    this.messagesLoaded = true
+                    setTimeout(() => this.messagesLoaded = false, 1000)
+                })
         }
         catch(err){
             console.error(err)
@@ -102,6 +114,7 @@ class Messenger extends Component {
         const receiver = this.state.currentRoom.members.find(m => m._id !== this.user._id) //same logic as friend in Room component
 
         this.socket.emit('send', {
+            roomId : this.state.currentRoom._id,
             senderId: this.user._id,
             senderImg : this.user.profileImg,
             receiverId:receiver._id,
@@ -120,7 +133,7 @@ class Messenger extends Component {
             this.setState({
                 messages: [...this.state.messages, newMessage],
                 writtingMessage:''
-            }) 
+            }, () => this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight) 
         }
         catch(err){
             console.error(err)
@@ -176,11 +189,21 @@ class Messenger extends Component {
         catch(err){
             console.log(err)
         }
-        
+    }
+
+    async loadMessages(e){
+        if(this.scrollChatRef.current.scrollTop > 100 || this.messagesLoaded) return
+
+        this.messagesLoaded = true
+        setTimeout(() => this.messagesLoaded = false, 1000)
+
+        const olderMessages = await apiHandler.getMessages(this.state.currentRoom._id, this.state.messages.length - 1, 20)
+        this.setState({
+            messages: [...olderMessages, ...this.state.messages]
+        }, () => this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight)    
     }
 
     render() {
-
         return (
             <div className="messenger">
                 <div className="roomsList">
@@ -212,7 +235,7 @@ class Messenger extends Component {
                 {!this.state.currentRoom ? <div className="noRoom">Select a room to start chatting</div> : (
                 <div className="chatBox">
                     {!this.state.messages ? '' : (
-                        <div className="chatBoxMessages" ref={this.scrollChatRef}>
+                        <div className="chatBoxMessages" ref={this.scrollChatRef} onScroll={this.loadMessages}>
                             <div className="chatBoxMessagesWrapper">
                                 {this.state.messages.map((message, index) => {
                                     return (
