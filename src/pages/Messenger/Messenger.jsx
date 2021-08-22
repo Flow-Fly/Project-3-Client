@@ -11,7 +11,7 @@ class Messenger extends Component {
 
     constructor(props){
         super(props)
-
+   
         this.state = {
             rooms: [],
             currentRoom: null,
@@ -28,7 +28,7 @@ class Messenger extends Component {
 
         this.messagesLoaded = false
         this.timeout= null
-        this.user = this.props.context.user
+        this.user = this.props.context.user.user ? this.props.context.user.user : this.props.context.user
         this.openRoom = this.openRoom.bind(this)
         this.submitMessage = this.submitMessage.bind(this)
         this.addFriend = this.addFriend.bind(this)
