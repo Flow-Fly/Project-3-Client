@@ -1,40 +1,82 @@
-import React from 'react';
-// import Button from '../Base/Button/Button';
+import React, { Component } from 'react';
 import './FeedJobCard.css';
+import JobDetailsCard from '../Job/JobDetailsCard';
+import Button from '../Base/Button/Button';
+import FormJob from '../FormJob/FormJob.jsx';
 
-const FeedJobCard = (props) => {
-  const job = props.job;
-  // console.log('job', job);
+class FeedJobCard extends Component {
+  state = {
+    showJobDetails: false,
+    showJobForm: false,
+  };
 
-  //   // handleDelete,
-  //   // handleEdit,
+  // toggle job details on the jobs list
+  showJobDetails = () => {
+    this.setState({ showJobDetails: !this.state.showJobDetails });
+  };
 
-  //   // description,
-  //   // technologies,
-  //   // remote,
-  //   // creator,
-  //   // link,
+  //show jobForm, action = "edit"
+  cancelEdit = () => {
+    this.setState({ showJobForm: false });
+  };
 
-  return (
-    <div>
+  startEdit = () => {
+    this.setState({ showJobForm: true });
+  };
+
+  render() {
+    if (this.state.showJobForm) {
+      return (
+        <div className="FeedJobCard">
+          <h6>
+            {this.props.job.title}
+            <Button onClick={this.cancelEdit}>Cancel</Button>
+          </h6>
+          <FormJob
+            action="edit"
+            job={this.props.job}
+            onSubmit={this.props.onJobUpdate}
+          />
+        </div>
+      );
+    }
+
+    let details;
+
+    if (!this.state.showJobDetails) {
+      details = (
+        <p
+          onClick={this.showJobDetails}
+          style={{ textAlign: 'right', fontSize: '0.6em' }}
+        >
+          More details
+        </p>
+      );
+    } else {
+      details = <JobDetailsCard job={this.props.job} />;
+    }
+
+    return (
       <div className="FeedJobCard">
-        <h5>{job.title}</h5>
-        <ul key={job._id}>
+        <h6>{this.props.job.title}</h6>
+        <Button onClick={this.startEdit}>Edit</Button>
+        <Button onClick={this.props.onDelete}>Delete</Button>
+        <ul key={this.props.job._id}>
           <li>
-            <b>{job.company}</b>
+            <b>{this.props.job.company}</b>
           </li>
           <li>
-            {job.location} |{' '}
-            {job.contractType !== undefined ? job.contractType : '...'} |
-            {job.level}
+            {this.props.job.location} |{' '}
+            {this.props.job.contractType !== undefined
+              ? this.props.job.contractType
+              : '...'}{' '}
+            | {this.props.job.level}
           </li>
+          {details}
         </ul>
-
-        {/* <Button handleClick={(event) => handleEdit(_id)}>Edit</Button>
-        <Button handleClick={(event) => handleDelete(_id)}>Delete</Button> */}
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 export default FeedJobCard;

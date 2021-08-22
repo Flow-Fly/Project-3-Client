@@ -1,10 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { withUser } from "./Auth/withUser";
+import { withUser } from "../components/Auth/withUser";
+import { withRouter } from "react-router";
 import apiHandler from "../api/apiHandler";
 
 
 import "../styles/NavMain.css";
+import Avatar from "./Base/Avatar/Avatar";
 
 const NavMain = (props) => {
   const { context } = props;
@@ -14,6 +16,7 @@ const NavMain = (props) => {
       .logout()
       .then(() => {
         context.removeUser();
+        props.history.push('/')
       })
       .catch((error) => {
         console.log(error);
@@ -36,7 +39,9 @@ const NavMain = (props) => {
             </li>
             <li>
               <NavLink to="/profile">
-                {context.user && context.user.email}
+                {context.user && 
+                <Avatar url={context.user.profileImg} size='big' />
+                }
               </NavLink>
             </li>
             <li>
@@ -59,4 +64,4 @@ const NavMain = (props) => {
   );
 };
 
-export default withUser(NavMain);
+export default withRouter(withUser(NavMain));

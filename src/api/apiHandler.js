@@ -27,14 +27,21 @@ const apiHandler = {
   signin(userInfo) {
     return service
       .post('/api/auth/signin', userInfo)
-      .then((res) => res.data)
+      .then((res) => {
+        console.log('logged in') 
+        return res.data})
       .catch(errorHandler);
   },
 
   isLoggedIn() {
     return service
       .get('/api/users/me')
-      .then((res) => res.data)
+      .then((res) => {
+        console.log(`%c${res.data.email} is logged in`,
+          "display: inline-block ; border: 3px solid red ; border-radius: 7px ; " +
+          "padding: 10px ; margin: 20px ;")
+        return res.data
+      })
       .catch(errorHandler);
   },
 
@@ -45,24 +52,24 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  //Users related 
-  // getUser(userId) {
-  //   return service
-  //     .get('/api/users/' + userId)
-  //     .then((res) => res.data)
-  //     .catch(errorHandler);
-  // },
-
-  // getUsers() {
-  //   return service
-  //     .get('/api/users')
-  //     .then((res) => res.data)
-  //     .catch(errorHandler);
-  // },
-
-  getUserByMail(email){
+  //Users related
+  getUser(userId) {
     return service
-      .get('/api/users/user?email='+email)
+      .get('/api/users/' + userId)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getUsers() {
+    return service
+      .get('/api/users')
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getUserByMail(email) {
+    return service
+      .get('/api/users/user?email=' + email)
       .then((res) => res.data)
       .catch(errorHandler);
   },
@@ -75,11 +82,11 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  createRoom(senderId, receiverId){
+  createRoom(senderId, receiverId) {
     return service
-    .post('/api/rooms/', {senderId, receiverId})
-    .then((res) => res.data)
-    .catch(errorHandler);
+      .post('/api/rooms/', { senderId, receiverId })
+      .then((res) => res.data)
+      .catch(errorHandler);
   },
 
   addNotifications(roomId, receiverId) {

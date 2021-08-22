@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { withUser } from '../Auth/withUser';
 import apiHandler from '../../api/apiHandler';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import './FormSign.css';
 import utils from '../../utils/helpers';
 import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
+import github from '../../assets/auth/github-btn.png'
 
 const initialState = {
-  canSubmit: false,
-  passwordSafe: false,
-  feedback: null,
+  canSubmit: '',
+  passwordSafe: '',
   firstName: '',
   lastName: '',
   email: '',
@@ -36,6 +36,7 @@ class FormSignup extends Component {
 
   handleChange = (event) => {
     let value = null;
+    // titleMe capitalize every first letter of every word, accounting '-'...
     if (event.target.name === 'firstName' || event.target.name === 'lastName') {
       value = utils.titleMe(event.target.value);
     } else {
@@ -72,10 +73,6 @@ class FormSignup extends Component {
       this.setState({
         password: value,
         passwordSafe: false,
-        feedback: {
-          error:
-            'Your password must contain 8 characters, atleast a number and a punctuation',
-        },
       });
     } else {
       e.target.style.boxShadow = 'inset 0px 0px 2px 3px #21C078';
@@ -83,7 +80,6 @@ class FormSignup extends Component {
       this.setState({
         password: value,
         passwordSafe: true,
-        feedback: { message: 'Your password is safe!' },
       });
     }
   };
@@ -94,14 +90,12 @@ class FormSignup extends Component {
       e.target.style.boxShadow = 'inset 0px 0px 2px 3px #21C078';
       this.setState({
         canSubmit: true,
-        feedback: { message: 'Ready to Sign Up !' },
         confirmation: e.target.value,
       });
     } else {
       e.target.style.boxShadow = 'inset 0px 0px 2px 3px red';
       this.setState({
         canSubmit: false,
-        feedback: { error: 'Your passwords are not matching' },
         confirmation: e.target.value,
       });
     }
@@ -110,10 +104,6 @@ class FormSignup extends Component {
   render() {
     if (this.props.context.user) {
       return <Redirect to="/" />;
-    }
-    let color = null;
-    if (this.state.feedback) {
-      color = this.state.feedback.message ? 'green' : 'red';
     }
 
     return (
@@ -260,53 +250,107 @@ class FormSignup extends Component {
               <Label className="label" htmlFor="password">
                 Password:
               </Label>
-              <Input
-                className="input"
-                id="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handlePassword}
-                type="password"
-                placeholder="Password: "
-                required
-              />
+
+              {this.state.password === '' ? (
+                <Input
+                  className="input"
+                  id="password"
+                  name="password"
+                  value={this.state.password}
+                  onChange={this.handlePassword}
+                  type="password"
+                  placeholder="Password: "
+                  required
+                  autoComplete="new-password"
+                />
+              ) : this.state.passwordSafe ? (
+                <>
+                  <Input
+                    className="input"
+                    id="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handlePassword}
+                    type="password"
+                    placeholder="Password: "
+                    required
+                    valid
+                  />
+                  <FormFeedback valid>Your password is safe!</FormFeedback>
+                </>
+              ) : (
+                <>
+                  <Input
+                    className="input"
+                    id="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handlePassword}
+                    type="password"
+                    placeholder="Password: "
+                    required
+                    invalid
+                    autoComplete="new-password"
+                  />
+                  <FormFeedback invalid='true'>
+                    Your password must contain atleast 8 characters, a number
+                    and a punctuation.
+                  </FormFeedback>
+                </>
+              )}
             </FormGroup>
             <FormGroup className="form-group">
               <Label className="label" htmlFor="confirmation">
                 Confirm your password
               </Label>
-              <Input
-                className="input"
-                id="confirmation"
-                name="confirmation"
-                value={this.state.confirmation}
-                onChange={this.handleConfirm}
-                type="password"
-                placeholder="Confirm you password: "
-                required
-              />
+              {this.state.confirmation === '' ? (
+                <Input
+                  className="input"
+                  id="confirmation"
+                  name="confirmation"
+                  value={this.state.confirmation}
+                  onChange={this.handleConfirm}
+                  type="password"
+                  placeholder="Confirm you password: "
+                  required
+                />
+              ) : this.state.canSubmit ? (
+                <>
+                  <Input
+                    className="input"
+                    id="confirmation"
+                    name="confirmation"
+                    value={this.state.confirmation}
+                    onChange={this.handleConfirm}
+                    type="password"
+                    placeholder="Confirm you password: "
+                    required
+                    valid
+                  />
+                  <FormFeedback valid>Ready to register!</FormFeedback>
+                </>
+              ) : (
+                <>
+                  <Input
+                    className="input"
+                    id="confirmation"
+                    name="confirmation"
+                    value={this.state.confirmation}
+                    onChange={this.handleConfirm}
+                    type="password"
+                    placeholder="Confirm you password: "
+                    required
+                    invalid
+                  />
+                  <FormFeedback invalid='true'>
+                    Your passwords are not matching
+                  </FormFeedback>
+                </>
+              )}
             </FormGroup>
             {/* Display some feedback to the user when needed */}
-            <div className="feedback">
-              {this.state.feedback?.message && (
-                <div
-                  style={{
-                    color: color,
-                  }}
-                >
-                  {this.state.feedback.message}
-                </div>
-              )}
-              {this.state.feedback?.error && (
-                <div
-                  style={{
-                    color: color,
-                  }}
-                >
-                  {this.state.feedback.error}
-                </div>
-              )}
-            </div>
+            <div className="feedback"></div>
+            <FormFeedback>Let's see</FormFeedback>
             {this.state.canSubmit ? (
               <Button>Sign up</Button>
             ) : (
@@ -315,8 +359,11 @@ class FormSignup extends Component {
           </Form>
 
           <div className="passports">
-            <a href="http://localhost:4000/api/auth/google">
+            <a href={process.env.REACT_APP_GOOGLE_CALLBACK}>
               <img src={google} alt="google auth" />
+            </a>
+            <a href={process.env.REACT_APP_GITHUB_CALLBACK}>
+              <img src={github} alt="github auth" />
             </a>
           </div>
         </div>

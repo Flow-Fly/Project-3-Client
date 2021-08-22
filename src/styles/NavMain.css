@@ -10,6 +10,7 @@
 .NavMain .nav-list {
   margin-left: auto;
   display: flex;
+  align-items: center;
 }
 
 .NavMain .nav-list li:not(:last-child) {
@@ -34,3 +35,7 @@
   color: white;
   font-size: 10px;
 }
+.nav-list li > p:hover {
+  cursor: pointer;
+  color: #0d6efd;
+} 

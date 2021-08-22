@@ -6,6 +6,8 @@
     border: solid 3px #00B4FF;
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .avatar.small{
@@ -25,6 +27,5 @@
 }
 
 .avatar img{
-    width: 100%;
-    height: auto;
+    min-width: 100%;
 }

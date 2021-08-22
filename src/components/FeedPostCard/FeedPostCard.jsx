@@ -13,7 +13,7 @@ function FeedPostCard(props) {
             {(post.type!==null &&post.type!==undefined &&post.type!=="")?<div className="postCardType">{post.type}</div> : null }
             {(post.title!==null &&post.title!==undefined &&post.title!=="")? <div>{post.title}</div> : null }
             {(post.content!==null &&post.content!==undefined &&post.content!=="")? <p>{post.content}</p> : null }
-            <img alt="florian" src={post.image}></img>
+            <img alt="" src={post.image}></img>
             {(post.link!==null &&post.link!==undefined &&post.link!=="")? <a href={post.link}>{post.link}</a> : null }
             <div className="postCardPublish">Published by: {firstName + " " + lastName} at {createdAt}</div>
         </div>
