@@ -5,6 +5,8 @@ import { withUser } from "../Auth/withUser";
 import { Form, FormGroup, Label, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import './FormSign.css'
+import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
+import github from '../../assets/auth/github-btn.png'
 
 class FormSignin extends Component {
   state = {
@@ -30,6 +32,7 @@ class FormSignin extends Component {
       })
       .catch((error) => {
         console.log(error);
+        this.setState({error})
         // Display error message here, if you set the state
       });
   };
@@ -70,8 +73,21 @@ class FormSignin extends Component {
               />
             
           </FormGroup>
+
+          <div className="feedback">
+            {this.state.error && "Wrong Credentials"}
+          </div>
+
           <Button>Sign In</Button>
         </Form>
+        <div className="passports">
+            <a href={process.env.REACT_APP_GOOGLE_CALLBACK}>
+              <img src={google} alt="google auth" />
+            </a>
+            <a href={process.env.REACT_APP_GITHUB_CALLBACK}>
+              <img src={github} alt="github auth" />
+            </a>
+          </div>
       </div>
       
       </>

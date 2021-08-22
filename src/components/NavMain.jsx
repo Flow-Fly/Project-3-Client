@@ -5,6 +5,7 @@ import { withRouter } from "react-router";
 import apiHandler from "../api/apiHandler";
 
 import "../styles/NavMain.css";
+import Avatar from "./Base/Avatar/Avatar";
 
 const NavMain = (props) => {
   const { context } = props;
@@ -36,7 +37,9 @@ const NavMain = (props) => {
             </li>
             <li>
               <NavLink to="/profile">
-                {context.user && context.user.email}
+                {context.user && 
+                <Avatar url={context.user.profileImg} size='big' />
+                }
               </NavLink>
             </li>
             <li>

@@ -19,6 +19,7 @@
   display: inline-table;
   word-wrap: normal;
   max-width: 100%;
+  color: rgb(185, 0, 0);
 }
 .feedback div {
     text-align: center;
@@ -32,6 +33,8 @@
 
 .form-container .passports {
     display: flex;
+    flex-direction: column;
+    
 }
 
 .passports img {
