@@ -1,5 +1,5 @@
 import React from 'react';
-import SideProfile from '../components/Base/SideProfile/SideProfile'
+//import SideProfile from '../components/Base/SideProfile/SideProfile'
 import Feed from '../components/Feed/Feed';
 import Button from '../components/Base/Button/Button'
 import FormArticle from "../components/FormArticle/FormArticle"

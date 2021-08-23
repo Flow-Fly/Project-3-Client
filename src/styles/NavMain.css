@@ -3,7 +3,7 @@
   color: rgb(57, 57, 57);
   display: flex;
   align-items: center;
-  padding: 20px;
+  padding: 4px 20px;
   height: 70px;
 }
 
@@ -41,5 +41,5 @@
 } 
 
 #logo{
-  height: 2.8rem;
+  height:4rem;
 }

@@ -8,6 +8,7 @@ import './FormSign.css';
 import utils from '../../utils/helpers';
 import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
 import github from '../../assets/auth/github-btn.png'
+import logo from '../../Images/logo.png'
 
 const initialState = {
   canSubmit: '',
@@ -118,6 +119,7 @@ class FormSignup extends Component {
     return (
       <>
         <div className="form-container">
+        <img id="signLogo" alt="signLogo" src={logo}></img>
           <Form className="form" onSubmit={this.handleSubmit}>
             <FormGroup className="form-group">
               <Label className="label" htmlFor="firstName" hidden>

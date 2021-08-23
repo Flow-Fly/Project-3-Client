@@ -7,10 +7,17 @@
     padding: 2em;
     box-shadow: 0 0 4px 4px rgba(71, 71, 71, 0.301);
     border-radius: .5em;
+    align-self: center;
+    margin-top: 2rem;
+    
+}
+
+#signLogo{
+    height:4rem;
 }
 
 .form-group {
-    margin-bottom: .5em;
+    margin-bottom: 1em;
 }
 
 .feedback {
@@ -39,4 +46,13 @@
 
 .passports img {
     cursor: pointer;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form button{
+    margin: 0.8rem 1.2rem;
 }
