@@ -22,7 +22,6 @@ export class FeedJobContent extends Component {
   showJobForm = (event) => {
     event.preventDefault();
     this.props.showJobForm('create');
-    this.props.showJobForm('edit');
   };
 
   handleJobCreate = (job) => {
