@@ -60,6 +60,12 @@ const apiHandler = {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+  updateUser(data) {
+    return service
+      .patch('/api/users/update/', data)
+      .then(res => res.data)
+      .catch(errorHandler)
+  },
 
   getUsers() {
     return service
