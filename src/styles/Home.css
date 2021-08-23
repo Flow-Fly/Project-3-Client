@@ -10,9 +10,9 @@
   --sidesOfFloat: 15rem;
 }
 
-.homePageBody{
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+.homePageBody {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 
 #mainBlobSection {

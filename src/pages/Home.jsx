@@ -40,7 +40,26 @@ class Home extends React.Component {
   blob1Ref = React.createRef();
   blob2Ref = React.createRef();
 
-  componentDidMount() {}
+  async componentDidMount() {
+    try {
+      let jobsInfo = await apiHandler.getJobs();
+      this.setState({ jobs: jobsInfo }, () => {
+        console.log(this.state.jobs);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  loadJobs = async () => {
+    console.log('called');
+    try {
+      let jobsInfo = await apiHandler.getJobs();
+      this.setState({ jobs: jobsInfo });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   componentDidUpdate() {
     if (this.props.context.isLoggedIn === false) {
@@ -62,11 +81,16 @@ class Home extends React.Component {
       return (
         <div className="homePageBody">
           <SideProfile />
-          <Feed showJobForm={this.showJobForm}></Feed>
+          <Feed
+            jobs={this.state.jobs}
+            loadJobs={this.loadJobs}
+            showJobForm={this.showJobForm}
+          ></Feed>
           <div className="homeRightSide">
             {this.state.showAddJobForm === true && (
               <FormJob
                 closeJobForm={this.closeJobForm}
+                loadJobs={this.loadJobs}
                 formChanged={this.formChanged}
                 action={this.state.jobFormAction}
               />
