@@ -1,9 +1,27 @@
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
+  --sidesOfFloat: 15rem;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #f3f2ef;
 }
 
 body {

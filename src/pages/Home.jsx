@@ -1,5 +1,5 @@
 import React from 'react';
-//import SideProfile from '../components/Base/SideProfile/SideProfile'
+import SideProfile from '../components/Base/SideProfile/SideProfile';
 import Feed from '../components/Feed/Feed';
 import Button from '../components/Base/Button/Button';
 import FormArticle from '../components/FormArticle/FormArticle';
@@ -61,6 +61,7 @@ class Home extends React.Component {
       //rendered if you are logged in
       return (
         <div className="homePageBody">
+          <SideProfile />
           <Feed showJobForm={this.showJobForm}></Feed>
           <div className="homeRightSide">
             {this.state.showAddJobForm === true && (
