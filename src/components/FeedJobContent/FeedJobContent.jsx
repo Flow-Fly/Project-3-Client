@@ -8,19 +8,11 @@ import '../FormJob/FormJob.css';
 
 export class FeedJobContent extends Component {
   state = {
-    jobs: [],
     showAddJobForm: false,
     showJobDetails: {},
   };
 
-  async componentDidMount() {
-    try {
-      let jobsInfo = await apiHandler.getJobs();
-      this.setState({ jobs: jobsInfo });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  componentDidMount() {}
 
   //toggle add job form
   // showAddJobForm = (event) => {
@@ -65,6 +57,7 @@ export class FeedJobContent extends Component {
   }
 
   render() {
+    console.log('i am rendered');
     if (this.state.jobsInfo === []) {
       return <div className="FeedJobContent">Loading...</div>;
     }
@@ -82,7 +75,7 @@ export class FeedJobContent extends Component {
           />
         ) : null}
 
-        {this.state.jobs.map((job) => {
+        {this.props.jobs.map((job) => {
           return (
             <FeedJobCard
               key={job._id}
