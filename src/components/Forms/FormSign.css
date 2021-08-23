@@ -9,6 +9,7 @@
     border-radius: .5em;
     align-self: center;
     margin-top: 2rem;
+    background-color: white;
     
 }
 
@@ -35,7 +36,7 @@
 .form-container input {
     border: none;
     box-shadow: inset 2px 2px 4px rgba(83, 83, 83, 0.26);
-    background-color: var(--linen);
+    background-color: rgba(204, 201, 201, 0.247);
 }
 
 .form-container .passports {

@@ -13,7 +13,6 @@ const SideProfile = (props) => {
     const graduationYear = null || props.context.user?.graduationYear
     const location = null || props.context.user?.location
 
-    console.log('Side profile props: ', props)
     return (
         <>
         <div className="side-profile-container">
@@ -23,9 +22,9 @@ const SideProfile = (props) => {
             <h5>
                 {firstName}&nbsp;{lastName}
             </h5>
+            {type && <h6>{type}</h6>}
             </div>
             <div className="informations">
-                {type && <p>{type}</p>}
                 {graduationYear && <p>
                     Graduated in: <span>{graduationYear}</span>
                 </p>}
@@ -33,7 +32,9 @@ const SideProfile = (props) => {
                     From: <span>{location}</span>
                     </p>}
             </div>
+            <div className="edit-link">
             <Link to='/edit'>Edit my profile</Link>
+            </div>
         </div>
         </>
     )
