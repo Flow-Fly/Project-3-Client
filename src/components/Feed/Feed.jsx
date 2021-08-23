@@ -42,7 +42,7 @@ export class Feed extends Component {
           {this.state.toggledTab === 'posts' ? (
             <FeedPostContent />
           ) : (
-            <FeedJobContent />
+            <FeedJobContent showJobForm={this.props.showJobForm} />
           )}
         </div>
       </div>

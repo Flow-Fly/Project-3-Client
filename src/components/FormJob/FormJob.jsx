@@ -73,6 +73,7 @@ export class FormJob extends Component {
       // Create
       apiHandler.addJob(this.state).then((data) => this.props.onCreate(data));
     }
+    this.props.closeJobForm();
   };
 
   //techno tags

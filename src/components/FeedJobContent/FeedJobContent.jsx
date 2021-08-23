@@ -23,9 +23,13 @@ export class FeedJobContent extends Component {
   }
 
   //toggle add job form
-  showAddJobForm = (event) => {
+  // showAddJobForm = (event) => {
+  //   event.preventDefault();
+  //   this.setState({ showAddJobForm: !this.state.showAddJobForm });
+  // };
+  showJobForm = (event) => {
     event.preventDefault();
-    this.setState({ showAddJobForm: !this.state.showAddJobForm });
+    this.props.showJobForm('create');
   };
 
   handleJobCreate = (job) => {
@@ -67,8 +71,8 @@ export class FeedJobContent extends Component {
 
     return (
       <div className="FeedJobContent">
-        <Button onClick={this.showAddJobForm}>Share a job</Button>
-
+        {/* <Button onClick={this.showAddJobForm}>Share a job</Button> */}
+        <Button onClick={this.showJobForm}>Share a job</Button>
         {/* toggle add job form */}
         {this.state.showAddJobForm ? (
           <FormJob
