@@ -1,11 +1,15 @@
 .side-profile-container {
+    position: sticky;
+    top: 0px;
     max-width: 300px;
-    min-height: 400px;
+    max-height: 75vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding: 1em;
-    background-color: var(--linen);
+    background-color: white;
     border-radius: .5rem;
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
+    text-align: center;
 }

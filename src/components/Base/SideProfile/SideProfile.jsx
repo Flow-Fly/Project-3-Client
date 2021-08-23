@@ -20,18 +20,18 @@ const SideProfile = (props) => {
             <div className="wrapper-picture-and-name">
 
             <Avatar url={picture} size='big' />
-            <h4>
+            <h5>
                 {firstName}&nbsp;{lastName}
-            </h4>
+            </h5>
             </div>
             <div className="informations">
                 {type && <p>{type}</p>}
-                {graduationYear && <h5>
+                {graduationYear && <p>
                     Graduated in: <span>{graduationYear}</span>
-                </h5>}
-                {location && <h5>
+                </p>}
+                {location && <p>
                     From: <span>{location}</span>
-                    </h5>}
+                    </p>}
             </div>
             <Link to='/edit'>Edit my profile</Link>
         </div>
