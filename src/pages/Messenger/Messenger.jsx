@@ -3,22 +3,20 @@ import Room from './Room/Room'
 import Message from './Message/Message'
 import apiHandler from '../../api/apiHandler'
 import { withUser } from '../../components/Auth/withUser'
+import { withMessenger } from '../../components/MessengerCtx/withMessenger'
 import './Messenger.css'
 import Button from '../../components/Base/Button/Button'
-import { io } from 'socket.io-client'
 
 class Messenger extends Component {
 
     constructor(props){
         super(props)
-   
+        
         this.state = {
-            rooms: [],
             currentRoom: null,
             messages: [],
             writtingMessage : '',
             socket: null,
-            connectedUsers: [],
             receivedMessage: null,
             newFriend: '',
             addingFriendError: null
@@ -28,7 +26,8 @@ class Messenger extends Component {
 
         this.messagesLoaded = false
         this.timeout= null
-        this.user = this.props.context.user.user ? this.props.context.user.user : this.props.context.user
+        this.user = this.props.context.user
+        
         this.openRoom = this.openRoom.bind(this)
         this.submitMessage = this.submitMessage.bind(this)
         this.addFriend = this.addFriend.bind(this)
@@ -36,71 +35,57 @@ class Messenger extends Component {
     }
 
     async componentDidMount(){
-        this.socket = io(process.env.REACT_APP_SOCKET_URL)
 
-        //send my userId to socket server to inform it I just connected
-        this.socket.emit('addUser', this.user._id)
-        this.setState({
-            id: this.socket.id
-        })
-        //retreive the array of all the connected users
-        this.socket.on('getUsers', users => {
-            this.setState({connectedUsers: users})
-        })
+        this.props.messengerContext.socket.on('receive', async data => {
 
-        this.socket.on('receive', data => {
+            //if the room is opened delete notifications 
+            if(this.state.currentRoom?.members.find(m => m._id === data.senderId)){
+           
+                await apiHandler.deleteNotifications(data.room._id, this.user._id)
 
-            if(!this.state.currentRoom) return 
-            if(!this.state.currentRoom.members.find(m => m._id === data.senderId)) return
-
-            this.setState({
-                receivedMessage : {
-                    sender : {
-                        _id: data.senderId,
-                        profileImg: data.senderImg},
-                    content : data.content,
-                    createdAt: Date.now()
-                }
-            }, () => {
                 this.setState({
-                    messages: [...this.state.messages, this.state.receivedMessage]
-                }, () => this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight) 
-            })
+                    receivedMessage : {
+                        sender : {
+                            _id: data.senderId,
+                            profileImg: data.senderImg},
+                        content : data.content,
+                        createdAt: Date.now()
+                    }
+                }, () => {
+                    console.log('SATE', this.state)
+                    this.setState({
+                        messages: [...this.state.messages, this.state.receivedMessage],
+                    })
+                })
+            }
         })
-        
- 
-        try{
-            const rooms = await apiHandler.getRooms(this.user._id) 
-            this.setState({rooms})
-        }
-        catch(err){
-            console.error(err)
-        }
     }
 
-    // componentDidUpdate(prevProps, prevState){
-    //     if(!this.state.currentRoom) return 
-    //     if(this.state.messages[0] === prevState.messages[0]) return 
-    //     return this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
-    // }
+    componentDidUpdate(prevProps, prevState){
+        if(!this.state.currentRoom) return 
+        return this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
+    }
 
     componentWillUnmount(){
-        clearTimeout(this.timeout)
-        this.socket.emit('disconnected')
+        this.setState({currentRoom: null})
+        //clearTimeout(this.timeout) WHY ITS GIVES MEMORY LEAKS ????
     }
 
     async openRoom(room){
+
         try{
             //getMessages(roomId, firstMessageIndex, depth)
-            const messages = await apiHandler.getMessages(room._id, 0, 20)
+            const messages = await apiHandler.getMessages(room._id, 0, 100)
     
+            await apiHandler.deleteNotifications(room._id, this.user._id)
+
             this.setState({
                 currentRoom: room,
                 messages: messages}, () => {
                     this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight
                     this.messagesLoaded = true
                     setTimeout(() => this.messagesLoaded = false, 1000)
-                })
+            })
         }
         catch(err){
             console.error(err)
@@ -113,8 +98,8 @@ class Messenger extends Component {
         //sending the socket
         const receiver = this.state.currentRoom.members.find(m => m._id !== this.user._id) //same logic as friend in Room component
 
-        this.socket.emit('send', {
-            roomId : this.state.currentRoom._id,
+        this.props.messengerContext.socket.emit('send', {
+            room : this.state.currentRoom,
             senderId: this.user._id,
             senderImg : this.user.profileImg,
             receiverId:receiver._id,
@@ -133,7 +118,7 @@ class Messenger extends Component {
             this.setState({
                 messages: [...this.state.messages, newMessage],
                 writtingMessage:''
-            }, () => this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight) 
+            }) 
         }
         catch(err){
             console.error(err)
@@ -148,8 +133,8 @@ class Messenger extends Component {
         if(e.key !== 'Enter') return 
 
         try{
-            
             const newFriend = await apiHandler.getUserByMail(this.state.newFriend)
+
             if(!newFriend.length){
 
                 this.setState({
@@ -178,11 +163,10 @@ class Messenger extends Component {
                 return this.openRoom(room.room[0])
             }
             else{
-                console.log(room)
                 this.setState({
-                    rooms: [...this.state.rooms, room],
                     newFriend: ''
                 })
+                this.props.messengerContext.setRooms(room)
                 return this.openRoom(room)
             }
         }
@@ -220,13 +204,13 @@ class Messenger extends Component {
                              <span className='errorMsg'>{this.state.addingFriendError}</span> 
                              {/* Would be nice to have a fadeIn/fadeOut animation */}
                         </div>
-                        {this.state.rooms.map(room => {
+                        {this.props.messengerContext.rooms.map((room, index) => {
                             return (
-                                <div key={room._id} onClick={() => this.openRoom(room)}>
+                                <div key={index} onClick={() => this.openRoom(room)}>
                                     <Room 
                                         room={room} 
                                         me={this.user} 
-                                        connectedUsers={this.state.connectedUsers}/>
+                                        connectedUsers={this.props.messengerContext.connectedUsers}/>
                                 </div>
                             )
                         }) }
@@ -267,4 +251,4 @@ class Messenger extends Component {
     }
 }
 
-export default withUser(Messenger)
+export default withMessenger(withUser(Messenger))

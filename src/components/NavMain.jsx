@@ -7,11 +7,23 @@ import apiHandler from "../api/apiHandler";
 
 import "../styles/NavMain.css";
 import Avatar from "./Base/Avatar/Avatar";
+import { withMessenger } from "./MessengerCtx/withMessenger";
 
 const NavMain = (props) => {
   const { context } = props;
 
+  const notifications = () => {
+    const id = props.context.user._id
+    const notifications = 
+      props.messengerContext.rooms
+        .filter(room => room.notifications?.includes(id))
+        .length
+    
+    return notifications
+  }
+
   function handleLogout() {
+
     apiHandler
       .logout()
       .then(() => {
@@ -34,7 +46,8 @@ const NavMain = (props) => {
             <li>
               <NavLink className="messengerNav" to="/messenger">
                 Messenger
-                <span className="notifications">3</span>
+                {console.log(notifications())}
+                {(notifications() > 0) ? <span className="notifications">{notifications()}</span> : ''}
               </NavLink>
             </li>
             <li>
@@ -64,4 +77,4 @@ const NavMain = (props) => {
   );
 };
 
-export default withRouter(withUser(NavMain));
+export default withRouter(withUser(withMessenger(NavMain)));
