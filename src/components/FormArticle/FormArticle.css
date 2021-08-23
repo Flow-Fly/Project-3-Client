@@ -31,3 +31,11 @@
 .articleForm-container Button{
     align-self: center;
 }
+.articleForm-container .formTitle{
+    align-self: center;
+}
+.articleForm-container .closeFormButton{
+    align-self: flex-end;
+    font-size: 0.8rem;
+    padding:0.1rem 0.3rem;
+}

@@ -33,6 +33,19 @@
 }
 
 .postCardPublish {
-  align-self: flex-end;
+  align-self: flex-start;
   font-size: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.publishInfos{
+  display: flex;
+  align-items: center;
+}
+
+.postCardPublish a{
+  justify-self: flex-end;
+  margin: 0 0.2rem;
 }

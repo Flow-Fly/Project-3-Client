@@ -22,12 +22,30 @@ export class FormArticle extends Component {
     handleCreate=(event)=>{
         event.preventDefault();
         const formData=new FormData();
-        console.log("create button clicked")
+        formData.append('title',this.state.title)
+        formData.append('content',this.state.content)
+        formData.append('type',this.state.type)
+        formData.append('link',this.state.link)
+        formData.append('image',this.state.image)
+
+
+        apiHandler.createNewPost(formData)
+            .then((dbrEs)=>{
+                console.log(dbrEs); 
+                this.props.loadPosts();
+                this.props.closePostForm()})
+            .catch((error)=>{console.log(error)})
+
     }
     handleUpdate=(event)=>{
         event.preventDefault();
         const formData=new FormData();
         console.log("update button clicked")
+    }
+
+    closePostForm = (event)=>{
+        event.preventDefault();
+        this.props.closePostForm();
     }
 
     //To handle input change on the form
@@ -44,6 +62,9 @@ export class FormArticle extends Component {
     render() {
         return (
             <div className='articleForm-container'>
+                <Button className="closeFormButton" onClick={this.closePostForm}>X</Button>
+                {(this.state.action==="create") ?   <h3 className="formTitle">Create new Post</h3> : 
+                    (this.state.action==="edit") ?  <h3 className="formTitle">Update Post</h3> : null}
                 <Form className='form' onSubmit={this.handleSubmit} >
 
                     <FormGroup className='form-group'>

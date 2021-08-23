@@ -16,10 +16,13 @@ import apiHandler from '../api/apiHandler';
 class Home extends React.Component {
   state = {
     displayedJob: null,
+    displayedPost: null,
     jobs: [],
+    posts:[],
     showAddJobForm: false,
+    showAddPostForm: false,
     jobFormAction: 'create',
-    formIschanged: false,
+    postFormAction: 'create',
   };
 
   // formChanged = (newJob) => {
@@ -36,18 +39,29 @@ class Home extends React.Component {
     this.setState({ showAddJobForm: false });
   };
 
+  //Toggle postForm
+  showPostForm = (action) => {
+    this.setState({ showAddPostForm: true, jobFormAction: action });
+  };
+  closePostForm = () => {
+    this.setState({ showAddPostForm: false });
+  };
+
   blob1Ref = React.createRef();
   blob2Ref = React.createRef();
 
   async componentDidMount() {
-    try {
+    try{
+      let posts= await apiHandler.getAllPost();
       let jobsInfo = await apiHandler.getJobs();
-      this.setState({ jobs: jobsInfo }, () => {
-        console.log(this.state.jobs);
-      });
-    } catch (error) {
-      console.log(error);
-    }
+
+      this.setState({ jobs: jobsInfo,posts:posts });
+     }
+
+   catch (error)
+   {
+       console.log(error)
+   }
   }
 
   loadJobs = async () => {
@@ -58,6 +72,18 @@ class Home extends React.Component {
     } catch (error) {
       console.log(error);
     }
+  };
+  loadPosts = async () => {
+    try{  
+      let posts= await apiHandler.getAllPost();
+      this.setState({posts:posts});
+     }
+
+   catch (error)
+   {
+       console.log(error)
+   }
+
   };
 
   componentDidUpdate() {
@@ -81,19 +107,30 @@ class Home extends React.Component {
         <div className="homePageBody">
           <SideProfile />
           <Feed
-            jobs={this.state.jobs}
-            loadJobs={this.loadJobs}
-            showJobForm={this.showJobForm}
+            jobs=         {this.state.jobs}
+            loadJobs=     {this.loadJobs}
+            showJobForm=  {this.showJobForm}
+            posts=        {this.state.posts}
+            loadPosts=    {this.loadPosts}
+            showPostForm= {this.showPostForm}
           ></Feed>
           <div className="homeRightSide">
             {this.state.showAddJobForm === true && (
               <FormJob
-                closeJobForm={this.closeJobForm}
-                loadJobs={this.loadJobs}
-                // formChanged={this.formChanged}
-                action={this.state.jobFormAction}
+                closeJobForm= {this.closeJobForm}
+                loadJobs=     {this.loadJobs}
+                action=       {this.state.jobFormAction}
               />
             )}
+            {
+              this.state.showAddPostForm===true &&(
+                <FormArticle
+                closePostForm=    {this.closePostForm}
+                loadPosts=        {this.loadPosts}
+                action=           {this.state.postFormAction}
+                />
+              )
+            }
           </div>
         </div>
       );
