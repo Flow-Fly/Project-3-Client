@@ -12,10 +12,12 @@
 .jobForm-container {
   border: 1px solid var(--mainLightBlueColor);
   padding: 0.3rem;
+  margin-top: 0.5rem;
   max-width: 400px;
   border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
 .jobForm-container .form-group {

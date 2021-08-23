@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './FeedJobCard.css';
 import JobDetailsCard from '../Job/JobDetailsCard';
-import Button from '../Base/Button/Button';
+// import Button from '../Base/Button/Button';
 import FormJob from '../FormJob/FormJob';
 
 class FeedJobCard extends Component {
@@ -39,7 +39,12 @@ class FeedJobCard extends Component {
         <div className="FeedJobCard">
           <h6>
             {this.props.job.title}
-            <Button onClick={this.cancelEdit}>Cancel</Button>
+            <button
+              className="button-cancel-edit-job"
+              onClick={this.cancelEdit}
+            >
+              Cancel
+            </button>
           </h6>
           <FormJob
             action="edit"
@@ -69,9 +74,15 @@ class FeedJobCard extends Component {
 
     return (
       <div className="FeedJobCard">
-        <h6>{this.props.job.title}</h6>
-        <Button onClick={this.startEdit}>Edit</Button>
-        <Button onClick={this.props.onDelete}>Delete</Button>
+        <h6>
+          {this.props.job.title}
+          <button className="button-edit-job" onClick={this.startEdit}>
+            Edit
+          </button>
+          <button className="button-delete-job" onClick={this.props.onDelete}>
+            Delete
+          </button>
+        </h6>
         <ul key={this.props.job._id}>
           <li>
             <b>{this.props.job.company}</b>
