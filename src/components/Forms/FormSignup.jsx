@@ -8,6 +8,7 @@ import './FormSign.css';
 import utils from '../../utils/helpers';
 import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
 import github from '../../assets/auth/github-btn.png'
+import logo from '../../Images/logo.png'
 
 const initialState = {
   canSubmit: '',
@@ -118,6 +119,7 @@ class FormSignup extends Component {
     return (
       <>
         <div className="form-container">
+        <img id="signLogo" alt="signLogo" src={logo}></img>
           <Form className="form" onSubmit={this.handleSubmit}>
             <FormGroup className="form-group">
               <Label className="label" htmlFor="firstName" hidden>
@@ -164,96 +166,6 @@ class FormSignup extends Component {
                 required
               />
             </FormGroup>
-            {/* <FormGroup className="form-group">
-                  <Label className="label" htmlFor="phoneNumber">
-                    Phone number:{' '}
-                  </Label>
-                  <Input
-                    className="input"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={this.state.phoneNumber}
-                    onChange={this.handleChange}
-                    type="tel"
-                    placeholder="Phone number"
-                  />
-                </FormGroup>
-       
-                <FormGroup className="form-group">
-                  <Label className="label" htmlFor="graduationYear">
-                    Graduation year:{' '}
-                  </Label>
-                  <Input
-                    className="input"
-                    id="graduationYear"
-                    name="graduationYear"
-                    value={this.state.graduationYear}
-                    onChange={this.handleChange}
-                    type="number"
-                    placeholder="Graduation year"
-                    min="2013"
-                    max="2022"
-                  />
-                </FormGroup>
-                <FormGroup className="form-group">
-                  <Label
-                    className="label"
-                    htmlFor="location"
-                    value={this.state.location}
-                    onChange={this.handleChange}
-                  >
-                    Location:{' '}
-                  </Label>
-
-                  <Input
-                    name="location"
-                    id="location"
-                    type="select"
-                    name="location"
-                    value={this.state.location}
-                    onChange={this.handleChange}
-                  >
-                    <option value="-1" disabled>
-                      Please select a Campus
-                    </option>
-                    <option value="Paris">Paris</option>
-                    <option value="Madrid">Madrid</option>
-                    <option value="Amsterdam">Amsterdam</option>
-                    <option value="Barcelona">Barcelona</option>
-                    <option value="Berlin">Berlin</option>
-                    <option value="Miami">Miami</option>
-                    <option value="Sao Paulo">Sao Paulo</option>
-                    <option value="Lisbon">Lisbon</option>
-                    <option value="Mexico City">Mexico City</option>
-                  </Input>
-                </FormGroup>
-
-                <FormGroup className="form-group">
-                  <Label
-                    className="label"
-                    htmlFor="type"
-                    value={this.state.type}
-                    onChange={this.handleChange}
-                  >
-                    Field of work:{' '}
-                  </Label>
-
-                  <Input
-                    name="type"
-                    id="type"
-                    type="select"
-                    required
-                    name="type"
-                    value={this.state.type}
-                    onChange={this.handleChange}
-                  >
-                    <option value="-1">Please select your field of work</option>
-                    <option value="Web Dev">Web Development</option>
-                    <option value="UI/UX">UI / UX</option>
-                    <option value="Data Analyst">Data Analyst</option>
-                    <option value="Cyber Security">Cyber Security</option>
-                  </Input>
-                </FormGroup> */}
 
             <FormGroup className="form-group">
               <Label className="label" htmlFor="password" hidden>

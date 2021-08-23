@@ -7,6 +7,7 @@ import Button from '../Base/Button/Button';
 import './FormSign.css'
 import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
 import github from '../../assets/auth/github-btn.png'
+import logo from '../../Images/logo.png'
 
 class FormSignin extends Component {
   state = {
@@ -45,6 +46,7 @@ class FormSignin extends Component {
     return (
       <>
       <div className="form-container">
+        <img id="signLogo" alt="signLogo" src={logo}></img>
         <Form className='form' onSubmit={this.handleSubmit}>
 
           <FormGroup>

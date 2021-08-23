@@ -15,15 +15,13 @@
     grid-template-columns: 1fr 1fr 1fr;
 }
 
-.feedBlock{
-    grid-column: 2 / 3;
-}
 
 
 #mainBlobSection{
     display: flex;
     justify-content: center;
     position: relative;
+    grid-column: 2/3;
 }
 
 .homeFloating{
@@ -36,7 +34,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    animation:float 20s ease-in-out infinite
+    animation:float 20s ease-in-out infinite;
+    
 }
 
 @keyframes float {
