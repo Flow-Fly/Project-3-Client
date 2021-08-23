@@ -22,14 +22,13 @@ class Home extends React.Component {
     formIschanged: false,
   };
 
-  formChanged = (newJob) => {
-    //  this.setState({ formIschanged: !this.state.formIschanged });
-    //console.log('fwegf');
-    // updatethestate with the new job.
-  };
+  // formChanged = (newJob) => {
+  //   //  this.setState({ formIschanged: !this.state.formIschanged });
+  //   //console.log('fwegf');
+  //   // updatethestate with the new job.
+  // };
 
-  //
-
+  //toggle jobForm
   showJobForm = (action) => {
     this.setState({ showAddJobForm: true, jobFormAction: action });
   };
@@ -52,7 +51,7 @@ class Home extends React.Component {
   }
 
   loadJobs = async () => {
-    console.log('called');
+    // console.log('called');
     try {
       let jobsInfo = await apiHandler.getJobs();
       this.setState({ jobs: jobsInfo });
@@ -91,7 +90,7 @@ class Home extends React.Component {
               <FormJob
                 closeJobForm={this.closeJobForm}
                 loadJobs={this.loadJobs}
-                formChanged={this.formChanged}
+                // formChanged={this.formChanged}
                 action={this.state.jobFormAction}
               />
             )}

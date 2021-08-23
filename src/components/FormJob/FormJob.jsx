@@ -261,10 +261,12 @@ export class FormJob extends Component {
             </Input>
           </FormGroup>
           {this.props.action === 'create' && (
-            <Button onClick={this.handleCreate}>Create</Button>
+            // <Button onClick={this.handleCreate}>Create</Button>
+            <Button>Create</Button>
           )}
           {this.props.action === 'edit' && (
-            <Button onClick={this.handleUpdate}>Submit changes</Button>
+            // <Button onClick={this.handleUpdate}>Submit changes</Button>
+            <Button>Submit changes</Button>
           )}
         </Form>
       </div>

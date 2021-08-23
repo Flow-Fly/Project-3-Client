@@ -1,11 +1,41 @@
 .side-profile-container {
     max-width: 300px;
-    min-height: 400px;
+    max-height: 50vh;
     display: flex;
+    position: sticky;
+    top: calc(70px + 1rem);
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
     padding: 1em;
-    background-color: var(--linen);
+    background-color: white;
     border-radius: .5rem;
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
+    text-align: center;
+}
+
+.wrapper-picture-and-name {
+    box-shadow: 0 0 4px .5px rgba(0, 0, 0, 0.315);
+    padding: .5rem;
+    border-radius: .5rem;
+}
+
+.side-profile-container .informations {
+    margin-top: 1rem;
+}
+
+.side-profile-container .informations p {
+    font-style: italic;
+}
+
+.side-profile-container .informations span {
+    font-style: normal;
+    font-weight: 500;
+}
+
+.edit-link {
+    width: 100%;
+    margin-top: 3rem;
+    border-top: 2px solid rgba(0, 0, 0, 0.233);
+    justify-self: flex-end;
 }

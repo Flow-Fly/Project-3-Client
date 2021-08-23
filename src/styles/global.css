@@ -17,19 +17,15 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
+ body{
+   background-color: #F3F2EF;
+   font-size: 12px;
+ }
+ .mainPage {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
-  background-color: #f3f2ef;
-}
-
-body {
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: #f3f2ef;
-}
+ }
 
 html {
   font-family: 'Manrope', sans-serif;
@@ -47,4 +43,31 @@ ul {
 .App {
   display: flex;
   flex-direction: column;
+}
+
+.webdev {
+  color: green;
+}
+.uiux {
+  color: blue;
+}
+.cyber {
+  color: red;
+}
+.data-analyst {
+  color: purple;
+}
+
+
+.webdev.bg {
+  background-color: rgb(72, 145, 72);
+}
+.uiux.bg {
+  background-color: rgb(75, 75, 153);
+}
+.cyber.bg {
+  background-color: rgb(146, 70, 70);
+}
+.data-analyst.bg {
+  background-color: rgb(148, 73, 148);
 }

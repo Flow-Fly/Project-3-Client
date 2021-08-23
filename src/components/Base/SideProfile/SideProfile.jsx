@@ -13,27 +13,28 @@ const SideProfile = (props) => {
     const graduationYear = null || props.context.user?.graduationYear
     const location = null || props.context.user?.location
 
-    console.log('Side profile props: ', props)
     return (
         <>
         <div className="side-profile-container">
             <div className="wrapper-picture-and-name">
 
             <Avatar url={picture} size='big' />
-            <h4>
+            <h5>
                 {firstName}&nbsp;{lastName}
-            </h4>
+            </h5>
+            {type && <h6>{type}</h6>}
             </div>
             <div className="informations">
-                {type && <p>{type}</p>}
-                {graduationYear && <h5>
+                {graduationYear && <p>
                     Graduated in: <span>{graduationYear}</span>
-                </h5>}
-                {location && <h5>
+                </p>}
+                {location && <p>
                     From: <span>{location}</span>
-                    </h5>}
+                    </p>}
             </div>
+            <div className="edit-link">
             <Link to='/edit'>Edit my profile</Link>
+            </div>
         </div>
         </>
     )

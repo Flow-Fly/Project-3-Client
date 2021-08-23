@@ -6,6 +6,7 @@ import Uploader from '../Base/Uploader/Uploader';
 import apiHandler from '../../api/apiHandler'
 import Avatar from '../Base/Avatar/Avatar';
 import {withUser} from '../Auth/withUser'
+import { Redirect } from 'react-router-dom'
 
 const initial = {
     user: {
@@ -17,6 +18,7 @@ const initial = {
         location: -1,
         type: -1,
     },
+    edited: false,
 };
 export class FormEditProfile extends Component {
   state = { ...initial };
@@ -54,38 +56,18 @@ export class FormEditProfile extends Component {
     if (this.imageRef.current.files[0]) {
       fd.append("profileImg", this.imageRef.current.files[0]);
     }
-    for (var value of fd.values()) {
-        console.log(value);
-     }
+    // for (var value of fd.values()) {
+    //     console.log(value);
+    //  }
     apiHandler
       .updateUser(fd)
       .then((data) => {
         this.props.context.setUser(data);
-        console.log('updated! ',this.props.context.user)
-        // this.setState({
-        //   httpResponse: {
-        //     status: "success",
-        //     message: "Profile successfully updated.",
-        //   },
-        // });
-
-        // this.timeoutId = setTimeout(() => {
-        //   this.setState({ httpResponse: null });
-        // }, 2000);
+        this.setState({edited: true})
       })
       .catch((error) => {
           console.error(error)
-        // this.setState({
-        //   httpResponse: {
-        //     status: "failure",
-        //     message:
-        //       "Something bad happened while updating your profile, try again later",
-        //   },
-        // });
-
-        // this.timeoutId = setTimeout(() => {
-        //   this.setState({ httpResponse: null });
-        // }, 2000);
+        
       });
 }
 handleFileSelect = (temporaryURL) => {
@@ -96,6 +78,7 @@ handleFileSelect = (temporaryURL) => {
 
   render() {
       //if (this.props.context.isLoading) return <div className="loading">Loading...</div>
+      if (this.state.edited) return <Redirect to='/' />
     return (
       <>
         <div className="form-container">
