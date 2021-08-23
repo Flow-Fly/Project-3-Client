@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './FeedJobCard.css';
 import JobDetailsCard from '../Job/JobDetailsCard';
 import Button from '../Base/Button/Button';
-import FormJob from '../FormJob/FormJob.jsx';
+import FormJob from '../FormJob/FormJob';
 
 class FeedJobCard extends Component {
   state = {

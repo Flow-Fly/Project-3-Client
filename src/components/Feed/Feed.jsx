@@ -15,6 +15,7 @@ export class Feed extends Component {
   };
 
   render() {
+    console.log(this.props.jobs);
     return (
       <div className="feedContainer">
         <div className="feedTabs">
@@ -42,7 +43,11 @@ export class Feed extends Component {
           {this.state.toggledTab === 'posts' ? (
             <FeedPostContent />
           ) : (
-            <FeedJobContent />
+            <FeedJobContent
+              jobs={this.props.jobs}
+              loadJobs={this.props.loadJobs}
+              showJobForm={this.props.showJobForm}
+            />
           )}
         </div>
       </div>

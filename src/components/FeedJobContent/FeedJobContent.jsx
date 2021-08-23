@@ -4,27 +4,25 @@ import apiHandler from '../../api/apiHandler';
 import Button from '../Base/Button/Button';
 import './FeedJobContent.css';
 import FormJob from '../FormJob/FormJob';
+import '../FormJob/FormJob.css';
 
 export class FeedJobContent extends Component {
   state = {
-    jobs: [],
-    displayAddJobForm: false,
-    displayJobDetails: {},
+    showAddJobForm: false,
+    showJobDetails: {},
   };
 
-  async componentDidMount() {
-    try {
-      let jobsInfo = await apiHandler.getJobs();
-      this.setState({ jobs: jobsInfo });
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  componentDidMount() {}
 
-  //toggle add job form //ugly as hell, better go to a new page
-  showAddJobForm = (event) => {
+  //toggle add job form
+  // showAddJobForm = (event) => {
+  //   event.preventDefault();
+  //   this.setState({ showAddJobForm: !this.state.showAddJobForm });
+  // };
+  showJobForm = (event) => {
     event.preventDefault();
-    this.setState({ displayAddJobForm: !this.state.displayAddJobForm });
+    this.props.showJobForm('create');
+    this.props.showJobForm('edit');
   };
 
   handleJobCreate = (job) => {
@@ -32,7 +30,7 @@ export class FeedJobContent extends Component {
 
     this.setState({
       jobs: [job, ...this.state.jobs],
-      displayAddJobForm: false,
+      showAddJobForm: false,
     });
   };
 
@@ -44,7 +42,7 @@ export class FeedJobContent extends Component {
     this.setState({ jobs });
   };
 
-  handleDelete = (jobId) => {
+  handleJobDelete = (jobId) => {
     apiHandler
       .deleteJob(jobId)
       .then(() => {
@@ -60,15 +58,17 @@ export class FeedJobContent extends Component {
   }
 
   render() {
+    console.log('rendered');
     if (this.state.jobsInfo === []) {
       return <div className="FeedJobContent">Loading...</div>;
     }
 
     return (
       <div className="FeedJobContent">
-        <Button onClick={this.showAddJobForm}>Share a job</Button>
+        {/* <Button onClick={this.showAddJobForm}>Share a job</Button> */}
+        <Button onClick={this.showJobForm}>Share a job</Button>
         {/* toggle add job form */}
-        {this.state.displayAddJobForm ? (
+        {this.state.showAddJobForm ? (
           <FormJob
             onCreate={this.handleJobCreate}
             action="create"
@@ -76,7 +76,7 @@ export class FeedJobContent extends Component {
           />
         ) : null}
 
-        {this.state.jobs.map((job) => {
+        {this.props.jobs.map((job) => {
           return (
             <FeedJobCard
               key={job._id}
@@ -85,7 +85,7 @@ export class FeedJobContent extends Component {
                 this.handleJobUpdate(job._id, data);
               }}
               onDelete={() => {
-                this.handleDelete(job._id);
+                this.handleJobDelete(job._id);
               }}
             />
           );

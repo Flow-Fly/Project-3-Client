@@ -60,8 +60,8 @@ export class FormJob extends Component {
     event.preventDefault();
     console.log('handleSubmit', this.state.title);
 
-    // Edit
     if (this.props.job) {
+      // Edit
       apiHandler
         .updateJob(this.props.job._id, this.state)
         .then((data) => {
@@ -71,23 +71,12 @@ export class FormJob extends Component {
         .catch((err) => console.log(err));
     } else {
       // Create
-      apiHandler.addJob(this.state).then((data) => this.props.onCreate(data));
+      apiHandler.addJob(this.state).then((data) => {
+        console.log(data);
+        this.props.loadJobs();
+        this.props.closeJobForm();
+      });
     }
-
-    // reset form
-    // this.setState({
-    //   title: '',
-    //   description: '',
-    //   technologies: [],
-    //   currentTechnology: '',
-    //   location: '',
-    //   remote: false,
-    //   link: '',
-    //   contractType: 'CDI',
-    //   level: 'junior',
-    //   company: '',
-    //   type: 'Web Dev',
-    // });
   };
 
   //techno tags
@@ -272,10 +261,12 @@ export class FormJob extends Component {
             </Input>
           </FormGroup>
           {this.props.action === 'create' && (
-            <Button onClick={this.handleCreate}>Create</Button>
+            // <Button onClick={this.handleCreate}>Create</Button>
+            <Button>Create</Button>
           )}
           {this.props.action === 'edit' && (
-            <Button onClick={this.handleUpdate}>Submit changes</Button>
+            // <Button onClick={this.handleUpdate}>Submit changes</Button>
+            <Button>Submit changes</Button>
           )}
         </Form>
       </div>

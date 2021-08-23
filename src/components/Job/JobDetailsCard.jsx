@@ -10,6 +10,7 @@ export class JobDetailsCard extends Component {
           <li>{this.props.job.description}</li>
           <li>{this.props.job.technologies}</li>
           <li>Remote: {this.props.job.remote}</li>
+          {/* add a link to the creator profile page */}
           <li>Job shared by: {this.props.job.creator?.email}</li>
           <li>Job link: {this.props.job.link}</li>
         </ul>
