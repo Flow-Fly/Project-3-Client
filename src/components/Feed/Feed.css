@@ -15,12 +15,13 @@
     flex-direction: column;
     position: relative;
     /* For testing */
-    width:500px;
+    
     /* width: 100%; */
     background: #f1f1f1;
     border-radius: 0.4rem;
     margin: 0.5rem;
     overflow:hidden;
+    grid-column: 2/3;
 }
 
 .feedTabs{
@@ -51,12 +52,12 @@
     
   }
 
-  .active  {
+  .feedContainer .active  {
     background: white;
     border-bottom: 1px solid transparent;
   }
   
-  .active::before {
+  .feedContainer .active::before {
     content: "";
     position: absolute;
     top: 0px;
