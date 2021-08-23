@@ -41,15 +41,17 @@ export class Feed extends Component {
         <div className="feedContentWrapper">
           {this.state.toggledTab === 'posts' ? (
             <FeedPostContent
-              posts=           {this.props.posts}
-              loadPosts=      {this.props.loadPosts}
-              showPostForm=   {this.props.showPostForm}
-              />
+              posts={this.props.posts}
+              loadPosts={this.props.loadPosts}
+              showPostForm={this.props.showPostForm}
+            />
           ) : (
             <FeedJobContent
-              jobs=           {this.props.jobs}
-              loadJobs=       {this.props.loadJobs}
-              showJobForm=    {this.props.showJobForm}
+              jobs={this.props.jobs}
+              // loadJobs={this.props.loadJobs}
+              showJobForm={this.props.showJobForm}
+              handleJobDelete={this.props.handleJobDelete}
+              handleEditStart={this.props.handleEditStart}
             />
           )}
         </div>

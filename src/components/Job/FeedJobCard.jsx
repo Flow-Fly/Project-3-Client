@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import './FeedJobCard.css';
 import JobDetailsCard from '../Job/JobDetailsCard';
-// import Button from '../Base/Button/Button';
-import FormJob from '../FormJob/FormJob';
 
 class FeedJobCard extends Component {
   state = {
     showJobDetails: false,
-    showJobForm: false,
   };
 
   // toggle job details on the jobs list
@@ -19,42 +16,7 @@ class FeedJobCard extends Component {
     this.setState({ showJobDetails: false });
   };
 
-  //show jobForm, action = "edit"
-  cancelEdit = () => {
-    this.setState({ showJobForm: false });
-  };
-
-  startEdit = () => {
-    this.setState({ showJobForm: true });
-  };
-
-  onJobUpdate = (data) => {
-    this.setState({ showJobForm: false });
-    this.props.onJobUpdate(data);
-  };
-
   render() {
-    if (this.state.showJobForm) {
-      return (
-        <div className="FeedJobCard">
-          <h6>
-            {this.props.job.title}
-            <button
-              className="button-cancel-edit-job"
-              onClick={this.cancelEdit}
-            >
-              Cancel
-            </button>
-          </h6>
-          <FormJob
-            action="edit"
-            job={this.props.job}
-            onUpdate={this.onJobUpdate}
-          />
-        </div>
-      );
-    }
-
     let details;
 
     if (!this.state.showJobDetails) {
@@ -76,10 +38,16 @@ class FeedJobCard extends Component {
       <div className="FeedJobCard">
         <h6>
           {this.props.job.title}
-          <button className="button-edit-job" onClick={this.startEdit}>
+          <button
+            className="button-edit-job"
+            onClick={this.props.handleEditStart}
+          >
             Edit
           </button>
-          <button className="button-delete-job" onClick={this.props.onDelete}>
+          <button
+            className="button-delete-job"
+            onClick={this.props.handleJobDelete}
+          >
             Delete
           </button>
         </h6>

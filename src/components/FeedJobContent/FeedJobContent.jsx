@@ -1,55 +1,22 @@
 import React, { Component } from 'react';
 import FeedJobCard from '../Job/FeedJobCard';
-import apiHandler from '../../api/apiHandler';
 import Button from '../Base/Button/Button';
 import './FeedJobContent.css';
 import FormJob from '../FormJob/FormJob';
 import '../FormJob/FormJob.css';
+import { withUser } from '../Auth/withUser';
 
 export class FeedJobContent extends Component {
   state = {
-    showAddJobForm: false,
     showJobDetails: {},
   };
 
-  componentDidMount() {}
+  // componentDidMount() {}
 
-  //toggle add job form
-  // showAddJobForm = (event) => {
-  //   event.preventDefault();
-  //   this.setState({ showAddJobForm: !this.state.showAddJobForm });
-  // };
+  //toggle job form
   showJobForm = (event) => {
     event.preventDefault();
     this.props.showJobForm('create');
-  };
-
-  handleJobCreate = (job) => {
-    console.log(`Creating ${job}.`);
-
-    this.setState({
-      jobs: [job, ...this.state.jobs],
-      showAddJobForm: false,
-    });
-  };
-
-  handleJobUpdate = (jobId, updatedJob) => {
-    const jobs = [...this.state.jobs].map((job) =>
-      job._id === jobId ? updatedJob : job
-    );
-
-    this.setState({ jobs });
-  };
-
-  handleJobDelete = (jobId) => {
-    apiHandler
-      .deleteJob(jobId)
-      .then(() => {
-        this.setState({
-          jobs: this.state.jobs.filter((job) => job._id !== jobId),
-        });
-      })
-      .catch((err) => console.log(err));
   };
 
   async componentWillUnmount() {
@@ -58,38 +25,33 @@ export class FeedJobContent extends Component {
 
   render() {
     console.log('rendered');
-    if (this.state.jobsInfo === []) {
+    if (this.props.jobsInfo === []) {
       return <div className="FeedJobContent">Loading...</div>;
     }
 
     return (
       <div className="FeedJobContent">
-        {/* <Button onClick={this.showAddJobForm}>Share a job</Button> */}
         <div className="button-create-job-wrapper">
           <Button className="button-create-job" onClick={this.showJobForm}>
             Share a job
           </Button>
         </div>
 
-        {/* toggle add job form */}
-        {this.state.showAddJobForm ? (
-          <FormJob
-            onCreate={this.handleJobCreate}
-            action="create"
-            className="addJobForm"
-          />
-        ) : null}
+        {this.state.showJobForm && (
+          <FormJob action="create" className="addJobForm" />
+        )}
 
         {this.props.jobs.map((job) => {
           return (
             <FeedJobCard
               key={job._id}
               job={job}
-              onJobUpdate={(data) => {
-                this.handleJobUpdate(job._id, data);
+              showJobForm={this.props.showJobForm}
+              handleEditStart={() => {
+                this.props.handleEditStart(job);
               }}
-              onDelete={() => {
-                this.handleJobDelete(job._id);
+              handleJobDelete={() => {
+                this.props.handleJobDelete(job._id);
               }}
             />
           );
@@ -99,4 +61,4 @@ export class FeedJobContent extends Component {
   }
 }
 
-export default FeedJobContent;
+export default withUser(FeedJobContent);

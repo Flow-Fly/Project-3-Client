@@ -16,29 +16,78 @@ import apiHandler from '../api/apiHandler';
 class Home extends React.Component {
   state = {
     displayedJob: null,
-    displayedPost: null,
     jobs: [],
-    posts:[],
-    showAddJobForm: false,
-    showAddPostForm: false,
+    showJobForm: false,
     jobFormAction: 'create',
+    jobFormJob: null,
+    /////////
+    displayedPost: null,
+    posts: [],
+    showAddPostForm: false,
     postFormAction: 'create',
   };
 
-  // formChanged = (newJob) => {
-  //   //  this.setState({ formIschanged: !this.state.formIschanged });
-  //   //console.log('fwegf');
-  //   // updatethestate with the new job.
-  // };
-
+  ////////job related////////////
+  // 2 api calls on FormJob(create and update), 1 here(delete)
   //toggle jobForm
   showJobForm = (action) => {
-    this.setState({ showAddJobForm: true, jobFormAction: action });
-  };
-  closeJobForm = () => {
-    this.setState({ showAddJobForm: false });
+    this.setState({
+      showJobForm: true,
+      jobFormAction: 'create',
+      jobFormJob: null,
+    });
   };
 
+  closeJobForm = () => {
+    this.setState({ showJobForm: false });
+  };
+
+  //toggle form for job edit
+  handleEditStart = (job) => {
+    this.setState({
+      showJobForm: true,
+      jobFormAction: 'edit',
+      jobFormJob: job,
+    });
+  };
+
+  //render created job
+  handleJobCreated = (createdJob) => {
+    this.setState({
+      jobs: [createdJob, ...this.state.jobs],
+      showJobForm: false,
+      jobFormAction: 'edit',
+      // to clean up job form after
+      jobFormJob: null,
+    });
+  };
+
+  //render updated job
+  handleJobUpdated = (updatedJob) => {
+    const jobs = [...this.state.jobs].map((job) =>
+      job._id === this.state.jobFormJob._id ? updatedJob : job
+    );
+    this.setState({
+      jobs: jobs,
+      showJobForm: false,
+      jobFormAction: 'edit',
+      jobFormJob: null,
+    });
+  };
+
+  //delete job
+  handleJobDelete = (jobId) => {
+    apiHandler
+      .deleteJob(jobId)
+      .then(() => {
+        this.setState({
+          jobs: this.state.jobs.filter((job) => job._id !== jobId),
+        });
+      })
+      .catch((err) => console.log(err));
+  };
+
+  ////////post related///////////////////
   //Toggle postForm
   showPostForm = (action) => {
     this.setState({ showAddPostForm: true, jobFormAction: action });
@@ -47,43 +96,38 @@ class Home extends React.Component {
     this.setState({ showAddPostForm: false });
   };
 
+  //////////blob related///////
   blob1Ref = React.createRef();
   blob2Ref = React.createRef();
 
   async componentDidMount() {
-    try{
-      let posts= await apiHandler.getAllPost();
-      let jobsInfo = await apiHandler.getJobs();
-
-      this.setState({ jobs: jobsInfo,posts:posts });
-     }
-
-   catch (error)
-   {
-       console.log(error)
-   }
-  }
-
-  loadJobs = async () => {
-    // console.log('called');
     try {
+      let posts = await apiHandler.getAllPost();
       let jobsInfo = await apiHandler.getJobs();
-      this.setState({ jobs: jobsInfo });
+
+      this.setState({ jobs: jobsInfo, posts: posts });
     } catch (error) {
       console.log(error);
     }
-  };
+  }
+
+  // loadJobs = async () => {
+  //   // console.log('called');
+  //   try {
+  //     let jobsInfo = await apiHandler.getJobs();
+  //     this.setState({ jobs: jobsInfo });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   loadPosts = async () => {
-    try{  
-      let posts= await apiHandler.getAllPost();
-      this.setState({posts:posts});
-     }
-
-   catch (error)
-   {
-       console.log(error)
-   }
-
+    try {
+      let posts = await apiHandler.getAllPost();
+      this.setState({ posts: posts });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   componentDidUpdate() {
@@ -107,30 +151,33 @@ class Home extends React.Component {
         <div className="homePageBody">
           <SideProfile />
           <Feed
-            jobs=         {this.state.jobs}
-            loadJobs=     {this.loadJobs}
-            showJobForm=  {this.showJobForm}
-            posts=        {this.state.posts}
-            loadPosts=    {this.loadPosts}
-            showPostForm= {this.showPostForm}
+            jobs={this.state.jobs}
+            // loadJobs={this.loadJobs}
+            showJobForm={this.showJobForm}
+            posts={this.state.posts}
+            loadPosts={this.loadPosts}
+            showPostForm={this.showPostForm}
+            handleJobDelete={this.handleJobDelete}
+            handleEditStart={this.handleEditStart}
           ></Feed>
           <div className="homeRightSide">
-            {this.state.showAddJobForm === true && (
+            {this.state.showJobForm === true && (
               <FormJob
-                closeJobForm= {this.closeJobForm}
-                loadJobs=     {this.loadJobs}
-                action=       {this.state.jobFormAction}
+                closeJobForm={this.closeJobForm}
+                // loadJobs={this.loadJobs}
+                job={this.state.jobFormJob}
+                action={this.state.jobFormAction}
+                onJobCreated={this.handleJobCreated}
+                onJobUpdated={this.handleJobUpdated}
               />
             )}
-            {
-              this.state.showAddPostForm===true &&(
-                <FormArticle
-                closePostForm=    {this.closePostForm}
-                loadPosts=        {this.loadPosts}
-                action=           {this.state.postFormAction}
-                />
-              )
-            }
+            {this.state.showAddPostForm === true && (
+              <FormArticle
+                closePostForm={this.closePostForm}
+                loadPosts={this.loadPosts}
+                action={this.state.postFormAction}
+              />
+            )}
           </div>
         </div>
       );

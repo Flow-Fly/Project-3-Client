@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Button from '../Base/Button/Button';
-// import apiHandler from '../../api/apiHandler';
 import './FormJob.css';
 import { Form, FormGroup, Label, Input } from 'reactstrap';
-// import { FormText } from 'reactstrap';
 import TechnologyTag from '../Base/TechnologyTag/TechnologyTag';
 import apiHandler from '../../api/apiHandler';
 
@@ -24,25 +22,38 @@ export class FormJob extends Component {
     type: 'Web Dev',
   };
 
+  copyStateFromJob() {
+    this.setState({
+      title: this.props.job.title,
+      description: this.props.job.description,
+      technologies: this.props.job.technologies,
+      currentTechnology: this.props.job.currentTechnology,
+      location: this.props.job.location,
+      remote: this.props.job.remote,
+      link: this.props.job.link,
+      contractType: this.props.job.contractType,
+      level: this.props.job.level,
+      company: this.props.job.company,
+      type: this.props.job.type,
+    });
+  }
+
   componentDidMount() {
     if (this.props.job) {
-      this.setState({
-        title: this.props.job.title,
-        description: this.props.job.description,
-        technologies: this.props.job.technologies,
-        currentTechnology: this.props.job.currentTechnology,
-        location: this.props.job.location,
-        remote: this.props.job.remote,
-        link: this.props.job.link,
-        contractType: this.props.job.contractType,
-        level: this.props.job.level,
-        company: this.props.job.company,
-        type: this.props.job.type,
-      });
+      this.copyStateFromJob();
     }
   }
 
-  //To handle input change on the form
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.job &&
+      (!prevProps.job || prevProps.job._id !== this.props.job._id)
+    ) {
+      this.copyStateFromJob();
+    }
+  }
+
+  //handle input change on the form
   handleChange = (event) => {
     let key = event.target.name;
     let value =
@@ -56,31 +67,42 @@ export class FormJob extends Component {
     });
   };
 
+  //handle form data submit
   handleSubmit = (event) => {
     event.preventDefault();
     console.log('handleSubmit', this.state.title);
 
     if (this.props.job) {
-      // Edit
       apiHandler
         .updateJob(this.props.job._id, this.state)
         .then((data) => {
-          console.log('EditForm', data);
-          this.props.onUpdate(data);
+          console.log('Editd', data);
+          //called apihandler here => job already updated
+          this.props.onJobUpdated(data);
         })
         .catch((err) => console.log(err));
     } else {
-      // Create
-      apiHandler.addJob(this.state).then((data) => {
-        console.log(data);
-        this.props.loadJobs();
-        this.props.closeJobForm();
-      });
+      apiHandler
+        .addJob(this.state)
+        .then((data) => {
+          console.log('Created', data);
+          //called apihandler here => so job already created
+          this.props.onJobCreated(data);
+          // this.props.closeJobForm();
+        })
+        .catch((err) => console.log(err));
     }
+  };
+
+  // close job form by click on the x
+  closeJobForm = (event) => {
+    event.preventDefault();
+    this.props.closeJobForm();
   };
 
   //techno tags
   technoLogiesPressed = (event) => {
+    event.preventDefault();
     let str = this.state.currentTechnology.replaceAll(' ', '');
     if (event.key === 'Enter' && str !== '') {
       let technologiesTemp = [...this.state.technologies];
@@ -89,7 +111,6 @@ export class FormJob extends Component {
         technologies: technologiesTemp,
         currentTechnology: '',
       });
-      event.preventDefault();
     }
   };
 
@@ -102,6 +123,7 @@ export class FormJob extends Component {
   render() {
     return (
       <div className="jobForm-container">
+        <Button onClick={this.closeJobForm}>x</Button>
         <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup className="form-group">
             <Label className="label" htmlFor="title">
@@ -260,14 +282,8 @@ export class FormJob extends Component {
               <option value="All">All</option>
             </Input>
           </FormGroup>
-          {this.props.action === 'create' && (
-            // <Button onClick={this.handleCreate}>Create</Button>
-            <Button>Create</Button>
-          )}
-          {this.props.action === 'edit' && (
-            // <Button onClick={this.handleUpdate}>Submit changes</Button>
-            <Button>Submit changes</Button>
-          )}
+          {this.props.action === 'create' && <Button>Create Job</Button>}
+          {this.props.action === 'edit' && <Button>Submit changes</Button>}
         </Form>
       </div>
     );
