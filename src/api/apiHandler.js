@@ -62,7 +62,7 @@ const apiHandler = {
   },
   updateUser(data) {
     return service
-      .patch('/api/users/update/', data)
+      .patch('/api/users/me', data)
       .then(res => res.data)
       .catch(errorHandler)
   },
