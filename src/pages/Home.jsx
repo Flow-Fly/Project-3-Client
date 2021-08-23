@@ -11,13 +11,24 @@ import '../styles/Home.css';
 import Avatar from '../components/Base/Avatar/Avatar';
 import logo from '../Images/logo.png';
 import { Link } from 'react-router-dom';
+import apiHandler from '../api/apiHandler';
 
 class Home extends React.Component {
   state = {
     displayedJob: null,
+    jobs: [],
     showAddJobForm: false,
     jobFormAction: 'create',
+    formIschanged: false,
   };
+
+  formChanged = (newJob) => {
+    //  this.setState({ formIschanged: !this.state.formIschanged });
+    //console.log('fwegf');
+    // updatethestate with the new job.
+  };
+
+  //
 
   showJobForm = (action) => {
     this.setState({ showAddJobForm: true, jobFormAction: action });
@@ -55,6 +66,7 @@ class Home extends React.Component {
             {this.state.showAddJobForm === true && (
               <FormJob
                 closeJobForm={this.closeJobForm}
+                formChanged={this.formChanged}
                 action={this.state.jobFormAction}
               />
             )}
