@@ -1,5 +1,5 @@
 import React from 'react';
-//import SideProfile from '../components/Base/SideProfile/SideProfile'
+import SideProfile from '../components/Base/SideProfile/SideProfile'
 import Feed from '../components/Feed/Feed';
 import Button from '../components/Base/Button/Button'
 import FormArticle from "../components/FormArticle/FormArticle"
@@ -47,7 +47,7 @@ class Home extends React.Component {
     else if (this.props.context.isLoggedIn) {
       //rendered if you are logged in
       return <div className="homePageBody">
-        
+        <SideProfile/>  
         <Feed></Feed>
 
       </div>;

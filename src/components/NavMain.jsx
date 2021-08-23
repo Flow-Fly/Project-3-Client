@@ -26,7 +26,7 @@ const NavMain = (props) => {
 
   return (
     <nav className="NavMain">
-      <NavLink exact to="/">
+      <NavLink className="logoLink" exact to="/">
         <img id="logo" src={logo} alt="logo"></img>
       </NavLink>
       <ul className="nav-list">
