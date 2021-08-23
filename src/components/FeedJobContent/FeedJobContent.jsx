@@ -22,7 +22,6 @@ export class FeedJobContent extends Component {
   showJobForm = (event) => {
     event.preventDefault();
     this.props.showJobForm('create');
-    this.props.showJobForm('edit');
   };
 
   handleJobCreate = (job) => {
@@ -66,7 +65,12 @@ export class FeedJobContent extends Component {
     return (
       <div className="FeedJobContent">
         {/* <Button onClick={this.showAddJobForm}>Share a job</Button> */}
-        <Button onClick={this.showJobForm}>Share a job</Button>
+        <div className="button-create-job-wrapper">
+          <Button className="button-create-job" onClick={this.showJobForm}>
+            Share a job
+          </Button>
+        </div>
+
         {/* toggle add job form */}
         {this.state.showAddJobForm ? (
           <FormJob
