@@ -27,8 +27,21 @@ export class FeedJobContent extends Component {
     this.setState({ displayAddJobForm: !this.state.displayAddJobForm });
   };
 
-  handleJobUpdate = (jobId, data) => {
-    console.log(`Updating ${jobId}, for ex new title: ${data.title}`);
+  handleJobCreate = (job) => {
+    console.log(`Creating ${job}.`);
+
+    this.setState({
+      jobs: [job, ...this.state.jobs],
+      displayAddJobForm: false,
+    });
+  };
+
+  handleJobUpdate = (jobId, updatedJob) => {
+    const jobs = [...this.state.jobs].map((job) =>
+      job._id === jobId ? updatedJob : job
+    );
+
+    this.setState({ jobs });
   };
 
   handleDelete = (jobId) => {
@@ -56,7 +69,11 @@ export class FeedJobContent extends Component {
         <Button onClick={this.showAddJobForm}>Share a job</Button>
         {/* toggle add job form */}
         {this.state.displayAddJobForm ? (
-          <FormJob action="create" className="addJobForm" />
+          <FormJob
+            onCreate={this.handleJobCreate}
+            action="create"
+            className="addJobForm"
+          />
         ) : null}
 
         {this.state.jobs.map((job) => {

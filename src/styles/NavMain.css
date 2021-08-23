@@ -17,6 +17,24 @@
   margin-right: 20px;
 }
 
+.messengerNav{
+  position: relative;
+}
+
+.notifications{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  border-radius: 50%;
+  background-color: #BA324F;
+  width: 15px;
+  height: 15px;
+  top: -4px;
+  left: -10px;
+  color: white;
+  font-size: 10px;
+}
 .nav-list li > p:hover {
   cursor: pointer;
   color: #0d6efd;

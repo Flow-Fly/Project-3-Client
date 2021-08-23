@@ -36,10 +36,12 @@ const apiHandler = {
     return service
       .get('/api/users/me')
       .then((res) => {
-        console.log(`%c${res.data.email} is logged in`,
-          "display: inline-block ; border: 3px solid red ; border-radius: 7px ; " +
-          "padding: 10px ; margin: 20px ;")
-        return res.data
+        console.log(
+          `%c${res.data.email} is logged in`,
+          'display: inline-block ; border: 3px solid red ; border-radius: 7px ; ' +
+            'padding: 10px ; margin: 20px ;'
+        );
+        return res.data;
       })
       .catch(errorHandler);
   },
@@ -88,9 +90,33 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
-  getMessages(roomId) {
+  addNotifications(roomId, receiverId) {
     return service
-      .get('/api/messages/' + roomId)
+      .patch('api/rooms/notifications/add', {
+        roomId,
+        receiverId
+      })
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  deleteNotifications(roomId, receiverId) {
+    return service
+      .patch('api/rooms/notifications/delete', {
+        roomId,
+        receiverId
+      })
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getMessages(roomId, skip, limit) {
+    return service
+      .post('/api/messages/' + roomId, 
+        {
+          firstMessageIndex: skip,
+          depth: limit
+        })
       .then((res) => res.data)
       .catch(errorHandler);
   },
@@ -126,7 +152,7 @@ const apiHandler = {
 
   updateJob(jobId, data) {
     return service
-      .patch(`/jobs/${jobId}`)
+      .patch(`/jobs/${jobId}`, data)
       .then((res) => res.data)
       .catch(errorHandler);
   },

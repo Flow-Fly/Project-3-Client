@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Button from '../Base/Button/Button';
 // import apiHandler from '../../api/apiHandler';
 import './FormJob.css';
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
+// import { FormText } from 'reactstrap';
 import TechnologyTag from '../Base/TechnologyTag/TechnologyTag';
+import apiHandler from '../../api/apiHandler';
 
 //Form component to be used either for creating an article or editing it
 export class FormJob extends Component {
@@ -40,17 +42,6 @@ export class FormJob extends Component {
     }
   }
 
-  handleCreate = (event) => {
-    event.preventDefault();
-    // const formData = new FormData();
-    this.props.onSubmit();
-  };
-
-  handleUpdate = (event) => {
-    event.preventDefault();
-    this.props.onSubmit(this.state);
-  };
-
   //To handle input change on the form
   handleChange = (event) => {
     let key = event.target.name;
@@ -65,6 +56,41 @@ export class FormJob extends Component {
     });
   };
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('handleSubmit', this.state.title);
+
+    // Edit
+    if (this.props.job) {
+      apiHandler
+        .updateJob(this.props.job._id, this.state)
+        .then((data) => {
+          console.log('EditForm', data);
+          this.props.onUpdate(data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      // Create
+      apiHandler.addJob(this.state).then((data) => this.props.onCreate(data));
+    }
+
+    // reset form
+    // this.setState({
+    //   title: '',
+    //   description: '',
+    //   technologies: [],
+    //   currentTechnology: '',
+    //   location: '',
+    //   remote: false,
+    //   link: '',
+    //   contractType: 'CDI',
+    //   level: 'junior',
+    //   company: '',
+    //   type: 'Web Dev',
+    // });
+  };
+
+  //techno tags
   technoLogiesPressed = (event) => {
     let str = this.state.currentTechnology.replaceAll(' ', '');
     if (event.key === 'Enter' && str !== '') {
@@ -74,6 +100,7 @@ export class FormJob extends Component {
         technologies: technologiesTemp,
         currentTechnology: '',
       });
+      event.preventDefault();
     }
   };
 

@@ -12,7 +12,11 @@ class FeedJobCard extends Component {
 
   // toggle job details on the jobs list
   showJobDetails = () => {
-    this.setState({ showJobDetails: !this.state.showJobDetails });
+    this.setState({ showJobDetails: true });
+  };
+
+  hideJobDetails = () => {
+    this.setState({ showJobDetails: false });
   };
 
   //show jobForm, action = "edit"
@@ -22,6 +26,11 @@ class FeedJobCard extends Component {
 
   startEdit = () => {
     this.setState({ showJobForm: true });
+  };
+
+  onJobUpdate = (data) => {
+    this.setState({ showJobForm: false });
+    this.props.onJobUpdate(data);
   };
 
   render() {
@@ -35,7 +44,7 @@ class FeedJobCard extends Component {
           <FormJob
             action="edit"
             job={this.props.job}
-            onSubmit={this.props.onJobUpdate}
+            onUpdate={this.onJobUpdate}
           />
         </div>
       );
@@ -47,13 +56,15 @@ class FeedJobCard extends Component {
       details = (
         <p
           onClick={this.showJobDetails}
-          style={{ textAlign: 'right', fontSize: '0.6em' }}
+          style={{ textAlign: 'center', fontSize: '0.6em' }}
         >
           More details
         </p>
       );
     } else {
-      details = <JobDetailsCard job={this.props.job} />;
+      details = (
+        <JobDetailsCard job={this.props.job} onClose={this.hideJobDetails} />
+      );
     }
 
     return (

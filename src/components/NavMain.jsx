@@ -4,6 +4,7 @@ import { withUser } from "../components/Auth/withUser";
 import { withRouter } from "react-router";
 import apiHandler from "../api/apiHandler";
 
+
 import "../styles/NavMain.css";
 import Avatar from "./Base/Avatar/Avatar";
 
@@ -31,8 +32,9 @@ const NavMain = (props) => {
         {context.isLoggedIn && (
           <React.Fragment>  
             <li>
-              <NavLink to="/messenger">
+              <NavLink className="messengerNav" to="/messenger">
                 Messenger
+                <span className="notifications">3</span>
               </NavLink>
             </li>
             <li>
