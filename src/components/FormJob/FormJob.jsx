@@ -60,8 +60,8 @@ export class FormJob extends Component {
     event.preventDefault();
     console.log('handleSubmit', this.state.title);
 
-    // Edit
     if (this.props.job) {
+      // Edit
       apiHandler
         .updateJob(this.props.job._id, this.state)
         .then((data) => {
@@ -73,21 +73,6 @@ export class FormJob extends Component {
       // Create
       apiHandler.addJob(this.state).then((data) => this.props.onCreate(data));
     }
-
-    // reset form
-    // this.setState({
-    //   title: '',
-    //   description: '',
-    //   technologies: [],
-    //   currentTechnology: '',
-    //   location: '',
-    //   remote: false,
-    //   link: '',
-    //   contractType: 'CDI',
-    //   level: 'junior',
-    //   company: '',
-    //   type: 'Web Dev',
-    // });
   };
 
   //techno tags

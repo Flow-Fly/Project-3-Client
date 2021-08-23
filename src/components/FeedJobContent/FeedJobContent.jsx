@@ -4,12 +4,13 @@ import apiHandler from '../../api/apiHandler';
 import Button from '../Base/Button/Button';
 import './FeedJobContent.css';
 import FormJob from '../FormJob/FormJob';
+import '../FormJob/FormJob.css';
 
 export class FeedJobContent extends Component {
   state = {
     jobs: [],
-    displayAddJobForm: false,
-    displayJobDetails: {},
+    showAddJobForm: false,
+    showJobDetails: {},
   };
 
   async componentDidMount() {
@@ -21,10 +22,10 @@ export class FeedJobContent extends Component {
     }
   }
 
-  //toggle add job form //ugly as hell, better go to a new page
+  //toggle add job form
   showAddJobForm = (event) => {
     event.preventDefault();
-    this.setState({ displayAddJobForm: !this.state.displayAddJobForm });
+    this.setState({ showAddJobForm: !this.state.showAddJobForm });
   };
 
   handleJobCreate = (job) => {
@@ -32,7 +33,7 @@ export class FeedJobContent extends Component {
 
     this.setState({
       jobs: [job, ...this.state.jobs],
-      displayAddJobForm: false,
+      showAddJobForm: false,
     });
   };
 
@@ -44,7 +45,7 @@ export class FeedJobContent extends Component {
     this.setState({ jobs });
   };
 
-  handleDelete = (jobId) => {
+  handleJobDelete = (jobId) => {
     apiHandler
       .deleteJob(jobId)
       .then(() => {
@@ -67,8 +68,9 @@ export class FeedJobContent extends Component {
     return (
       <div className="FeedJobContent">
         <Button onClick={this.showAddJobForm}>Share a job</Button>
+
         {/* toggle add job form */}
-        {this.state.displayAddJobForm ? (
+        {this.state.showAddJobForm ? (
           <FormJob
             onCreate={this.handleJobCreate}
             action="create"
@@ -85,7 +87,7 @@ export class FeedJobContent extends Component {
                 this.handleJobUpdate(job._id, data);
               }}
               onDelete={() => {
-                this.handleDelete(job._id);
+                this.handleJobDelete(job._id);
               }}
             />
           );
