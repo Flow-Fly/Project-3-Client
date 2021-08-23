@@ -32,7 +32,16 @@ const initialState = {
 // }
 
 class FormSignup extends Component {
-  state = { ...initialState };
+  constructor(props) {
+    super(props)
+    this.state = {...initialState}
+    this.textInput = React.createRef()
+    this.focusTextInput = this.focusTextInput.bind(this)
+  }
+  
+  focusTextInput() {
+    this.textInput.current.focus()
+  }
 
   handleChange = (event) => {
     let value = null;
@@ -111,8 +120,8 @@ class FormSignup extends Component {
         <div className="form-container">
           <Form className="form" onSubmit={this.handleSubmit}>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="firstName">
-                First name
+              <Label className="label" htmlFor="firstName" hidden>
+                First name:
               </Label>
               <Input
                 className="input"
@@ -126,8 +135,8 @@ class FormSignup extends Component {
               />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="lastName">
-                Last name
+              <Label className="label" htmlFor="lastName" hidden>
+                Last name:
               </Label>
               <Input
                 className="input"
@@ -141,7 +150,7 @@ class FormSignup extends Component {
               />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="email">
+              <Label className="label" htmlFor="email" hidden>
                 Email:
               </Label>
               <Input
@@ -247,7 +256,7 @@ class FormSignup extends Component {
                 </FormGroup> */}
 
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="password">
+              <Label className="label" htmlFor="password" hidden>
                 Password:
               </Label>
 
@@ -262,6 +271,8 @@ class FormSignup extends Component {
                   placeholder="Password: "
                   required
                   autoComplete="new-password"
+                  ref={this.textInput}
+                  onClick={this.focusTextInput}
                 />
               ) : this.state.passwordSafe ? (
                 <>
@@ -275,6 +286,7 @@ class FormSignup extends Component {
                     placeholder="Password: "
                     required
                     valid
+                    autoFocus
                   />
                   <FormFeedback valid>Your password is safe!</FormFeedback>
                 </>
@@ -291,6 +303,7 @@ class FormSignup extends Component {
                     required
                     invalid
                     autoComplete="new-password"
+                    autoFocus
                   />
                   <FormFeedback invalid='true'>
                     Your password must contain atleast 8 characters, a number
@@ -300,8 +313,8 @@ class FormSignup extends Component {
               )}
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="confirmation">
-                Confirm your password
+              <Label className="label" htmlFor="confirmation" hidden>
+                Confirm your password:
               </Label>
               {this.state.confirmation === '' ? (
                 <Input
@@ -311,7 +324,9 @@ class FormSignup extends Component {
                   value={this.state.confirmation}
                   onChange={this.handleConfirm}
                   type="password"
-                  placeholder="Confirm you password: "
+                  onFocus={event => event.target.placeholder = ''}
+                  onBlur={event => event.target.placeholder = 'Confirm you password: '}
+                  placeholder= 'Confirm your password: '
                   required
                 />
               ) : this.state.canSubmit ? (
@@ -326,6 +341,7 @@ class FormSignup extends Component {
                     placeholder="Confirm you password: "
                     required
                     valid
+                    autoFocus
                   />
                   <FormFeedback valid>Ready to register!</FormFeedback>
                 </>
@@ -341,6 +357,7 @@ class FormSignup extends Component {
                     placeholder="Confirm you password: "
                     required
                     invalid
+                    autoFocus
                   />
                   <FormFeedback invalid='true'>
                     Your passwords are not matching

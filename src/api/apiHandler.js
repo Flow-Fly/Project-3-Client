@@ -28,7 +28,6 @@ const apiHandler = {
     return service
       .post('/api/auth/signin', userInfo)
       .then((res) => {
-        console.log('logged in') 
         return res.data})
       .catch(errorHandler);
   },
