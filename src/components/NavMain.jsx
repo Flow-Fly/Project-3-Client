@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { withUser } from "../components/Auth/withUser";
 import { withRouter } from "react-router";
 import apiHandler from "../api/apiHandler";
+import logo  from "../Images/logo.png"
 
 
 import "../styles/NavMain.css";
@@ -26,7 +27,7 @@ const NavMain = (props) => {
   return (
     <nav className="NavMain">
       <NavLink exact to="/">
-        <h3 className="logo">App name</h3>
+        <img id="logo" src={logo} alt="logo"></img>
       </NavLink>
       <ul className="nav-list">
         {context.isLoggedIn && (
@@ -40,7 +41,7 @@ const NavMain = (props) => {
             <li>
               <NavLink to="/profile">
                 {context.user && 
-                <Avatar url={context.user.profileImg} size='big' />
+                <Avatar url={context.user.profileImg} size='tiny' />
                 }
               </NavLink>
             </li>

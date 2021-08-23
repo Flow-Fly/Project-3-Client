@@ -51,12 +51,12 @@
     
   }
 
-  .active  {
+  .feedContainer .active  {
     background: white;
     border-bottom: 1px solid transparent;
   }
   
-  .active::before {
+  .feedContainer .active::before {
     content: "";
     position: absolute;
     top: 0px;
