@@ -46,12 +46,6 @@ const NavMain = (props) => {
           {context.isLoggedIn && (
             <React.Fragment>
               <li>
-                <NavLink className="messengerNav" to="/messenger">
-                  Messenger
-                  {(notifications() > 0) ? <span className="notifications">{notifications()}</span> : ''}
-                </NavLink>
-              </li>
-              <li>
                 <NavLink to="/profile">
                   {context.user && (
                     <Avatar url={context.user.profileImg} size="tiny" />

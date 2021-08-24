@@ -128,12 +128,12 @@ handleFileSelect = (temporaryURL) => {
                 required
               />
             </FormGroup>
-            <Avatar url={this.state.tmpUrl || this.state.user.profileImg } size='small'></Avatar>
             <Uploader
               ref={this.imageRef}
               onFileSelect={this.handleFileSelect}
               name="profileImg"
             >
+              <Avatar url={this.state.tmpUrl || this.state.user.profileImg } size='small'></Avatar>
               Change profile picture
             </Uploader>
 
