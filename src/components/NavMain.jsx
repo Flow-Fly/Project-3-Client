@@ -13,16 +13,6 @@ import { withMessenger } from "./MessengerCtx/withMessenger";
 const NavMain = (props) => {
   const { context } = props;
 
-  const notifications = () => {
-    const id = props.context.user._id
-    const notifications = 
-      props.messengerContext.rooms
-        .filter(room => room.notifications?.includes(id))
-        .length
-    
-    return notifications
-  }
-
   function handleLogout() {
 
     apiHandler
@@ -45,12 +35,6 @@ const NavMain = (props) => {
         <ul className="nav-list">
           {context.isLoggedIn && (
             <React.Fragment>
-              <li>
-                <NavLink className="messengerNav" to="/messenger">
-                  Messenger
-                  {(notifications() > 0) ? <span className="notifications">{notifications()}</span> : ''}
-                </NavLink>
-              </li>
               <li>
                 <NavLink to="/profile">
                   {context.user && (

@@ -1,0 +1,26 @@
+.messengerIcon {
+    position: absolute;
+    bottom: 5%;
+    right: -8%;
+    width: 75px;
+    height: 75px;
+  }
+
+  .messengerIcon:hover{
+      cursor: pointer;
+  }
+  
+.notifications {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    border-radius: 50%;
+    background-color: #ba324f;
+    width: 20px;
+    height: 20px;
+    bottom: 5px;
+    right: 5px;
+    color: white;
+    font-size: 10px;
+}
