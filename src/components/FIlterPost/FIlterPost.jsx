@@ -9,13 +9,18 @@ export class FIlterPost extends Component {
     originalFilters:[],
   };
 
-  componentDidMount(){
-    let filtersTemp=[];
-    this.props.posts.forEach((post)=>{
-        if (filtersTemp.includes(post.type)===false) filtersTemp.push(post.type);
-    })
 
-    this.setState({originalFilters:filtersTemp})
+  componentDidUpdate(prevProps, prevState){
+
+    if(this.props.originalPosts!==prevProps.originalPosts){
+            let filtersTemp=[];
+            this.props.posts.forEach((post)=>{
+            if (filtersTemp.includes(post.type)===false) filtersTemp.push(post.type);
+            })
+
+            this.setState({originalFilters:filtersTemp})
+    
+    }
 
   }
 
@@ -39,6 +44,16 @@ export class FIlterPost extends Component {
     }
 
     render() {
+
+        // if (this.state.isOriginalLoaded===false && this.props.originalPosts.length>0){
+        //     let filtersTemp=[];
+        //     this.props.posts.forEach((post)=>{
+        //     if (filtersTemp.includes(post.type)===false) filtersTemp.push(post.type);
+        //     })
+
+        //     this.setState({originalFilters:filtersTemp,isOriginalLoaded:true})
+        // }
+        
         
         
             return (
