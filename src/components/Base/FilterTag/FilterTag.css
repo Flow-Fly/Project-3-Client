@@ -10,7 +10,7 @@
 }
 
 .filterTagDiv{
-    background-color: var(--mainLightBlueColor);
+    background-color: rgba(161, 161, 161, 0.664);
     color: white;
     font-size: 0.8rem;
     margin: 0.1rem 0.1rem;
@@ -30,4 +30,10 @@
 .filterTagDiv span{
     margin: 0.1rem;
     font-weight: bolder;
+    padding: 0 0.2rem;
 }
+
+.filterTagDiv.active{
+    background-color: var(--mainLightBlueColor);
+}
+

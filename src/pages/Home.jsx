@@ -26,6 +26,7 @@ class Home extends React.Component {
     jobFormJob: null,
     /////////
     displayedPost: null,
+    originalPosts:[],
     posts: [],
     showAddPostForm: false,
     postFormAction: 'create',
@@ -126,16 +127,7 @@ class Home extends React.Component {
     });
   };
 
-  // loadPosts = async () => {
-  //   try {
-  //     let posts = await apiHandler.getAllPost();
-  //     this.setState({ posts: posts });
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
-  //delete job
+  //delete post
   handlePostDelete = (postId) => {
     apiHandler
       .deleteOnePost(postId)
@@ -146,6 +138,14 @@ class Home extends React.Component {
       })
       .catch((err) => console.log(err));
   };
+//to filter post via the panel
+  handlePostFilter = (filters)=>{
+    let tempPosts= (filters.length===0) ? [...this.state.originalPosts] : this.state.originalPosts.filter((post)=>{
+      if (filters.includes(post.type)) return post;
+    })
+
+    this.setState({posts:tempPosts,})
+  }
 
   //////////blob related///////
   blob1Ref = React.createRef();
@@ -156,7 +156,7 @@ class Home extends React.Component {
       let posts = await apiHandler.getAllPost();
       let jobsInfo = await apiHandler.getJobs();
 
-      this.setState({ jobs: jobsInfo, posts: posts });
+      this.setState({ jobs: jobsInfo, posts: posts, originalPosts:posts });
     } catch (error) {
       console.log(error);
     }
@@ -220,10 +220,15 @@ class Home extends React.Component {
               )}
             </span>
           </div>
+
+          {/* //Left SIDE */}
           <div className="sideDiv">
             <SideProfile />
-            <FIlterPost posts={this.state.posts} />
+            <FIlterPost posts={this.state.posts} filterPosts={this.handlePostFilter}/>
           </div>
+
+
+          {/* Middle=FEED */}
           <Feed
             jobs={this.state.jobs}
             // loadJobs={this.loadJobs}
@@ -235,6 +240,8 @@ class Home extends React.Component {
             handleEditStart={this.handleEditStart}
             onPostDeleted={this.handlePostDelete}
           ></Feed>
+
+          {/* Right Side */}
           <div className="homeRightSide">
             {this.state.showJobForm === true && (
               <FormJob
