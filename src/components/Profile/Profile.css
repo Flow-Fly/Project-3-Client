@@ -1,0 +1,21 @@
+.backdrop {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    height: 101vh;
+    width: 101vw;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: brightness(70%) blur(2px);
+    z-index: 100;
+}
+
+.profile-container {
+    position: fixed;
+    z-index: 100;
+    background-color: white;
+    width: 66%;
+    height: 66%;
+}
