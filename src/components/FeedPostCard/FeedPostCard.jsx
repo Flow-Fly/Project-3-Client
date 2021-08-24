@@ -11,12 +11,11 @@ function FeedPostCard(props) {
     let lastName = post.creator ? post.creator.lastName !==undefined? post.creator.lastName : "":"";
     let userImage = post.creator ? post.creator.profileImg !==undefined? post.creator.profileImg : "":"";
     let createdAt = post.createdAt? post.createdAt.replace("T", " ").slice(0,16) : "";
-
     return (
         <div className={"FeedPostCard "+post.type.replaceAll(' ',"")}>
             <div className="postCardPublish">
                 <div className="publishInfos">
-                <Avatar url={userImage} size='tiny' />Published by: {firstName + " " + lastName} at {createdAt}
+                <Avatar url={userImage} size='tiny' id={postUserID} clickOnProfile={props.clickOnProfile} />Published by: {firstName + " " + lastName} at {createdAt}
                 </div>
                 {ownPost===true && <div className="publishLinks">
                 <a href="#">Edit</a>
