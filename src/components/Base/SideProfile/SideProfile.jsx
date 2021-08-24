@@ -29,7 +29,7 @@ const SideProfile = (props) => {
                     Graduated in: <span>{graduationYear}</span>
                 </p>}
                 {location && <p>
-                    From: <span>{location}</span>
+                    From: <span>{location} Campus</span>
                     </p>}
             </div>
             <div className="edit-link">

@@ -92,12 +92,14 @@ export class Profile extends Component {
                     )}
                   </div>
                 </div>
-                <div className="saved-list">
-                  <div className="title">
-                    <h4>{name} saved list:</h4>
+                {name === 'Your' && (
+                  <div className="saved-list">
+                    <div className="title">
+                      <h4>{name} saved list:</h4>
+                    </div>
+                    <div className="content"></div>
                   </div>
-                  <div className="content"></div>
-                </div>
+                )}
               </div>
             </div>
           </div>

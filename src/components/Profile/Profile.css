@@ -1,9 +1,9 @@
 .backdrop {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 800vh;
-    width: 101vw;
+    top: calc(-70px - 1rem);
+    left: calc(-300px - 3.75rem);
+    height: 100vh;
+    width: 100vw;
     overflow: hidden;
     backdrop-filter: brightness(70%) blur(2px);
     z-index: 100;
@@ -40,3 +40,11 @@
 
 }
 
+.profile-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-content > div:not(:last-child) {
+    margin-right: 2em;
+}
