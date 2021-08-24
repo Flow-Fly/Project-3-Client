@@ -53,6 +53,8 @@ export class FeedJobContent extends Component {
               handleJobDelete={() => {
                 this.props.handleJobDelete(job._id);
               }}
+              clickOnProfile={this.props.clickOnProfile}
+              userID={this.props.context.user._id}
             />
           );
         })}
