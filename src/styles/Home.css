@@ -102,6 +102,9 @@
 }
 
 .sideDiv{
+  display: flex;
+  flex-direction: column;
   position: sticky;
   top: calc(70px + 1rem);
+  height: max-content;
 }
