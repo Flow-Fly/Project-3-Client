@@ -32,9 +32,9 @@ export class FeedJobContent extends Component {
     return (
       <div className="FeedJobContent">
         <div className="button-create-job-wrapper">
-          <Button className="button-create-job" onClick={this.showJobForm}>
+          <button className="button-create-job" onClick={this.showJobForm}>
             Share a job
-          </Button>
+          </button>
         </div>
 
         {this.state.showJobForm && (

@@ -1,17 +1,34 @@
-:root{
-    --mainLightBlueColor:#00B4FF;
-    --mainLightBlueColorHover:#007cb1;
-    --cadetBlue:#35A4B2;
-    --blueMansel:#008B9C;
-    --greenSheen:#77C0BB;
-    --orangeYellowCrayola:#FFD26F;
-    --peachCrayola:#FFCDA8;
-    --linen:#FEF3E9;
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
 }
 
-.FeedPostContent{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.FeedPostContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button-create-post {
+  background-color: var(--mainLightBlueColor);
+  padding: 0.175rem 0.55rem;
+  margin: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  color: white;
+  font-weight: bolder;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-create-post:hover {
+  background-color: var(--mainLightBlueColorHover);
 }

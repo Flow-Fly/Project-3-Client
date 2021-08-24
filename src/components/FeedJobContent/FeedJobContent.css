@@ -1,3 +1,14 @@
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
+}
+
 .FeedJobContent {
   width: 100%;
 }
@@ -5,4 +16,21 @@
 .button-create-job-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.button-create-job {
+  background-color: var(--mainLightBlueColor);
+  padding: 0.175rem 0.55rem;
+  margin: 0.5rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  color: white;
+  font-weight: bolder;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-create-job:hover {
+  background-color: var(--mainLightBlueColorHover);
 }
