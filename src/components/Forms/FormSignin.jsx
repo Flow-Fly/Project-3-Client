@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter, Redirect } from "react-router-dom";
 import apiHandler from "../../api/apiHandler";
 import { withUser } from "../Auth/withUser";
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import './FormSign.css'
 import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
@@ -50,27 +50,29 @@ class FormSignin extends Component {
         <Form className='form' onSubmit={this.handleSubmit}>
 
           <FormGroup>
-            <Label className='label' htmlFor='email'>Email: </Label>
               <Input className='input'
               id='email'
               name='email'
               value={this.state.email}
               onChange={this.handleChange}
+              onFocus={e => e.target.placeholder = ''}
+              onBlur={e => e.target.placeholder = 'Email: '}
               type='email'
-              placeholder='Email'
+              placeholder='Email:'
               required
               />
             
           </FormGroup>
           <FormGroup>
-            <Label className='label' htmlFor='password'>Password: </Label>
               <Input className='input'
               id='password'
               name='password'
               value={this.state.password}
               onChange={this.handleChange}
               type='password'
-              placeholder='Password'
+              onFocus={e => e.target.placeholder = ''}
+              onBlur={e => e.target.placeholder = 'Password: '}
+              placeholder='Password:'
               required
               />
             

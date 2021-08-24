@@ -32,4 +32,5 @@
 .avatar img{
     margin: 0 auto;
     min-width: 100%;
+    max-height: 100%;
 }
