@@ -224,7 +224,7 @@ class Home extends React.Component {
             {/* //Left SIDE */}
             <div className="sideDiv">
               <SideProfile />
-              <FIlterPost posts={this.state.posts} filterPosts={this.handlePostFilter}/>
+              <FIlterPost posts={this.state.posts} filterPosts={this.handlePostFilter} originalPosts={this.state.originalPosts}/>
             </div>
 
 
