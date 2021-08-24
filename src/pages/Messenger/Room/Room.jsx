@@ -27,7 +27,10 @@ class Room extends Component {
                 <Avatar size="small" url={this.state.friend?.profileImg}>
                     <div className={this.isConnected() ? "status online" : "status offline"}></div>
                 </Avatar>
-                <span className='roomName'>
+                <span 
+                    className={`roomName 
+                    ${this.props.room.notifications.find(n => n === this.props.me._id) ? '' : 'read'}`}
+                >
                     {this.state.friend ? (
                         (this.state.friend.firstName ? this.state.friend.firstName : '') + 
                         ' ' + 

@@ -28,7 +28,7 @@ const NavMain = (props) => {
       .logout()
       .then(() => {
         context.removeUser();
-        props.history.push('/')
+        return window.location = "/"
       })
       .catch((error) => {
         console.log(error);
@@ -46,7 +46,6 @@ const NavMain = (props) => {
             <li>
               <NavLink className="messengerNav" to="/messenger">
                 Messenger
-                {console.log(notifications())}
                 {(notifications() > 0) ? <span className="notifications">{notifications()}</span> : ''}
               </NavLink>
             </li>

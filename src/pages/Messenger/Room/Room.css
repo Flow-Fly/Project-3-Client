@@ -14,7 +14,11 @@
 .roomName{
     display: inline-block;
     margin-left: 1rem;
-    font-size: 600;
+    font-weight: 600;
+}
+
+.read{
+    opacity: .7;
 }
 
 .status{
