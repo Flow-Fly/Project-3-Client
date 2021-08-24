@@ -3,32 +3,32 @@ import { Form, FormGroup, Label, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import utils from '../../utils/helpers';
 import Uploader from '../Base/Uploader/Uploader';
-import apiHandler from '../../api/apiHandler'
+import apiHandler from '../../api/apiHandler';
 import Avatar from '../Base/Avatar/Avatar';
-import {withUser} from '../Auth/withUser'
-import { Redirect } from 'react-router-dom'
+import { withUser } from '../Auth/withUser';
+import { Redirect } from 'react-router-dom';
 
 const initial = {
-    user: {
-        firstName: '',
-        lastName: '',
-        profileImg: '',
-        phoneNumber: '',
-        graduationYear: 2013,
-        location: -1,
-        type: -1,
-    },
-    edited: false,
+  user: {
+    firstName: '',
+    lastName: '',
+    profileImg: '',
+    phoneNumber: '',
+    graduationYear: 2013,
+    location: -1,
+    type: -1,
+  },
+  edited: false,
 };
 export class FormEditProfile extends Component {
   state = { ...initial };
 
-  imageRef = React.createRef()
+  imageRef = React.createRef();
 
   componentDidMount() {
     const user = this.props.context.user;
-    this.setState({user});
-    console.log(this.state.user)
+    this.setState({ user });
+    console.log(this.state.user);
   }
 
   handleChange = (event) => {
@@ -40,7 +40,7 @@ export class FormEditProfile extends Component {
       value = event.target.value;
     }
     const key = event.target.name;
-    this.setState({ user: {...this.state.user, [key]: value} });
+    this.setState({ user: { ...this.state.user, [key]: value } });
   };
 
   handleSubmit = async (event) => {
@@ -49,12 +49,12 @@ export class FormEditProfile extends Component {
     const fd = new FormData();
 
     for (const key in this.state.user) {
-      if (key === "profileImg") continue;
+      if (key === 'profileImg') continue;
       fd.append(key, this.state.user[key]);
     }
 
     if (this.imageRef.current.files[0]) {
-      fd.append("profileImg", this.imageRef.current.files[0]);
+      fd.append('profileImg', this.imageRef.current.files[0]);
     }
     // for (var value of fd.values()) {
     //     console.log(value);
@@ -63,22 +63,21 @@ export class FormEditProfile extends Component {
       .updateUser(fd)
       .then((data) => {
         this.props.context.setUser(data);
-        this.setState({edited: true})
+        this.setState({ edited: true });
       })
       .catch((error) => {
-          console.error(error)
-        
+        console.error(error);
       });
-}
-handleFileSelect = (temporaryURL) => {
+  };
+  handleFileSelect = (temporaryURL) => {
     // Get the temporaryURL from the UploadWidget component and
     // set the state so we can have a visual feedback on what the image will look like :)
     this.setState({ tmpUrl: temporaryURL });
   };
 
   render() {
-      //if (this.props.context.isLoading) return <div className="loading">Loading...</div>
-      if (this.state.edited) return <Redirect to='/' />
+    //if (this.props.context.isLoading) return <div className="loading">Loading...</div>
+    if (this.state.edited) return <Redirect to="/" />;
     return (
       <>
         <div className="form-container">
@@ -133,7 +132,10 @@ handleFileSelect = (temporaryURL) => {
               onFileSelect={this.handleFileSelect}
               name="profileImg"
             >
-              <Avatar url={this.state.tmpUrl || this.state.user.profileImg } size='small'></Avatar>
+              <Avatar
+                url={this.state.tmpUrl || this.state.user.profileImg}
+                size="small"
+              ></Avatar>
               Change profile picture
             </Uploader>
 

@@ -145,7 +145,6 @@ export class FormArticle extends Component {
               value={this.state.type}
               onChange={this.handleChange}
             >
-              <option value={this.state.type}>{this.state.type}</option>
               <option value="UI/UX">UI/UX</option>
               <option value="Data Analyst">Data Analyst</option>
               <option value="Cyber Security">Cyber Security</option>
