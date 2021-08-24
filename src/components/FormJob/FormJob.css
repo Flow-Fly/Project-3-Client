@@ -10,14 +10,16 @@
 }
 
 .jobForm-container {
-  border: 1px solid var(--mainLightBlueColor);
+  /* border: 1px solid var(--mainLightBlueColor); */
+  position: sticky;
   padding: 0.3rem;
-  margin-top: 0.5rem;
+  margin-top: 0.1rem;
   max-width: 400px;
   border-radius: 0.4rem;
   display: flex;
   flex-direction: column;
   background-color: white;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
 }
 
 .jobForm-container .form-group {
