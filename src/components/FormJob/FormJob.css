@@ -10,7 +10,6 @@
 }
 
 .jobForm-container {
-  /* border: 1px solid var(--mainLightBlueColor); */
   position: sticky;
   top: calc(70px + 1rem);
   padding: 0.3rem;
@@ -46,4 +45,25 @@
   display: flex;
   flex-wrap: wrap;
   align-self: flex-start;
+}
+
+.button-close-form-wrapper {
+  text-align: end;
+}
+
+.button-close-form {
+  background-color: var(--mainLightBlueColor);
+  padding: 0rem 0.45rem;
+  margin-right: 0.35rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  color: white;
+  font-weight: bolder;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-close-form:hover {
+  background-color: var(--mainLightBlueColorHover);
 }
