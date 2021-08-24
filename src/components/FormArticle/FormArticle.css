@@ -1,44 +1,43 @@
-
-:root{
-    --mainLightBlueColor:#00B4FF;
-    --mainLightBlueColorHover:#007cb1;
-    --cadetBlue:#35A4B2;
-    --blueMansel:#008B9C;
-    --greenSheen:#77C0BB;
-    --orangeYellowCrayola:#FFD26F;
-    --peachCrayola:#FFCDA8;
-    --linen:#FEF3E9;
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
 }
 
-.articleForm-container{
-    position:sticky;
-    top: calc(70px + 1rem);
-    padding:0.3rem; 
-    max-width: 400px;
-    border-radius: 0.4rem;
-    display: flex;
-    flex-direction: column;
-    background-color: white;
-    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
+.articleForm-container {
+  position: sticky;
+  top: calc(70px + 1rem);
+  padding: 0.3rem;
+  max-width: 400px;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
 }
 
-.articleForm-container .form-group{
-    margin:0.25rem 0.25rem;
+.articleForm-container .form-group {
+  margin: 0.25rem 0.25rem;
 }
 
-.articleForm-container Form{
-    display: flex;
-    flex-direction: column;
+.articleForm-container Form {
+  display: flex;
+  flex-direction: column;
 }
 
-.articleForm-container Button{
-    align-self: center;
+.articleForm-container Button {
+  align-self: center;
 }
-.articleForm-container .formTitle{
-    align-self: center;
+.articleForm-container .formTitle {
+  align-self: center;
 }
-.articleForm-container .closeFormButton{
-    align-self: flex-end;
-    font-size: 0.8rem;
-    padding:0.1rem 0.3rem;
+.articleForm-container .closeFormButton {
+  align-self: flex-end;
+  font-size: 1rem;
+  padding: 0rem 0.45rem;
 }

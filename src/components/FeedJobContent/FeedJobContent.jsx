@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FeedJobCard from '../Job/FeedJobCard';
-import Button from '../Base/Button/Button';
 import './FeedJobContent.css';
 import FormJob from '../FormJob/FormJob';
 import '../FormJob/FormJob.css';
