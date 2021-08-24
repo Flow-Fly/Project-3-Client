@@ -3,7 +3,7 @@ import FeedPostContent from '../FeedPostContent/FeedPostContent';
 import FeedJobContent from '../FeedJobContent/FeedJobContent';
 import apiHandler from '../../api/apiHandler';
 import './Feed.css';
-import Profile from '../Profile/Profile';
+import Profile from '../../pages/Profile';
 //This component handles the Post/Job Tabs and renders the main
 // FeedJobContent and FeedPostContent elements
 export class Feed extends Component {
@@ -73,6 +73,7 @@ export class Feed extends Component {
                 showJobForm={this.props.showJobForm}
                 handleJobDelete={this.props.handleJobDelete}
                 handleEditStart={this.props.handleEditStart}
+                clickOnProfile={this.clickOnProfile}
               />
             )}
           </div>

@@ -18,15 +18,36 @@ class FeedJobCard extends Component {
   };
 
   render() {
-    let details;
+    const job = this.props.job;
+    const userId = this.props.userID;
+    const jobId = this.props.job._id;
+    const jobCreatorId = job.creator ? job.creator._id : '';
+    const ownJob = String(jobCreatorId) === userId ? true : false;
+    const firstName = job.creator
+      ? job.creator.firstName !== undefined
+        ? job.creator.firstName
+        : '...'
+      : '...';
+    const lastName = job.creator
+      ? job.creator.lastName !== undefined
+        ? job.creator.lastName
+        : '...'
+      : '...';
+    const userImage = job.creator
+      ? job.creator.profileImg !== undefined
+        ? job.creator.profileImg
+        : '...'
+      : '...';
+    const createdAt = job.createdAt
+      ? job.createdAt.replace('T', ' ').slice(0, 16)
+      : '...';
 
+    //toggle job details
+    let details;
     if (!this.state.showJobDetails) {
       details = (
-        <p
-          onClick={this.showJobDetails}
-          style={{ textAlign: 'center', fontSize: '0.6em' }}
-        >
-          More details
+        <p onClick={this.showJobDetails}>
+          <span className="flash"> ⌄ </span>
         </p>
       );
     } else {
@@ -39,32 +60,38 @@ class FeedJobCard extends Component {
       <div className="FeedJobCard">
         <div className="flex-wrapper">
           <Avatar
-            ulr={this.props.job.creator?.profileImg}
+            url={userImage}
+            clickOnProfile={this.props.clickOnProfile}
+            id={jobCreatorId}
             size="tiny"
             alt="avatar"
           />
-          <p>
-            Published by : {''} at {''}
+          <p className="publishInfo">
+            Published by : {firstName + ' ' + lastName}
+            {''} at {''}
+            {createdAt}
           </p>
-          <div className="button-edit-delete-wrapper">
-            <button
-              className="button-edit-job"
-              onClick={this.props.handleEditStart}
-            >
-              Edit
-            </button>
-            <button
-              className="button-delete-job"
-              onClick={this.props.handleJobDelete}
-            >
-              Delete
-            </button>
-          </div>
+          {ownJob && (
+            <div className="button-edit-delete-wrapper">
+              <button
+                className="button-edit-job"
+                onClick={this.props.handleEditStart}
+              >
+                Edit
+              </button>
+              <button
+                className="button-delete-job"
+                onClick={this.props.handleJobDelete}
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
-        <h6>{this.props.job.title}</h6>
-        <ul key={this.props.job._id}>
+        <h6 className="job-title">{this.props.job.title}</h6>
+        <ul className="job-wrapper" key={jobId}>
           <li>
-            <b>{this.props.job.company}</b>
+            <span className="bold">{this.props.job.company}</span>
           </li>
           <li>
             {this.props.job.location} |{' '}
@@ -72,6 +99,10 @@ class FeedJobCard extends Component {
               ? this.props.job.contractType
               : '...'}{' '}
             | {this.props.job.level}
+          </li>
+          <li>
+            <span className="bold">Remote: </span>
+            {this.props.job.remote ? 'yes' : 'no'}
           </li>
           {details}
         </ul>

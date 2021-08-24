@@ -16,6 +16,9 @@ import { withMessenger } from "../components/MessengerCtx/withMessenger";
 import messengerIcon from '../Images/messenger.png'
 import '../styles/messengerIcon.css'
 import Messenger from './Messenger/Messenger';
+//test
+import FIlterPost from '../components/FIlterPost/FIlterPost';
+
 
 
 class Home extends React.Component {
@@ -211,7 +214,10 @@ class Home extends React.Component {
                   {(this.notifications() > 0) ? <span className="notifications">{this.notifications()}</span> : ''}
             </span>
           </div>
+          <div className="sideDiv">
           <SideProfile />
+          <FIlterPost posts={this.state.posts}/>
+          </div>
           <Feed
             jobs={this.state.jobs}
             // loadJobs={this.loadJobs}
