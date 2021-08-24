@@ -21,7 +21,7 @@
    background-color: #F3F2EF;
    font-size: 12px;
  }
- .mainPage {
+ .mainPage, .nav-content{
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
@@ -31,7 +31,7 @@
 @media screen 
   and (min-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 1) { 
-    .mainPage{
+    .mainPage, .nav-content{
       width:1200px
     }
 }
@@ -40,7 +40,7 @@
   and (min-device-width: 1200px) 
   and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 1) { 
-    .mainPage{
+    .mainPage, .nav-content{
       width:1200px
     }
 }
@@ -49,7 +49,7 @@
   and (min-device-width: 900px) 
   and (max-device-width: 1199px) 
   and (-webkit-min-device-pixel-ratio: 1) { 
-    .mainPage{
+    .mainPage, .nav-content{
       width:900px
     }
 }
@@ -61,7 +61,7 @@
   and (min-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (min-resolution: 192dpi) { 
-    .mainPage{
+    .mainPage, .nav-content{
       width:1200px
     }
 }
@@ -70,7 +70,7 @@
   and (max-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (min-resolution: 192dpi) { 
-    .mainPage{
+    .mainPage, .nav-content{
       width:1200px
     }
 }
@@ -80,7 +80,7 @@
   and (max-device-width: 1199PX) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (min-resolution: 192dpi) { 
-    .mainPage{
+    .mainPage,.nav-content{
       width:900PX
     }
 }

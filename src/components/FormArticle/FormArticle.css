@@ -11,12 +11,15 @@
 }
 
 .articleForm-container{
-    border:1px solid var(--mainLightBlueColor);
+    position:sticky;
+    top: calc(70px + 1rem);
     padding:0.3rem; 
     max-width: 400px;
     border-radius: 0.4rem;
     display: flex;
     flex-direction: column;
+    background-color: white;
+    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
 }
 
 .articleForm-container .form-group{
