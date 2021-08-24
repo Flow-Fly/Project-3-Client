@@ -19,7 +19,7 @@
 }
 
 .button-edit-delete-wrapper {
-  text-align: end;
+  margin-left: 30%;
 }
 
 .button-edit-job,
@@ -40,4 +40,17 @@
 
 .flex-wrapper {
   display: flex;
+  align-items: center;
+}
+
+.job-title {
+  font-size: 0.8rem;
+}
+
+.publishInfo {
+  margin-left: 1em;
+}
+
+.flash:hover {
+  color: var(--mainLightBlueColor);
 }

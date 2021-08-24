@@ -45,7 +45,11 @@ class FeedJobCard extends Component {
     //toggle job details
     let details;
     if (!this.state.showJobDetails) {
-      details = <p onClick={this.showJobDetails}>⌄</p>;
+      details = (
+        <p onClick={this.showJobDetails}>
+          <span className="flash"> ⌄ </span>
+        </p>
+      );
     } else {
       details = (
         <JobDetailsCard job={this.props.job} onClose={this.hideJobDetails} />
@@ -62,30 +66,32 @@ class FeedJobCard extends Component {
             size="tiny"
             alt="avatar"
           />
-          <p>
+          <p className="publishInfo">
             Published by : {firstName + ' ' + lastName}
             {''} at {''}
             {createdAt}
           </p>
-          <div className="button-edit-delete-wrapper">
-            <button
-              className="button-edit-job"
-              onClick={this.props.handleEditStart}
-            >
-              Edit
-            </button>
-            <button
-              className="button-delete-job"
-              onClick={this.props.handleJobDelete}
-            >
-              Delete
-            </button>
-          </div>
+          {ownJob && (
+            <div className="button-edit-delete-wrapper">
+              <button
+                className="button-edit-job"
+                onClick={this.props.handleEditStart}
+              >
+                Edit
+              </button>
+              <button
+                className="button-delete-job"
+                onClick={this.props.handleJobDelete}
+              >
+                Delete
+              </button>
+            </div>
+          )}
         </div>
-        <h6>{this.props.job.title}</h6>
-        <ul key={this.props.job._id}>
+        <h6 className="job-title">{this.props.job.title}</h6>
+        <ul className="job-wrapper" key={jobId}>
           <li>
-            <b>{this.props.job.company}</b>
+            <span className="bold">{this.props.job.company}</span>
           </li>
           <li>
             {this.props.job.location} |{' '}
@@ -93,6 +99,10 @@ class FeedJobCard extends Component {
               ? this.props.job.contractType
               : '...'}{' '}
             | {this.props.job.level}
+          </li>
+          <li>
+            <span className="bold">Remote: </span>
+            {this.props.job.remote ? 'yes' : 'no'}
           </li>
           {details}
         </ul>
