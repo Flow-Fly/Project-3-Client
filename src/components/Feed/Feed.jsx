@@ -27,14 +27,28 @@ export class Feed extends Component {
     }
   };
 
+  closeProfile = () => {
+    this.setState({
+      displayProfile: false,
+      user: null,
+    })
+  }
+
   toggleTab = (event) => {
     this.setState({ toggledTab: event.target.id });
   };
 
   render() {
+    console.log(this.props)
+    if(this.state.displayProfile) {
+      let id = this.state.user._id
+      const filteredPosts = this.props.posts.filter(post => post.creator.toString() === id)
+      const filteredJobs = this.props.jobs.filter(job => job.creator.toString() === id)
+
+    }
     return (
       <>
-        {this.state.displayProfile && <Profile user={this.state.user} />}
+        {this.state.displayProfile && <Profile user={this.state.user} close={this.closeProfile} posts={this.filteredPosts} jobs={this.filteredJobs} />}
         <div className="feedContainer">
           <div className="feedTabs">
             <div

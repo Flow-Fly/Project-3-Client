@@ -13,15 +13,25 @@
 }
 
 .profile-container {
-    position: fixed;
+    position: sticky;
     z-index: 100;
     background-color: white;
     width: 66%;
     height: 66%;
+    padding: 1em;
+    border-radius: .5rem;
+    box-shadow: 0 15px 20px 8px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 .close {
     position:absolute;
     top: 1em;
     right: 1em;
+}
+
+.main-infos {
 
 }
+
