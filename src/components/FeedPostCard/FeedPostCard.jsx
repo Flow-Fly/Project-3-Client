@@ -1,8 +1,6 @@
 import React from 'react';
 import './FeedPostCard.css';
 import Avatar from '../Base/Avatar/Avatar';
-import axios from 'axios';
-import apiHandler from '../../api/apiHandler';
 
 function FeedPostCard(props) {
   let post = props.post;
@@ -42,11 +40,7 @@ function FeedPostCard(props) {
       <div className="postCardPublish">
         <div className="publishInfos">
           <div className="wrapper-avatar" onClick={props.clickOnProfile}>
-            <Avatar
-              url={userImage}
-              size="tiny"
-              id={postUserID}
-            />
+            <Avatar url={userImage} size="tiny" id={postUserID} />
           </div>
           Published by: {firstName + ' ' + lastName} at {createdAt}
         </div>
