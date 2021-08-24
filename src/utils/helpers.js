@@ -5,7 +5,7 @@ const titleMe = (name) => {
 }
 
 const utils = {
-    titleMe: titleMe
+    titleMe
 }
 
 export default utils
