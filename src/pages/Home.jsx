@@ -14,6 +14,7 @@ import { Link } from 'react-router-dom';
 import apiHandler from '../api/apiHandler';
 
 
+
 class Home extends React.Component {
   state = {
     displayedJob: null,
