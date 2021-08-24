@@ -23,6 +23,7 @@ export class Profile extends Component {
         <div className="backdrop">
           <div className="profile-container">
             <Avatar url={user.profileImg} size="big" />
+            <div className="close">X</div>
           </div>
         </div>
       </React.Fragment>
