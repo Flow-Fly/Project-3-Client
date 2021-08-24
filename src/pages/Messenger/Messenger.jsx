@@ -32,6 +32,7 @@ class Messenger extends Component {
         this.submitMessage = this.submitMessage.bind(this)
         this.addFriend = this.addFriend.bind(this)
         this.loadMessages = this.loadMessages.bind(this)
+        this._Mounted = true;
     }
 
     async componentDidMount(){
@@ -40,9 +41,10 @@ class Messenger extends Component {
 
             //if the room is opened delete notifications 
             if(this.state.currentRoom?.members.find(m => m._id === data.senderId)){
-           
+                
                 await apiHandler.deleteNotifications(data.room._id, this.user._id)
-
+                this.props.messengerContext.deleteNotifications(data.room._id)
+                
                 this.setState({
                     receivedMessage : {
                         sender : {
@@ -52,7 +54,6 @@ class Messenger extends Component {
                         createdAt: Date.now()
                     }
                 }, () => {
-                    console.log('SATE', this.state)
                     this.setState({
                         messages: [...this.state.messages, this.state.receivedMessage],
                     })
@@ -63,21 +64,27 @@ class Messenger extends Component {
 
     componentDidUpdate(prevProps, prevState){
         if(!this.state.currentRoom) return 
+        
+        if(this.messagesLoaded) return
+     
         return this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
+      
     }
 
     componentWillUnmount(){
+        //this.props.messengerContext.socket.off('receive')
         this.setState({currentRoom: null})
-        //clearTimeout(this.timeout) WHY ITS GIVES MEMORY LEAKS ????
+        clearTimeout(this.timeout) 
     }
 
     async openRoom(room){
 
         try{
             //getMessages(roomId, firstMessageIndex, depth)
-            const messages = await apiHandler.getMessages(room._id, 0, 100)
+            const messages = await apiHandler.getMessages(room._id, 0, 20)
     
             await apiHandler.deleteNotifications(room._id, this.user._id)
+            this.props.messengerContext.deleteNotifications(room._id)
 
             this.setState({
                 currentRoom: room,
@@ -182,9 +189,11 @@ class Messenger extends Component {
         setTimeout(() => this.messagesLoaded = false, 1000)
 
         const olderMessages = await apiHandler.getMessages(this.state.currentRoom._id, this.state.messages.length - 1, 20)
+
         this.setState({
             messages: [...olderMessages, ...this.state.messages]
-        }, () => this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight)    
+        }, () => this.scrollChatRef.current.scrollTop = '-300px')
+        
     }
 
     render() {

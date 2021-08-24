@@ -10,35 +10,33 @@ class MessengerProvider extends Component {
 
         this.state = {
             rooms: [],
-            connected: false,
             connectedUsers: []
         }
 
         this.setRooms = this.setRooms.bind(this)
+        this.addNotifications = this.addNotifications.bind(this)
+        this.deleteNotifications = this.deleteNotifications.bind(this)
     }
 
     async componentDidMount(){ 
         this.socket = io(process.env.REACT_APP_SOCKET_URL)
-               
+
         if(!this.props.context.user) return
+        
 
-        if(!this.state.connected){
-            
-            
-            //send my userId to socket server to inform it I just connected
-            this.props.messengerContext.socket.emit('addUser', this.user._id)
+        //send my userId to socket server to inform it I just connected
+        this.socket.emit('addUser', this.user._id)
 
-            try{
-                const rooms = await apiHandler.getRooms(this.props.context.user._id) 
-                this.setState({
-                    rooms,
-                    connected: true
-                })
-            }
-            catch(err){
-                console.error(err)
-            }
+        try{
+            const rooms = await apiHandler.getRooms(this.props.context.user._id) 
+            this.setState({
+                rooms,
+            })
         }
+        catch(err){
+            console.error(err)
+        }
+        
     }
 
     async componentDidUpdate(prevProps, prevState){
@@ -46,12 +44,13 @@ class MessengerProvider extends Component {
         if(prevProps === this.props) return 
 
         if(!this.props.context.user){
-            this.socket.emit('disconnected')
-            this.setState({connected: false})
             return
         }
 
-        this.socket = io(process.env.REACT_APP_SOCKET_URL)
+        if(!this.socket){
+            this.socket = io(process.env.REACT_APP_SOCKET_URL)
+        }
+        
         //send my userId to socket server to inform it I just connected / reconnected
         this.socket.emit('addUser', this.props.context.user._id)
 
@@ -66,9 +65,10 @@ class MessengerProvider extends Component {
                 console.log('SET NEW ROOM', data.room)
                 this.setState({rooms : [...this.state.rooms, data.room]})
             }
-
+            console.log('create notiication')
             //add notif
             await apiHandler.addNotifications(data.room._id, this.props.context.user._id)
+            this.addNotifications(data.room._id)
         })
             
         if(!this.state.connected){
@@ -85,8 +85,41 @@ class MessengerProvider extends Component {
         }
     }
 
+    componentWillUnmount(){
+        this.socket.emit('disconnected')
+    }
+
     setRooms(room){
         this.setState({ rooms : [...this.state.rooms, room]})
+    }
+
+    addNotifications(roomId){
+        const rooms = this.state.rooms
+        const newRooms = rooms.map(room => {
+            if(room._id !== roomId ) return room
+
+            const thisRoom = room 
+            thisRoom.notifications = [...thisRoom.notifications, this.props.context.user._id]
+            return thisRoom
+        })
+
+        this.setState({rooms: newRooms})
+    }
+
+    deleteNotifications(roomId){
+        const rooms = this.state.rooms
+        const newRooms = rooms.map(room => {
+            if(room._id !== roomId ) return room
+
+            const thisRoom = room 
+            const filteredNotifications = thisRoom.notifications.filter(r => r !== this.props.context.user._id)
+
+            thisRoom.notifications = filteredNotifications
+
+            return thisRoom
+        })
+
+        this.setState({rooms: newRooms})
     }
     
     render() {
@@ -95,7 +128,8 @@ class MessengerProvider extends Component {
             setRooms: this.setRooms,
             socket: this.socket,
             connectedUsers: this.state.connectedUsers,
-            connected: this.connected,
+            addNotifications :this.addNotifications,
+            deleteNotifications: this.deleteNotifications
         }
 
         return (
