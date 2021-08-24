@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FeedPostCard from '../FeedPostCard/FeedPostCard';
-import apiHandler from '../../api/apiHandler';
 import './FeedPostContent.css';
 import Button from '../Base/Button/Button';
 import { withUser } from '../Auth/withUser';

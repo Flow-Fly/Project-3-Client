@@ -15,6 +15,7 @@ export class Feed extends Component {
 
   clickOnProfile = async (e) => {
     const id = e.target.getAttribute('data-id');
+    if (!id) return console.log('id: ', id)
     try {
       const profile = await apiHandler.getUser(id);
       this.setState({
