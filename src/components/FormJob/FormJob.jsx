@@ -102,7 +102,7 @@ export class FormJob extends Component {
 
   //techno tags
   technoLogiesPressed = (event) => {
-    event.preventDefault();
+    
     let str = this.state.currentTechnology.replaceAll(' ', '');
     if (event.key === 'Enter' && str !== '') {
       let technologiesTemp = [...this.state.technologies];

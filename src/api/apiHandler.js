@@ -197,9 +197,9 @@ const apiHandler = {
   },
 
   //Update one post
-  updateOnePost(postId) {
+  updateOnePost(postId,data) {
     return service
-      .patch('/posts/' + postId)
+      .patch(`/posts/${postId}`, data)
       .then((res) => res.data)
       .catch(errorHandler);
   },

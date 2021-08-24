@@ -44,6 +44,7 @@ export class Feed extends Component {
               posts={this.props.posts}
               loadPosts={this.props.loadPosts}
               showPostForm={this.props.showPostForm}
+              onPostDeleted={this.props.onPostDeleted}
             />
           ) : (
             <FeedJobContent

@@ -89,11 +89,52 @@ class Home extends React.Component {
 
   ////////post related///////////////////
   //Toggle postForm
-  showPostForm = (action) => {
-    this.setState({ showAddPostForm: true, jobFormAction: action });
+  showPostForm = (action,post) => {
+    this.setState({ showAddPostForm: true, postFormAction: action, displayedPost:post});
   };
   closePostForm = () => {
-    this.setState({ showAddPostForm: false });
+    this.setState({ showAddPostForm: false, displayedPost:null });
+  };
+
+  handlePostCreated = (createdPost) => {
+    this.setState({
+      posts: [createdPost, ...this.state.posts],
+      showJobForm: false,
+      showAddPostForm: false,
+      postFormAction: 'create',
+    });
+  };
+    //render updated posts
+  handlePostUpdated = (updatedPost) => {
+    const posts = this.state.posts.map((post) =>
+      post._id === updatedPost._id ? updatedPost : post
+    );
+    this.setState({
+      posts: posts,
+      showAddPostForm: false,
+      postFormAction: 'create',
+    });
+  };
+
+  // loadPosts = async () => {
+  //   try {
+  //     let posts = await apiHandler.getAllPost();
+  //     this.setState({ posts: posts });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  //delete job
+  handlePostDelete = (postId) => {
+    apiHandler
+      .deleteOnePost(postId)
+      .then(() => {
+        this.setState({
+          posts: this.state.posts.filter((post) => post._id !== postId),
+        });
+      })
+      .catch((err) => console.log(err));
   };
 
   //////////blob related///////
@@ -121,14 +162,7 @@ class Home extends React.Component {
   //   }
   // };
 
-  loadPosts = async () => {
-    try {
-      let posts = await apiHandler.getAllPost();
-      this.setState({ posts: posts });
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
 
   componentDidUpdate() {
     if (this.props.context.isLoggedIn === false) {
@@ -159,6 +193,7 @@ class Home extends React.Component {
             showPostForm={this.showPostForm}
             handleJobDelete={this.handleJobDelete}
             handleEditStart={this.handleEditStart}
+            onPostDeleted={this.handlePostDelete}
           ></Feed>
           <div className="homeRightSide">
             {this.state.showJobForm === true && (
@@ -174,8 +209,11 @@ class Home extends React.Component {
             {this.state.showAddPostForm === true && (
               <FormArticle
                 closePostForm={this.closePostForm}
-                loadPosts={this.loadPosts}
                 action={this.state.postFormAction}
+                displayedPost={this.state.displayedPost}
+                handlePostUpdated={this.handlePostUpdated}
+                handlePostCreated={this.handlePostCreated}
+                
               />
             )}
           </div>

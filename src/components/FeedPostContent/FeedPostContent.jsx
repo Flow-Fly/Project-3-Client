@@ -31,7 +31,7 @@ export class FeedPostContent extends Component {
             <div className="FeedPostContent">
             <Button onClick={this.createNewButton}>Create post</Button>
                 {this.props.posts.map((post)=>{
-                    return <FeedPostCard key={post._id} post={post} userID={this.props.context.user._id} />
+                    return <FeedPostCard showForm={this.props.showPostForm} onPostDeleted={this.props.onPostDeleted} refreshPost={this.props.loadPosts} key={post._id} post={post} userID={this.props.context.user._id} />
                 })}
             </div>
         )
