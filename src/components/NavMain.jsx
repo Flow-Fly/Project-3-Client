@@ -5,18 +5,31 @@ import { withRouter } from 'react-router';
 import apiHandler from '../api/apiHandler';
 import logo from '../Images/logo.png';
 
-import '../styles/NavMain.css';
-import Avatar from './Base/Avatar/Avatar';
+
+import "../styles/NavMain.css";
+import Avatar from "./Base/Avatar/Avatar";
+import { withMessenger } from "./MessengerCtx/withMessenger";
 
 const NavMain = (props) => {
   const { context } = props;
 
+  const notifications = () => {
+    const id = props.context.user._id
+    const notifications = 
+      props.messengerContext.rooms
+        .filter(room => room.notifications?.includes(id))
+        .length
+    
+    return notifications
+  }
+
   function handleLogout() {
+
     apiHandler
       .logout()
       .then(() => {
         context.removeUser();
-        props.history.push('/');
+        return window.location = "/"
       })
       .catch((error) => {
         console.log(error);
@@ -35,7 +48,7 @@ const NavMain = (props) => {
               <li>
                 <NavLink className="messengerNav" to="/messenger">
                   Messenger
-                  <span className="notifications">3</span>
+                  {(notifications() > 0) ? <span className="notifications">{notifications()}</span> : ''}
                 </NavLink>
               </li>
               <li>
@@ -66,4 +79,4 @@ const NavMain = (props) => {
   );
 };
 
-export default withRouter(withUser(NavMain));
+export default withRouter(withUser(withMessenger(NavMain)));
