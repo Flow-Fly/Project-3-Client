@@ -3,7 +3,8 @@ import FeedPostContent from '../FeedPostContent/FeedPostContent';
 import FeedJobContent from '../FeedJobContent/FeedJobContent';
 import apiHandler from '../../api/apiHandler';
 import './Feed.css';
-import Profile from '../../pages/Profile';
+import Profile from '../Profile/Profile';
+import { withUser } from '../Auth/withUser';
 //This component handles the Post/Job Tabs and renders the main
 // FeedJobContent and FeedPostContent elements
 export class Feed extends Component {
@@ -15,7 +16,7 @@ export class Feed extends Component {
 
   clickOnProfile = async (e) => {
     const id = e.target.getAttribute('data-id');
-    if (!id) return console.log('id: ', id)
+    if (!id) return console.log('id: ', id);
     try {
       const profile = await apiHandler.getUser(id);
       this.setState({
@@ -31,24 +32,42 @@ export class Feed extends Component {
     this.setState({
       displayProfile: false,
       user: null,
-    })
-  }
+    });
+  };
 
   toggleTab = (event) => {
     this.setState({ toggledTab: event.target.id });
   };
 
   render() {
-    console.log(this.props)
-    if(this.state.displayProfile) {
-      let id = this.state.user._id
-      const filteredPosts = this.props.posts.filter(post => post.creator.toString() === id)
-      const filteredJobs = this.props.jobs.filter(job => job.creator.toString() === id)
+    let filteredPosts = null;
+    let filteredJobs = null;
 
+    if (this.state.displayProfile) {
+      let id = this.props.context.user._id;
+      filteredPosts = this.props.posts.filter(
+        (post) => post.creator._id.toString() === id.toString()
+      );
+      filteredJobs = this.props.jobs.filter(
+        (job) => job.creator._id.toString() === id.toString()
+      );
+      filteredPosts = filteredPosts.length === 0 ? null : filteredPosts;
+      filteredJobs = filteredJobs.length === 0 ? null : filteredJobs;
+      console.log(filteredPosts);
+      console.log(filteredJobs);
     }
     return (
       <>
-        {this.state.displayProfile && <Profile user={this.state.user} close={this.closeProfile} posts={this.filteredPosts} jobs={this.filteredJobs} />}
+        {this.state.displayProfile && (
+          <Profile
+            user={this.state.user}
+            close={this.closeProfile}
+            posts={filteredPosts}
+            jobs={filteredJobs}
+            showForm={this.props.showPostForm}
+            deletePost={this.props.onPostDeleted}
+          />
+        )}
         <div className="feedContainer">
           <div className="feedTabs">
             <div
@@ -97,4 +116,4 @@ export class Feed extends Component {
   }
 }
 
-export default Feed;
+export default withUser(Feed);
