@@ -8,7 +8,7 @@ const ProtectedRoute = ({ component: Component, context, ...rest }) => {
   } else if (context.isLoggedIn) {
     return <Route {...rest} render={(props) => <Component {...props} />} />;
   } else {
-    return <Redirect to="/signin" />;
+    return <Redirect to="/" />;
   }
 };
 

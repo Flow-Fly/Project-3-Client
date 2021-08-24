@@ -52,6 +52,9 @@ class FormSignup extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+
+    this.props.resetDisplayBlob()
+
     apiHandler
       .signup(this.state)
       .then(() => {
@@ -111,6 +114,7 @@ class FormSignup extends Component {
     return (
       <>
         <div className="form-container">
+          <span className="form-close" onClick={() => this.props.resetDisplayBlob()}></span>
         <img id="signLogo" alt="signLogo" src={logo}></img>
           <Form className="form" onSubmit={this.handleSubmit}>
             <FormGroup className="form-group">

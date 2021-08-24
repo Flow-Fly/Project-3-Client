@@ -6,7 +6,6 @@ import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Profile from "./pages/Profile";
-import Messenger from "./pages/Messenger/Messenger";
 import FormEditProfile from "./components/FormEditProfile/FormEditProfile";
 
 

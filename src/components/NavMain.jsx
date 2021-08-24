@@ -47,7 +47,7 @@ const NavMain = (props) => {
               </li>
             </React.Fragment>
           )}
-          {!context.isLoggedIn && (
+          {/* {!context.isLoggedIn && (
             <React.Fragment>
               <li>
                 <NavLink to="/signin">Log in</NavLink>
@@ -56,7 +56,7 @@ const NavMain = (props) => {
                 <NavLink to="/signup">Create account</NavLink>
               </li>
             </React.Fragment>
-          )}
+          )} */}
         </ul>
       </div>
     </nav>

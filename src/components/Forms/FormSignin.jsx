@@ -24,7 +24,9 @@ class FormSignin extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-
+    
+    this.props.resetDisplayBlob()
+    
     apiHandler
       .signin(this.state)
       .then((data) => {
@@ -46,6 +48,7 @@ class FormSignin extends Component {
     return (
       <>
       <div className="form-container">
+      <span className="form-close" onClick={() => this.props.resetDisplayBlob()}></span>
         <img id="signLogo" alt="signLogo" src={logo}></img>
         <Form className='form' onSubmit={this.handleSubmit}>
 
