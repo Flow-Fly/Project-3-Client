@@ -29,7 +29,7 @@ export class FeedPostContent extends Component {
 
         return (
             <div className="FeedPostContent">
-            <Button onClick={this.createNewButton}>Create post</Button>
+            <Button className='createPostButton' onClick={this.createNewButton}>Create post</Button>
                 {this.props.posts.map((post)=>{
                     return <FeedPostCard showForm={this.props.showPostForm} onPostDeleted={this.props.onPostDeleted} refreshPost={this.props.loadPosts} key={post._id} post={post} userID={this.props.context.user._id} />
                 })}
