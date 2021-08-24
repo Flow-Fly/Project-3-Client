@@ -19,3 +19,9 @@
     width: 66%;
     height: 66%;
 }
+.close {
+    position:absolute;
+    top: 1em;
+    right: 1em;
+
+}

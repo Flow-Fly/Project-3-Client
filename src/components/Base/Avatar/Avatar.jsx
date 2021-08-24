@@ -8,13 +8,13 @@
 import React from 'react'
 import './Avatar.css'
 
-const Avatar = ({url, size, children}) => {
+const Avatar = ({url, size, id, children}) => {
     return (
 
         <div className="avatarWrapper">
             {children}
             <div className={'avatar ' + size} >
-                <img src={url} alt="avatar" />
+                <img src={url} alt="avatar" data-id={id} />
             </div>
         </div>
     )
