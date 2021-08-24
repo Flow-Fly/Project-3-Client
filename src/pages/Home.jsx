@@ -199,67 +199,69 @@ class Home extends React.Component {
     } else if (this.props.context.isLoggedIn) {
       //rendered if you are logged in
       return (
-        <div className="homePageBody">
-          <div className="homePageBody-wrapper">
-            {this.state.displayMessenger && <Messenger />}
-            <span
-              className="messengerIcon"
-              onClick={() =>
-                this.setState({
-                  displayMessenger: !this.state.displayMessenger,
-                })
-              }
-            >
-              <img src={messengerIcon} alt="Messenger Icon" />
-              {this.notifications() > 0 ? (
-                <span className="notifications">{this.notifications()}</span>
-              ) : (
-                ''
-              )}
+        <div className="homePageBody-wrapper">
+            <div className="messenger-wrapper">
+              {this.state.displayMessenger && <Messenger />}
+              
+              <span
+                className="messengerIcon"
+                onClick={() =>
+                  this.setState({
+                    displayMessenger: !this.state.displayMessenger,
+                  })
+                }
+              >
+                <img src={messengerIcon} alt="Messenger Icon" />
+                {this.notifications() > 0 ? (
+                  <span className="notifications">{this.notifications()}</span>
+                ) : ''}
             </span>
           </div>
+        
+          <div className="homePageBody">
 
-          {/* //Left SIDE */}
-          <div className="sideDiv">
-            <SideProfile />
-            <FIlterPost posts={this.state.posts} filterPosts={this.handlePostFilter}/>
-          </div>
+            {/* //Left SIDE */}
+            <div className="sideDiv">
+              <SideProfile />
+              <FIlterPost posts={this.state.posts} filterPosts={this.handlePostFilter}/>
+            </div>
 
 
-          {/* Middle=FEED */}
-          <Feed
-            jobs={this.state.jobs}
-            // loadJobs={this.loadJobs}
-            showJobForm={this.showJobForm}
-            posts={this.state.posts}
-            loadPosts={this.loadPosts}
-            showPostForm={this.showPostForm}
-            handleJobDelete={this.handleJobDelete}
-            handleEditStart={this.handleEditStart}
-            onPostDeleted={this.handlePostDelete}
-          ></Feed>
+            {/* Middle=FEED */}
+            <Feed
+              jobs={this.state.jobs}
+              // loadJobs={this.loadJobs}
+              showJobForm={this.showJobForm}
+              posts={this.state.posts}
+              loadPosts={this.loadPosts}
+              showPostForm={this.showPostForm}
+              handleJobDelete={this.handleJobDelete}
+              handleEditStart={this.handleEditStart}
+              onPostDeleted={this.handlePostDelete}
+            ></Feed>
 
-          {/* Right Side */}
-          <div className="homeRightSide">
-            {this.state.showJobForm === true && (
-              <FormJob
-                closeJobForm={this.closeJobForm}
-                // loadJobs={this.loadJobs}
-                job={this.state.jobFormJob}
-                action={this.state.jobFormAction}
-                onJobCreated={this.handleJobCreated}
-                onJobUpdated={this.handleJobUpdated}
-              />
-            )}
-            {this.state.showAddPostForm === true && (
-              <FormArticle
-                closePostForm={this.closePostForm}
-                action={this.state.postFormAction}
-                displayedPost={this.state.displayedPost}
-                handlePostUpdated={this.handlePostUpdated}
-                handlePostCreated={this.handlePostCreated}
-              />
-            )}
+            {/* Right Side */}
+            <div className="homeRightSide">
+              {this.state.showJobForm === true && (
+                <FormJob
+                  closeJobForm={this.closeJobForm}
+                  // loadJobs={this.loadJobs}
+                  job={this.state.jobFormJob}
+                  action={this.state.jobFormAction}
+                  onJobCreated={this.handleJobCreated}
+                  onJobUpdated={this.handleJobUpdated}
+                />
+              )}
+              {this.state.showAddPostForm === true && (
+                <FormArticle
+                  closePostForm={this.closePostForm}
+                  action={this.state.postFormAction}
+                  displayedPost={this.state.displayedPost}
+                  handlePostUpdated={this.handlePostUpdated}
+                  handlePostCreated={this.handlePostCreated}
+                />
+              )}
+            </div>
           </div>
         </div>
       );

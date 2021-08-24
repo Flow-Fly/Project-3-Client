@@ -11,18 +11,14 @@
 }
 
 .homePageBody {
-  position: relative;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   column-gap: 1rem;
 }
 
 .homePageBody-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
-  height: calc(98vh - 70px);
 }
 
 #mainBlobSection {
