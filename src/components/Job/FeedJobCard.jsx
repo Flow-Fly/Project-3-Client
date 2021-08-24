@@ -18,17 +18,34 @@ class FeedJobCard extends Component {
   };
 
   render() {
-    let details;
+    const job = this.props.job;
+    const userId = this.props.userID;
+    const jobId = this.props.job._id;
+    const jobCreatorId = job.creator ? job.creator._id : '';
+    const ownJob = String(jobCreatorId) === userId ? true : false;
+    const firstName = job.creator
+      ? job.creator.firstName !== undefined
+        ? job.creator.firstName
+        : '...'
+      : '...';
+    const lastName = job.creator
+      ? job.creator.lastName !== undefined
+        ? job.creator.lastName
+        : '...'
+      : '...';
+    const userImage = job.creator
+      ? job.creator.profileImg !== undefined
+        ? job.creator.profileImg
+        : '...'
+      : '...';
+    const createdAt = job.createdAt
+      ? job.createdAt.replace('T', ' ').slice(0, 16)
+      : '...';
 
+    //toggle job details
+    let details;
     if (!this.state.showJobDetails) {
-      details = (
-        <p
-          onClick={this.showJobDetails}
-          style={{ textAlign: 'center', fontSize: '0.6em' }}
-        >
-          More details
-        </p>
-      );
+      details = <p onClick={this.showJobDetails}>⌄</p>;
     } else {
       details = (
         <JobDetailsCard job={this.props.job} onClose={this.hideJobDetails} />
@@ -39,12 +56,16 @@ class FeedJobCard extends Component {
       <div className="FeedJobCard">
         <div className="flex-wrapper">
           <Avatar
-            ulr={this.props.job.creator?.profileImg}
+            url={userImage}
+            clickOnProfile={this.props.clickOnProfile}
+            id={jobCreatorId}
             size="tiny"
             alt="avatar"
           />
           <p>
-            Published by : {''} at {''}
+            Published by : {firstName + ' ' + lastName}
+            {''} at {''}
+            {createdAt}
           </p>
           <div className="button-edit-delete-wrapper">
             <button

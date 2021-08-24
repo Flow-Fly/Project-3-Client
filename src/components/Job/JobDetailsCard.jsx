@@ -5,7 +5,7 @@ import '../Job/JobDetailsCard.css';
 export class JobDetailsCard extends Component {
   render() {
     return (
-      <div>
+      <>
         <ul key={this.props.job._id}>
           <li>Description: {this.props.job.description}</li>
           <li>Technologies: {this.props.job.technologies}</li>
@@ -13,15 +13,8 @@ export class JobDetailsCard extends Component {
           <li>Job link: {this.props.job.link}</li>
         </ul>
 
-        {
-          <p
-            onClick={this.props.onClose}
-            style={{ textAlign: 'center', fontSize: '0.6em' }}
-          >
-            Close
-          </p>
-        }
-      </div>
+        {<p onClick={this.props.onClose}>˄</p>}
+      </>
     );
   }
 }
