@@ -1,46 +1,69 @@
-:root{
-    --mainLightBlueColor:#00B4FF;
-    --mainLightBlueColorHover:#007cb1;
-    --cadetBlue:#35A4B2;
-    --blueMansel:#008B9C;
-    --greenSheen:#77C0BB;
-    --orangeYellowCrayola:#FFD26F;
-    --peachCrayola:#FFCDA8;
-    --linen:#FEF3E9;
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
 }
 
-.jobForm-container{
-    border:1px solid var(--mainLightBlueColor);
-    padding:0.3rem; 
-    max-width: 400px;
-    border-radius: 0.4rem;
-    display: flex;
-    flex-direction: column;
+.jobForm-container {
+  position: sticky;
+  top: calc(70px + 1rem);
+  padding: 0.3rem;
+  max-width: 400px;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
 }
 
-.jobForm-container .form-group{
-    margin:0.25rem 0.25rem;
+.jobForm-container .form-group {
+  margin: 0.25rem 0.25rem;
 }
 
-.jobForm-container Form{
-    display: flex;
-    flex-direction: column;
+.jobForm-container Form {
+  display: flex;
+  flex-direction: column;
 }
 
-.jobForm-container Button{
-    align-self: center;
+.jobForm-container Button {
+  align-self: center;
 }
 
-#technologyWrapper{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+#technologyWrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
+#TechnologyTagsDiv {
+  margin-top: 0.4rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-self: flex-start;
+}
 
-#TechnologyTagsDiv{
-    margin-top: 0.4rem;
-    display: flex;
-    flex-wrap: wrap;
-    align-self: flex-start;
+.button-close-form-wrapper {
+  text-align: end;
+}
+
+.button-close-form {
+  background-color: var(--mainLightBlueColor);
+  padding: 0rem 0.45rem;
+  margin-right: 0.35rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  color: white;
+  font-weight: bolder;
+  font-size: 1rem;
+  line-height: 1.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.button-close-form:hover {
+  background-color: var(--mainLightBlueColorHover);
 }

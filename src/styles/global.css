@@ -1,13 +1,93 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
+  --sidesOfFloat: 15rem;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
+ body{
+   background-color: #F3F2EF;
+   font-size: 12px;
+ }
+ .mainPage, .nav-content{
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+ }
+
+/* ----------- Non-Retina Screens ----------- */
+@media screen 
+  and (min-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    .mainPage, .nav-content{
+      width:1200px
+    }
+}
+
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    .mainPage, .nav-content{
+      width:1200px
+    }
+}
+
+@media screen 
+  and (min-device-width: 900px) 
+  and (max-device-width: 1199px) 
+  and (-webkit-min-device-pixel-ratio: 1) { 
+    .mainPage, .nav-content{
+      width:900px
+    }
+}
+
+
+/* ----------- Retina Screens ----------- */
+
+@media screen 
+  and (min-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    .mainPage, .nav-content{
+      width:1200px
+    }
+}
+@media screen 
+  and (min-device-width: 1200px) 
+  and (max-device-width: 1600px) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    .mainPage, .nav-content{
+      width:1200px
+    }
+}
+
+@media screen 
+  and (min-device-width: 900px) 
+  and (max-device-width: 1199PX) 
+  and (-webkit-min-device-pixel-ratio: 2)
+  and (min-resolution: 192dpi) { 
+    .mainPage,.nav-content{
+      width:900PX
+    }
+}
+
 
 html {
-  font-family: "Manrope", sans-serif;
+  font-family: 'Manrope', sans-serif;
 }
 
 a {
@@ -17,4 +97,36 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.webdev {
+  color: green;
+}
+.uiux {
+  color: blue;
+}
+.cyber {
+  color: red;
+}
+.data-analyst {
+  color: purple;
+}
+
+
+.webdev.bg {
+  background-color: rgb(72, 145, 72);
+}
+.uiux.bg {
+  background-color: rgb(75, 75, 153);
+}
+.cyber.bg {
+  background-color: rgb(146, 70, 70);
+}
+.data-analyst.bg {
+  background-color: rgb(148, 73, 148);
 }

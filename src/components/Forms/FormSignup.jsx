@@ -8,6 +8,7 @@ import './FormSign.css';
 import utils from '../../utils/helpers';
 import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
 import github from '../../assets/auth/github-btn.png'
+import logo from '../../Images/logo.png'
 
 const initialState = {
   canSubmit: '',
@@ -32,8 +33,9 @@ const initialState = {
 // }
 
 class FormSignup extends Component {
-  state = { ...initialState };
-
+  
+  state = {...initialState}
+  
   handleChange = (event) => {
     let value = null;
     // titleMe capitalize every first letter of every word, accounting '-'...
@@ -109,147 +111,59 @@ class FormSignup extends Component {
     return (
       <>
         <div className="form-container">
+        <img id="signLogo" alt="signLogo" src={logo}></img>
           <Form className="form" onSubmit={this.handleSubmit}>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="firstName">
-                First name
-              </Label>
+              
               <Input
                 className="input"
                 id="firstName"
                 name="firstName"
                 value={this.state.firstName}
                 onChange={this.handleChange}
+                onFocus={e => e.target.placeholder = ''}
+                onBlur={e => e.target.placeholder = 'First Name: '}
+                placeholder='First Name: '
                 type="text"
-                placeholder="First Name"
+           
                 required
               />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="lastName">
-                Last name
-              </Label>
+         
               <Input
                 className="input"
                 id="lastName"
                 name="lastName"
                 value={this.state.lastName}
                 onChange={this.handleChange}
+                onFocus={e => e.target.placeholder = ''}
+                onBlur={e => e.target.placeholder = 'Last Name: '}
+                placeholder='Last Name: '
                 type="text"
-                placeholder="Last Name"
+        
                 required
               />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="email">
-                Email:
-              </Label>
+      
               <Input
                 className="input"
                 id="email"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleChange}
+                onFocus={e => e.target.placeholder = ''}
+                onBlur={e => e.target.placeholder = 'Email: '}
+                placeholder='Email: '
                 type="text"
-                placeholder="Email"
+          
                 required
               />
             </FormGroup>
-            {/* <FormGroup className="form-group">
-                  <Label className="label" htmlFor="phoneNumber">
-                    Phone number:{' '}
-                  </Label>
-                  <Input
-                    className="input"
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    value={this.state.phoneNumber}
-                    onChange={this.handleChange}
-                    type="tel"
-                    placeholder="Phone number"
-                  />
-                </FormGroup>
-       
-                <FormGroup className="form-group">
-                  <Label className="label" htmlFor="graduationYear">
-                    Graduation year:{' '}
-                  </Label>
-                  <Input
-                    className="input"
-                    id="graduationYear"
-                    name="graduationYear"
-                    value={this.state.graduationYear}
-                    onChange={this.handleChange}
-                    type="number"
-                    placeholder="Graduation year"
-                    min="2013"
-                    max="2022"
-                  />
-                </FormGroup>
-                <FormGroup className="form-group">
-                  <Label
-                    className="label"
-                    htmlFor="location"
-                    value={this.state.location}
-                    onChange={this.handleChange}
-                  >
-                    Location:{' '}
-                  </Label>
-
-                  <Input
-                    name="location"
-                    id="location"
-                    type="select"
-                    name="location"
-                    value={this.state.location}
-                    onChange={this.handleChange}
-                  >
-                    <option value="-1" disabled>
-                      Please select a Campus
-                    </option>
-                    <option value="Paris">Paris</option>
-                    <option value="Madrid">Madrid</option>
-                    <option value="Amsterdam">Amsterdam</option>
-                    <option value="Barcelona">Barcelona</option>
-                    <option value="Berlin">Berlin</option>
-                    <option value="Miami">Miami</option>
-                    <option value="Sao Paulo">Sao Paulo</option>
-                    <option value="Lisbon">Lisbon</option>
-                    <option value="Mexico City">Mexico City</option>
-                  </Input>
-                </FormGroup>
-
-                <FormGroup className="form-group">
-                  <Label
-                    className="label"
-                    htmlFor="type"
-                    value={this.state.type}
-                    onChange={this.handleChange}
-                  >
-                    Field of work:{' '}
-                  </Label>
-
-                  <Input
-                    name="type"
-                    id="type"
-                    type="select"
-                    required
-                    name="type"
-                    value={this.state.type}
-                    onChange={this.handleChange}
-                  >
-                    <option value="-1">Please select your field of work</option>
-                    <option value="Web Dev">Web Development</option>
-                    <option value="UI/UX">UI / UX</option>
-                    <option value="Data Analyst">Data Analyst</option>
-                    <option value="Cyber Security">Cyber Security</option>
-                  </Input>
-                </FormGroup> */}
 
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="password">
-                Password:
-              </Label>
+         
 
               {this.state.password === '' ? (
                 <Input
@@ -259,9 +173,12 @@ class FormSignup extends Component {
                   value={this.state.password}
                   onChange={this.handlePassword}
                   type="password"
-                  placeholder="Password: "
+                  onFocus={e => e.target.placeholder = ''}
+                onBlur={e => e.target.placeholder = 'Password: '}
+                placeholder='Password: '
                   required
                   autoComplete="new-password"
+               
                 />
               ) : this.state.passwordSafe ? (
                 <>
@@ -272,9 +189,11 @@ class FormSignup extends Component {
                     value={this.state.password}
                     onChange={this.handlePassword}
                     type="password"
-                    placeholder="Password: "
+                    onFocus={e => e.target.placeholder = ''}
+                    onBlur={e => e.target.placeholder = 'Password: '}
                     required
                     valid
+                    autoFocus
                   />
                   <FormFeedback valid>Your password is safe!</FormFeedback>
                 </>
@@ -287,10 +206,12 @@ class FormSignup extends Component {
                     value={this.state.password}
                     onChange={this.handlePassword}
                     type="password"
-                    placeholder="Password: "
+                    onFocus={e => e.target.placeholder = ''}
+                onBlur={e => e.target.placeholder = 'Password: '}
                     required
                     invalid
                     autoComplete="new-password"
+                    autoFocus
                   />
                   <FormFeedback invalid='true'>
                     Your password must contain atleast 8 characters, a number
@@ -300,9 +221,7 @@ class FormSignup extends Component {
               )}
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="confirmation">
-                Confirm your password
-              </Label>
+    
               {this.state.confirmation === '' ? (
                 <Input
                   className="input"
@@ -311,7 +230,9 @@ class FormSignup extends Component {
                   value={this.state.confirmation}
                   onChange={this.handleConfirm}
                   type="password"
-                  placeholder="Confirm you password: "
+                  onFocus={event => event.target.placeholder = ''}
+                  onBlur={event => event.target.placeholder = 'Confirm you password: '}
+                  placeholder= 'Confirm your password: '
                   required
                 />
               ) : this.state.canSubmit ? (
@@ -323,9 +244,11 @@ class FormSignup extends Component {
                     value={this.state.confirmation}
                     onChange={this.handleConfirm}
                     type="password"
-                    placeholder="Confirm you password: "
+                    onFocus={event => event.target.placeholder = ''}
+                  onBlur={event => event.target.placeholder = 'Confirm you password: '}
                     required
                     valid
+                    autoFocus
                   />
                   <FormFeedback valid>Ready to register!</FormFeedback>
                 </>
@@ -338,9 +261,11 @@ class FormSignup extends Component {
                     value={this.state.confirmation}
                     onChange={this.handleConfirm}
                     type="password"
-                    placeholder="Confirm you password: "
+                    onFocus={event => event.target.placeholder = ''}
+                  onBlur={event => event.target.placeholder = 'Confirm you password: '}
                     required
                     invalid
+                    autoFocus
                   />
                   <FormFeedback invalid='true'>
                     Your passwords are not matching

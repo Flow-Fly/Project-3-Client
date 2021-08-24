@@ -1,66 +1,67 @@
 import React, { Component } from 'react';
 import './FeedJobCard.css';
 import JobDetailsCard from '../Job/JobDetailsCard';
-import Button from '../Base/Button/Button';
-import FormJob from '../FormJob/FormJob.jsx';
+import Avatar from '../Base/Avatar/Avatar';
 
 class FeedJobCard extends Component {
   state = {
     showJobDetails: false,
-    showJobForm: false,
   };
 
   // toggle job details on the jobs list
   showJobDetails = () => {
-    this.setState({ showJobDetails: !this.state.showJobDetails });
+    this.setState({ showJobDetails: true });
   };
 
-  //show jobForm, action = "edit"
-  cancelEdit = () => {
-    this.setState({ showJobForm: false });
-  };
-
-  startEdit = () => {
-    this.setState({ showJobForm: true });
+  hideJobDetails = () => {
+    this.setState({ showJobDetails: false });
   };
 
   render() {
-    if (this.state.showJobForm) {
-      return (
-        <div className="FeedJobCard">
-          <h6>
-            {this.props.job.title}
-            <Button onClick={this.cancelEdit}>Cancel</Button>
-          </h6>
-          <FormJob
-            action="edit"
-            job={this.props.job}
-            onSubmit={this.props.onJobUpdate}
-          />
-        </div>
-      );
-    }
-
     let details;
 
     if (!this.state.showJobDetails) {
       details = (
         <p
           onClick={this.showJobDetails}
-          style={{ textAlign: 'right', fontSize: '0.6em' }}
+          style={{ textAlign: 'center', fontSize: '0.6em' }}
         >
           More details
         </p>
       );
     } else {
-      details = <JobDetailsCard job={this.props.job} />;
+      details = (
+        <JobDetailsCard job={this.props.job} onClose={this.hideJobDetails} />
+      );
     }
 
     return (
       <div className="FeedJobCard">
+        <div className="flex-wrapper">
+          <Avatar
+            ulr={this.props.job.creator?.profileImg}
+            size="tiny"
+            alt="avatar"
+          />
+          <p>
+            Published by : {''} at {''}
+          </p>
+          <div className="button-edit-delete-wrapper">
+            <button
+              className="button-edit-job"
+              onClick={this.props.handleEditStart}
+            >
+              Edit
+            </button>
+            <button
+              className="button-delete-job"
+              onClick={this.props.handleJobDelete}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
         <h6>{this.props.job.title}</h6>
-        <Button onClick={this.startEdit}>Edit</Button>
-        <Button onClick={this.props.onDelete}>Delete</Button>
         <ul key={this.props.job._id}>
           <li>
             <b>{this.props.job.company}</b>

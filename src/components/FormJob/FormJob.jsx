@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Button from '../Base/Button/Button';
-// import apiHandler from '../../api/apiHandler';
 import './FormJob.css';
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 import TechnologyTag from '../Base/TechnologyTag/TechnologyTag';
+import apiHandler from '../../api/apiHandler';
 
 //Form component to be used either for creating an article or editing it
 export class FormJob extends Component {
@@ -22,37 +22,40 @@ export class FormJob extends Component {
     type: 'Web Dev',
   };
 
+  copyStateFromJob() {
+    this.setState({
+      title: this.props.job.title,
+      description: this.props.job.description,
+      technologies: this.props.job.technologies,
+      currentTechnology: this.props.job.currentTechnology,
+      location: this.props.job.location,
+      remote: this.props.job.remote,
+      link: this.props.job.link,
+      contractType: this.props.job.contractType,
+      level: this.props.job.level,
+      company: this.props.job.company,
+      type: this.props.job.type,
+    });
+  }
+
   componentDidMount() {
     if (this.props.job) {
-      this.setState({
-        title: this.props.job.title,
-        description: this.props.job.description,
-        technologies: this.props.job.technologies,
-        currentTechnology: this.props.job.currentTechnology,
-        location: this.props.job.location,
-        remote: this.props.job.remote,
-        link: this.props.job.link,
-        contractType: this.props.job.contractType,
-        level: this.props.job.level,
-        company: this.props.job.company,
-        type: this.props.job.type,
-      });
+      this.copyStateFromJob();
     }
   }
 
-  handleCreate = (event) => {
-    event.preventDefault();
-    // const formData = new FormData();
-    this.props.onSubmit();
-  };
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.job &&
+      (!prevProps.job || prevProps.job._id !== this.props.job._id)
+    ) {
+      this.copyStateFromJob();
+    }
+  }
 
-  handleUpdate = (event) => {
-    event.preventDefault();
-    this.props.onSubmit(this.state);
-  };
-
-  //To handle input change on the form
+  //handle input change on the form
   handleChange = (event) => {
+    console.log(event);
     let key = event.target.name;
     let value =
       event.target.type === 'file'
@@ -60,11 +63,46 @@ export class FormJob extends Component {
         : event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value;
+    console.log(key, value);
     this.setState({
       [key]: value,
     });
   };
 
+  //handle form data submit
+  handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('handleSubmit', this.state.title);
+
+    if (this.props.job) {
+      apiHandler
+        .updateJob(this.props.job._id, this.state)
+        .then((data) => {
+          console.log('Editd', data);
+          //called apihandler here => job already updated
+          this.props.onJobUpdated(data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      apiHandler
+        .addJob(this.state)
+        .then((data) => {
+          console.log('Created', data);
+          //called apihandler here => so job already created
+          this.props.onJobCreated(data);
+          // this.props.closeJobForm();
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+
+  // close job form by click on the x
+  closeJobForm = (event) => {
+    event.preventDefault();
+    this.props.closeJobForm();
+  };
+
+  //techno tags
   technoLogiesPressed = (event) => {
     let str = this.state.currentTechnology.replaceAll(' ', '');
     if (event.key === 'Enter' && str !== '') {
@@ -86,6 +124,12 @@ export class FormJob extends Component {
   render() {
     return (
       <div className="jobForm-container">
+        <div className="button-close-form-wrapper">
+          <button className="button-close-form" onClick={this.closeJobForm}>
+            x
+          </button>
+        </div>
+
         <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup className="form-group">
             <Label className="label" htmlFor="title">
@@ -200,7 +244,6 @@ export class FormJob extends Component {
               value={this.state.contractType}
               onChange={this.handleChange}
             >
-              <option value={this.state.type}>{this.state.type}</option>
               <option value="CDI">CDI</option>
               <option value="Part-time">Part-time</option>
               <option value="Freelance">Freelance</option>
@@ -219,7 +262,7 @@ export class FormJob extends Component {
               value={this.state.level}
               onChange={this.handleChange}
             >
-              <option value={this.state.level}>{this.state.level}</option>
+              <option value="junior">junior</option>
               <option value="experienced">experienced</option>
               <option value="senior">senior</option>
               <option value="expert">expert</option>
@@ -237,19 +280,15 @@ export class FormJob extends Component {
               value={this.state.type}
               onChange={this.handleChange}
             >
-              <option value={this.state.type}>{this.state.type}</option>
+              <option value="Web Dev">Web Dev</option>
               <option value="UI/UX">UI/UX</option>
               <option value="Data Analyst">Data Analyst</option>
               <option value="Cyber Security">Cyber Security</option>
               <option value="All">All</option>
             </Input>
           </FormGroup>
-          {this.props.action === 'create' && (
-            <Button onClick={this.handleCreate}>Create</Button>
-          )}
-          {this.props.action === 'edit' && (
-            <Button onClick={this.handleUpdate}>Submit changes</Button>
-          )}
+          {this.props.action === 'create' && <Button>Create Job</Button>}
+          {this.props.action === 'edit' && <Button>Submit changes</Button>}
         </Form>
       </div>
     );

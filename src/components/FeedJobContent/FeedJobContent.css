@@ -1,6 +1,8 @@
-.addJobForm {
-  /* position: absolute !important;
-  top: -9999px !important;
-  left: -9999px !important;
-  visibility: hidden !important; */
+.FeedJobContent {
+  width: 100%;
+}
+
+.button-create-job-wrapper {
+  display: flex;
+  justify-content: center;
 }

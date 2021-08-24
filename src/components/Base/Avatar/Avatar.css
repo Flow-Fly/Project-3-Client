@@ -1,5 +1,7 @@
 .avatarWrapper{
     position: relative;
+    display: flex;
+    justify-content: center;
 }
 
 .avatar{
@@ -8,6 +10,7 @@
     overflow: hidden;
     display: flex;
     align-items: center;
+    box-shadow: 0px 0px 1px 1px #00B4FF;
 }
 
 .avatar.small{
@@ -27,5 +30,7 @@
 }
 
 .avatar img{
+    margin: 0 auto;
     min-width: 100%;
+    max-height: 100%;
 }
