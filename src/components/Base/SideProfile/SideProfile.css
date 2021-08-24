@@ -2,8 +2,6 @@
     max-width: 300px;
     max-height: 50vh;
     display: flex;
-    position: sticky;
-    top: calc(70px + 1rem);
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;

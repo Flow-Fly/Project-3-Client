@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FeedPostCard from '../FeedPostCard/FeedPostCard';
 import './FeedPostContent.css';
-import Button from '../Base/Button/Button';
+// import Button from '../Base/Button/Button';
 import { withUser } from '../Auth/withUser';
 
 export class FeedPostContent extends Component {
@@ -23,7 +23,9 @@ export class FeedPostContent extends Component {
 
     return (
       <div className="FeedPostContent">
-        <Button onClick={this.createNewButton}>Create post</Button>
+        <button className="button-create-post" onClick={this.createNewButton}>
+          Create post
+        </button>
         {this.props.posts.map((post) => {
           return (
             <FeedPostCard
@@ -31,7 +33,6 @@ export class FeedPostContent extends Component {
               showForm={this.props.showPostForm}
               onPostDeleted={this.props.onPostDeleted}
               refreshPost={this.props.loadPosts}
-              key={post._id}
               post={post}
               clickOnProfile={this.props.clickOnProfile}
               userID={this.props.context.user._id}

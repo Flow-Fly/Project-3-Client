@@ -10,14 +10,14 @@
   --sidesOfFloat: 15rem;
 }
 
-.homePageBody{
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    column-gap: 1rem;
+.homePageBody {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  column-gap: 1rem;
 }
 
-.homePageBody-wrapper{
+.homePageBody-wrapper {
   position: absolute;
   top: 0;
   left: 0;
@@ -101,7 +101,8 @@
   color: white;
 }
 
-.sideDiv{
+.sideDiv {
   position: sticky;
   top: calc(70px + 1rem);
+  height: max-content;
 }
