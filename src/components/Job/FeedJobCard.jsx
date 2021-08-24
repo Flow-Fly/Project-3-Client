@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './FeedJobCard.css';
 import JobDetailsCard from '../Job/JobDetailsCard';
+import Avatar from '../Base/Avatar/Avatar';
 
 class FeedJobCard extends Component {
   state = {
@@ -36,21 +37,31 @@ class FeedJobCard extends Component {
 
     return (
       <div className="FeedJobCard">
-        <h6>
-          {this.props.job.title}
-          <button
-            className="button-edit-job"
-            onClick={this.props.handleEditStart}
-          >
-            Edit
-          </button>
-          <button
-            className="button-delete-job"
-            onClick={this.props.handleJobDelete}
-          >
-            Delete
-          </button>
-        </h6>
+        <div className="flex-wrapper">
+          <Avatar
+            ulr={this.props.job.creator?.profileImg}
+            size="tiny"
+            alt="avatar"
+          />
+          <p>
+            Published by : {''} at {''}
+          </p>
+          <div className="button-edit-delete-wrapper">
+            <button
+              className="button-edit-job"
+              onClick={this.props.handleEditStart}
+            >
+              Edit
+            </button>
+            <button
+              className="button-delete-job"
+              onClick={this.props.handleJobDelete}
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+        <h6>{this.props.job.title}</h6>
         <ul key={this.props.job._id}>
           <li>
             <b>{this.props.job.company}</b>
