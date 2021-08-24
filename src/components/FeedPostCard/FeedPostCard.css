@@ -30,6 +30,11 @@
 .FeedPostCard p {
   font-size: 0.8rem;
   margin: 0.1rem 0;
+  width: 100%;
+  word-wrap: break-word;
+}
+.postCardTitle{
+  font-weight: bolder;;
 }
 
 .postCardPublish {
@@ -48,4 +53,9 @@
 .postCardPublish a{
   justify-self: flex-end;
   margin: 0 0.2rem;
+}
+
+.postCardLink{
+  font-style: italic;
+  font-weight: 500;
 }

@@ -55,7 +55,7 @@ export class FormJob extends Component {
 
   //handle input change on the form
   handleChange = (event) => {
-    console.log(event)
+    console.log(event);
     let key = event.target.name;
     let value =
       event.target.type === 'file'
@@ -63,7 +63,7 @@ export class FormJob extends Component {
         : event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value;
-        console.log(key, value)
+    console.log(key, value);
     this.setState({
       [key]: value,
     });
@@ -104,8 +104,7 @@ export class FormJob extends Component {
 
   //techno tags
   technoLogiesPressed = (event) => {
-    console.log(event.target.value)
-    event.preventDefault();
+    
     let str = this.state.currentTechnology.replaceAll(' ', '');
     if (event.key === 'Enter' && str !== '') {
       let technologiesTemp = [...this.state.technologies];
@@ -126,7 +125,12 @@ export class FormJob extends Component {
   render() {
     return (
       <div className="jobForm-container">
-        <Button onClick={this.closeJobForm}>x</Button>
+        <div className="button-close-form-wrapper">
+          <button className="button-close-form" onClick={this.closeJobForm}>
+            x
+          </button>
+        </div>
+
         <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup className="form-group">
             <Label className="label" htmlFor="title">

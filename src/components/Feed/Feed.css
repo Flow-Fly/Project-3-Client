@@ -1,78 +1,76 @@
-:root{
-    --mainLightBlueColor:#00B4FF;
-    --mainLightBlueColorHover:#007cb1;
-    --cadetBlue:#35A4B2;
-    --blueMansel:#008B9C;
-    --greenSheen:#77C0BB;
-    --orangeYellowCrayola:#FFD26F;
-    --peachCrayola:#FFCDA8;
-    --linen:#FEF3E9;
+:root {
+  --mainLightBlueColor: #00b4ff;
+  --mainLightBlueColorHover: #007cb1;
+  --cadetBlue: #35a4b2;
+  --blueMansel: #008b9c;
+  --greenSheen: #77c0bb;
+  --orangeYellowCrayola: #ffd26f;
+  --peachCrayola: #ffcda8;
+  --linen: #fef3e9;
 }
 
-.feedContainer{
-    border:1px solid var(--mainLightBlueColor);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    /* For testing */
-    
-    /* width: 100%; */
-    background: #f1f1f1;
-    border-radius: 0.4rem;
-    overflow:hidden;
-    grid-column: 2/3;
+.feedContainer {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  /* For testing */
+
+  /* width: 100%; */
+  background: #f1f1f1;
+  border-radius: 0.4rem;
+  overflow: hidden;
+  grid-column: 2/3;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
 }
 
-.feedTabs{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    overflow:hidden;
-    position: relative;
+.feedTabs {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  overflow: hidden;
+  position: relative;
 }
 
-.feedContentWrapper{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    padding:0.3rem;
-    background-color: white;
+.feedContentWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 0.3rem;
+  background-color: white;
 }
 
 .tabs {
-    padding: 15px;
-    text-align: center;
-    width: 50%;
-    background: white;
-    cursor: pointer;
-    border-bottom: 1px solid var(--mainLightBlueColor);
-    position: relative;
-    overflow:hidden;
-    
-  }
+  padding: 15px;
+  text-align: center;
+  width: 50%;
+  background: white;
+  cursor: pointer;
+  border-bottom: 1px solid var(--mainLightBlueColor);
+  position: relative;
+  overflow: hidden;
+}
 
-  .feedContainer .active  {
-    background: white;
-    border-bottom: 1px solid transparent;
-  }
-  
-  .feedContainer .active::before {
-    content: "";
-    position: absolute;
-    top: 0px;
-    left: -5%;
-    
-    width: 110%;
-    border-radius: 0.4rem;
-    height: 5px;
-    background: var(--mainLightBlueColor);
-  }
+.feedContainer .active {
+  background: white;
+  border-bottom: 1px solid transparent;
+}
 
-  .tabs.left{
-    border-right: 1px solid var(--mainLightBlueColor);
-  }
+.feedContainer .active::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  left: -5%;
+  width: 110%;
+  border-radius: 0.4rem;
+  height: 5px;
+  background: var(--mainLightBlueColor);
+}
 
-  .tabs.right{
-    border-left: 1px solid var(--mainLightBlueColor);
-  }
+.tabs.left {
+  border-right: 1px solid var(--mainLightBlueColor);
+}
+
+.tabs.right {
+  border-left: 1px solid var(--mainLightBlueColor);
+}

@@ -10,18 +10,18 @@ export class FormArticle extends Component {
     state={
         //This action prop needs to come from the parent element if you set Create it will create new post, if edit then it will update one
         action:this.props.action,
-        idToUpdate:"",
-        title:"",
-        content:"",
-        type:"Web Dev",
-        link:"",
+        idToUpdate:     this.props.displayedPost!==null && this.props.displayedPost!==undefined? this.props.displayedPost._id:"",
+        title:          this.props.displayedPost!==null && this.props.displayedPost!==undefined? this.props.displayedPost.title:"",
+        content:        this.props.displayedPost!==null && this.props.displayedPost!==undefined? this.props.displayedPost.content:"",
+        type:           this.props.displayedPost!==null && this.props.displayedPost!==undefined? this.props.displayedPost.type:"Web Dev",
+        link:           this.props.displayedPost!==null && this.props.displayedPost!==undefined? this.props.displayedPost.link:"",
         image:"",
     }
 
 
     handleCreate=(event)=>{
         event.preventDefault();
-        const formData=new FormData();
+        let formData=new FormData();
         formData.append('title',this.state.title)
         formData.append('content',this.state.content)
         formData.append('type',this.state.type)
@@ -30,17 +30,24 @@ export class FormArticle extends Component {
 
 
         apiHandler.createNewPost(formData)
-            .then((dbrEs)=>{
-                console.log(dbrEs); 
-                this.props.loadPosts();
-                this.props.closePostForm()})
+            .then((createdPost)=>{
+               this.props.handlePostCreated(createdPost)})
             .catch((error)=>{console.log(error)})
 
     }
     handleUpdate=(event)=>{
         event.preventDefault();
-        const formData=new FormData();
-        console.log("update button clicked")
+        let formData=new FormData();
+        formData.append('title',this.state.title)
+        formData.append('content',this.state.content)
+        formData.append('type',this.state.type)
+        formData.append('link',this.state.link)
+        formData.append('image',this.state.image)
+        apiHandler.updateOnePost(this.state.idToUpdate,formData)
+            .then((updatedPost)=>{
+                this.props.handlePostUpdated(updatedPost)})
+            .catch((error)=>{console.log(error)})
+
     }
 
     closePostForm = (event)=>{
