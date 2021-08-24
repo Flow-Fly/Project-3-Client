@@ -55,6 +55,7 @@ export class FormJob extends Component {
 
   //handle input change on the form
   handleChange = (event) => {
+    console.log(event);
     let key = event.target.name;
     let value =
       event.target.type === 'file'
@@ -62,6 +63,7 @@ export class FormJob extends Component {
         : event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value;
+    console.log(key, value);
     this.setState({
       [key]: value,
     });
@@ -123,7 +125,12 @@ export class FormJob extends Component {
   render() {
     return (
       <div className="jobForm-container">
-        <Button onClick={this.closeJobForm}>x</Button>
+        <div className="button-close-form-wrapper">
+          <button className="button-close-form" onClick={this.closeJobForm}>
+            x
+          </button>
+        </div>
+
         <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup className="form-group">
             <Label className="label" htmlFor="title">
@@ -238,7 +245,6 @@ export class FormJob extends Component {
               value={this.state.contractType}
               onChange={this.handleChange}
             >
-              <option value={this.state.type}>{this.state.type}</option>
               <option value="CDI">CDI</option>
               <option value="Part-time">Part-time</option>
               <option value="Freelance">Freelance</option>
@@ -257,7 +263,7 @@ export class FormJob extends Component {
               value={this.state.level}
               onChange={this.handleChange}
             >
-              <option value={this.state.level}>{this.state.level}</option>
+              <option value="junior">junior</option>
               <option value="experienced">experienced</option>
               <option value="senior">senior</option>
               <option value="expert">expert</option>
@@ -275,7 +281,7 @@ export class FormJob extends Component {
               value={this.state.type}
               onChange={this.handleChange}
             >
-              <option value={this.state.type}>{this.state.type}</option>
+              <option value="Web Dev">Web Dev</option>
               <option value="UI/UX">UI/UX</option>
               <option value="Data Analyst">Data Analyst</option>
               <option value="Cyber Security">Cyber Security</option>

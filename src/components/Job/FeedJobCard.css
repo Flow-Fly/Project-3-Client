@@ -11,38 +11,31 @@
 
 .FeedJobCard {
   width: 100%;
-  border: 1px solid var(--mainLightBlueColor);
+  /* border: 1px solid var(--mainLightBlueColor); */
   padding-top: 0.7rem;
   margin: 0.3rem 0;
   border-radius: 0.3rem;
   text-align: center;
+  /* box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048); */
+  border-top: 1px solid rgba(0, 0, 0, 0.233);
 }
 
 .button-edit-job,
 .button-delete-job {
-  background-color: #00b4ff;
+  /* background-color: var(--mainLightBlueColor); */
   /* padding: .375rem .75rem; */
-  margin: 0.1rem;
+  /* margin: 0.1rem; */
 
-  border-radius: 0.25rem;
-  border: 1px solid transparent;
-  color: white;
+  /* border-radius: 0.25rem; */
+  /* border: 1px solid transparent; */
+  color: black;
   font-weight: bolder;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  transition: all 0.2s ease-in-out;
+  font-size: 0.7rem;
+  /* line-height: 1.5rem;
+  transition: all 0.2s ease-in-out; */
 }
 
-.button-cancel-edit-job {
-  background-color: #00b4ff;
-  /* padding: .375rem .75rem; */
-  margin: 0.1rem;
-
-  border-radius: 0.25rem;
-  border: 1px solid transparent;
-  color: white;
-  font-weight: bolder;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  transition: all 0.2s ease-in-out;
+.button-edit-job:hover,
+.button-delete-job:hover {
+  background-color: var(--mainLightBlueColorHover);
 }
