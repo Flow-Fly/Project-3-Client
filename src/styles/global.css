@@ -17,15 +17,23 @@
   padding: 0;
   box-sizing: border-box;
 }
- body{
-   background-color: #F3F2EF;
-   font-size: 12px;
- }
- .mainPage, .nav-content{
+
+body{
+  background-color: #F3F2EF;
+  font-size: 12px;
+  
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+}
+
+.mainPage, .nav-content{
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
- }
+}
 
 /* ----------- Non-Retina Screens ----------- */
 @media screen 
@@ -99,10 +107,6 @@ ul {
   list-style-type: none;
 }
 
-.App {
-  display: flex;
-  flex-direction: column;
-}
 
 .webdev {
   color: green;
