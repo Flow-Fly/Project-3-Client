@@ -6,7 +6,18 @@ import FilterTag from '../Base/FilterTag/FilterTag';
 export class FIlterPost extends Component {
   state = {
     filters: [],
+    originalFilters:[],
   };
+
+  componentDidMount(){
+    let filtersTemp=[];
+    this.props.posts.forEach((post)=>{
+        if (filtersTemp.includes(post.type)===false) filtersTemp.push(post.type);
+    })
+
+    this.setState({originalFilters:filtersTemp})
+
+  }
 
 
     toggleSelection = (filter)=>{
@@ -28,16 +39,13 @@ export class FIlterPost extends Component {
     }
 
     render() {
-        let filtersTemp=[];
-        this.props.posts.forEach((post)=>{
-            if (filtersTemp.includes(post.type)===false) filtersTemp.push(post.type);
-        })
+        
         
             return (
                 <div className="filterPostWrapper">
                     <h5>Filter by type</h5>
                     <div className="filerPostTag">
-                    {filtersTemp.map((filter)=>{
+                    {this.state.originalFilters.map((filter)=>{
                         return <FilterTag key={filter} filter={filter} isActive={this.state.filters.includes(filter)? "active": ""} toggleSelection={this.toggleSelection}/>
                     })}
                     </div>
