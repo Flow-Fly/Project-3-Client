@@ -13,6 +13,8 @@ import { withMessenger } from "./MessengerCtx/withMessenger";
 const NavMain = (props) => {
   const { context } = props;
 
+  if(!context.isLoggedIn) return <></>
+
   function handleLogout() {
 
     apiHandler
@@ -47,7 +49,7 @@ const NavMain = (props) => {
               </li>
             </React.Fragment>
           )}
-          {/* {!context.isLoggedIn && (
+          {!context.isLoggedIn && (
             <React.Fragment>
               <li>
                 <NavLink to="/signin">Log in</NavLink>
@@ -56,7 +58,7 @@ const NavMain = (props) => {
                 <NavLink to="/signup">Create account</NavLink>
               </li>
             </React.Fragment>
-          )} */}
+          )}
         </ul>
       </div>
     </nav>

@@ -76,16 +76,18 @@
   
   .form-close:before, .form-close:after {
     position: absolute;
-    left: .65rem;
+    left: .7rem;
     top: .2rem;
     content: ' ';
     height: 1.1rem;
     width: 2px;
     background-color: white;
   }
+
   .form-close:before {
     transform: rotate(45deg);
   }
+  
   .form-close:after {
     transform: rotate(-45deg);
   }
