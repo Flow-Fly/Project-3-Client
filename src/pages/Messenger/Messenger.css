@@ -3,8 +3,12 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    width: 100%;
-    height: calc(100vh - 70px);
+    min-width: 600px;
+    height: calc(100vh - 70px - 2rem);
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .roomsList {

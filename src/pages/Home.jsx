@@ -204,6 +204,8 @@ class Home extends React.Component {
       //rendered if you are logged in
       return (
         <div className="homePageBody">
+
+          
           <div className="homePageBody-wrapper">
               {this.state.displayMessenger && <Messenger/>}
               <span 
