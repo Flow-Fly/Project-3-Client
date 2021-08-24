@@ -12,8 +12,8 @@
 .jobForm-container {
   /* border: 1px solid var(--mainLightBlueColor); */
   position: sticky;
+  top: calc(70px + 1rem);
   padding: 0.3rem;
-  margin-top: 0.1rem;
   max-width: 400px;
   border-radius: 0.4rem;
   display: flex;
