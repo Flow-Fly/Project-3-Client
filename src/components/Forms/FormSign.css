@@ -57,3 +57,38 @@
 .form button{
     margin: 0.8rem 1.2rem;
 }
+
+.form-close{
+    position: absolute;
+    top: 2.5rem;
+    right: .5rem;
+    background-color: #00B4FF;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 4px;
+    transition: background .35s ease;
+  }
+  
+  .form-close:hover{
+    cursor: pointer;
+    background-color: var(--mainLightBlueColorHover);
+  }
+  
+  .form-close:before, .form-close:after {
+    position: absolute;
+    left: .7rem;
+    top: .2rem;
+    content: ' ';
+    height: 1.1rem;
+    width: 2px;
+    background-color: white;
+  }
+
+  .form-close:before {
+    transform: rotate(45deg);
+  }
+  
+  .form-close:after {
+    transform: rotate(-45deg);
+  }
+  

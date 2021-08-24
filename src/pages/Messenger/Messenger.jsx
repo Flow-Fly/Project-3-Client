@@ -151,20 +151,24 @@ class Messenger extends Component {
     render() {
         return (
             <div className="messenger">
+                <span className="messenger-close" onClick={this.props.onClick}></span>
+                <div className="addFriend">
+                    <input className="addFriendInput"
+                        type="text" 
+                        placeholder='Find a friend with email'
+                        onKeyDown={this.addFriend} 
+                        onChange={e => this.setState({newFriend: e.target.value})} 
+                        value={this.state.newFriend}
+                        onFocus={e => e.target.placeholder = ''}
+                        onBlur={e => e.target.placeholder = 'Find a friend with email'}
+                        />
+
+                        <span className='errorMsg'>
+                            {this.state.addingFriendError}
+                        </span> 
+                        {/* Would be nice to have a fadeIn/fadeOut animation */}
+                </div>
                 <div className="roomsList">
-                        <div className="addFriend">
-                            <input className="addFriendInput"
-                                type="text" 
-                                placeholder='Find a friend with email'
-                                onKeyDown={this.addFriend} 
-                                onChange={e => this.setState({newFriend: e.target.value})} 
-                                value={this.state.newFriend}
-                                onFocus={e => e.target.placeholder = ''}
-                                onBlur={e => e.target.placeholder = 'Find a friend with email'}
-                                />
-                             <span className='errorMsg'>{this.state.addingFriendError}</span> 
-                             {/* Would be nice to have a fadeIn/fadeOut animation */}
-                        </div>
                         {this.props.messengerContext.rooms.map((room, index) => {
                             return (
                                 <div key={index} onClick={() => this.openRoom(room)}>

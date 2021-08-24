@@ -4,7 +4,6 @@ import Feed from '../components/Feed/Feed';
 import FormArticle from '../components/FormArticle/FormArticle';
 import FormJob from '../components/FormJob/FormJob';
 import KUTE from 'kute.js';
-import ProtectedRoute from '../components/ProtectedRoute';
 import { withUser } from '../components/Auth/withUser';
 import '../styles/Home.css';
 import logo from '../Images/logo.png';
@@ -16,6 +15,9 @@ import '../styles/messengerIcon.css';
 import Messenger from './Messenger/Messenger';
 //test
 import FIlterPost from '../components/FIlterPost/FIlterPost';
+import Button from '../components/Base/Button/Button';
+import FormSignin from '../components/Forms/FormSignin';
+import FormSignup from '../components/Forms/FormSignup';
 
 class Home extends React.Component {
   state = {
@@ -32,6 +34,7 @@ class Home extends React.Component {
     postFormAction: 'create',
 
     displayMessenger: false,
+    displayInblob: null
   };
 
   ////////job related////////////
@@ -201,8 +204,6 @@ class Home extends React.Component {
       return (
         <div className="homePageBody-wrapper">
             <div className="messenger-wrapper">
-              {this.state.displayMessenger && <Messenger />}
-              
               <span
                 className="messengerIcon"
                 onClick={() =>
@@ -242,6 +243,12 @@ class Home extends React.Component {
 
             {/* Right Side */}
             <div className="homeRightSide">
+              {this.state.displayMessenger && 
+              <Messenger onClick={() =>
+                this.setState({
+                  displayMessenger: !this.state.displayMessenger,
+                })}
+              />}
               {this.state.showJobForm === true && (
                 <FormJob
                   closeJobForm={this.closeJobForm}
@@ -295,14 +302,13 @@ class Home extends React.Component {
             </svg>
 
             <div className="homeFloating">
-              <img alt="logoFloating" src={logo}></img>
+              {this.state.displayInblob === 'login' ? <FormSignin resetDisplayBlob={() => this.setState({displayInblob: null})}/> :
+                this.state.displayInblob === 'signup' ? <FormSignup resetDisplayBlob={() => this.setState({displayInblob: null})}/> : 
+                  <img alt="logoFloating" src={logo}></img>
+              }
               <div className="floatingButtons">
-                <Link to="/signin" className="LinkButton">
-                  Log in
-                </Link>
-                <Link to="/signup" className="LinkButton">
-                  Sign up
-                </Link>
+                <Button onClick={() => this.setState({displayInblob: 'login'})}>Log in</Button>
+                <Button onClick={() => this.setState({displayInblob: 'signup'})}>Sign up</Button>
               </div>
             </div>
           </section>

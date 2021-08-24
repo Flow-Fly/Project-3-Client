@@ -10,15 +10,16 @@
   --sidesOfFloat: 15rem;
 }
 
-.homePageBody {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  column-gap: 1rem;
-}
 
 .homePageBody-wrapper {
   position: relative;
   width: 100%;
+}
+
+.messenger-wrapper{
+  position: fixed;
+  width: 100%;
+  height: calc(99vh - 70px - 1rem);
 }
 
 #mainBlobSection {

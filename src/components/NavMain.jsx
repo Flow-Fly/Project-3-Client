@@ -13,6 +13,8 @@ import { withMessenger } from "./MessengerCtx/withMessenger";
 const NavMain = (props) => {
   const { context } = props;
 
+  if(!context.isLoggedIn) return <></>
+
   function handleLogout() {
 
     apiHandler
