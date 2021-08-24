@@ -14,7 +14,7 @@
   flex-direction: column;
   position: relative;
   /* For testing */
-
+  scroll-behavior: none;
   /* width: 100%; */
   background: #f1f1f1;
   border-radius: 0.4rem;
@@ -24,11 +24,8 @@
 }
 
 .feedTabs {
-  width: 100%;
   display: flex;
   justify-content: space-around;
-  overflow: hidden;
-  position: relative;
 }
 
 .feedContentWrapper {
