@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
-import apiHandler from '../../api/apiHandler'
-import  "./FIlterPost.css"
-import FilterTag from '../Base/FilterTag/FilterTag'
+import React, { Component } from 'react';
+// import apiHandler from '../../api/apiHandler'
+import './FIlterPost.css';
+import FilterTag from '../Base/FilterTag/FilterTag';
 
 export class FIlterPost extends Component {
-    state={
-        filters:[],
-    }
+  state = {
+    filters: [],
+  };
 
 
     toggleSelection = (filter)=>{
@@ -46,4 +46,4 @@ export class FIlterPost extends Component {
     }
 }
 
-export default FIlterPost
+export default FIlterPost;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import FeedJobCard from '../Job/FeedJobCard';
-import Button from '../Base/Button/Button';
 import './FeedJobContent.css';
 import FormJob from '../FormJob/FormJob';
 import '../FormJob/FormJob.css';
@@ -32,9 +31,9 @@ export class FeedJobContent extends Component {
     return (
       <div className="FeedJobContent">
         <div className="button-create-job-wrapper">
-          <Button className="button-create-job" onClick={this.showJobForm}>
+          <button className="button-create-job" onClick={this.showJobForm}>
             Share a job
-          </Button>
+          </button>
         </div>
 
         {this.state.showJobForm && (
