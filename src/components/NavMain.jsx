@@ -13,16 +13,6 @@ import { withMessenger } from "./MessengerCtx/withMessenger";
 const NavMain = (props) => {
   const { context } = props;
 
-  const notifications = () => {
-    const id = props.context.user._id
-    const notifications = 
-      props.messengerContext.rooms
-        .filter(room => room.notifications?.includes(id))
-        .length
-    
-    return notifications
-  }
-
   function handleLogout() {
 
     apiHandler

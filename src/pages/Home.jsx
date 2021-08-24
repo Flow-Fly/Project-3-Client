@@ -10,8 +10,12 @@ import { withUser } from '../components/Auth/withUser';
 import '../styles/Home.css';
 import Avatar from '../components/Base/Avatar/Avatar';
 import logo from '../Images/logo.png';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import apiHandler from '../api/apiHandler';
+import { withMessenger } from "../components/MessengerCtx/withMessenger";
+import messengerIcon from '../Images/messenger.png'
+import '../styles/messengerIcon.css'
+import Messenger from './Messenger/Messenger';
 
 
 class Home extends React.Component {
@@ -26,6 +30,8 @@ class Home extends React.Component {
     posts: [],
     showAddPostForm: false,
     postFormAction: 'create',
+
+    displayMessenger: false
   };
 
   ////////job related////////////
@@ -177,6 +183,17 @@ class Home extends React.Component {
     }
   }
 
+
+  notifications = () => {
+    const id = this.props.context.user._id
+    const notifications = 
+      this.props.messengerContext.rooms
+        .filter(room => room.notifications?.includes(id))
+        .length
+    
+    return notifications
+  }
+
   render() {
     if (this.props.context.isLoading) {
       return null;
@@ -184,6 +201,16 @@ class Home extends React.Component {
       //rendered if you are logged in
       return (
         <div className="homePageBody">
+          <div className="homePageBody-wrapper">
+              {this.state.displayMessenger && <Messenger/>}
+              <span 
+                className="messengerIcon"
+                onClick={() => this.setState({displayMessenger: !this.state.displayMessenger})}
+              >
+                  <img src={messengerIcon} alt="Messenger Icon" />
+                  {(this.notifications() > 0) ? <span className="notifications">{this.notifications()}</span> : ''}
+            </span>
+          </div>
           <SideProfile />
           <Feed
             jobs={this.state.jobs}
@@ -267,4 +294,4 @@ class Home extends React.Component {
   }
 }
 
-export default withUser(Home);
+export default withUser(withMessenger(Home));

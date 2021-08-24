@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import '../Job/JobDetailsCard.css';
 
 // only a part of job details
 export class JobDetailsCard extends Component {
   render() {
     return (
-      <div>
-        <ul key={this.props.job._id}>
-          <li>Description: {this.props.job.description}</li>
-          <li>Technologies: {this.props.job.technologies}</li>
-          <li>Remote: {this.props.job.remote}</li>
-          <li>Job link: {this.props.job.link}</li>
-        </ul>
+      <>
+        <li>
+          <span className="bold">Technologies: </span>
+          {this.props.job.technologies}
+        </li>
+        <li>
+          <span className="bold">Description: </span>
+          {this.props.job.description}
+        </li>
+
+        <li>
+          <span className="bold">Job link: </span>
+          <a className="link" href={this.props.job.link}>
+            {this.props.job.link}
+          </a>
+        </li>
 
         {
-          <p
-            onClick={this.props.onClose}
-            style={{ textAlign: 'center', fontSize: '0.6em' }}
-          >
-            Close
+          <p onClick={this.props.onClose}>
+            <span className="flash"> ˄ </span>
           </p>
         }
-      </div>
+      </>
     );
   }
 }

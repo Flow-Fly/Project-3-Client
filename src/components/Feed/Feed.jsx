@@ -87,6 +87,7 @@ export class Feed extends Component {
                 showJobForm={this.props.showJobForm}
                 handleJobDelete={this.props.handleJobDelete}
                 handleEditStart={this.props.handleEditStart}
+                clickOnProfile={this.clickOnProfile}
               />
             )}
           </div>
