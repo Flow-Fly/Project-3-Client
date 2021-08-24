@@ -15,63 +15,7 @@
     grid-template-columns: 1fr 2fr 1fr;
     column-gap: 1rem;
 }
-/* ----------- Non-Retina Screens ----------- */
-@media screen 
-  and (min-device-width: 1600px) 
-  and (-webkit-min-device-pixel-ratio: 1) { 
-    .homePageBody{
-      width:1200px
-    }
-}
 
-@media screen 
-  and (min-device-width: 1200px) 
-  and (max-device-width: 1600px) 
-  and (-webkit-min-device-pixel-ratio: 1) { 
-    .homePageBody{
-      width:1200px
-    }
-}
-
-@media screen 
-  and (min-device-width: 900px) 
-  and (max-device-width: 1199px) 
-  and (-webkit-min-device-pixel-ratio: 1) { 
-    .homePageBody{
-      width:900px
-    }
-}
-
-
-/* ----------- Retina Screens ----------- */
-
-@media screen 
-  and (min-device-width: 1600px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (min-resolution: 192dpi) { 
-    .homePageBody{
-      width:1200px
-    }
-}
-@media screen 
-  and (min-device-width: 1200px) 
-  and (max-device-width: 1600px) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (min-resolution: 192dpi) { 
-    .homePageBody{
-      width:1200px
-    }
-}
-
-@media screen 
-  and (min-device-width: 900px) 
-  and (max-device-width: 1199PX) 
-  and (-webkit-min-device-pixel-ratio: 2)
-  and (min-resolution: 192dpi) { 
-    .homePageBody{
-      width:900PX
-    }
-}
 #mainBlobSection {
   display: flex;
   justify-content: center;
