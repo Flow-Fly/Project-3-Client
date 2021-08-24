@@ -27,7 +27,7 @@ function FeedPostCard(props) {
         <div className={"FeedPostCard "+post.type.replaceAll(' ',"")}>
             <div className="postCardPublish">
                 <div className="publishInfos">
-                <Avatar url={userImage} size='tiny' />Published by: {firstName + " " + lastName} at {createdAt}
+                <Avatar url={userImage} size='tiny' id={postUserID} clickOnProfile={props.clickOnProfile} />Published by: {firstName + " " + lastName} at {createdAt}
                 </div>
                 {ownPost===true && <div className="publishLinks">
                 <a onClick={editCard} href="#">Edit</a>
