@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, HashRouter } from "react-router-dom";
 import NavMain from "./components/NavMain";
 import Home from "./pages/Home";
 import Signin from "./pages/Signin";
@@ -21,7 +21,13 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/signup" component={Signup} />
+            <Route exact path='/job'>
+              <HashRouter>
+                <Route path='/' component={(props) => <Home {...props} toJob={true} />} /> 
+              </HashRouter>
+            </Route>
             <ProtectedRoute exact path="/profile" component={Profile} />
+            
             {/* <ProtectedRoute exact path="/messenger" component={Messenger} /> */}
             <ProtectedRoute exact path="/edit" component={FormEditProfile} />
           </div>

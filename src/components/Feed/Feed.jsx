@@ -35,11 +35,22 @@ export class Feed extends Component {
     });
   };
 
+  componentDidMount() {
+    if (this.props.toJob) {
+      this.setState(
+        {
+          toggledTab: 'jobs',
+        }
+      );
+    }
+  }
+
   toggleTab = (event) => {
     this.setState({ toggledTab: event.target.id });
   };
 
   render() {
+    console.log('Feed log: ', this.state);
     let filteredPosts = null;
     let filteredJobs = null;
 
@@ -107,6 +118,8 @@ export class Feed extends Component {
                 handleJobDelete={this.props.handleJobDelete}
                 handleEditStart={this.props.handleEditStart}
                 clickOnProfile={this.clickOnProfile}
+                searchingJob={this.props.toJob}
+                
               />
             )}
           </div>

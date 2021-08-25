@@ -57,7 +57,7 @@ class FeedJobCard extends Component {
     }
 
     return (
-      <div className="FeedJobCard">
+      <div className="FeedJobCard" id={jobId}>
         <div className="flex-wrapper">
           <Avatar
             url={userImage}
@@ -88,7 +88,9 @@ class FeedJobCard extends Component {
             </div>
           )}
         </div>
-        <h6 className="job-title">{this.props.job.title}</h6>
+        <a href={'/job#' + jobId}>
+          <h6 className="job-title">{this.props.job.title}</h6>
+        </a>
         <ul className="job-wrapper" key={jobId}>
           <li>
             <span className="bold">{this.props.job.company}</span>

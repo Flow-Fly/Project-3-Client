@@ -10,7 +10,11 @@ export class FeedJobContent extends Component {
     showJobDetails: {},
   };
 
-  // componentDidMount() {}
+  componentDidMount() {
+    if(this.props.searchingJob) {
+      //TODO
+    }
+  }
 
   //toggle job form
   showJobForm = (event) => {

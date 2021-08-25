@@ -230,6 +230,9 @@ class Home extends React.Component {
   };
 
   render() {
+    console.log(this.props.location.pathname)
+    console.log(this.props.toJob)
+    //console.log(window.location.hash)
     if (this.props.context.isLoading) {
       return null;
     } else if (this.props.context.isLoggedIn) {
@@ -271,6 +274,7 @@ class Home extends React.Component {
             </div>
 
             {/* Middle=FEED */}
+            
             <Feed
               jobs={this.state.jobs}
               // loadJobs={this.loadJobs}
@@ -281,6 +285,8 @@ class Home extends React.Component {
               handleJobDelete={this.handleJobDelete}
               handleEditStart={this.handleEditStart}
               onPostDeleted={this.handlePostDelete}
+              toJob={this.props.toJob}
+              path={this.props.location.pathname}
             ></Feed>
 
             {/* Right Side */}

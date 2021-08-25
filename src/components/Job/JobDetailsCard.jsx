@@ -18,7 +18,7 @@ export class JobDetailsCard extends Component {
         <li>
           <span className="bold">Job link: </span>
           <a className="link" href={this.props.job.link}>
-            {this.props.job.link}
+            Click here
           </a>
         </li>
 
