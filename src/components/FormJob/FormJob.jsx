@@ -55,7 +55,7 @@ export class FormJob extends Component {
 
   //handle input change on the form
   handleChange = (event) => {
-    console.log(event);
+    // console.log(event);
     let key = event.target.name;
     let value =
       event.target.type === 'file'
@@ -63,7 +63,7 @@ export class FormJob extends Component {
         : event.target.type === 'checkbox'
         ? event.target.checked
         : event.target.value;
-    console.log(key, value);
+    // console.log(key, value);
     this.setState({
       [key]: value,
     });
@@ -72,13 +72,13 @@ export class FormJob extends Component {
   //handle form data submit
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('handleSubmit', this.state.title);
+    // console.log('handleSubmit', this.state.title);
 
     if (this.props.job) {
       apiHandler
         .updateJob(this.props.job._id, this.state)
         .then((data) => {
-          console.log('Editd', data);
+          // console.log('Editd', data);
           //called apihandler here => job already updated
           this.props.onJobUpdated(data);
         })
@@ -104,14 +104,17 @@ export class FormJob extends Component {
 
   //techno tags
   technoLogiesPressed = (event) => {
-    let str = this.state.currentTechnology.replaceAll(' ', '');
-    if (event.key === 'Enter' && str !== '') {
-      let technologiesTemp = [...this.state.technologies];
-      technologiesTemp.push(event.target.value);
-      this.setState({
-        technologies: technologiesTemp,
-        currentTechnology: '',
-      });
+    if (this.state.currentTechnology) {
+      let str = this.state.currentTechnology.replaceAll(' ', '');
+      if (event.key === 'Enter' && str !== '') {
+        let technologiesTemp = [...this.state.technologies];
+        technologiesTemp.push(event.target.value);
+        this.setState({
+          technologies: technologiesTemp,
+          currentTechnology: '',
+        });
+        event.preventDefault();
+      }
     }
   };
 
@@ -143,6 +146,20 @@ export class FormJob extends Component {
               onChange={this.handleChange}
               type="text"
               placeholder="Title of your Job..."
+            />
+          </FormGroup>
+          <FormGroup className="form-group">
+            <Label className="label" htmlFor="company">
+              Company
+            </Label>
+            <Input
+              className="input"
+              id="company"
+              name="company"
+              value={this.state.company}
+              onChange={this.handleChange}
+              type="text"
+              placeholder="Company name"
             />
           </FormGroup>
           <FormGroup className="form-group">
