@@ -1,10 +1,14 @@
-import React from 'react';
+
 import './FeedPostCard.css';
 import Avatar from '../Base/Avatar/Avatar';
 import { Link } from 'react-router-dom'
+import apiHandler from "../../api/apiHandler"
+import React, { useState } from 'react';
 
 function FeedPostCard(props) {
   let post = props.post;
+  //let favourited =post.creator.favouritePosts.includes(post._id);
+  const [favouritedState, setFavourite] = useState(post.creator.favouritePosts.includes(post._id));
   let userID = props.userID;
   let postId = post._id;
   let postUserID = post.creator ? post.creator._id : '';
@@ -31,11 +35,22 @@ function FeedPostCard(props) {
   function editCard() {
     props.showForm('edit', post);
   }
-
   function deleteCard() {
     props.onPostDeleted(postId);
   }
+  function addToFavourites() {
+    apiHandler.addFavouritePost(postId)
+      .then((dbRes)=>setFavourite(true))
+      .catch((error)=>{console.log(error)})
+  }
+  function removeFromFavourites() {
+    apiHandler.deleteFavouritePost(postId)
+      .then((dbRes)=>{setFavourite(false);})
+      .catch((error)=>{console.log(error)})
+    
+  }
 
+  
   return (
     <div className={'FeedPostCard ' + post.type.replaceAll(' ', '')}>
       <div className="postCardPublish">
@@ -45,8 +60,9 @@ function FeedPostCard(props) {
           </div>
           Published by: {firstName + ' ' + lastName} at {createdAt}
         </div>
+        <div className="publishLinks">
         {ownPost === true && (
-          <div className="publishLinks">
+          <div >
             <a onClick={editCard} href="#">
               Edit
             </a>
@@ -55,6 +71,20 @@ function FeedPostCard(props) {
             </a>
           </div>
         )}
+        {
+          favouritedState === false ?(
+            <a onClick={addToFavourites} href="#">
+              Add to favourite
+            </a>
+          ) :
+          (
+            <a onClick={removeFromFavourites} href="#">
+              Remove from Favourites
+            </a>
+          )
+        }
+        </div>
+
       </div>
       {post.title !== null && post.title !== undefined && post.title !== '' ? (
         <Link to={`/post/#${postId}`}><div className="postCardTitle">{post.title}</div></Link>

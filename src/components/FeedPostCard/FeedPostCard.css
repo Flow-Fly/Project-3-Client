@@ -66,3 +66,7 @@
 .wrapper-avatar {
   margin: 0.2rem 0.7rem;
 }
+
+.publishLinks{
+  display: flex;
+}
