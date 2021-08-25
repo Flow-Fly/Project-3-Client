@@ -25,7 +25,7 @@ class FormSignin extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     
-    this.props.resetDisplayBlob()
+    //this.props.resetDisplayBlob()
     
     apiHandler
       .signin(this.state)
