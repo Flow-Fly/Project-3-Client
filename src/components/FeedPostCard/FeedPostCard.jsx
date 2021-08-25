@@ -4,6 +4,7 @@ import Avatar from '../Base/Avatar/Avatar';
 import { Link } from 'react-router-dom'
 
 function FeedPostCard(props) {
+  console.log('IN CARD: ', props)
   let post = props.post;
   let userID = props.userID;
   let postId = post._id;
@@ -35,7 +36,7 @@ function FeedPostCard(props) {
   function deleteCard() {
     props.onPostDeleted(postId);
   }
-
+  console.log(post)
   return (
     <div className={'FeedPostCard ' + post.type.replaceAll(' ', '')}>
       <div className="postCardPublish">

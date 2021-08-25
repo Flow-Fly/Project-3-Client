@@ -110,6 +110,8 @@ export class Feed extends Component {
                 showPostForm={this.props.showPostForm}
                 onPostDeleted={this.props.onPostDeleted}
                 clickOnProfile={this.clickOnProfile}
+                path={this.props.path}
+                searchingPost={this.props.toPost}
               />
             ) : (
               <FeedJobContent
@@ -120,7 +122,8 @@ export class Feed extends Component {
                 handleEditStart={this.props.handleEditStart}
                 clickOnProfile={this.clickOnProfile}
                 searchingJob={this.props.toJob}
-                
+                path={this.props.path}
+
               />
             )}
           </div>

@@ -238,9 +238,9 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log(this.props.location)
-    console.log(this.props.toJob)
-    //console.log(window.location.hash)
+    // console.log(this.props.location)
+    // console.log(this.props.toJob)
+    // console.log(window.location.hash)
     if (this.props.context.isLoading) {
       return null;
     } else if (this.props.context.isLoggedIn) {
@@ -294,6 +294,7 @@ class Home extends React.Component {
               handleEditStart={this.handleEditStart}
               onPostDeleted={this.handlePostDelete}
               toJob={this.props.toJob}
+              toPost={this.props.toPost}
               path={this.props.location.hash}
             ></Feed>
 
