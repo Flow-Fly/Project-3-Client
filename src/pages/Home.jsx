@@ -18,7 +18,7 @@ import Button from '../components/Base/Button/Button';
 import FormSignin from '../components/Forms/FormSignin';
 import FormSignup from '../components/Forms/FormSignup';
 import FilterJobs from '../components/FilterJobs/FilterJobs';
-import FilterPost from '../components/FilterPost/FIlterPost';
+import FilterPost from "../components/FilterPost/FilterPost"
 
 class Home extends React.Component {
   state = {
