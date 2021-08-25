@@ -21,6 +21,7 @@ class MessengerProvider extends Component {
         this.setCurrentRoom = this.setCurrentRoom.bind(this)
         this.openRoom = this.openRoom.bind(this)
         this.setMessage = this.setMessage.bind(this)
+        this.loadMessages = this.loadMessages.bind(this)
     }
 
     async componentDidMount(){ 
@@ -154,7 +155,7 @@ class MessengerProvider extends Component {
     async openRoom(room){
         try{
             //getMessages(roomId, firstMessageIndex, depth)
-            const messages = await apiHandler.getMessages(room._id, 0, 100)
+            const messages = await apiHandler.getMessages(room._id, 0, 30)
     
             await apiHandler.deleteNotifications(room._id, this.props.context.user._id)
             this.deleteNotifications(room._id)
@@ -181,6 +182,17 @@ class MessengerProvider extends Component {
             console.error(err)
         }
     }
+
+    async loadMessages(callback){
+        const olderMessages = await apiHandler.getMessages(this.state.currentRoom._id, this.state.messages.length - 1, 30)
+        console.log('PROVIDER LOAD')
+
+        if(!olderMessages.length) return 'done'
+        
+        this.setState({
+            messages: [...olderMessages, ...this.state.messages]
+        }, () => callback()) 
+    }
     
     render() {
         const messengerValues = {
@@ -194,7 +206,8 @@ class MessengerProvider extends Component {
             setCurrentRoom: this.setCurrentRoom,
             openRoom: this.openRoom,
             messages: this.state.messages,
-            setMessage: this.setMessage
+            setMessage: this.setMessage,
+            loadMessages: this.loadMessages
         }
 
         return (

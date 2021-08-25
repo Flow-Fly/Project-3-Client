@@ -6,6 +6,7 @@ import { withUser } from '../../components/Auth/withUser'
 import { withMessenger } from '../../components/MessengerCtx/withMessenger'
 import './Messenger.css'
 import Button from '../../components/Base/Button/Button'
+import { Hint } from 'react-autocomplete-hint';
 
 class Messenger extends Component {
 
@@ -18,42 +19,59 @@ class Messenger extends Component {
             writtingMessage : '',
             socket: null,
             newFriend: '',
-            addingFriendError: null
+            addingFriendError: null,
+            suggestedEmails: []
         }
         
         this.scrollChatRef = React.createRef()
+        this.textAreaRef = React.createRef()
 
-        this.messagesLoaded = false
         this.timeout= null
         this.user = this.props.context.user
-        
+        this.isLoading = false
+    
         this.openRoom = this.openRoom.bind(this)
         this.submitMessage = this.submitMessage.bind(this)
         this.addFriend = this.addFriend.bind(this)
         this.loadMessages = this.loadMessages.bind(this)
-        this._Mounted = true;
     }
 
-    // async componentDidMount(){
+    async componentDidMount(){
+        try{
+            const emails = await apiHandler.getUsersEmail()
+            this.setState({suggestedEmails: emails.map(email => email.email)})
             
-    // }
+        }
+        catch(err){
+            console.error(err)
+        }
+    }
 
     componentDidUpdate(prevProps, prevState){
+        console.log(this.isLoading )
         if(!this.props.messengerContext.currentRoom) return 
-        
-        if(this.messagesLoaded) return
-     
-        return this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
+
+        if(this.isLoading) return
+        console.log(this.isLoading, 'ISLOADING')
+       this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
     }
 
     componentWillUnmount(){
         //this.props.messengerContext.socket.off('receive')
         this.props.messengerContext.setCurrentRoom(null)
-        clearTimeout(this.timeout) 
+        if(this.timeout) clearTimeout(this.timeout) 
+        if(this.isLoadingTimeout) clearTimeout(this.isLoadingTimeout)
     }
 
-    openRoom(room){
-        this.props.messengerContext.openRoom(room)
+    async openRoom(room){
+        console.log('OPEN ROOM')
+        this.isLoading = false
+        try{
+            await this.props.messengerContext.openRoom(room)
+        }
+        catch(err){
+            console.error(err)
+        }
     }
 
     async submitMessage(e){  
@@ -67,20 +85,18 @@ class Messenger extends Component {
             senderId: this.user._id,
             senderImg : this.user.profileImg,
             receiverId:receiver._id,
-            content: this.state.writtingMessage
+            content: this.textAreaRef.current.value
         })
 
         const message = {
             room: this.props.messengerContext.currentRoom,
             sender : this.user._id,
-            content: this.state.writtingMessage
+            content: this.textAreaRef.current.value
         }
 
         this.props.messengerContext.setMessage(message)
 
-        this.setState({
-            writtingMessage:''
-        }) 
+        this.textAreaRef.current.value = ''
 
     }
 
@@ -90,10 +106,12 @@ class Messenger extends Component {
 
     addFriend = async e => {
         if(e.key !== 'Enter') return 
+        let newFriend = null
 
         try{
-            const newFriend = await apiHandler.getUserByMail(this.state.newFriend)
-
+            console.log(this.state.newFriend)
+            newFriend = await apiHandler.getUserByMail(this.state.newFriend)
+            console.log(newFriend)
             if(!newFriend.length){
 
                 this.setState({
@@ -105,8 +123,14 @@ class Messenger extends Component {
                     this.setState({addingFriendError : ''})
                 }, 3000)
 
-            } 
- 
+            }
+         
+        }
+        catch(err){
+            console.error(err)
+        }
+
+        try{
             const room = await apiHandler.createRoom(this.user._id, newFriend[0]._id)
             
             if(room.message){
@@ -119,54 +143,68 @@ class Messenger extends Component {
                     this.setState({addingFriendError : ''})
                 }, 3000)
 
-                return this.props.messengerContext.openRoom(room.room[0])
+                 await this.props.messengerContext.openRoom(room.room[0])
+                 return
             }
             else{
                 this.setState({
                     newFriend: ''
                 })
                 this.props.messengerContext.setRooms(room)
-                return this.props.messengerContext.openRoom(room)
+                await this.props.messengerContext.openRoom(room)
+                return
             }
+        }
+        catch(err){
+            console.error(err)
+        }
+    }
+
+    async loadMessages(){
+       
+        if(this.scrollChatRef.current.scrollTop > (this.scrollChatRef.current.scrollHeight * .1) || this.isLoading || this.isLoading === 'done') return
+
+        this.isLoading = true
+       // this.isLoadingTimeout = setTimeout(() => this.isLoading = false, 500)
+
+        const scrolledFromBottom = this.scrollChatRef.current.scrollHeight - this.scrollChatRef.current.scrollTop
+
+        try{
+            const providerLoading = await this.props.messengerContext.loadMessages(() => this.isLoading = false)
+
+            if(providerLoading === 'done') return this.isLoading = 'done'
         }
         catch(err){
             console.log(err)
         }
-    }
 
-    async loadMessages(e){
-        return
-        // if(this.scrollChatRef.current.scrollTop > 100 || this.messagesLoaded) return
-
-        // this.messagesLoaded = true
-        // setTimeout(() => this.messagesLoaded = false, 1000)
-
-        // const olderMessages = await apiHandler.getMessages(this.state.currentRoom._id, this.state.messages.length - 1, 20)
-
-        // this.setState({
-        //     messages: [...olderMessages, ...this.state.messages]
-        // }, () => this.scrollChatRef.current.scrollTop = '-300px')
+        
+       this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight - scrolledFromBottom + 50
     }
 
     render() {
         return (
             <div className="messenger">
                 <span className="messenger-close" onClick={this.props.onClick}></span>
-                <div className="addFriend">
-                    <input className="addFriendInput"
-                        type="text" 
-                        placeholder='Find a friend with email'
-                        onKeyDown={this.addFriend} 
-                        onChange={e => this.setState({newFriend: e.target.value})} 
-                        value={this.state.newFriend}
-                        onFocus={e => e.target.placeholder = ''}
-                        onBlur={e => e.target.placeholder = 'Find a friend with email'}
-                        />
+                <div className="addFriend-wrapper">
+                    <div className="addFriend">
+                        <Hint options={this.state.suggestedEmails} allowTabFill style={{margin: 0, padding: 0}}>
+                            <input className="addFriendInput"
+                                type='text'
+                                placeholder='Find a friend with email'
+                                onKeyDown={this.addFriend} 
+                                onChange={e => this.setState({newFriend: e.target.value})} 
+                                value={this.state.newFriend}
+                                onFocus={e => e.target.placeholder = ''}
+                                onBlur={e => e.target.placeholder = 'Find a friend with email'}
+                            />
+                        </Hint>
 
-                        <span className='errorMsg'>
-                            {this.state.addingFriendError}
-                        </span> 
-                        {/* Would be nice to have a fadeIn/fadeOut animation */}
+                            <span className='errorMsg'>
+                                {this.state.addingFriendError}
+                            </span> 
+                            {/* Would be nice to have a fadeIn/fadeOut animation */}
+                    </div>
                 </div>
                 <div className="roomsList">
                         {this.props.messengerContext.rooms.map((room, index) => {
@@ -175,7 +213,8 @@ class Messenger extends Component {
                                     <Room 
                                         room={room} 
                                         me={this.user} 
-                                        connectedUsers={this.props.messengerContext.connectedUsers}/>
+                                        connectedUsers={this.props.messengerContext.connectedUsers}
+                                    />
                                 </div>
                             )
                         }) }
@@ -203,8 +242,8 @@ class Messenger extends Component {
                             placeholder="Write your message ..."
                             onFocus={e => e.target.placeholder = ''}
                             onBlur={e => e.target.placeholder = 'Write your message ...'}
-                            onChange={e => this.setState({writtingMessage: e.target.value})}
-                            value={this.state.writtingMessage}
+                            //onChange={e => this.setState({writtingMessage: e.target.value})}
+                            ref={this.textAreaRef}
                             ></textarea>
                         <Button className="ChatSendMessage" onClick={this.submitMessage}>Send</Button>
                     </div>
@@ -217,3 +256,5 @@ class Messenger extends Component {
 }
 
 export default withMessenger(withUser(Messenger))
+
+

@@ -60,6 +60,7 @@ const apiHandler = {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+  
   updateUser(data) {
     return service
       .patch('/api/users/me', data)
@@ -74,9 +75,16 @@ const apiHandler = {
       .catch(errorHandler);
   },
 
+  getUsersEmail() {
+    return service
+      .get('/api/users/emails')
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   getUserByMail(email) {
     return service
-      .get('/api/users/user?email=' + email)
+      .get('/api/users/user/email?email=' + email)
       .then((res) => res.data)
       .catch(errorHandler);
   },

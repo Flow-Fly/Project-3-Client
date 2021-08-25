@@ -247,7 +247,15 @@ class Home extends React.Component {
       //rendered if you are logged in
       return (
         <div className="homePageBody-wrapper">
-          <div className="messenger-wrapper">
+          <div 
+            className="messenger-wrapper"
+            tabIndex = "0"
+            style={{zIndex: this.state.displayMessenger ? 2 : 0, outline: 'none'}}
+            onClick={() => this.state.displayMessenger ? this.setState({displayMessenger: false}) : null}
+            onKeyDown={e => {
+              return (e.key === 'Escape') && this.state.displayMessenger ? this.setState({displayMessenger: false}) : null
+            }}
+          >
             <span
               className="messengerIcon"
               onClick={() =>
@@ -258,11 +266,18 @@ class Home extends React.Component {
             >
               <img src={messengerIcon} alt="Messenger Icon" />
               {this.notifications() > 0 ? (
-                <span className="notifications">{this.notifications()}</span>
-              ) : (
-                ''
-              )}
+                <span className="notifications">
+                  {this.notifications()}
+                </span>) : ''}
             </span>
+
+            {this.state.displayMessenger && (
+              <div onClick={e => e.stopPropagation()}>
+                <Messenger
+                  onClick={() => this.setState({displayMessenger: !this.state.displayMessenger})}
+                />
+              </div>
+            )}    
           </div>
 
           <div className="homePageBody">
@@ -300,15 +315,6 @@ class Home extends React.Component {
 
             {/* Right Side */}
             <div className="homeRightSide">
-              {this.state.displayMessenger && (
-                <Messenger
-                  onClick={() =>
-                    this.setState({
-                      displayMessenger: !this.state.displayMessenger,
-                    })
-                  }
-                />
-              )}
               {this.state.showJobForm === true && (
                 <FormJob
                   closeJobForm={this.closeJobForm}
