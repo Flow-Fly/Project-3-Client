@@ -14,7 +14,7 @@ import messengerIcon from '../Images/messenger.png';
 import '../styles/messengerIcon.css';
 import Messenger from './Messenger/Messenger';
 //test
-import FIlterPost from '../components/FilterPost/FilterPost';
+import FilterPost from '../components/FilterPost/FilterPost';
 import Button from '../components/Base/Button/Button';
 import FormSignin from '../components/Forms/FormSignin';
 import FormSignup from '../components/Forms/FormSignup';
@@ -258,7 +258,7 @@ class Home extends React.Component {
             {/* //Left SIDE */}
             <div className="sideDiv">
               <SideProfile />
-              <FIlterPost
+              <FilterPost
                 posts={this.state.posts}
                 filterPosts={this.handlePostFilter}
                 originalPosts={this.state.originalPosts}
