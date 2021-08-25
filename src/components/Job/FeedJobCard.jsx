@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './FeedJobCard.css';
 import JobDetailsCard from '../Job/JobDetailsCard';
 import Avatar from '../Base/Avatar/Avatar';
+import { Link } from 'react-router-dom';
 
 class FeedJobCard extends Component {
   state = {
@@ -88,9 +89,10 @@ class FeedJobCard extends Component {
             </div>
           )}
         </div>
-        <a href={'/job#' + jobId}>
+        <Link to={`/job/#${jobId}`}>
           <h6 className="job-title">{this.props.job.title}</h6>
-        </a>
+        </Link>
+
         <ul className="job-wrapper" key={jobId}>
           <li>
             <span className="bold">{this.props.job.company}</span>

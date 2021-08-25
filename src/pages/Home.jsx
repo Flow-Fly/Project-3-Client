@@ -238,7 +238,7 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log(this.props.location.pathname)
+    console.log(this.props.location)
     console.log(this.props.toJob)
     //console.log(window.location.hash)
     if (this.props.context.isLoading) {
@@ -294,7 +294,7 @@ class Home extends React.Component {
               handleEditStart={this.handleEditStart}
               onPostDeleted={this.handlePostDelete}
               toJob={this.props.toJob}
-              path={this.props.location.pathname}
+              path={this.props.location.hash}
             ></Feed>
 
             {/* Right Side */}
