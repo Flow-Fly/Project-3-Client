@@ -50,7 +50,6 @@ export class Feed extends Component {
   };
 
   render() {
-    console.log('Feed log: ', this.state);
     let filteredPosts = null;
     let filteredJobs = null;
 
@@ -65,8 +64,6 @@ export class Feed extends Component {
       );
       filteredPosts = filteredPosts.length === 0 ? null : filteredPosts;
       filteredJobs = filteredJobs.length === 0 ? null : filteredJobs;
-      console.log(filteredPosts);
-      console.log(filteredJobs);
     }
     return (
       <>

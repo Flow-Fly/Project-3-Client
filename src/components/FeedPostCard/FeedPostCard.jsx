@@ -6,7 +6,7 @@ import apiHandler from "../../api/apiHandler"
 import React, { useState } from 'react';
 
 function FeedPostCard(props) {
-  console.log('IN CARD: ', props)
+  const {color} = props
   let post = props.post;
   //let favourited =post.creator.favouritePosts.includes(post._id);
   const [favouritedState, setFavourite] = useState(post.creator.favouritePosts.includes(post._id));
@@ -48,12 +48,11 @@ function FeedPostCard(props) {
     apiHandler.deleteFavouritePost(postId)
       .then((dbRes)=>{setFavourite(false);})
       .catch((error)=>{console.log(error)})
-    
   }
 
   
   return (
-    <div className={'FeedPostCard ' + post.type.replaceAll(' ', '')}>
+    <div className={'FeedPostCard ' + post.type.replaceAll(' ', '')} style={color && {boxShadow: `0 0 .5em .25em ${color}`}}>
       <div className="postCardPublish">
         <div className="publishInfos">
           <div className="wrapper-avatar" onClick={props.clickOnProfile}>

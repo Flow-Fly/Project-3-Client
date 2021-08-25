@@ -14,18 +14,14 @@ export class FeedPostContent extends Component {
         const searchedPost = this.props.posts.filter(
           (e) => e._id.toString() === str
         );
-        let allPosts = this.props.posts.filter(e => e._id.toString() !== str)
+        let allPosts = this.props.posts.filter((e) => e._id.toString() !== str);
         this.setState({
           searchedPost: searchedPost[0],
           allPosts: allPosts,
         });
       }
     }
-    if (prevState !== this.state) {
-      console.log('coucou')
-    }
   }
-
 
   createNewButton = (event) => {
     event.preventDefault();
@@ -33,7 +29,7 @@ export class FeedPostContent extends Component {
   };
 
   render() {
-    if (this.props.posts === [])
+    if (this.state.allPosts === [])
       return (
         <div className="FeedPostContent">
           <h4>Loading</h4>
@@ -52,34 +48,39 @@ export class FeedPostContent extends Component {
             post={this.state.searchedPost}
             clickOnProfile={this.props.clickOnProfile}
             userID={this.props.context.user._id}
-          />,
-        
-        this.state.allPosts.map(post => {
-          return (
-            <FeedPostCard
-            showForm={this.props.showPostForm}
-            onPostDeleted={this.props.onPostDeleted}
-            refreshPost={this.props.loadPosts}
-            post={post}
-            clickOnProfile={this.props.clickOnProfile}
-            userID={this.props.context.user._id}
+            color='yellow'
           />
-          )
-        })
         )}
-        {this.props.posts.map((post) => {
-          return (
-            <FeedPostCard
-              key={post._id}
-              showForm={this.props.showPostForm}
-              onPostDeleted={this.props.onPostDeleted}
-              refreshPost={this.props.loadPosts}
-              post={post}
-              clickOnProfile={this.props.clickOnProfile}
-              userID={this.props.context.user._id}
-            />
-          );
-        })}
+
+        {this.props.searchingPost &&
+          this.state.searchedPost &&
+          this.state.allPosts.map((post) => {
+            return (
+              <FeedPostCard
+                showForm={this.props.showPostForm}
+                onPostDeleted={this.props.onPostDeleted}
+                refreshPost={this.props.loadPosts}
+                post={post}
+                clickOnProfile={this.props.clickOnProfile}
+                userID={this.props.context.user._id}
+              />
+            );
+          })}
+
+        {!this.state.allPosts &&
+          this.props.posts.map((post) => {
+            return (
+              <FeedPostCard
+                key={post._id}
+                showForm={this.props.showPostForm}
+                onPostDeleted={this.props.onPostDeleted}
+                refreshPost={this.props.loadPosts}
+                post={post}
+                clickOnProfile={this.props.clickOnProfile}
+                userID={this.props.context.user._id}
+              />
+            );
+          })}
       </div>
     );
   }
