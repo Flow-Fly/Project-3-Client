@@ -56,6 +56,7 @@ export class Feed extends Component {
 
     if (this.state.displayProfile) {
       let id = this.props.context.user._id;
+      console.log(this.props.posts)
       filteredPosts = this.props.posts.filter(
         (post) => post.creator._id.toString() === id.toString()
       );
