@@ -10,21 +10,20 @@
   --sidesOfFloat: 15rem;
 }
 
-
 .homePageBody-wrapper {
   position: relative;
   width: 100%;
 }
 
-.messenger-wrapper{
+.messenger-wrapper {
   position: fixed;
   width: 100%;
   height: calc(99vh - 70px - 1rem);
 }
 
-.homePageBody{
+/* .homePageBody {
   height: 100vh;
-}
+} */
 
 #mainBlobSection {
   display: grid;
@@ -47,25 +46,29 @@
   animation: float 20s ease-in-out infinite;
 }
 
-.floatingLogoSection{
+.floatingLogoSection {
   z-index: 100;
   height: var(--sidesOfFloat);
   width: var(--sidesOfFloat);
   display: flex;
   flex-direction: column;
   align-items: center;
-
 }
 
-svg{
-
+svg {
   grid-column: 1/2;
   grid-row: 1/2;
   transition: all 0.2s ease-in-out;
 }
-.landing{  transform: scale(1)}
-.login{  transform: scale(1.3)}
-.signup{  transform: scale(1.6)}
+.landing {
+  transform: scale(1);
+}
+.login {
+  transform: scale(1.3);
+}
+.signup {
+  transform: scale(1.6);
+}
 
 @keyframes float {
   0% {
@@ -128,4 +131,3 @@ svg{
   top: calc(70px + 1rem);
   height: max-content;
 }
-
