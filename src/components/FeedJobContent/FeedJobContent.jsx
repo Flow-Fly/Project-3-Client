@@ -5,6 +5,7 @@ import FormJob from '../FormJob/FormJob';
 import '../FormJob/FormJob.css';
 import { withUser } from '../Auth/withUser';
 
+
 export class FeedJobContent extends Component {
   state = {
     showJobDetails: {},

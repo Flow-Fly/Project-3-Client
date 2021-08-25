@@ -1,6 +1,7 @@
 import React from 'react';
 import './FeedPostCard.css';
 import Avatar from '../Base/Avatar/Avatar';
+import { Link } from 'react-router-dom'
 
 function FeedPostCard(props) {
   let post = props.post;
@@ -56,7 +57,7 @@ function FeedPostCard(props) {
         )}
       </div>
       {post.title !== null && post.title !== undefined && post.title !== '' ? (
-        <div className="postCardTitle">{post.title}</div>
+        <Link to={`/post/#${postId}`}><div className="postCardTitle">{post.title}</div></Link>
       ) : null}
       {post.content !== null &&
       post.content !== undefined &&
