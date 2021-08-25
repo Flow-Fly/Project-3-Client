@@ -13,7 +13,7 @@ function Message(props) {
     
     return (
         <div className={`messageComponent ${isMine() ? 'mine' : ''}`}>
-            
+                
             <div className={`messageContentWrapper ${isMine() ? 'mine' : ''}`}>
                 <Avatar size='tiny' url={isMine() ? props.context.user.profileImg : props.message.sender.profileImg}/>
                 <div className={`message ${isMine() ? 'mine' : ''}`}>
@@ -21,7 +21,7 @@ function Message(props) {
                         {props.message.content}
                     </div>
                     <div className="messageTimer">
-                        {format(props.message.createdAt)}
+                        {format(props.message.createdAt, 'round')}
                     </div>
                 </div>
             </div>

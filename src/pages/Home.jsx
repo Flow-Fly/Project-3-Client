@@ -14,11 +14,11 @@ import messengerIcon from '../Images/messenger.png';
 import '../styles/messengerIcon.css';
 import Messenger from './Messenger/Messenger';
 //test
-import FIlterPost from '../components/FilterPost/FilterPost';
 import Button from '../components/Base/Button/Button';
 import FormSignin from '../components/Forms/FormSignin';
 import FormSignup from '../components/Forms/FormSignup';
 import FilterJobs from '../components/FilterJobs/FilterJobs';
+import FilterPost from '../components/FIlterPost/FilterPost';
 
 class Home extends React.Component {
   state = {
@@ -236,7 +236,15 @@ class Home extends React.Component {
       //rendered if you are logged in
       return (
         <div className="homePageBody-wrapper">
-          <div className="messenger-wrapper">
+          <div 
+            className="messenger-wrapper"
+            tabIndex = "0"
+            style={{zIndex: this.state.displayMessenger ? 2 : 0, outline: 'none'}}
+            onClick={() => this.state.displayMessenger ? this.setState({displayMessenger: false}) : null}
+            onKeyDown={e => {
+              return (e.key === 'Escape') && this.state.displayMessenger ? this.setState({displayMessenger: false}) : null
+            }}
+          >
             <span
               className="messengerIcon"
               onClick={() =>
@@ -247,18 +255,25 @@ class Home extends React.Component {
             >
               <img src={messengerIcon} alt="Messenger Icon" />
               {this.notifications() > 0 ? (
-                <span className="notifications">{this.notifications()}</span>
-              ) : (
-                ''
-              )}
+                <span className="notifications">
+                  {this.notifications()}
+                </span>) : ''}
             </span>
+
+            {this.state.displayMessenger && (
+              <div onClick={e => e.stopPropagation()}>
+                <Messenger
+                  onClick={() => this.setState({displayMessenger: !this.state.displayMessenger})}
+                />
+              </div>
+            )}    
           </div>
 
           <div className="homePageBody">
             {/* //Left SIDE */}
             <div className="sideDiv">
               <SideProfile />
-              <FIlterPost
+              <FilterPost
                 posts={this.state.posts}
                 filterPosts={this.handlePostFilter}
                 originalPosts={this.state.originalPosts}
@@ -285,15 +300,6 @@ class Home extends React.Component {
 
             {/* Right Side */}
             <div className="homeRightSide">
-              {this.state.displayMessenger && (
-                <Messenger
-                  onClick={() =>
-                    this.setState({
-                      displayMessenger: !this.state.displayMessenger,
-                    })
-                  }
-                />
-              )}
               {this.state.showJobForm === true && (
                 <FormJob
                   closeJobForm={this.closeJobForm}

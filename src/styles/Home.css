@@ -20,6 +20,7 @@
   position: fixed;
   width: 100%;
   height: calc(99vh - 70px - 1rem);
+  z-index: 2;
 }
 
 #mainBlobSection {
