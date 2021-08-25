@@ -356,7 +356,7 @@ class Home extends React.Component {
     } else {
       //To be rendered if you are not logged in, hence this is landing page
       return (
-        <div className="homePageBody">
+        <div className="homePageBodyBlob">
           <section id="mainBlobSection">
             <svg
               className={
