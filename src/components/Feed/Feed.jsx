@@ -62,7 +62,6 @@ export class Feed extends Component {
   };
 
   render() {
-    console.log('Feed log: ', this.state);
     let filteredPosts = null;
     let filteredJobs = null;
 
@@ -77,8 +76,6 @@ export class Feed extends Component {
       );
       filteredPosts = filteredPosts.length === 0 ? null : filteredPosts;
       filteredJobs = filteredJobs.length === 0 ? null : filteredJobs;
-      console.log(filteredPosts);
-      console.log(filteredJobs);
     }
     return (
       <>
@@ -123,6 +120,8 @@ export class Feed extends Component {
                 onPostDeleted={this.props.onPostDeleted}
                 clickOnProfile={this.clickOnProfile}
                 user={this.state.currentUser}
+                path={this.props.path}
+                searchingPost={this.props.toPost}
               />
             ) : (
               <FeedJobContent
@@ -134,6 +133,8 @@ export class Feed extends Component {
                 clickOnProfile={this.clickOnProfile}
                 searchingJob={this.props.toJob}
                 user={this.state.currentUser}
+                path={this.props.path}
+
               />
             )}
           </div>

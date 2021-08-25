@@ -237,17 +237,29 @@ class Home extends React.Component {
     return notifications;
   };
 
+  redirectToSignin = () => {
+    this.setState({ displayInblob: 'login' })
+  }
+
   render() {
-    console.log(this.props.location)
-    console.log(this.props.toJob)
-    //console.log(window.location.hash)
+    // console.log(this.props.location)
+    // console.log(this.props.toJob)
+    // console.log(window.location.hash)
     if (this.props.context.isLoading) {
       return null;
     } else if (this.props.context.isLoggedIn) {
       //rendered if you are logged in
       return (
         <div className="homePageBody-wrapper">
-          <div className="messenger-wrapper">
+          <div 
+            className="messenger-wrapper"
+            tabIndex = "0"
+            style={{zIndex: this.state.displayMessenger ? 2 : 0, outline: 'none'}}
+            onClick={() => this.state.displayMessenger ? this.setState({displayMessenger: false}) : null}
+            onKeyDown={e => {
+              return (e.key === 'Escape') && this.state.displayMessenger ? this.setState({displayMessenger: false}) : null
+            }}
+          >
             <span
               className="messengerIcon"
               onClick={() =>
@@ -258,11 +270,18 @@ class Home extends React.Component {
             >
               <img src={messengerIcon} alt="Messenger Icon" />
               {this.notifications() > 0 ? (
-                <span className="notifications">{this.notifications()}</span>
-              ) : (
-                ''
-              )}
+                <span className="notifications">
+                  {this.notifications()}
+                </span>) : ''}
             </span>
+
+            {this.state.displayMessenger && (
+              <div onClick={e => e.stopPropagation()}>
+                <Messenger
+                  onClick={() => this.setState({displayMessenger: !this.state.displayMessenger})}
+                />
+              </div>
+            )}    
           </div>
 
           <div className="homePageBody">
@@ -294,20 +313,12 @@ class Home extends React.Component {
               handleEditStart={this.handleEditStart}
               onPostDeleted={this.handlePostDelete}
               toJob={this.props.toJob}
+              toPost={this.props.toPost}
               path={this.props.location.hash}
             ></Feed>
 
             {/* Right Side */}
             <div className="homeRightSide">
-              {this.state.displayMessenger && (
-                <Messenger
-                  onClick={() =>
-                    this.setState({
-                      displayMessenger: !this.state.displayMessenger,
-                    })
-                  }
-                />
-              )}
               {this.state.showJobForm === true && (
                 <FormJob
                   closeJobForm={this.closeJobForm}
@@ -375,7 +386,7 @@ class Home extends React.Component {
                   }
                 />
               ) : this.state.displayInblob === 'signup' ? (
-                <FormSignup
+                <FormSignup goToSignin={this.redirectToSignin}
                   resetDisplayBlob={() =>
                     this.setState({ displayInblob: null })
                   }

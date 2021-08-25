@@ -1,23 +1,24 @@
 .messenger{
-    position: sticky;
-    top: calc(70px + 1rem);
-    left: 0; 
+    position: fixed;
+    bottom: 4%;
+    right: 8%; 
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
     align-items: flex-start;
-    max-width: 700px;
-    min-width: 600px;
-    height: calc(100vh - 70px - 2rem);
+    width: 600px;
+    height: 60%;
     background-color: white;
     padding: 1rem 2rem; 
     border-radius: .5rem;
+    z-index: 10;
+    border: solid 1px #007cb1;
 }
 
 .roomsList {
   width: 40%;
   height: calc(100% - 2rem);
-  margin-top: 3rem;
+  margin-top: 4rem;
   overflow-y: auto;
 }
 
@@ -48,9 +49,9 @@
 }
 
 .chatBoxInput {
-  height: 13vh;
-  margin-bottom: 1rem;
-  margin-top: 2rem;
+  height: 20%vh;
+  margin-bottom: .5rem;
+  margin-top: 1rem;
   border: none;
   border-top: solid 1px #2d354c;
   resize: none;
@@ -90,11 +91,11 @@
 
 .chatBoxMessages {
   position: relative;
-  height: calc(100vh - 70px - 13vh);
+  height: calc(80vh - 70px - 13vh);
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(45, 53, 76, 0.7) rgba(45, 53, 76, 0.15);
-  scroll-behavior: smooth;
+  margin-right: .5rem;
 }
 
 .chatBoxMessages::-webkit-scrollbar {
@@ -111,13 +112,19 @@
   border: none;
 }
 
-.addFriend {
+.addFriend-wrapper{
+  /* top: 1rem;
+  left: 1rem; */
   position: absolute;
-  padding-bottom: 1rem;
+  width: 40%;
+}
+
+.addFriend {
+  justify-content: flex-start;
+  align-items: flex-end;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  width: 50%;
+  width: fit-content;
 }
 
 .addFriendInput {
@@ -143,8 +150,8 @@
 
 .messenger-close{
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: .8rem;
+  right: .8rem;
   background-color: #00B4FF;
   width: 1.5rem;
   height: 1.5rem;

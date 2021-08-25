@@ -67,7 +67,6 @@ export class  FeedPostCard extends Component {
     apiHandler.deleteFavouritePost(this.postId)
       .then((dbRes)=>this.setState({favouritedState:false}))
       .catch((error)=>{console.log(error)})
-    
   }
 
   render(){
