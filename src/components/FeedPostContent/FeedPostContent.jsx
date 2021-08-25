@@ -6,7 +6,6 @@ import { withUser } from '../Auth/withUser';
 
 export class FeedPostContent extends Component {
   async componentDidMount() {}
-  componentWillUnmount() {}
 
   createNewButton = (event) => {
     event.preventDefault();
@@ -36,6 +35,7 @@ export class FeedPostContent extends Component {
               post={post}
               clickOnProfile={this.props.clickOnProfile}
               userID={this.props.context.user._id}
+              user={this.props.user}
             />
           );
         })}

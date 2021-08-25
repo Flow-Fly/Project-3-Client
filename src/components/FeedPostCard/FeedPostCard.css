@@ -70,3 +70,7 @@
 .publishLinks{
   display: flex;
 }
+
+.favourite{
+  border: 1px solid black;
+}

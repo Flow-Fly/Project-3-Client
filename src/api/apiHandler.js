@@ -216,9 +216,9 @@ const apiHandler = {
   //fOR favourites
 
   //get favourites of user
-  getFavourites(userID) {
-    return service
-      .get('/api/users/favourites/' + userID)
+  getFavourites() {
+      return service
+      .get('/api/users/favourites/all/' )
       .then((res) => res.data)
       .catch(errorHandler);
   },

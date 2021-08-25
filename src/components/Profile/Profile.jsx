@@ -3,6 +3,7 @@ import Avatar from '../Base/Avatar/Avatar';
 import './Profile.css';
 import Button from '../Base/Button/Button';
 import { withUser } from '../Auth/withUser';
+import FavouriteList from '../FavouriteList/FavouriteList';
 
 export class Profile extends Component {
   //     user:
@@ -28,7 +29,6 @@ export class Profile extends Component {
   };
 
   render() {
-    console.log(this.props);
     const user = this.props.user;
     const name =
       this.props.context.user._id === user._id ? 'Your' : user.firstName;
@@ -58,10 +58,8 @@ export class Profile extends Component {
                         return (
                           <div className="small-card">
                             <p>{post.title}</p>
-                            <p onClick={() => this.editCard(post)}>Edit</p>
-                            <p onClick={() => this.deleteCard(post._id)}>
-                              Delete
-                            </p>
+                            {/* <p onClick={() => this.editCard(post)}>Edit</p>
+                            <p onClick={() => this.deleteCard(post._id)}>Delete</p> */}
                           </div>
                         );
                       })
@@ -95,9 +93,12 @@ export class Profile extends Component {
                 {name === 'Your' && (
                   <div className="saved-list">
                     <div className="title">
-                      <h4>{name} saved list:</h4>
+                      <h4>{name} Favourites:</h4>
                     </div>
-                    <div className="content"></div>
+                    <div className="content">
+                      <FavouriteList  type={'Post'} />
+                      <FavouriteList  type={'List'} />
+                    </div>
                   </div>
                 )}
               </div>
