@@ -7,17 +7,18 @@ import KUTE from 'kute.js';
 import { withUser } from '../components/Auth/withUser';
 import '../styles/Home.css';
 import logo from '../Images/logo.png';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import apiHandler from '../api/apiHandler';
 import { withMessenger } from '../components/MessengerCtx/withMessenger';
 import messengerIcon from '../Images/messenger.png';
 import '../styles/messengerIcon.css';
 import Messenger from './Messenger/Messenger';
 //test
-import FIlterPost from '../components/FIlterPost/FIlterPost';
+import FIlterPost from '../components/FilterPost/FilterPost';
 import Button from '../components/Base/Button/Button';
 import FormSignin from '../components/Forms/FormSignin';
 import FormSignup from '../components/Forms/FormSignup';
+import FilterJobs from '../components/FilterJobs/FilterJobs';
 
 class Home extends React.Component {
   state = {
@@ -28,13 +29,15 @@ class Home extends React.Component {
     jobFormJob: null,
     /////////
     displayedPost: null,
-    originalPosts:[],
     posts: [],
     showAddPostForm: false,
     postFormAction: 'create',
-
+    //for filters
+    originalJobs: [],
+    originalPosts: [],
+    ////////
     displayMessenger: false,
-    displayInblob: null
+    displayInblob: null,
   };
 
   ////////job related////////////
@@ -97,6 +100,25 @@ class Home extends React.Component {
       .catch((err) => console.log(err));
   };
 
+  //filter jobs
+  filterJobs = (filters) => {
+    let filteredJobs = [...this.state.originalJobs];
+
+    // Object.entries method combine Object.key & Object.value
+    // inside forEach, destruct directly
+    Object.entries(filters).forEach(([attribute, values]) => {
+      if (values.length > 0) {
+        filteredJobs = filteredJobs.filter((job) => {
+          return values.includes(job[attribute]);
+        });
+      }
+    });
+
+    this.setState({
+      jobs: filteredJobs,
+    });
+  };
+
   ////////post related///////////////////
   //Toggle postForm
   showPostForm = (action, post) => {
@@ -106,6 +128,7 @@ class Home extends React.Component {
       displayedPost: post,
     });
   };
+
   closePostForm = () => {
     this.setState({ showAddPostForm: false, displayedPost: null });
   };
@@ -118,6 +141,7 @@ class Home extends React.Component {
       postFormAction: 'create',
     });
   };
+
   //render updated posts
   handlePostUpdated = (updatedPost) => {
     const posts = this.state.posts.map((post) =>
@@ -141,14 +165,18 @@ class Home extends React.Component {
       })
       .catch((err) => console.log(err));
   };
-//to filter post via the panel
-  handlePostFilter = (filters)=>{
-    let tempPosts= (filters.length===0) ? [...this.state.originalPosts] : this.state.originalPosts.filter((post)=>{
-      if (filters.includes(post.type)) return post;
-    })
 
-    this.setState({posts:tempPosts,})
-  }
+  //to filter post via the panel
+  handlePostFilter = (filters) => {
+    let tempPosts =
+      filters.length === 0
+        ? [...this.state.originalPosts]
+        : this.state.originalPosts.filter((post) => {
+            return filters.includes(post.type);
+          });
+
+    this.setState({ posts: tempPosts });
+  };
 
   //////////blob related///////
   blob1Ref = React.createRef();
@@ -159,7 +187,12 @@ class Home extends React.Component {
       let posts = await apiHandler.getAllPost();
       let jobsInfo = await apiHandler.getJobs();
 
-      this.setState({ jobs: jobsInfo, posts: posts, originalPosts:posts });
+      this.setState({
+        originalJobs: jobsInfo,
+        jobs: jobsInfo,
+        posts: posts,
+        originalPosts: posts,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -203,30 +236,39 @@ class Home extends React.Component {
       //rendered if you are logged in
       return (
         <div className="homePageBody-wrapper">
-            <div className="messenger-wrapper">
-              <span
-                className="messengerIcon"
-                onClick={() =>
-                  this.setState({
-                    displayMessenger: !this.state.displayMessenger,
-                  })
-                }
-              >
-                <img src={messengerIcon} alt="Messenger Icon" />
-                {this.notifications() > 0 ? (
-                  <span className="notifications">{this.notifications()}</span>
-                ) : ''}
+          <div className="messenger-wrapper">
+            <span
+              className="messengerIcon"
+              onClick={() =>
+                this.setState({
+                  displayMessenger: !this.state.displayMessenger,
+                })
+              }
+            >
+              <img src={messengerIcon} alt="Messenger Icon" />
+              {this.notifications() > 0 ? (
+                <span className="notifications">{this.notifications()}</span>
+              ) : (
+                ''
+              )}
             </span>
           </div>
-        
-          <div className="homePageBody">
 
+          <div className="homePageBody">
             {/* //Left SIDE */}
             <div className="sideDiv">
               <SideProfile />
-              <FIlterPost posts={this.state.posts} filterPosts={this.handlePostFilter} originalPosts={this.state.originalPosts}/>
+              <FIlterPost
+                posts={this.state.posts}
+                filterPosts={this.handlePostFilter}
+                originalPosts={this.state.originalPosts}
+              />
+              <FilterJobs
+                jobs={this.state.jobs}
+                originalJobs={this.state.originalJobs}
+                filterJobs={this.filterJobs}
+              />
             </div>
-
 
             {/* Middle=FEED */}
             <Feed
@@ -243,12 +285,15 @@ class Home extends React.Component {
 
             {/* Right Side */}
             <div className="homeRightSide">
-              {this.state.displayMessenger && 
-              <Messenger onClick={() =>
-                this.setState({
-                  displayMessenger: !this.state.displayMessenger,
-                })}
-              />}
+              {this.state.displayMessenger && (
+                <Messenger
+                  onClick={() =>
+                    this.setState({
+                      displayMessenger: !this.state.displayMessenger,
+                    })
+                  }
+                />
+              )}
               {this.state.showJobForm === true && (
                 <FormJob
                   closeJobForm={this.closeJobForm}
@@ -302,13 +347,32 @@ class Home extends React.Component {
             </svg>
 
             <div className="homeFloating">
-              {this.state.displayInblob === 'login' ? <FormSignin resetDisplayBlob={() => this.setState({displayInblob: null})}/> :
-                this.state.displayInblob === 'signup' ? <FormSignup resetDisplayBlob={() => this.setState({displayInblob: null})}/> : 
-                  <img alt="logoFloating" src={logo}></img>
-              }
+              {this.state.displayInblob === 'login' ? (
+                <FormSignin
+                  resetDisplayBlob={() =>
+                    this.setState({ displayInblob: null })
+                  }
+                />
+              ) : this.state.displayInblob === 'signup' ? (
+                <FormSignup
+                  resetDisplayBlob={() =>
+                    this.setState({ displayInblob: null })
+                  }
+                />
+              ) : (
+                <img alt="logoFloating" src={logo}></img>
+              )}
               <div className="floatingButtons">
-                <Button onClick={() => this.setState({displayInblob: 'login'})}>Log in</Button>
-                <Button onClick={() => this.setState({displayInblob: 'signup'})}>Sign up</Button>
+                <Button
+                  onClick={() => this.setState({ displayInblob: 'login' })}
+                >
+                  Log in
+                </Button>
+                <Button
+                  onClick={() => this.setState({ displayInblob: 'signup' })}
+                >
+                  Sign up
+                </Button>
               </div>
             </div>
           </section>
