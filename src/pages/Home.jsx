@@ -18,7 +18,7 @@ import Button from '../components/Base/Button/Button';
 import FormSignin from '../components/Forms/FormSignin';
 import FormSignup from '../components/Forms/FormSignup';
 import FilterJobs from '../components/FilterJobs/FilterJobs';
-import FilterPost from "../components/FIlterPost/FIlterPost";
+import FilterPost from '../components/FilterPost/FIlterPost';
 
 class Home extends React.Component {
   state = {
@@ -38,7 +38,7 @@ class Home extends React.Component {
     ////////
     displayMessenger: false,
     displayInblob: null,
-    blobStarted:false,
+    blobStarted: false,
   };
 
   ////////job related////////////
@@ -73,6 +73,7 @@ class Home extends React.Component {
       jobFormAction: 'edit',
       // to clean up job form after
       jobFormJob: null,
+      originalJobs: [...this.state.jobs],
     });
   };
 
@@ -86,6 +87,7 @@ class Home extends React.Component {
       showJobForm: false,
       jobFormAction: 'edit',
       jobFormJob: null,
+      originalJobs: [...this.state.jobs],
     });
   };
 
@@ -96,6 +98,7 @@ class Home extends React.Component {
       .then(() => {
         this.setState({
           jobs: this.state.jobs.filter((job) => job._id !== jobId),
+          originalJobs: [...this.state.jobs],
         });
       })
       .catch((err) => console.log(err));
@@ -211,9 +214,8 @@ class Home extends React.Component {
 
   componentDidUpdate() {
     if (this.props.context.isLoggedIn === false) {
-      
-      if (this.state.blobStarted===false){
-        console.log("tween started")
+      if (this.state.blobStarted === false) {
+        console.log('tween started');
         const tween = KUTE.fromTo(
           this.blob1Ref.current,
           { path: this.blob1Ref.current },
@@ -221,7 +223,7 @@ class Home extends React.Component {
           { repeat: 999, duration: 3000, yoyo: true }
         );
         tween.start();
-        this.setState({blobStarted:true})
+        this.setState({ blobStarted: true });
       }
     }
   }
@@ -329,7 +331,13 @@ class Home extends React.Component {
         <div className="homePageBody">
           <section id="mainBlobSection">
             <svg
-              className={this.state.displayInblob === 'login' ? "login" : this.state.displayInblob === 'signup' ? "signup" : "landing" }
+              className={
+                this.state.displayInblob === 'login'
+                  ? 'login'
+                  : this.state.displayInblob === 'signup'
+                  ? 'signup'
+                  : 'landing'
+              }
               id="visual"
               viewBox="0 0 500 500"
               width="500"
@@ -368,14 +376,21 @@ class Home extends React.Component {
                 />
               ) : (
                 <div className="floatingLogoSection">
-                <img alt="logoFloating" src={logo}></img>
-                <div className="floatingButtons">
-                <Button onClick={() => this.setState({ displayInblob: 'login' })}>Log in</Button>
-                <Button onClick={() => this.setState({ displayInblob: 'signup' })}>Sign up</Button>
+                  <img alt="logoFloating" src={logo}></img>
+                  <div className="floatingButtons">
+                    <Button
+                      onClick={() => this.setState({ displayInblob: 'login' })}
+                    >
+                      Log in
+                    </Button>
+                    <Button
+                      onClick={() => this.setState({ displayInblob: 'signup' })}
+                    >
+                      Sign up
+                    </Button>
+                  </div>
                 </div>
-              </div>
-                )}
-
+              )}
             </div>
           </section>
         </div>
