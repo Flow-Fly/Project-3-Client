@@ -39,6 +39,7 @@ class Home extends React.Component {
     displayMessenger: false,
     displayInblob: null,
     blobStarted: false,
+    hashPath:null, //test
   };
 
   ////////job related////////////
@@ -196,6 +197,7 @@ class Home extends React.Component {
         jobs: jobsInfo,
         posts: posts,
         originalPosts: posts,
+        hashPath:this.props.location.hash //test
       });
     } catch (error) {
       console.log(error);
@@ -212,7 +214,7 @@ class Home extends React.Component {
   //   }
   // };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.context.isLoggedIn === false) {
       if (this.state.blobStarted === false) {
         console.log('tween started');
@@ -226,6 +228,14 @@ class Home extends React.Component {
         this.setState({ blobStarted: true });
       }
     }
+
+    if(this.props.location.hash!==prevProps.location.hash){
+      console.log("hash updated")
+      this.setState({hashPath:this.props.location.hash})
+    }
+
+
+
   }
 
   notifications = () => {
@@ -314,7 +324,8 @@ class Home extends React.Component {
               onPostDeleted={this.handlePostDelete}
               toJob={this.props.toJob}
               toPost={this.props.toPost}
-              path={this.props.location.hash}
+              //path={this.props.location.hash}
+              path={this.state.hashPath}
             ></Feed>
 
             {/* Right Side */}

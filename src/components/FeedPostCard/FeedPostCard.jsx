@@ -71,7 +71,7 @@ export class  FeedPostCard extends Component {
 
   render(){
     return (
-      <div className={'FeedPostCard ' + this.post.type.replaceAll(' ', '') +" "+ (this.state.favouritedState?'favourite':"")}>
+      <div style={this.props.color && {boxShadow: `0 0 .5em .25em ${this.props.color}`}}  className={'FeedPostCard ' + this.post.type.replaceAll(' ', '') +" "+ (this.state.favouritedState?'favourite':"") } >
         <div className="postCardPublish">
           <div className="publishInfos">
             <div className="wrapper-avatar" onClick={this.props.clickOnProfile}>

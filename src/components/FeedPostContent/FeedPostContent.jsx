@@ -5,12 +5,16 @@ import './FeedPostContent.css';
 import { withUser } from '../Auth/withUser';
 
 export class FeedPostContent extends Component {
-  state = {};
+  state = {
+    searchedPost:null,
+    allPosts:null,
+  };
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
       if (this.props.searchingPost && this.props.posts.length !== 0) {
         let str = this.props.path.substring(1);
+
         const searchedPost = this.props.posts.filter(
           (e) => e._id.toString() === str
         );
@@ -35,6 +39,7 @@ export class FeedPostContent extends Component {
           <h4>Loading</h4>
         </div>
       );
+
     return (
       <div className="FeedPostContent">
         <button className="button-create-post" onClick={this.createNewButton}>
@@ -42,6 +47,7 @@ export class FeedPostContent extends Component {
         </button>
         {this.props.searchingPost && this.state.searchedPost && (
           <FeedPostCard
+            key={this.state.searchedPost._id}
             showForm={this.props.showPostForm}
             onPostDeleted={this.props.onPostDeleted}
             refreshPost={this.props.loadPosts}
@@ -58,6 +64,7 @@ export class FeedPostContent extends Component {
           this.state.allPosts.map((post) => {
             return (
               <FeedPostCard
+                key={post._id}
                 showForm={this.props.showPostForm}
                 onPostDeleted={this.props.onPostDeleted}
                 refreshPost={this.props.loadPosts}

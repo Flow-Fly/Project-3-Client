@@ -97,7 +97,7 @@ export class Profile extends Component {
                     </div>
                     <div className="content">
                       <FavouriteList  type={'Post'} />
-                      <FavouriteList  type={'List'} />
+                      <FavouriteList  type={'Job'} />
                     </div>
                   </div>
                 )}

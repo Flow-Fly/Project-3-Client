@@ -15,7 +15,7 @@ export class FavouriteList extends Component {
                     this.setState({elements:dbRes.favouritePosts})
                     
                 }
-                else if (this.props.type==='List'){
+                else if (this.props.type==='Job'){
                     this.setState({elements:dbRes.favouriteJobs})
                 }
 
