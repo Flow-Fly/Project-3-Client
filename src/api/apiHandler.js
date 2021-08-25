@@ -219,6 +219,52 @@ const apiHandler = {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+
+  //fOR favourites
+
+  //get favourites of user
+  getFavourites(userID) {
+    return service
+      .get('/api/users/favourites/' + userID)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  //Add post to favourites
+  addFavouritePost(postID) {
+    return service
+      .patch('/api/users/addFavouritePost/' + postID)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  //Add post to favourites
+  deleteFavouritePost(postID) {
+    return service
+      .patch('/api/users/deleteFavouritePost/' + postID)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  //Add job to favourites
+  addFavouriteJob(jobID) {
+    return service
+      .patch('/api/users/addFavouriteJob/' + jobID)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+  //Add job to favourites
+  deleteFavouriteJob(jobID) {
+    return service
+      .patch('/api/users/deleteFavouriteJob/' + jobID)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };
+
+
+
+
+
 
 export default apiHandler;

@@ -35,16 +35,28 @@ export class Feed extends Component {
     });
   };
 
+  componentDidMount() {
+    if (this.props.toJob) {
+      this.setState(
+        {
+          toggledTab: 'jobs',
+        }
+      );
+    }
+  }
+
   toggleTab = (event) => {
     this.setState({ toggledTab: event.target.id });
   };
 
   render() {
+    console.log('Feed log: ', this.state);
     let filteredPosts = null;
     let filteredJobs = null;
 
     if (this.state.displayProfile) {
       let id = this.props.context.user._id;
+      console.log(this.props.posts)
       filteredPosts = this.props.posts.filter(
         (post) => post.creator._id.toString() === id.toString()
       );
@@ -107,6 +119,8 @@ export class Feed extends Component {
                 handleJobDelete={this.props.handleJobDelete}
                 handleEditStart={this.props.handleEditStart}
                 clickOnProfile={this.clickOnProfile}
+                searchingJob={this.props.toJob}
+                
               />
             )}
           </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import apiHandler from '../../api/apiHandler'
-import './FilterPost.css'
+import './FilterPost.css';
 import FilterTag from '../Base/FilterTag/FilterTag';
 
 export class FilterPost extends Component {

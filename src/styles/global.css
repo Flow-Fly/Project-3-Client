@@ -20,8 +20,7 @@
 
 body{
   background-color: #F3F2EF;
-  font-size: 12px;
-  
+  font-size: 12px;  
 }
 
 .App {
@@ -50,11 +49,11 @@ body{
 
 
 /* ----------- Non-Retina Screens ----------- */
-/* @media screen 
+@media screen 
   and (min-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 1) { 
     .homePageBody, .nav-content{
-      width:1200px
+      width:1600px
     }
 }
 
@@ -74,12 +73,12 @@ body{
     .homePageBody, .nav-content{
       width:900px
     }
-} */
+}
 
 
 /* ----------- Retina Screens ----------- */
 
-/* @media screen 
+@media screen 
   and (min-device-width: 1600px) 
   and (-webkit-min-device-pixel-ratio: 2)
   and (min-resolution: 192dpi) { 
@@ -105,7 +104,7 @@ body{
     .homePageBody,.nav-content{
       width:900PX
     }
-} */
+}
 
 
 html {
@@ -136,15 +135,15 @@ ul {
 }
 
 
-.webdev.bg {
-  background-color: rgb(72, 145, 72);
+.WebDev {
+  background-color: rgb(205, 240, 205);
 }
-.uiux.bg {
-  background-color: rgb(75, 75, 153);
+.UI\/UX {
+  background-color: rgb(217, 217, 243);
 }
-.cyber.bg {
-  background-color: rgb(146, 70, 70);
+.CyberSecurity {
+  background-color: rgb(241, 215, 215);
 }
-.data-analyst.bg {
-  background-color: rgb(148, 73, 148);
+.DataAnalyst {
+  background-color: rgb(241, 216, 241);
 }
