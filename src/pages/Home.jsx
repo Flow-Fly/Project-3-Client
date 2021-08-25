@@ -237,6 +237,10 @@ class Home extends React.Component {
     return notifications;
   };
 
+  redirectToSignin = () => {
+    this.setState({ displayInblob: 'login' })
+  }
+
   render() {
     // console.log(this.props.location)
     // console.log(this.props.toJob)
@@ -382,7 +386,7 @@ class Home extends React.Component {
                   }
                 />
               ) : this.state.displayInblob === 'signup' ? (
-                <FormSignup
+                <FormSignup goToSignin={this.redirectToSignin}
                   resetDisplayBlob={() =>
                     this.setState({ displayInblob: null })
                   }
