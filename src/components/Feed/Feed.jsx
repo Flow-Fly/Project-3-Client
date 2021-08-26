@@ -9,7 +9,6 @@ import { withUser } from '../Auth/withUser';
 // FeedJobContent and FeedPostContent elements
 export class Feed extends Component {
   state = {
-    toggledTab: 'posts',
     displayProfile: false,
     user: null,
     currentUser:null,
@@ -61,14 +60,11 @@ export class Feed extends Component {
     }
 
     if (this.props.toJob) {
-      this.setState({
-        toggledTab: 'jobs',
-      });
+      this.props.toggleFilterTab('jobs')
     }
   }
 
   toggleTab = (event) => {
-    this.setState({ toggledTab: event.target.id });
     this.props.toggleFilterTab(event.target.id)
   };
 
@@ -91,7 +87,7 @@ export class Feed extends Component {
               onClick={this.toggleTab}
               id="posts"
               className={
-                this.state.toggledTab === 'posts' ? 'tabs active' : 'tabs left'
+                this.props.filterTab === 'posts' ? 'tabs active' : 'tabs left'
               }
             >
               Posts
@@ -100,7 +96,7 @@ export class Feed extends Component {
               onClick={this.toggleTab}
               id="jobs"
               className={
-                this.state.toggledTab === 'jobs' ? 'tabs active' : 'tabs right'
+                this.state.filterTab === 'jobs' ? 'tabs active' : 'tabs right'
               }
             >
               Jobs
@@ -108,7 +104,7 @@ export class Feed extends Component {
           </div>
 
           <div className="feedContentWrapper">
-            {this.state.toggledTab === 'posts' ? (
+            {this.props.filterTab === 'posts' ? (
               <FeedPostContent
                 posts={this.props.posts}
                 loadPosts={this.props.loadPosts}

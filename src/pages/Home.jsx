@@ -43,7 +43,7 @@ class Home extends React.Component {
     filterTab: 'posts' 
   };
 
-  toggleFilterTab(id){
+  toggleFilterTab = (id) => {
     this.setState({filterTab: id})
   }
 
@@ -313,14 +313,14 @@ class Home extends React.Component {
             {/* //Left SIDE */}
             <div className="sideDiv">
               <SideProfile />
-              {this.filterTab === 'posts' && 
+              {this.state.filterTab === 'posts' && 
                   <FilterPost
                     posts={this.state.posts}
                     filterPosts={this.handlePostFilter}
                     originalPosts={this.state.originalPosts}
                 />
               }
-              {this.filteredJobs === 'jobs' && 
+              {this.state.filterTab === 'jobs' && 
                 <FilterJobs
                   jobs={this.state.jobs}
                   originalJobs={this.state.originalJobs}
@@ -351,6 +351,7 @@ class Home extends React.Component {
               //path={this.props.location.hash}
               path={this.state.hashPath}
               toggleFilterTab={this.toggleFilterTab}
+              filterTab={this.filterTab}
             ></Feed>
 
             {/* Right Side */}
