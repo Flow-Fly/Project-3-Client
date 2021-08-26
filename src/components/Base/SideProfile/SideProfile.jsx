@@ -3,7 +3,7 @@ import { withUser } from '../../Auth/withUser';
 import Avatar from '../Avatar/Avatar';
 import './SideProfile.css';
 import { Link } from 'react-router-dom';
-import FavoriteDetails from './FavoriteDetails';
+//import FavoriteDetails from './FavoriteDetails';
 import FavouriteList from '../../FavouriteList/FavouriteList';
 
 class SideProfile extends React.Component {

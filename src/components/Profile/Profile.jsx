@@ -3,7 +3,7 @@ import Avatar from '../Base/Avatar/Avatar';
 import './Profile.css';
 import Button from '../Base/Button/Button';
 import { withUser } from '../Auth/withUser';
-import FavouriteList from '../FavouriteList/FavouriteList';
+//import FavouriteList from '../FavouriteList/FavouriteList';
 
 export class Profile extends Component {
   //     user:
@@ -30,9 +30,9 @@ export class Profile extends Component {
 
   render() {
     const user = this.props.user;
-    const name =
-      this.props.context.user._id === user._id ? 'Your' : user.firstName;
-      const owner = this.props.context.user._id === user._id
+    // const name =
+    //   this.props.context.user._id === user._id ? 'Your' : user.firstName;
+    //   const owner = this.props.context.user._id === user._id
     return (
       <React.Fragment>
         <div className="backdrop">
