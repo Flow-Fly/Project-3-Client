@@ -32,7 +32,7 @@
 }
 
 .messageContent.mine{
-    background-color: #00B4FF;
+    background-color: var(--mainLightBlueColor);
 }
 
 .messageTimer{

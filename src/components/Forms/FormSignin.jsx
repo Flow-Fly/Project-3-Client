@@ -82,7 +82,7 @@ class FormSignin extends Component {
             {this.state.error && "Wrong Credentials"}
           </div>
 
-          <Button>Sign In</Button>
+          <Button>Log In</Button>
         </Form>
         <div className="passports">
             <a href={process.env.REACT_APP_GOOGLE_CALLBACK}>

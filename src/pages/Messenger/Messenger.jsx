@@ -48,11 +48,10 @@ class Messenger extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        console.log(this.isLoading )
         if(!this.props.messengerContext.currentRoom) return 
 
         if(this.isLoading) return
-        console.log(this.isLoading, 'ISLOADING')
+
        this.scrollChatRef.current.scrollTop = this.scrollChatRef.current.scrollHeight //so it scrolls down to the last message 
     }
 
@@ -64,7 +63,7 @@ class Messenger extends Component {
     }
 
     async openRoom(room){
-        console.log('OPEN ROOM')
+
         this.isLoading = false
         try{
             await this.props.messengerContext.openRoom(room)
@@ -109,9 +108,8 @@ class Messenger extends Component {
         let newFriend = null
 
         try{
-            console.log(this.state.newFriend)
             newFriend = await apiHandler.getUserByMail(this.state.newFriend)
-            console.log(newFriend)
+
             if(!newFriend.length){
 
                 this.setState({
@@ -175,7 +173,7 @@ class Messenger extends Component {
             if(providerLoading === 'done') return this.isLoading = 'done'
         }
         catch(err){
-            console.log(err)
+            console.error(err)
         }
 
         
@@ -224,7 +222,7 @@ class Messenger extends Component {
                 <div className="chatBox">
                     {!this.props.messengerContext.messages ? '' : (
                         <div className="chatBoxMessages" ref={this.scrollChatRef} onScroll={this.loadMessages}>
-                            <div className="chatBoxMessagesWrapper">
+                            <div className="chatBoxMessagesWrapper" >
                                 {this.props.messengerContext.messages.map((message, index) => {
                                     return (
                                         <Message key={index} message={message}/>

@@ -62,7 +62,7 @@
     position: absolute;
     top: 2.5rem;
     right: .5rem;
-    background-color: #00B4FF;
+    background-color: var(--mainLightBlueColor);
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 4px;

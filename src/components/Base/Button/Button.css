@@ -1,5 +1,5 @@
 .Button{
-    background-color: #00B4FF;
+    background-color: var(--mainLightBlueColor);
     padding: .375rem .75rem;
     margin:0.1rem;
     border-radius: 0.25rem;
@@ -9,6 +9,8 @@
     font-size: 1rem;
     line-height: 1.5rem;
     transition: all 0.2s ease-in-out;
+    text-align: center;
+    vertical-align: middle;
 }
 
 .Button:hover{
@@ -17,7 +19,7 @@
 }
 
 .Button:disabled {
-    background-color: #557a8a;
+    background-color: var(--mainLightBlueColorHover);
     color:#86a1be
 
 }

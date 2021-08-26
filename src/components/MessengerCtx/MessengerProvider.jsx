@@ -79,10 +79,9 @@ class MessengerProvider extends Component {
         this.socket.on('receive', async data => {
             //if someone new send you a message, add a new room to your rooms
             if(!this.state.rooms.find(r => r._id === data.room._id)){
-                console.log('SET NEW ROOM', data.room)
                 this.setState({rooms : [...this.state.rooms, data.room]})
             }
-            console.log(this.state.currentRoom)
+
             if(this.state.currentRoom && this.state.currentRoom?.members.find(m => m._id === data.senderId)){
                 
                 const receivedMessage = 
@@ -93,7 +92,6 @@ class MessengerProvider extends Component {
                         content : data.content,
                         createdAt: Date.now()
                     }
-             
                 this.setState({
                     messages: [...this.state.messages, receivedMessage],
                 })
@@ -185,8 +183,7 @@ class MessengerProvider extends Component {
 
     async loadMessages(callback){
         const olderMessages = await apiHandler.getMessages(this.state.currentRoom._id, this.state.messages.length - 1, 30)
-        console.log('PROVIDER LOAD')
-
+ 
         if(!olderMessages.length) return 'done'
         
         this.setState({

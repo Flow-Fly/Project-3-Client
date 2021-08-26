@@ -12,7 +12,7 @@
     padding: 1rem 2rem; 
     border-radius: .5rem;
     z-index: 10;
-    border: solid 1px #007cb1;
+    border: solid 1px var(--mainLightBlueColorHover);
 }
 
 .roomsList {
@@ -76,7 +76,7 @@
 }
 
 .chatBoxInput:focus {
-  border-top: solid 1px #00b4ff;
+  border-top: solid 1px var(--mainLightBlueColor);
 }
 
 .chatBoxMessagesWrapper {
@@ -138,7 +138,7 @@
 
 .addFriendInput:focus {
   border: none;
-  border-bottom: solid 1px #00b4ff;
+  border-bottom: solid 1px var(--mainLightBlueColor);
 }
 
 .errorMsg {
@@ -152,7 +152,7 @@
   position: absolute;
   top: .8rem;
   right: .8rem;
-  background-color: #00B4FF;
+  background-color: var(--mainLightBlueColor);
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 4px;
