@@ -229,7 +229,6 @@ class Home extends React.Component {
   componentDidUpdate(prevProps) {
     if (this.props.context.isLoggedIn === false) {
       if (this.state.blobStarted === false) {
-        console.log('tween started');
         const tween = KUTE.fromTo(
           this.blob1Ref.current,
           { path: this.blob1Ref.current },
