@@ -21,26 +21,52 @@
     position: sticky;
     z-index: 100;
     background-color: white;
-    min-height: 600px;
-    padding: 1em;
+    min-width: 300px;
     border-radius: .5rem;
     box-shadow: 0 15px 20px 8px rgba(0, 0, 0, 0.2);
     display: flex;
     align-items: center;
     flex-direction: column;
 }
-.close {
-    position:absolute;
-    top: 1em;
-    right: 1em;
-}
+
 
 
 .profile-content {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
-.profile-content > div:not(:last-child) {
-    margin-right: 2em;
+.main-infos{
+    display: flex;
+    padding: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
 }
+
+.main-infos>div{
+    margin: 0.3rem 0.5rem
+}
+
+.close{
+    align-self: flex-start;
+}
+
+.infoDiv{
+    display: flex;
+    align-items: center;
+    margin:0.2rem 0.3rem;
+    justify-content: space-between;
+}
+
+.infoSpan{
+    font-size: 1rem;
+    margin-left: 1rem;
+}
+
+.strongSpan{
+    font-size: 1rem;
+    font-weight: bold;
+}
+
+
+
