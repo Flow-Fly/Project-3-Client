@@ -4,7 +4,6 @@ import JobDetailsCard from '../Job/JobDetailsCard';
 import Avatar from '../Base/Avatar/Avatar';
 import { Link } from 'react-router-dom';
 import apiHandler from '../../api/apiHandler';
-import Button from '../Base/Button/Button';
 import { format } from 'timeago.js';
 
 class FeedJobCard extends Component {
@@ -132,20 +131,20 @@ class FeedJobCard extends Component {
 
           <div className="button-edit-delete-wrapper">
             {this.ownJob && (
-              <>
-                <Button
+              <div className="publish-links-wrapper">
+                <span
                   onClick={this.props.handleEditStart}
-                  className="jobCard"
+                  className="publishLinks"
                 >
                   Edit
-                </Button>
-                <Button
+                </span>
+                <span
                   onClick={this.props.handleJobDelete}
-                  className="jobCard"
+                  className="publishLinks"
                 >
                   Delete
-                </Button>
-              </>
+                </span>
+              </div>
             )}
 
             {this.state.favouritedState === false ? (
