@@ -3,11 +3,42 @@ import './FeedJobCard.css';
 import JobDetailsCard from '../Job/JobDetailsCard';
 import Avatar from '../Base/Avatar/Avatar';
 import { Link } from 'react-router-dom';
+import apiHandler from "../../api/apiHandler"
+import Button from '../Base/Button/Button';
 
 class FeedJobCard extends Component {
-  state = {
-    showJobDetails: false,
-  };
+  constructor(props){
+    super(props);
+    this.state={
+
+      showJobDetails: false,
+      job:this.props.job,
+      favouritedState:false,
+    }
+
+    this.userId = this.props.userID;
+    this.jobId = this.props.job._id;
+    this.jobCreatorId = this.state.job.creator ? this.state.job.creator._id : '';
+    this.ownJob = String(this.jobCreatorId) === this.userId ? true : false;
+    this.firstName = this.state.job.creator
+      ? this.state.job.creator.firstName !== undefined
+        ? this.state.job.creator.firstName
+        : '...'
+      : '...';
+      this.lastName = this.state.job.creator
+      ? this.state.job.creator.lastName !== undefined
+        ? this.state.job.creator.lastName
+        : '...'
+      : '...';
+      this.userImage = this.state.job.creator
+      ? this.state.job.creator.profileImg !== undefined
+        ? this.state.job.creator.profileImg
+        : '...'
+      : '...';
+      this.createdAt = this.state.job.createdAt
+      ? this.state.job.createdAt.replace('T', ' ').slice(0, 16)
+      : '...';
+  }
 
   // toggle job details on the jobs list
   showJobDetails = () => {
@@ -18,30 +49,35 @@ class FeedJobCard extends Component {
     this.setState({ showJobDetails: false });
   };
 
+  componentDidMount(){
+    if(this.props.user!==null) this.setState({favouritedState:this.props.user.favouriteJobs.includes(this.state.job._id)})
+  }
+
+  componentDidUpdate(prevProps){
+    if(this.props.user !== prevProps.user){
+      this.setState({favouritedState:this.props.user.favouriteJobs.includes(this.state.job._id)})
+    }
+
+    if(this.props.job!==prevProps.job){
+      this.setState({job:this.props.job})
+    }
+
+  }
+
+  addToFavourites=()=> {
+    apiHandler.addFavouriteJob(this.jobId)
+      .then((dbRes)=>
+      {console.log(dbRes);this.setState({favouritedState:true})})
+      .catch((error)=>{console.log(error)})
+  }
+  removeFromFavourites=() =>{
+    apiHandler.deleteFavouriteJob(this.jobId)
+      .then((dbRes)=>this.setState({favouritedState:false}))
+      .catch((error)=>{console.log(error)})
+  }
+
   render() {
-    const job = this.props.job;
-    const userId = this.props.userID;
-    const jobId = this.props.job._id;
-    const jobCreatorId = job.creator ? job.creator._id : '';
-    const ownJob = String(jobCreatorId) === userId ? true : false;
-    const firstName = job.creator
-      ? job.creator.firstName !== undefined
-        ? job.creator.firstName
-        : '...'
-      : '...';
-    const lastName = job.creator
-      ? job.creator.lastName !== undefined
-        ? job.creator.lastName
-        : '...'
-      : '...';
-    const userImage = job.creator
-      ? job.creator.profileImg !== undefined
-        ? job.creator.profileImg
-        : '...'
-      : '...';
-    const createdAt = job.createdAt
-      ? job.createdAt.replace('T', ' ').slice(0, 16)
-      : '...';
+    
 
     //toggle job details
     let details;
@@ -53,43 +89,41 @@ class FeedJobCard extends Component {
       );
     } else {
       details = (
-        <JobDetailsCard job={this.props.job} onClose={this.hideJobDetails} />
+        <JobDetailsCard job={this.state.job} onClose={this.hideJobDetails} />
       );
     }
 
     return (
-      <div className="FeedJobCard" id={jobId}>
+      <div className="FeedJobCard" id={this.jobId}>
         <div className="flex-wrapper">
         <div className="wrapper-avatar" onClick={this.props.clickOnProfile}>
-            <Avatar url={userImage} size="tiny" id={jobCreatorId} />
+            <Avatar url={this.userImage} size="tiny" id={this.jobCreatorId} />
           </div>
           <p className="publishInfo">
-            Published by : {firstName + ' ' + lastName}
+            Published by : {this.firstName + ' ' + this.lastName}
             {''} at {''}
-            {createdAt}
+            {this.createdAt}
           </p>
-          {ownJob && (
+          {this.ownJob && (
             <div className="button-edit-delete-wrapper">
-              <button
-                className="button-edit-job"
-                onClick={this.props.handleEditStart}
-              >
-                Edit
-              </button>
-              <button
-                className="button-delete-job"
-                onClick={this.props.handleJobDelete}
-              >
-                Delete
-              </button>
+              <Button  onClick={this.props.handleEditStart} className="jobCard">Edit</Button>
+              <Button  onClick={this.props.handleJobDelete} className="jobCard">Delete</Button>
+              {
+            this.state.favouritedState === false ?(
+              <Button className="postCard favourites" onClick={this.addToFavourites}>☆</Button>
+            ) :
+            (
+              <Button className="postCard favourites" onClick={this.removeFromFavourites}>★</Button>
+            )
+          }
             </div>
           )}
         </div>
-        <Link to={`/job/#${jobId}`}>
+        <Link to={`/job/#${this.jobId}`}>
           <h6 className="job-title">{this.props.job.title}</h6>
         </Link>
 
-        <ul className="job-wrapper" key={jobId}>
+        <ul className="job-wrapper" key={this.jobId}>
           <li>
             <span className="bold">{this.props.job.company}</span>
           </li>

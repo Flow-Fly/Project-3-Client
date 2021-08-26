@@ -9,6 +9,8 @@
 
 .button-edit-delete-wrapper {
   margin-left: 30%;
+  display: flex;
+  align-items: center;
 }
 
 .button-edit-job,
@@ -45,4 +47,37 @@
 
 .flash:hover {
   color: var(--mainLightBlueColor);
+}
+
+.Button.jobCard{
+  background-color: transparent;
+  color:black;
+  padding: .375rem .75rem;
+  line-height: 0.5rem;
+  margin:0.1rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  font-weight: bolder;
+  font-size: 0.5rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.Button.jobCard.favourites{
+  background-color: transparent;
+  color:var(--mainLightBlueColorHover);
+  padding: .1rem .1rem;
+  line-height:normal;
+  margin:0.1rem;
+  border-radius: 0.25rem;
+  border: 1px solid transparent;
+  font-weight: bolder;
+  font-size: 1.7rem;
+  transition: all 0.1s ease-in-out;
+}
+
+
+.Button.jobCard:hover{
+  background-color: transparent;
+  cursor: pointer;
+  transform: scale(1.2);
 }
