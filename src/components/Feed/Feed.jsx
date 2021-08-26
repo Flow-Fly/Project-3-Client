@@ -21,9 +21,21 @@ export class Feed extends Component {
     if (!id) return console.log('id: ', id);
     try {
       const profile = await apiHandler.getUser(id);
+      console.log(profile);
+      let filteredJobs = this.props.jobs.filter(
+        (job) => job.creator._id.toString() === profile._id.toString()
+      );
+      let filteredPosts = this.props.posts.filter(
+        (post) => post.creator._id.toString() === profile._id.toString()
+      );
+      filteredPosts = filteredPosts.length === 0 ? null : filteredPosts;
+      filteredJobs = filteredJobs.length === 0 ? null : filteredJobs;
+
       this.setState({
         displayProfile: true,
         user: profile,
+        filteredJobs,
+        filteredPosts
       });
     } catch (e) {
       console.error(e);
@@ -49,11 +61,9 @@ export class Feed extends Component {
     }
 
     if (this.props.toJob) {
-      this.setState(
-        {
-          toggledTab: 'jobs',
-        }
-      );
+      this.setState({
+        toggledTab: 'jobs',
+      });
     }
   }
 
@@ -62,29 +72,15 @@ export class Feed extends Component {
   };
 
   render() {
-    let filteredPosts = null;
-    let filteredJobs = null;
-
-    if (this.state.displayProfile) {
-      let id = this.props.context.user._id;
-      console.log(this.props.posts)
-      filteredPosts = this.props.posts.filter(
-        (post) => post.creator._id.toString() === id.toString()
-      );
-      filteredJobs = this.props.jobs.filter(
-        (job) => job.creator._id.toString() === id.toString()
-      );
-      filteredPosts = filteredPosts.length === 0 ? null : filteredPosts;
-      filteredJobs = filteredJobs.length === 0 ? null : filteredJobs;
-    }
+    
     return (
       <>
         {this.state.displayProfile && (
           <Profile
             user={this.state.user}
             close={this.closeProfile}
-            posts={filteredPosts}
-            jobs={filteredJobs}
+            posts={this.state.filteredPosts}
+            jobs={this.state.filteredJobs}
             showForm={this.props.showPostForm}
             deletePost={this.props.onPostDeleted}
           />
@@ -134,7 +130,6 @@ export class Feed extends Component {
                 searchingJob={this.props.toJob}
                 user={this.state.currentUser}
                 path={this.props.path}
-
               />
             )}
           </div>

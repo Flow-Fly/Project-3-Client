@@ -3,6 +3,7 @@ import './FeedPostCard.css';
 import Avatar from '../Base/Avatar/Avatar';
 import { Link } from 'react-router-dom'
 import apiHandler from "../../api/apiHandler"
+import Button from '../Base/Button/Button';
 
 
 export class  FeedPostCard extends Component {
@@ -13,7 +14,7 @@ export class  FeedPostCard extends Component {
       favouritedState:false,
     };
     this.post = this.props.post;
-    this.userID = this.props.post.userID;
+    this.userID = this.props.userID;
     this.user=this.props.user;
     this.postId = this.props.post._id;
     this.postUserID = this.props.post.creator ? this.props.post.creator._id : '';
@@ -60,7 +61,8 @@ export class  FeedPostCard extends Component {
 
   addToFavourites=()=> {
     apiHandler.addFavouritePost(this.postId)
-      .then((dbRes)=>this.setState({favouritedState:true}))
+      .then((dbRes)=>
+      {console.log("i got here");this.setState({favouritedState:true})})
       .catch((error)=>{console.log(error)})
   }
   removeFromFavourites=() =>{
@@ -70,8 +72,9 @@ export class  FeedPostCard extends Component {
   }
 
   render(){
+
     return (
-      <div style={this.props.color && {boxShadow: `0 0 .5em .25em #ffc107`}}  className={'FeedPostCard ' + this.post.type.replaceAll(' ', '') +" "+ (this.state.favouritedState?'favourite':"") } >
+      <div className={'FeedPostCard'+" "+ (this.state.favouritedState?'favourite':"") +" "+ (this.props.color && "highlighted")  } >
         <div className="postCardPublish">
           <div className="publishInfos">
             <div className="wrapper-avatar" onClick={this.props.clickOnProfile}>
@@ -81,26 +84,17 @@ export class  FeedPostCard extends Component {
           </div>
           <div className="publishLinks">
           {this.ownPost === true && (
-  
             <div >
-              <a onClick={this.editCard} href="#">
-                Edit
-              </a>
-              <a onClick={this.deleteCard} href="#">
-                Delete
-              </a>
+              <Button className="postCard" onClick={this.editCard}>Edit</Button>
+              <Button className="postCard" onClick={this.deleteCard}>Delete</Button>
             </div>
           )}
           {
             this.state.favouritedState === false ?(
-              <a onClick={this.addToFavourites} href="#">
-                Add to favourite
-              </a>
+              <Button className="postCard favourites" onClick={this.addToFavourites}>☆</Button>
             ) :
             (
-              <a onClick={this.removeFromFavourites} href="#">
-                Remove from Favourites
-              </a>
+              <Button className="postCard favourites" onClick={this.removeFromFavourites}>★</Button>
             )
           }
           </div>
@@ -124,7 +118,7 @@ export class  FeedPostCard extends Component {
           </a>
         ) : null}
         {this.post.type !== null && this.post.type !== undefined && this.post.type !== '' ? (
-          <div className="postCardType">{this.post.type}</div>
+          <div className={"postCardType"+" "+this.post.type.replaceAll(' ', '')}>{this.post.type}</div>
         ) : null}
       </div>
     );

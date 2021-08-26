@@ -60,13 +60,9 @@ class FeedJobCard extends Component {
     return (
       <div className="FeedJobCard" id={jobId}>
         <div className="flex-wrapper">
-          <Avatar
-            url={userImage}
-            clickOnProfile={this.props.clickOnProfile}
-            id={jobCreatorId}
-            size="tiny"
-            alt="avatar"
-          />
+        <div className="wrapper-avatar" onClick={this.props.clickOnProfile}>
+            <Avatar url={userImage} size="tiny" id={jobCreatorId} />
+          </div>
           <p className="publishInfo">
             Published by : {firstName + ' ' + lastName}
             {''} at {''}

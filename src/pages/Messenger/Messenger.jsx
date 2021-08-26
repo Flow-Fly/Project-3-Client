@@ -6,7 +6,7 @@ import { withUser } from '../../components/Auth/withUser'
 import { withMessenger } from '../../components/MessengerCtx/withMessenger'
 import './Messenger.css'
 import Button from '../../components/Base/Button/Button'
-import { Hint } from 'react-autocomplete-hint';
+import {Hint} from 'react-autocomplete-hint'
 
 class Messenger extends Component {
 

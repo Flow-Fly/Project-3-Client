@@ -9,6 +9,22 @@ export class FeedPostContent extends Component {
     searchedPost:null,
     allPosts:null,
   };
+  componentDidMount(){
+
+    if (this.props.searchingPost && this.props.posts.length !== 0) {
+      let str = this.props.path.substring(1);
+
+      const searchedPost = this.props.posts.filter(
+        (e) => e._id.toString() === str
+      );
+      let allPosts = this.props.posts.filter((e) => e._id.toString() !== str);
+      this.setState({
+        searchedPost: searchedPost[0],
+        allPosts: allPosts,
+      });
+    }
+
+  }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
@@ -27,6 +43,8 @@ export class FeedPostContent extends Component {
     }
   }
 
+ 
+
   createNewButton = (event) => {
     event.preventDefault();
     this.props.showPostForm('create');
@@ -39,6 +57,7 @@ export class FeedPostContent extends Component {
           <h4>Loading</h4>
         </div>
       );
+      console.log(this.state.searchedPost)
 
     return (
       <div className="FeedPostContent">
