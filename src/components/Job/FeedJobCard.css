@@ -9,6 +9,8 @@
 
 .button-edit-delete-wrapper {
   margin-left: 30%;
+  display: flex;
+  align-items: center;
 }
 
 .button-edit-job,
@@ -46,5 +48,4 @@
 .flash:hover {
   color: var(--mainLightBlueColor);
 }
-
 

@@ -3,7 +3,6 @@ import './FeedPostCard.css';
 import Avatar from '../Base/Avatar/Avatar';
 import { Link } from 'react-router-dom'
 import apiHandler from "../../api/apiHandler"
-import Button from '../Base/Button/Button';
 import { format } from 'timeago.js';
 
 export class  FeedPostCard extends Component {
@@ -12,26 +11,26 @@ export class  FeedPostCard extends Component {
     super(props);
     this.state={
       favouritedState:false,
+      post:this.props.post,
     };
-    this.post = this.props.post;
     this.userID = this.props.userID;
     this.user=this.props.user;
-    this.postId = this.props.post._id;
-    this.postUserID = this.props.post.creator ? this.props.post.creator._id : '';
+    this.postId = this.state.post._id;
+    this.postUserID = this.state.post.creator ? this.state.post.creator._id : '';
     this.ownPost = String(this.postUserID) === this.userID ? true : false;
-    this.firstName = this.post.creator
-    ? this.post.creator.firstName !== undefined
-      ? this.post.creator.firstName
+    this.firstName = this.state.post.creator
+    ? this.state.post.creator.firstName !== undefined
+      ? this.state.post.creator.firstName
       : ''
     : '';
-    this.lastName = this.post.creator
-    ? this.post.creator.lastName !== undefined
-      ? this.post.creator.lastName
+    this.lastName = this.state.post.creator
+    ? this.state.post.creator.lastName !== undefined
+      ? this.state.post.creator.lastName
       : ''
     : '';
-    this.userImage = this.post.creator
-    ? this.post.creator.profileImg !== undefined
-      ? this.post.creator.profileImg
+    this.userImage = this.state.post.creator
+    ? this.state.post.creator.profileImg !== undefined
+      ? this.state.post.creator.profileImg
       : ''
     : '';
     this.createdAt = this.post.createdAt
@@ -42,20 +41,27 @@ export class  FeedPostCard extends Component {
 
 
   componentDidMount(){
-    if(this.props.user!==null) this.setState({favouritedState:this.props.user.favouritePosts.includes(this.post._id)})
+    if(this.props.user!==null) this.setState({favouritedState:this.props.user.favouritePosts.includes(this.state.post._id)})
   }
   componentDidUpdate(prevProps){
     if(this.props.user !== prevProps.user){
-      this.setState({favouritedState:this.props.user.favouritePosts.includes(this.post._id)})
+      this.setState({favouritedState:this.props.user.favouritePosts.includes(this.state.post._id)})
     }
+
+    if(this.props.post!==prevProps.post){
+      this.setState({post:this.props.post})
+    }
+
   }
   
   
 
   editCard=()=> {
-    this.props.showForm('edit', this.post);
+    this.props.showForm('edit', this.state.post);
   }
+
   deleteCard=()=> {
+    console.log("to delete post ID "+this.postId)
     this.props.onPostDeleted(this.postId);
   }
 
