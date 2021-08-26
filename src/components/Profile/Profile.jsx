@@ -32,6 +32,7 @@ export class Profile extends Component {
     const user = this.props.user;
     const name =
       this.props.context.user._id === user._id ? 'Your' : user.firstName;
+      const owner = this.props.context.user._id === user._id
     return (
       <React.Fragment>
         <div className="backdrop">
@@ -58,10 +59,10 @@ export class Profile extends Component {
                         return (
                           <div className="small-card">
                             <p>{post.title}</p>
-                            <p onClick={() => this.editCard(post)}>Edit</p>
-                            <p onClick={() => this.deleteCard(post._id)}>
+                            {owner && <p onClick={() => this.editCard(post)}>Edit</p>}
+                            {owner && <p onClick={() => this.deleteCard(post._id)}>
                               Delete
-                            </p>
+                            </p>}
                           </div>
                         );
                       })
