@@ -4,19 +4,12 @@ import Avatar from '../Avatar/Avatar';
 import './SideProfile.css';
 import { Link } from 'react-router-dom';
 import FavoriteDetails from './FavoriteDetails';
+import FavouriteList from '../../FavouriteList/FavouriteList';
 
 class SideProfile extends React.Component {
   state = {
     displayFavs: false,
   };
-
-  handleDisplayFavs = () => {
-    if (this.state.displayFavs) {
-        this.setState({displayFavs: !this.state.displayFavs})
-    }
-  }
-
-
 
   render() {
     const picture = null || this.props.context.user?.profileImg;
@@ -25,7 +18,6 @@ class SideProfile extends React.Component {
     const type = null || this.props.context.user?.type;
     const graduationYear = null || this.props.context.user?.graduationYear;
     const location = null || this.props.context.user?.location;
-    console.log(this.props.context.user)
     return (
       <>
         <div className="side-profile-container">
@@ -48,12 +40,24 @@ class SideProfile extends React.Component {
               </p>
             )}
           </div>
-          <div className={'favorites ' + this.state.displayFavs && 'active'}>
-            <div className={"arrow " + this.state.displayFavs && 'active'} onClick={this.handleDisplayFavs}>
+          <div
+            className={'favorites ' + (this.state.displayFavs ? 'active' : '')}
+          >
+            <div
+              className={'arrow ' + (this.state.displayFavs ? 'active' : '')}
+              onClick={() =>
+                this.setState({ displayFavs: !this.state.displayFavs })
+              }
+            >
               <span>|</span>
               <span>|</span>
             </div>
-            {this.state.displayFavs && <FavoriteDetails />}
+            {this.state.displayFavs && (
+              <>
+                <FavouriteList type="Post" />
+                <FavouriteList type="Job" />
+              </>
+            )}
           </div>
           <div className="edit-link">
             <Link to="/edit">Edit my profile</Link>
