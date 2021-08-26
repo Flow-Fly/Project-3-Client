@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import apiHandler from '../../api/apiHandler'
-import './FilterPost.css';
+import '../FilterJobs/FilterJobs.css';
 import FilterTag from '../Base/FilterTag/FilterTag';
 
 export class FilterPost extends Component {
@@ -8,6 +8,16 @@ export class FilterPost extends Component {
     filters: [],
     originalFilters: [],
   };
+
+  componentDidMount() {
+    let filtersTemp = [];
+    this.props.posts.forEach((post) => {
+      if (filtersTemp.includes(post.type) === false)
+        filtersTemp.push(post.type);
+    });
+
+    this.setState({ originalFilters: filtersTemp });
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.originalPosts !== prevProps.originalPosts) {

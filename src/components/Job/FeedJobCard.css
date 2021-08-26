@@ -1,14 +1,3 @@
-:root {
-  --mainLightBlueColor: #00b4ff;
-  --mainLightBlueColorHover: #007cb1;
-  --cadetBlue: #35a4b2;
-  --blueMansel: #008b9c;
-  --greenSheen: #77c0bb;
-  --orangeYellowCrayola: #ffd26f;
-  --peachCrayola: #ffcda8;
-  --linen: #fef3e9;
-}
-
 .FeedJobCard {
   width: 100%;
   padding: 0.7rem;
