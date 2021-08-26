@@ -1,6 +1,5 @@
 .side-profile-container {
     max-width: 300px;
-    max-height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -13,9 +12,7 @@
 }
 
 .wrapper-picture-and-name {
-    box-shadow: 0 0 4px .5px rgba(0, 0, 0, 0.315);
-    padding: .5rem;
-    border-radius: .5rem;
+
 }
 
 .side-profile-container .informations {
@@ -33,7 +30,20 @@
 
 .edit-link {
     width: 100%;
-    margin-top: 3rem;
+    margin-top: 0.5rem;
     border-top: 2px solid rgba(0, 0, 0, 0.233);
     justify-self: flex-end;
+}
+
+.informations{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+
+}
+
+.arrow{
+    font-size: 1.5rem;
+    cursor: pointer;
 }
