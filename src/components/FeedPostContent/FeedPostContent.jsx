@@ -28,6 +28,7 @@ export class FeedPostContent extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
+
       if (this.props.searchingPost && this.props.posts.length !== 0) {
         let str = this.props.path.substring(1);
 
@@ -41,6 +42,7 @@ export class FeedPostContent extends Component {
         });
       }
     }
+
   }
 
  
@@ -57,7 +59,7 @@ export class FeedPostContent extends Component {
           <h4>Loading</h4>
         </div>
       );
-      console.log(this.state.searchedPost)
+
 
     return (
       <div className="FeedPostContent">

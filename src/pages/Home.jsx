@@ -127,6 +127,7 @@ class Home extends React.Component {
   ////////post related///////////////////
   //Toggle postForm
   showPostForm = (action, post) => {
+    console.log("Iam being called")
     this.setState({
       showAddPostForm: true,
       postFormAction: action,
@@ -149,11 +150,21 @@ class Home extends React.Component {
 
   //render updated posts
   handlePostUpdated = (updatedPost) => {
-    const posts = this.state.posts.map((post) =>
-      post._id === updatedPost._id ? updatedPost : post
+
+    const refreshedPosts = this.state.posts.map((post) =>{
+      if (String(post._id) === String(updatedPost._id))
+      {
+        console.log("match")
+        return updatedPost
+      }
+
+      else {
+        return post
+      }
+    }
     );
     this.setState({
-      posts: posts,
+      posts: refreshedPosts,
       showAddPostForm: false,
       postFormAction: 'create',
     });
@@ -233,8 +244,7 @@ class Home extends React.Component {
       console.log("hash updated")
       this.setState({hashPath:this.props.location.hash})
     }
-
-
+    
 
   }
 

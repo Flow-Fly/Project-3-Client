@@ -12,50 +12,57 @@ export class  FeedPostCard extends Component {
     super(props);
     this.state={
       favouritedState:false,
+      post:this.props.post,
     };
-    this.post = this.props.post;
     this.userID = this.props.userID;
     this.user=this.props.user;
-    this.postId = this.props.post._id;
-    this.postUserID = this.props.post.creator ? this.props.post.creator._id : '';
+    this.postId = this.state.post._id;
+    this.postUserID = this.state.post.creator ? this.state.post.creator._id : '';
     this.ownPost = String(this.postUserID) === this.userID ? true : false;
-    this.firstName = this.post.creator
-    ? this.post.creator.firstName !== undefined
-      ? this.post.creator.firstName
+    this.firstName = this.state.post.creator
+    ? this.state.post.creator.firstName !== undefined
+      ? this.state.post.creator.firstName
       : ''
     : '';
-    this.lastName = this.post.creator
-    ? this.post.creator.lastName !== undefined
-      ? this.post.creator.lastName
+    this.lastName = this.state.post.creator
+    ? this.state.post.creator.lastName !== undefined
+      ? this.state.post.creator.lastName
       : ''
     : '';
-    this.userImage = this.post.creator
-    ? this.post.creator.profileImg !== undefined
-      ? this.post.creator.profileImg
+    this.userImage = this.state.post.creator
+    ? this.state.post.creator.profileImg !== undefined
+      ? this.state.post.creator.profileImg
       : ''
     : '';
-    this.createdAt = this.post.createdAt
-    ? this.post.createdAt.replace('T', ' ').slice(0, 16)
+    this.createdAt = this.state.post.createdAt
+    ? this.state.post.createdAt.replace('T', ' ').slice(0, 16)
     : '';
   }
 
 
 
   componentDidMount(){
-    if(this.props.user!==null) this.setState({favouritedState:this.props.user.favouritePosts.includes(this.post._id)})
+    if(this.props.user!==null) this.setState({favouritedState:this.props.user.favouritePosts.includes(this.state.post._id)})
   }
   componentDidUpdate(prevProps){
     if(this.props.user !== prevProps.user){
-      this.setState({favouritedState:this.props.user.favouritePosts.includes(this.post._id)})
+      this.setState({favouritedState:this.props.user.favouritePosts.includes(this.state.post._id)})
     }
+
+    if(this.props.post!==prevProps.post){
+      this.setState({post:this.props.post})
+    }
+
   }
   
   
 
   editCard=()=> {
-    this.props.showForm('edit', this.post);
+    this.props.showForm('edit', this.state.post);
   }
+
   deleteCard=()=> {
+    console.log("to delete post ID "+this.postId)
     this.props.onPostDeleted(this.postId);
   }
 
@@ -100,25 +107,25 @@ export class  FeedPostCard extends Component {
           </div>
   
         </div>
-        {this.post.title !== null && this.post.title !== undefined && this.post.title !== '' ? (
-          <Link to={`/post/#${this.postId}`}><div className="postCardTitle">{this.post.title}</div></Link>
+        {this.state.post.title !== null && this.state.post.title !== undefined && this.state.post.title !== '' ? (
+          <Link to={`/post/#${this.postId}`}><div className="postCardTitle">{this.state.post.title}</div></Link>
         ) : null}
-        {this.post.content !== null &&
-        this.post.content !== undefined &&
-        this.post.content !== '' ? (
-          <p>{this.post.content}</p>
+        {this.state.post.content !== null &&
+        this.state.post.content !== undefined &&
+        this.state.post.content !== '' ? (
+          <p>{this.state.post.content}</p>
         ) : null}
-        {this.post.image !== null && this.post.image !== undefined && this.post.image !== '' ? (
-          <img alt="" src={this.post.image}></img>
+        {this.state.post.image !== null && this.state.post.image !== undefined && this.state.post.image !== '' ? (
+          <img alt="" src={this.state.post.image}></img>
         ) : null}
   
-        {this.post.link !== null && this.post.link !== undefined && this.post.link !== '' ? (
-          <a className="postCardLink" href={this.post.link}>
-            {this.post.link}
+        {this.state.post.link !== null && this.state.post.link !== undefined && this.state.post.link !== '' ? (
+          <a className="postCardLink" href={this.state.post.link}>
+            {this.state.post.link}
           </a>
         ) : null}
-        {this.post.type !== null && this.post.type !== undefined && this.post.type !== '' ? (
-          <div className={"postCardType"+" "+this.post.type.replaceAll(' ', '')}>{this.post.type}</div>
+        {this.state.post.type !== null && this.state.post.type !== undefined && this.state.post.type !== '' ? (
+          <div className={"postCardType"+" "+this.state.post.type.replaceAll(' ', '')}>{this.state.post.type}</div>
         ) : null}
       </div>
     );
