@@ -104,20 +104,20 @@ class FeedJobCard extends Component {
             {''} at {''}
             {this.createdAt}
           </p>
-          {this.ownJob && (
-            <div className="button-edit-delete-wrapper">
+          <div className="button-edit-delete-wrapper">
+          {this.ownJob && (<>
               <Button  onClick={this.props.handleEditStart} className="jobCard">Edit</Button>
-              <Button  onClick={this.props.handleJobDelete} className="jobCard">Delete</Button>
-              {
-            this.state.favouritedState === false ?(
+              <Button  onClick={this.props.handleJobDelete} className="jobCard">Delete</Button></>)}
+
+            {this.state.favouritedState === false ?(
               <Button className="postCard favourites" onClick={this.addToFavourites}>☆</Button>
             ) :
             (
               <Button className="postCard favourites" onClick={this.removeFromFavourites}>★</Button>
-            )
-          }
+            )}
+          
+          
             </div>
-          )}
         </div>
         <Link to={`/job/#${this.jobId}`}>
           <h6 className="job-title">{this.props.job.title}</h6>
