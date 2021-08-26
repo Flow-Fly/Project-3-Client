@@ -101,7 +101,7 @@ class Messenger extends Component {
     }
 
     handleKeyDown = e => {
-        if(e.key === 'Enter' && e.shiftKey) return this.submitMessage(e)
+        if(e.key === 'Enter' && !e.shiftKey) return this.submitMessage(e)
     }
 
     addFriend = async e => {
