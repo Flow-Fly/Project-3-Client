@@ -15,9 +15,9 @@ export class  FeedPostCard extends Component {
     };
     this.userID = this.props.userID;
     this.user=this.props.user;
-    this.postId = this.state.post._id;
-    this.postUserID = this.state.post.creator ? this.state.post.creator._id : '';
-    this.ownPost = String(this.postUserID) === this.userID ? true : false;
+    this.state.postId = this.state.post._id;
+    this.state.postUserID = this.state.post.creator ? this.state.post.creator._id : '';
+    this.ownPost = String(this.state.postUserID) === this.userID ? true : false;
     this.firstName = this.state.post.creator
     ? this.state.post.creator.firstName !== undefined
       ? this.state.post.creator.firstName
@@ -33,8 +33,8 @@ export class  FeedPostCard extends Component {
       ? this.state.post.creator.profileImg
       : ''
     : '';
-    this.createdAt = this.post.createdAt
-    ? format(this.post.createdAt.replace('T', ' ').slice(0, 16))
+    this.createdAt = this.state.post.createdAt
+    ? format(this.state.post.createdAt)
     : '';
   }
 
@@ -61,18 +61,18 @@ export class  FeedPostCard extends Component {
   }
 
   deleteCard=()=> {
-    console.log("to delete post ID "+this.postId)
-    this.props.onPostDeleted(this.postId);
+    console.log("to delete post ID "+this.state.postId)
+    this.props.onPostDeleted(this.state.postId);
   }
 
   addToFavourites=()=> {
-    apiHandler.addFavouritePost(this.postId)
+    apiHandler.addFavouritePost(this.state.postId)
       .then((dbRes)=>
       {console.log("i got here");this.setState({favouritedState:true})})
       .catch((error)=>{console.log(error)})
   }
   removeFromFavourites=() =>{
-    apiHandler.deleteFavouritePost(this.postId)
+    apiHandler.deleteFavouritePost(this.state.postId)
       .then((dbRes)=>this.setState({favouritedState:false}))
       .catch((error)=>{console.log(error)})
   }
@@ -85,7 +85,7 @@ export class  FeedPostCard extends Component {
 
           <div className="publishInfos">
             <div className="wrapper-avatar" onClick={this.props.clickOnProfile}>
-              <Avatar url={this.userImage} size="small" id={this.postUserID} />
+              <Avatar url={this.userImage} size="small" id={this.state.postUserID} />
             </div>
             <div className="publishInfos-title">
             <span className='publishInfos-title-name'>{this.firstName + ' ' + this.lastName}</span> 
@@ -116,26 +116,26 @@ export class  FeedPostCard extends Component {
      
         <div className="postCard-body">
           <div className="postCard-body-image">
-          {this.post.image !== null && this.post.image !== undefined && this.post.image !== '' ? (
-            <img alt="" src={this.post.image}></img>
+          {this.state.post.image !== null && this.state.post.image !== undefined && this.state.post.image !== '' ? (
+            <img alt="" src={this.state.post.image}></img>
           ) : null}
           </div>
 
           <div className="postCard-body-content">
-          {this.post.title !== null && this.post.title !== undefined && this.post.title !== '' ? (
-          <Link to={`/post/#${this.postId}`}><div className="postCardTitle">{this.post.title}</div></Link>
+          {this.state.post.title !== null && this.state.post.title !== undefined && this.state.post.title !== '' ? (
+          <Link to={`/post/#${this.state.postId}`}><div className="postCardTitle">{this.state.post.title}</div></Link>
         ) : null}
 
-        {this.post.link !== null && this.post.link !== undefined && this.post.link !== '' ? (
-          <a className="postCardLink" href={this.post.link}>
-            {this.post.link}
+        {this.state.post.link !== null && this.state.post.link !== undefined && this.state.post.link !== '' ? (
+          <a className="postCardLink" href={this.state.post.link}>
+            {this.state.post.link}
           </a>
         ) : null}
 
-        {this.post.content !== null &&
-        this.post.content !== undefined &&
-        this.post.content !== '' ? (
-          <p>{this.post.content}</p>
+        {this.state.post.content !== null &&
+        this.state.post.content !== undefined &&
+        this.state.post.content !== '' ? (
+          <p>{this.state.post.content}</p>
         ) : null}
 
           </div>
@@ -143,8 +143,8 @@ export class  FeedPostCard extends Component {
         
   
   
-        {this.post.type !== null && this.post.type !== undefined && this.post.type !== '' ? (
-          <div className={"postCardType"+" "+this.post.type.replaceAll(' ', '')}>{this.post.type}</div>
+        {this.state.post.type !== null && this.state.post.type !== undefined && this.state.post.type !== '' ? (
+          <div className={"postCardType"+" "+this.state.post.type.replaceAll(' ', '')}>{this.state.post.type}</div>
         ) : null}
 
 
