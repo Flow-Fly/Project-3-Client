@@ -1,0 +1,9 @@
+.favList{
+    margin:0.3rem 0;
+}
+
+.remove:hover{
+    cursor: pointer;
+    background-color: black;
+    color: white;
+}

@@ -12,9 +12,11 @@ export class Feed extends Component {
     toggledTab: 'posts',
     displayProfile: false,
     user: null,
+    currentUser:null,
   };
 
   clickOnProfile = async (e) => {
+
     const id = e.target.getAttribute('data-id');
     if (!id) return console.log('id: ', id);
     try {
@@ -35,7 +37,17 @@ export class Feed extends Component {
     });
   };
 
-  componentDidMount() {
+  async componentDidMount() {
+
+    try {
+      const profile = await apiHandler.getUser(this.props.context.user._id);
+      this.setState({
+        currentUser: profile,
+      });
+    } catch (e) {
+      console.error(e);
+    }
+
     if (this.props.toJob) {
       this.setState(
         {
@@ -50,7 +62,6 @@ export class Feed extends Component {
   };
 
   render() {
-    console.log('Feed log: ', this.state);
     let filteredPosts = null;
     let filteredJobs = null;
 
@@ -65,8 +76,6 @@ export class Feed extends Component {
       );
       filteredPosts = filteredPosts.length === 0 ? null : filteredPosts;
       filteredJobs = filteredJobs.length === 0 ? null : filteredJobs;
-      console.log(filteredPosts);
-      console.log(filteredJobs);
     }
     return (
       <>
@@ -110,6 +119,9 @@ export class Feed extends Component {
                 showPostForm={this.props.showPostForm}
                 onPostDeleted={this.props.onPostDeleted}
                 clickOnProfile={this.clickOnProfile}
+                user={this.state.currentUser}
+                path={this.props.path}
+                searchingPost={this.props.toPost}
               />
             ) : (
               <FeedJobContent
@@ -120,7 +132,9 @@ export class Feed extends Component {
                 handleEditStart={this.props.handleEditStart}
                 clickOnProfile={this.clickOnProfile}
                 searchingJob={this.props.toJob}
-                
+                user={this.state.currentUser}
+                path={this.props.path}
+
               />
             )}
           </div>

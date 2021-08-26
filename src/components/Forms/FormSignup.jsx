@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { withRouter, Redirect } from 'react-router-dom';
 import { withUser } from '../Auth/withUser';
 import apiHandler from '../../api/apiHandler';
-import { Form, FormGroup, Label, Input, FormFeedback } from 'reactstrap';
+import { Form, FormGroup, Input, FormFeedback } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import './FormSign.css';
 import utils from '../../utils/helpers';
 import google from '../../assets/auth/btn_google_signin_light_normal_web@2x.png';
-import github from '../../assets/auth/github-btn.png'
-import logo from '../../Images/logo.png'
+import github from '../../assets/auth/github-btn.png';
+import logo from '../../Images/logo.png';
 
 const initialState = {
   canSubmit: '',
@@ -20,22 +20,9 @@ const initialState = {
   confirmation: '',
 };
 
-// const devState= {
-//   firstName: "Jean",
-//   lastName:"D'eau",
-//   email: "email@email.com",
-//   password: "1234@azer",
-//   phoneNumber: '123456789',
-//   graduationYear: 2020,
-//   location: 'Paris',
-//   type: 'webdev'
-
-// }
-
 class FormSignup extends Component {
-  
-  state = {...initialState}
-  
+  state = { ...initialState };
+
   handleChange = (event) => {
     let value = null;
     // titleMe capitalize every first letter of every word, accounting '-'...
@@ -53,12 +40,10 @@ class FormSignup extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
 
-    this.props.resetDisplayBlob()
-
     apiHandler
       .signup(this.state)
       .then(() => {
-        this.props.history.push('/signin');
+        this.props.goToSignin()
       })
       .catch((error) => {
         console.log(error);
@@ -81,7 +66,6 @@ class FormSignup extends Component {
       });
     } else {
       e.target.style.boxShadow = 'inset 0px 0px 2px 3px #21C078';
-
       this.setState({
         password: value,
         passwordSafe: true,
@@ -114,61 +98,56 @@ class FormSignup extends Component {
     return (
       <>
         <div className="form-container">
-          <span className="form-close" onClick={() => this.props.resetDisplayBlob()}></span>
-        <img id="signLogo" alt="signLogo" src={logo}></img>
+          <span
+            className="form-close"
+            onClick={() => this.props.resetDisplayBlob()}
+          ></span>
+          <img id="signLogo" alt="signLogo" src={logo}></img>
           <Form className="form" onSubmit={this.handleSubmit}>
             <FormGroup className="form-group">
-              
               <Input
                 className="input"
                 id="firstName"
                 name="firstName"
                 value={this.state.firstName}
                 onChange={this.handleChange}
-                onFocus={e => e.target.placeholder = ''}
-                onBlur={e => e.target.placeholder = 'First Name: '}
-                placeholder='First Name: '
+                onFocus={(e) => (e.target.placeholder = '')}
+                onBlur={(e) => (e.target.placeholder = 'First Name: ')}
+                placeholder="First Name: "
                 type="text"
-           
                 required
               />
             </FormGroup>
             <FormGroup className="form-group">
-         
               <Input
                 className="input"
                 id="lastName"
                 name="lastName"
                 value={this.state.lastName}
                 onChange={this.handleChange}
-                onFocus={e => e.target.placeholder = ''}
-                onBlur={e => e.target.placeholder = 'Last Name: '}
-                placeholder='Last Name: '
+                onFocus={(e) => (e.target.placeholder = '')}
+                onBlur={(e) => (e.target.placeholder = 'Last Name: ')}
+                placeholder="Last Name: "
                 type="text"
-        
                 required
               />
             </FormGroup>
             <FormGroup className="form-group">
-      
               <Input
                 className="input"
                 id="email"
                 name="email"
                 value={this.state.email}
                 onChange={this.handleChange}
-                onFocus={e => e.target.placeholder = ''}
-                onBlur={e => e.target.placeholder = 'Email: '}
-                placeholder='Email: '
+                onFocus={(e) => (e.target.placeholder = '')}
+                onBlur={(e) => (e.target.placeholder = 'Email: ')}
+                placeholder="Email: "
                 type="text"
-          
                 required
               />
             </FormGroup>
 
             <FormGroup className="form-group">
-         
-
               {this.state.password === '' ? (
                 <Input
                   className="input"
@@ -177,12 +156,11 @@ class FormSignup extends Component {
                   value={this.state.password}
                   onChange={this.handlePassword}
                   type="password"
-                  onFocus={e => e.target.placeholder = ''}
-                onBlur={e => e.target.placeholder = 'Password: '}
-                placeholder='Password: '
+                  onFocus={(e) => (e.target.placeholder = '')}
+                  onBlur={(e) => (e.target.placeholder = 'Password: ')}
+                  placeholder="Password: "
                   required
                   autoComplete="new-password"
-               
                 />
               ) : this.state.passwordSafe ? (
                 <>
@@ -193,8 +171,8 @@ class FormSignup extends Component {
                     value={this.state.password}
                     onChange={this.handlePassword}
                     type="password"
-                    onFocus={e => e.target.placeholder = ''}
-                    onBlur={e => e.target.placeholder = 'Password: '}
+                    onFocus={(e) => (e.target.placeholder = '')}
+                    onBlur={(e) => (e.target.placeholder = 'Password: ')}
                     required
                     valid
                     autoFocus
@@ -210,14 +188,14 @@ class FormSignup extends Component {
                     value={this.state.password}
                     onChange={this.handlePassword}
                     type="password"
-                    onFocus={e => e.target.placeholder = ''}
-                onBlur={e => e.target.placeholder = 'Password: '}
+                    onFocus={(e) => (e.target.placeholder = '')}
+                    onBlur={(e) => (e.target.placeholder = 'Password: ')}
                     required
                     invalid
                     autoComplete="new-password"
                     autoFocus
                   />
-                  <FormFeedback invalid='true'>
+                  <FormFeedback invalid="true">
                     Your password must contain atleast 8 characters, a number
                     and a punctuation.
                   </FormFeedback>
@@ -225,7 +203,6 @@ class FormSignup extends Component {
               )}
             </FormGroup>
             <FormGroup className="form-group">
-    
               {this.state.confirmation === '' ? (
                 <Input
                   className="input"
@@ -234,9 +211,11 @@ class FormSignup extends Component {
                   value={this.state.confirmation}
                   onChange={this.handleConfirm}
                   type="password"
-                  onFocus={event => event.target.placeholder = ''}
-                  onBlur={event => event.target.placeholder = 'Confirm you password: '}
-                  placeholder= 'Confirm your password: '
+                  onFocus={(event) => (event.target.placeholder = '')}
+                  onBlur={(event) =>
+                    (event.target.placeholder = 'Confirm you password: ')
+                  }
+                  placeholder="Confirm your password: "
                   required
                 />
               ) : this.state.canSubmit ? (
@@ -248,8 +227,10 @@ class FormSignup extends Component {
                     value={this.state.confirmation}
                     onChange={this.handleConfirm}
                     type="password"
-                    onFocus={event => event.target.placeholder = ''}
-                  onBlur={event => event.target.placeholder = 'Confirm you password: '}
+                    onFocus={(event) => (event.target.placeholder = '')}
+                    onBlur={(event) =>
+                      (event.target.placeholder = 'Confirm you password: ')
+                    }
                     required
                     valid
                     autoFocus
@@ -265,13 +246,15 @@ class FormSignup extends Component {
                     value={this.state.confirmation}
                     onChange={this.handleConfirm}
                     type="password"
-                    onFocus={event => event.target.placeholder = ''}
-                  onBlur={event => event.target.placeholder = 'Confirm you password: '}
+                    onFocus={(event) => (event.target.placeholder = '')}
+                    onBlur={(event) =>
+                      (event.target.placeholder = 'Confirm you password: ')
+                    }
                     required
                     invalid
                     autoFocus
                   />
-                  <FormFeedback invalid='true'>
+                  <FormFeedback invalid="true">
                     Your passwords are not matching
                   </FormFeedback>
                 </>

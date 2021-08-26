@@ -84,6 +84,83 @@ export class FilterJobs extends Component {
 
   render() {
     return (
+      // <>
+      //   <div className="jobFilterWrapper">
+      //     <h6>Filter by job domain</h6>
+      //     <div className="jobFilterTag">
+      //       {this.state.availableTypeFilters.map((filter) => {
+      //         return (
+      //           <FilterTag
+      //             key={filter}
+      //             filter={filter}
+      //             isActive={
+      //               this.state.typeFilters.includes(filter) ? 'active' : ''
+      //             }
+      //             toggleSelection={() => {
+      //               this.toggleSelection('typeFilters', filter);
+      //             }}
+      //           />
+      //         );
+      //       })}
+
+      //       <h6>Filter by contract type</h6>
+      //       <div className="jobFilterTag">
+      //         {this.state.availableContractTypeFilters.map((filter) => {
+      //           return (
+      //             <FilterTag
+      //               key={filter}
+      //               filter={filter}
+      //               isActive={
+      //                 this.state.contractTypeFilters.includes(filter)
+      //                   ? 'active'
+      //                   : ''
+      //               }
+      //               toggleSelection={() => {
+      //                 this.toggleSelection('contractTypeFilters', filter);
+      //               }}
+      //             />
+      //           );
+      //         })}
+      //       </div>
+      //     </div>
+
+      //     <h6>Filter by job location</h6>
+      //     <div className="jobFilterTag">
+      //       {this.state.availableLocationFilters.map((filter) => {
+      //         return (
+      //           <FilterTag
+      //             key={filter}
+      //             filter={filter}
+      //             isActive={
+      //               this.state.locationFilters.includes(filter) ? 'active' : ''
+      //             }
+      //             toggleSelection={() => {
+      //               this.toggleSelection('locationFilters', filter);
+      //             }}
+      //           />
+      //         );
+      //       })}
+      //     </div>
+      //     <h6>Filter by job level</h6>
+      //     <div className="jobFilterTag">
+      //       {this.state.availableLevelFilters.map((filter) => {
+      //         return (
+      //           <FilterTag
+      //             key={filter}
+      //             filter={filter}
+      //             isActive={
+      //               this.state.levelFilters.includes(filter) ? 'active' : ''
+      //             }
+      //             toggleSelection={() => {
+      //               this.toggleSelection('levelFilters', filter);
+      //             }}
+      //           />
+      //         );
+      //       })}
+      //     </div>
+      //   </div>
+      // </>
+
       <div>
         <div className="jobFilterWrapper">
           <h6>Filter by job domain</h6>
@@ -104,65 +181,65 @@ export class FilterJobs extends Component {
             })}
           </div>
         </div>
-        <div className="jobFilterWrapper">
-          <h6>Filter by contract type</h6>
-          <div className="jobFilterTag">
-            {this.state.availableContractTypeFilters.map((filter) => {
-              return (
-                <FilterTag
-                  key={filter}
-                  filter={filter}
-                  isActive={
-                    this.state.contractTypeFilters.includes(filter)
-                      ? 'active'
-                      : ''
-                  }
-                  toggleSelection={() => {
-                    this.toggleSelection('contractTypeFilters', filter);
-                  }}
-                />
-              );
-            })}
-          </div>
+      <div className="jobFilterWrapper">
+        <h6>Filter by contract type</h6>
+        <div className="jobFilterTag">
+          {this.state.availableContractTypeFilters.map((filter) => {
+            return (
+              <FilterTag
+                key={filter}
+                filter={filter}
+                isActive={
+                  this.state.contractTypeFilters.includes(filter)
+                    ? 'active'
+                    : ''
+                }
+                toggleSelection={() => {
+                  this.toggleSelection('contractTypeFilters', filter);
+                }}
+              />
+            );
+          })}
         </div>
-        <div className="jobFilterWrapper">
-          <h6>Filter by job location</h6>
-          <div className="jobFilterTag">
-            {this.state.availableLocationFilters.map((filter) => {
-              return (
-                <FilterTag
-                  key={filter}
-                  filter={filter}
-                  isActive={
-                    this.state.locationFilters.includes(filter) ? 'active' : ''
-                  }
-                  toggleSelection={() => {
-                    this.toggleSelection('locationFilters', filter);
-                  }}
-                />
-              );
-            })}
-          </div>
+      </div>
+      <div className="jobFilterWrapper">
+        <h6>Filter by job location</h6>
+        <div className="jobFilterTag">
+          {this.state.availableLocationFilters.map((filter) => {
+            return (
+              <FilterTag
+                key={filter}
+                filter={filter}
+                isActive={
+                  this.state.locationFilters.includes(filter) ? 'active' : ''
+                }
+                toggleSelection={() => {
+                  this.toggleSelection('locationFilters', filter);
+                }}
+              />
+            );
+          })}
         </div>
-        <div className="jobFilterWrapper">
-          <h6>Filter by job level</h6>
-          <div className="jobFilterTag">
-            {this.state.availableLevelFilters.map((filter) => {
-              return (
-                <FilterTag
-                  key={filter}
-                  filter={filter}
-                  isActive={
-                    this.state.levelFilters.includes(filter) ? 'active' : ''
-                  }
-                  toggleSelection={() => {
-                    this.toggleSelection('levelFilters', filter);
-                  }}
-                />
-              );
-            })}
-          </div>
+      </div>
+      <div className="jobFilterWrapper">
+        <h6>Filter by job level</h6>
+        <div className="jobFilterTag">
+          {this.state.availableLevelFilters.map((filter) => {
+            return (
+              <FilterTag
+                key={filter}
+                filter={filter}
+                isActive={
+                  this.state.levelFilters.includes(filter) ? 'active' : ''
+                }
+                toggleSelection={() => {
+                  this.toggleSelection('levelFilters', filter);
+                }}
+              />
+            );
+          })}
         </div>
+      </div>
       </div>
     );
   }

@@ -39,6 +39,7 @@ class Home extends React.Component {
     displayMessenger: false,
     displayInblob: null,
     blobStarted: false,
+    hashPath:null, //test
   };
 
   ////////job related////////////
@@ -196,6 +197,7 @@ class Home extends React.Component {
         jobs: jobsInfo,
         posts: posts,
         originalPosts: posts,
+        hashPath:this.props.location.hash //test
       });
     } catch (error) {
       console.log(error);
@@ -212,7 +214,7 @@ class Home extends React.Component {
   //   }
   // };
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.context.isLoggedIn === false) {
       if (this.state.blobStarted === false) {
         console.log('tween started');
@@ -226,6 +228,14 @@ class Home extends React.Component {
         this.setState({ blobStarted: true });
       }
     }
+
+    if(this.props.location.hash!==prevProps.location.hash){
+      console.log("hash updated")
+      this.setState({hashPath:this.props.location.hash})
+    }
+
+
+
   }
 
   notifications = () => {
@@ -237,10 +247,14 @@ class Home extends React.Component {
     return notifications;
   };
 
+  redirectToSignin = () => {
+    this.setState({ displayInblob: 'login' })
+  }
+
   render() {
-    console.log(this.props.location)
-    console.log(this.props.toJob)
-    //console.log(window.location.hash)
+    // console.log(this.props.location)
+    // console.log(this.props.toJob)
+    // console.log(window.location.hash)
     if (this.props.context.isLoading) {
       return null;
     } else if (this.props.context.isLoggedIn) {
@@ -309,7 +323,9 @@ class Home extends React.Component {
               handleEditStart={this.handleEditStart}
               onPostDeleted={this.handlePostDelete}
               toJob={this.props.toJob}
-              path={this.props.location.hash}
+              toPost={this.props.toPost}
+              //path={this.props.location.hash}
+              path={this.state.hashPath}
             ></Feed>
 
             {/* Right Side */}
@@ -340,7 +356,7 @@ class Home extends React.Component {
     } else {
       //To be rendered if you are not logged in, hence this is landing page
       return (
-        <div className="homePageBody">
+        <div className="homePageBodyBlob">
           <section id="mainBlobSection">
             <svg
               className={
@@ -381,7 +397,7 @@ class Home extends React.Component {
                   }
                 />
               ) : this.state.displayInblob === 'signup' ? (
-                <FormSignup
+                <FormSignup goToSignin={this.redirectToSignin}
                   resetDisplayBlob={() =>
                     this.setState({ displayInblob: null })
                   }
