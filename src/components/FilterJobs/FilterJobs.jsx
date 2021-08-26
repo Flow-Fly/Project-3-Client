@@ -163,7 +163,7 @@ export class FilterJobs extends Component {
 
       <div>
         <div className="jobFilterWrapper">
-          <h6>Filter by job domain</h6>
+          <h6>Filter jobs by domain</h6>
           <div className="jobFilterTag">
             {this.state.availableTypeFilters.map((filter) => {
               return (
@@ -182,7 +182,7 @@ export class FilterJobs extends Component {
           </div>
         </div>
       <div className="jobFilterWrapper">
-        <h6>Filter by contract type</h6>
+        <h6>Filter jobs by contract type</h6>
         <div className="jobFilterTag">
           {this.state.availableContractTypeFilters.map((filter) => {
             return (
@@ -203,7 +203,7 @@ export class FilterJobs extends Component {
         </div>
       </div>
       <div className="jobFilterWrapper">
-        <h6>Filter by job location</h6>
+        <h6>Filter jobs by location</h6>
         <div className="jobFilterTag">
           {this.state.availableLocationFilters.map((filter) => {
             return (
@@ -222,7 +222,7 @@ export class FilterJobs extends Component {
         </div>
       </div>
       <div className="jobFilterWrapper">
-        <h6>Filter by job level</h6>
+        <h6>Filter jobs by experience</h6>
         <div className="jobFilterTag">
           {this.state.availableLevelFilters.map((filter) => {
             return (

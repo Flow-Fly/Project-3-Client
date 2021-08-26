@@ -40,7 +40,12 @@ class Home extends React.Component {
     displayInblob: null,
     blobStarted: false,
     hashPath:null, //test
+    filterTab: 'posts' 
   };
+
+  toggleFilterTab(id){
+    this.setState({filterTab: id})
+  }
 
   ////////job related////////////
   // 2 api calls on FormJob(create and update), 1 here(delete)
@@ -308,16 +313,21 @@ class Home extends React.Component {
             {/* //Left SIDE */}
             <div className="sideDiv">
               <SideProfile />
-              <FilterPost
-                posts={this.state.posts}
-                filterPosts={this.handlePostFilter}
-                originalPosts={this.state.originalPosts}
+              {this.filterTab === 'posts' && 
+                  <FilterPost
+                    posts={this.state.posts}
+                    filterPosts={this.handlePostFilter}
+                    originalPosts={this.state.originalPosts}
+                />
+              }
+              {this.filteredJobs === 'jobs' && 
+                <FilterJobs
+                  jobs={this.state.jobs}
+                  originalJobs={this.state.originalJobs}
+                  filterJobs={this.filterJobs}
               />
-              <FilterJobs
-                jobs={this.state.jobs}
-                originalJobs={this.state.originalJobs}
-                filterJobs={this.filterJobs}
-              />
+              }
+    
             </div>
 
             {/* Middle=FEED */}
@@ -340,6 +350,7 @@ class Home extends React.Component {
               toPost={this.props.toPost}
               //path={this.props.location.hash}
               path={this.state.hashPath}
+              toggleFilterTab={this.toggleFilterTab}
             ></Feed>
 
             {/* Right Side */}

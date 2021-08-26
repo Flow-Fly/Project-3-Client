@@ -69,6 +69,7 @@ export class Feed extends Component {
 
   toggleTab = (event) => {
     this.setState({ toggledTab: event.target.id });
+    this.props.toggleFilterTab(event.target.id)
   };
 
   render() {
