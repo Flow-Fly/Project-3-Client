@@ -27,10 +27,7 @@ const NavMain = (props) => {
         console.log(error);
       });
   }
-  let color;
-  // if (context.user) {
-  //   color = context.user.type.replaceAll(' ', '')
-  // }
+
   return (
     <nav className="NavMain">
       <div className="nav-content">

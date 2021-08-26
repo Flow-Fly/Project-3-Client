@@ -175,6 +175,7 @@ class Home extends React.Component {
     apiHandler
       .deleteOnePost(postId)
       .then(() => {
+        console.log('delete worked')
         this.setState({
           posts: this.state.posts.filter((post) => post._id !== postId),
         });

@@ -38,8 +38,6 @@ export class  FeedPostCard extends Component {
     : '';
   }
 
-
-
   componentDidMount(){
     if(this.props.user!==null) this.setState({favouritedState:this.props.user.favouritePosts.includes(this.state.post._id)})
   }
@@ -54,8 +52,6 @@ export class  FeedPostCard extends Component {
 
   }
   
-  
-
   editCard=()=> {
     this.props.showForm('edit', this.state.post);
   }
@@ -80,7 +76,7 @@ export class  FeedPostCard extends Component {
   render(){
 
     return (
-      <div className={'FeedPostCard'+" "+ (this.state.favouritedState?'favourite':"") +" "+ (this.props.color && "highlighted")  } >
+      <div className={'FeedPostCard ' + (this.state.favouritedState?'favourite':"") +" "+ (this.props.color && "highlighted")  } >
         <div className="postCardPublish">
 
           <div className="publishInfos">
@@ -140,14 +136,10 @@ export class  FeedPostCard extends Component {
 
           </div>
         </div>
-        
-  
-  
+
         {this.state.post.type !== null && this.state.post.type !== undefined && this.state.post.type !== '' ? (
-          <div className={"postCardType"+" "+this.state.post.type.replaceAll(' ', '')}>{this.state.post.type}</div>
+          <div className={"postCardType " + this.state.post.type.replaceAll(' ', '')}>{this.state.post.type}</div>
         ) : null}
-
-
 
       </div>
     );

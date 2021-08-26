@@ -12,28 +12,26 @@ function App() {
   return (
     <div className="App">
       <NavMain />
-      <Switch>
-        <div className="mainPage">
-          <Route exact path="/" component={Home} />
-          <Route exact path="/signin" component={Signin} />
-          <Route exact path="/signup" component={Signup} />
-          <Route exact path="/job">
-              <Route path='/:id'
-                component={(props) => <Home {...props} toJob={true} />}
-              />
-          </Route>
-          <Route exact path="/post">
-              <Route path='/:id'
-                component={(props) => <Home {...props} toPost={true} />}
-              />
-          </Route>
-          <ProtectedRoute exact path="/profile" component={Profile} />
-
-          {/* <ProtectedRoute exact path="/messenger" component={Messenger} /> */}
-          <ProtectedRoute exact path="/edit" component={FormEditProfile} />
-        </div>
-      </Switch>
-    </div>
+      <div className="mainPage">
+        <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/signin" component={Signin} />
+            <Route exact path="/signup" component={Signup} />
+            <Route exact path="/job">
+                <Route path='/:id'
+                  component={(props) => <Home {...props} toJob={true} />}
+                />
+            </Route>
+            <Route exact path="/post">
+                <Route path='/:id'
+                  component={(props) => <Home {...props} toPost={true} />}
+                />
+            </Route>
+            <ProtectedRoute exact path="/profile" component={Profile} />
+            <ProtectedRoute exact path="/edit" component={FormEditProfile} />
+        </Switch>
+      </div>
+  </div>
   );
 }
 

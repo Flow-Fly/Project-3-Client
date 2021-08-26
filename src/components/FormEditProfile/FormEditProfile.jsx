@@ -184,7 +184,6 @@ export class FormEditProfile extends Component {
                 name="location"
                 id="location"
                 type="select"
-                name="location"
                 value={this.state.user.location}
                 onChange={this.handleChange}
               >
@@ -218,7 +217,6 @@ export class FormEditProfile extends Component {
                 id="type"
                 type="select"
                 required
-                name="type"
                 value={this.state.user.type}
                 onChange={this.handleChange}
               >

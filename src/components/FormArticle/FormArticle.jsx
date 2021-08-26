@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Button from '../Base/Button/Button';
 import apiHandler from '../../api/apiHandler';
 import './FormArticle.css';
-import { Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Form, FormGroup, Label, Input } from 'reactstrap';
 
 //Form component to be used either for creating an article or editing it
 export class FormArticle extends Component {
