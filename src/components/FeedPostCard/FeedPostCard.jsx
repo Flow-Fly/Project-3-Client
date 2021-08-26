@@ -74,7 +74,7 @@ export class FeedPostCard extends Component {
     apiHandler
       .addFavouritePost(this.state.postId)
       .then((dbRes) => {
-        console.log('i got here');
+        // console.log('i got here');
         this.setState({ favouritedState: true });
       })
       .catch((error) => {
@@ -191,18 +191,6 @@ export class FeedPostCard extends Component {
             }
           >
             {this.state.post.type}
-          </div>
-        ) : null}
-
-        {this.post.type !== null &&
-        this.post.type !== undefined &&
-        this.post.type !== '' ? (
-          <div
-            className={
-              'postCardType' + ' ' + this.post.type.replaceAll(' ', '')
-            }
-          >
-            {this.post.type}
           </div>
         ) : null}
       </div>
