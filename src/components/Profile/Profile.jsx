@@ -39,71 +39,37 @@ export class Profile extends Component {
           <div className="wrapper-profile">
             <div className="profile-container">
               <div className="main-infos">
-                <Avatar url={user.profileImg} size="big" />
-                <h5>
-                  {user.firstName} {user.lastName}
-                </h5>
-              </div>
-              <Button className="close" onClick={this.props.close}>
-                X
-              </Button>
-
-              <div className="profile-content">
-                <div className="post-created">
-                  <div className="title">
-                    <h4>{name} posts:</h4>
-                  </div>
-                  <div className="content">
-                    {this.props.posts ? (
-                      this.props.posts.map((post) => {
-                        return (
-                          <div className="small-card">
-                            <p>{post.title}</p>
-                            {owner && <p onClick={() => this.editCard(post)}>Edit</p>}
-                            {owner && <p onClick={() => this.deleteCard(post._id)}>
-                              Delete
-                            </p>}
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <div className="small-card">
-                        <p>Go and spread fun!</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="job-created">
-                  <div className="title">
-                    <h4>{name} created jobs:</h4>
-                  </div>
-                  <div className="content">
-                    {this.props.jobs ? (
-                      this.props.jobs.map((job) => {
-                        return (
-                          <div className="small-card">
-                            <p>{job.title}</p>
-                          </div>
-                        );
-                      })
-                    ) : (
-                      <div className="small-card">
-                        <p>Go and recruit your friends!</p>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                {name === 'Your' && (
-                  <div className="saved-list">
-                    <div className="title">
-                      <h4>{name} Favourites:</h4>
+                    <div className="profilHeader">
+                    <Avatar url={user.profileImg} size="huge" />    
+                        <div className="infoDiv">
+                          <h5>{user.firstName} {user.lastName}</h5>
+                        </div>
                     </div>
-                    <div className="content">
-                      <FavouriteList  type={'Post'} />
-                      <FavouriteList  type={'Job'} />
-                    </div>
-                  </div>
-                )}
+                      <div className="profile-content">
+                        <div className="infoDiv">
+                          <span className="strongSpan">Graduated in:</span> 
+                          <span className="infoSpan">{user.graduationYear} </span>
+                        </div>
+                        <div className="infoDiv">
+                          <span className="strongSpan">Location:</span> 
+                          <span className="infoSpan">{user.location} </span>
+                        </div>
+                        <div className="infoDiv">
+                          <span className="strongSpan">Field:</span>
+                          <span className="infoSpan">{user.type} </span> 
+                        </div>
+                        <div className="infoDiv">
+                          <span className="strongSpan">Email:</span> 
+                          <span className="infoSpan">{user.email} </span>
+                        </div>
+                        <div className="infoDiv">
+                          <span className="strongSpan">Phone:</span> 
+                          <span className="infoSpan">{user.phoneNumber} </span>
+                        </div>
+                      </div>
+                  <Button className="close" onClick={this.props.close}>
+                   X
+                  </Button>
               </div>
             </div>
           </div>

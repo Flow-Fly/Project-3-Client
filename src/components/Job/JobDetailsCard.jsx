@@ -24,7 +24,7 @@ export class JobDetailsCard extends Component {
 
         {
           <p onClick={this.props.onClose}>
-            <span className="flash"> ˄ </span>
+            <span className="flash"> close </span>
           </p>
         }
       </>

@@ -18,6 +18,8 @@ class SideProfile extends React.Component {
     const type = null || this.props.context.user?.type;
     const graduationYear = null || this.props.context.user?.graduationYear;
     const location = null || this.props.context.user?.location;
+    const email = null || this.props.context.user?.email;
+    const phoneNumber = null || this.props.context.user?.phoneNumber;
     return (
       <>
         <div className="side-profile-container">
@@ -28,6 +30,7 @@ class SideProfile extends React.Component {
             </h5>
             {type && <h6>{type}</h6>}
           </div>
+
           <div className="informations">
             {graduationYear && (
               <p>
@@ -37,6 +40,16 @@ class SideProfile extends React.Component {
             {location && (
               <p>
                 From: <span>{location} Campus</span>
+              </p>
+            )}
+            {email && (
+              <p>
+                Email: <span>{email}</span>
+              </p>
+            )}
+            {phoneNumber && (
+              <p>
+                Phone: <span>{phoneNumber}</span>
               </p>
             )}
           </div>
@@ -49,8 +62,7 @@ class SideProfile extends React.Component {
                 this.setState({ displayFavs: !this.state.displayFavs })
               }
             >
-              <span>|</span>
-              <span>|</span>
+              {this.state.displayFavs ?"⇧" :"⇩"}
             </div>
             {this.state.displayFavs && (
               <>
