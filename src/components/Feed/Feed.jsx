@@ -9,6 +9,7 @@ import { withUser } from '../Auth/withUser';
 // FeedJobContent and FeedPostContent elements
 export class Feed extends Component {
   state = {
+    toggledTab: 'posts',
     displayProfile: false,
     user: null,
     currentUser:null,
@@ -69,6 +70,7 @@ export class Feed extends Component {
   };
 
   render() {
+   
     return (
       <>
         {this.state.displayProfile && (

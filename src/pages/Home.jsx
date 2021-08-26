@@ -351,7 +351,7 @@ class Home extends React.Component {
               //path={this.props.location.hash}
               path={this.state.hashPath}
               toggleFilterTab={this.toggleFilterTab}
-              filterTab={this.filterTab}
+              filterTab={this.state.filterTab}
             ></Feed>
 
             {/* Right Side */}
