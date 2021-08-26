@@ -51,14 +51,11 @@ export class FeedJobContent extends Component {
               key={job._id}
               job={job}
               showJobForm={this.props.showJobForm}
-              handleEditStart={() => {
-                this.props.handleEditStart(job);
-              }}
-              handleJobDelete={() => {
-                this.props.handleJobDelete(job._id);
-              }}
+              handleEditStart={() => {this.props.handleEditStart(job); }}
+              handleJobDelete={() => {this.props.handleJobDelete(job._id);}}
               clickOnProfile={this.props.clickOnProfile}
               userID={this.props.context.user._id}
+              user={this.props.user}
             />
           );
         })}
