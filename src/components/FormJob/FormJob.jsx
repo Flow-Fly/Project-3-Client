@@ -132,6 +132,12 @@ export class FormJob extends Component {
             x
           </button>
         </div>
+        {this.props.action === 'create' && (
+          <h3 className="formTitle">Share new job</h3>
+        )}
+        {this.state.action === 'edit' && (
+          <h3 className="formTitle">Update job</h3>
+        )}
 
         <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup className="form-group">
@@ -223,7 +229,7 @@ export class FormJob extends Component {
             />
           </FormGroup>
           <FormGroup className="form-group">
-            <Label className="label" htmlFor="remote">
+            <Label className="label checkbox" htmlFor="remote">
               Remote
             </Label>
             <Input

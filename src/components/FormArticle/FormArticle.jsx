@@ -96,9 +96,9 @@ export class FormArticle extends Component {
           x
         </Button>
         {this.state.action === 'create' ? (
-          <h3 className="formTitle">Create new Post</h3>
+          <h3 className="formTitle">Create new post</h3>
         ) : this.state.action === 'edit' ? (
-          <h3 className="formTitle">Update Post</h3>
+          <h3 className="formTitle">Update post</h3>
         ) : null}
         <Form className="form" onSubmit={this.handleSubmit}>
           <FormGroup className="form-group">

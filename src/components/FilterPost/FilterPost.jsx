@@ -69,7 +69,7 @@ export class FilterPost extends Component {
 
     return (
       <div className="filterPostWrapper">
-        <h5>Filter posts by post</h5>
+        <h6>Filter posts by post</h6>
         <div className="filerPostTag">
           {this.state.originalFilters.map((filter) => {
             return (

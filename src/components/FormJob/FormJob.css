@@ -56,3 +56,7 @@
 .button-close-form:hover {
   background-color: var(--mainLightBlueColorHover);
 }
+
+.label.checkbox {
+  margin-right: 0.5rem;
+}

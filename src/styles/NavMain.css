@@ -33,7 +33,7 @@
 
 .nav-list li > p:hover {
   cursor: pointer;
-  color: #0d6efd;
+  color: var(--mainLightBlueColorHover);
 }
 .nav-list li {
   font-weight: bolder;
