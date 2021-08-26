@@ -41,7 +41,7 @@ export class FavouriteList extends Component {
       return <div className="loading">Loading...</div>;
     return (
       <div className="favList">
-        <h6>{this.props.type}:</h6>
+        <h6>Favourite {this.props.type}s:</h6>
         <ul>
           {this.state.elements.map((element) => {
             return (
