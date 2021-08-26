@@ -72,7 +72,6 @@ export class Feed extends Component {
   };
 
   render() {
-    
     return (
       <>
         {this.state.displayProfile && (
