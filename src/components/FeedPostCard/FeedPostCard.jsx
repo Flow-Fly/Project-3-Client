@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 function FeedPostCard(props) {
   let post = props.post;
   //let favourited =post.creator.favouritePosts.includes(post._id);
-  const [favouritedState, setFavourite] = useState(post.creator.favouritePosts.includes(post._id));
+  const [favouritedState, setFavourite] = useState(post.creator?.favouritePosts?.includes(post._id));
   let userID = props.userID;
   let postId = post._id;
   let postUserID = post.creator ? post.creator._id : '';
