@@ -24,7 +24,7 @@ class Home extends React.Component {
   state = {
     displayedJob: null,
     jobs: [],
-    showJobForm: false,
+    showAddJobForm: false,
     jobFormAction: 'create',
     jobFormJob: null,
     /////////
@@ -47,20 +47,20 @@ class Home extends React.Component {
   //toggle jobForm
   showJobForm = (action) => {
     this.setState({
-      showJobForm: true,
+      showAddJobForm: true,
       jobFormAction: 'create',
       jobFormJob: null,
     });
   };
 
   closeJobForm = () => {
-    this.setState({ showJobForm: false });
+    this.setState({ showAddJobForm: false });
   };
 
   //toggle form for job edit
   handleEditStart = (job) => {
     this.setState({
-      showJobForm: true,
+      showAddJobForm: true,
       jobFormAction: 'edit',
       jobFormJob: job,
     });
@@ -70,7 +70,7 @@ class Home extends React.Component {
   handleJobCreated = (createdJob) => {
     this.setState({
       jobs: [createdJob, ...this.state.jobs],
-      showJobForm: false,
+      showAddJobForm: false,
       jobFormAction: 'edit',
       // to clean up job form after
       jobFormJob: null,
@@ -85,7 +85,7 @@ class Home extends React.Component {
     );
     this.setState({
       jobs: jobs,
-      showJobForm: false,
+      showAddJobForm: false,
       jobFormAction: 'edit',
       jobFormJob: null,
       originalJobs: [...this.state.jobs],
@@ -141,7 +141,7 @@ class Home extends React.Component {
   handlePostCreated = (createdPost) => {
     this.setState({
       posts: [createdPost, ...this.state.posts],
-      showJobForm: false,
+      showAddJobForm: false,
       showAddPostForm: false,
       postFormAction: 'create',
     });
@@ -315,13 +315,17 @@ class Home extends React.Component {
             <Feed
               jobs={this.state.jobs}
               // loadJobs={this.loadJobs}
-              showJobForm={this.showJobForm}
+              showAddJobForm={this.state.showAddJobForm}
               posts={this.state.posts}
               loadPosts={this.loadPosts}
               showPostForm={this.showPostForm}
+              showJobForm={this.showJobForm}
+              showAddPostForm={this.state.showAddPostForm}
               handleJobDelete={this.handleJobDelete}
               handleEditStart={this.handleEditStart}
               onPostDeleted={this.handlePostDelete}
+              closePostForm={this.closePostForm}
+              closeJobForm={this.closeJobForm}
               toJob={this.props.toJob}
               toPost={this.props.toPost}
               //path={this.props.location.hash}
@@ -330,7 +334,7 @@ class Home extends React.Component {
 
             {/* Right Side */}
             <div className="homeRightSide">
-              {this.state.showJobForm === true && (
+              {this.state.showAddJobForm === true && (
                 <FormJob
                   closeJobForm={this.closeJobForm}
                   // loadJobs={this.loadJobs}

@@ -47,6 +47,8 @@ export class FeedPostContent extends Component {
 
   createNewButton = (event) => {
     event.preventDefault();
+    if(this.props.showAddPostForm) return this.props.closePostForm();
+    
     this.props.showPostForm('create');
   };
 
@@ -57,7 +59,6 @@ export class FeedPostContent extends Component {
           <h4>Loading</h4>
         </div>
       );
-      console.log(this.state.searchedPost)
 
     return (
       <div className="FeedPostContent">

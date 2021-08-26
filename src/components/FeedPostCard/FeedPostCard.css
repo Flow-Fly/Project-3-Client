@@ -2,20 +2,19 @@
 .FeedPostCard {
   width: 100%;
   box-shadow: 0px 0px 6px 4px rgba(65, 65, 65, 0.267);
-  padding: 0.3rem;
+  padding: 2rem 3rem;
   margin: 0.5rem 0;
   border-radius: 0.3rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
+  position: relative;
 }
+
 .FeedPostCard.highlighted {
   box-shadow: 0px 0px 6px 4px rgba(228, 162, 19, 0.856);
 }
 
-.FeedPostCard img {
-  height: 200px;
-}
 
 .postCardType {
   align-self: flex-end;
@@ -45,11 +44,16 @@
 
 .postCardTitle {
   font-weight: bolder;
+  line-height: 1;
+  font-size: 1.3rem;
+}
+
+.postCardTitle:hover{
+  color: var(--mainLightBlueColorHover);
 }
 
 .postCardPublish {
   align-self: flex-start;
-  font-size: 0.6rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -67,53 +71,81 @@
 }
 
 .postCardLink {
+  display: block;
   font-style: italic;
   font-weight: 500;
+  padding-bottom: 1.5rem;
+}
+
+.postCardLink:hover{
+    color: var(--mainLightBlueColorHover);  
 }
 
 .wrapper-avatar {
-  margin: 0.2rem 0.7rem;
+  margin-right: .5rem;
 }
 
 .publishLinks{
   display: flex;
   align-items: center;
+  font-size: .9rem;
 }
 
-.favourite{
-  border: 1px solid black;
-  box-shadow: 0px 0px 6px 4px rgba(42, 42, 42, 0.705);
+.publishLinks span{
+  display: inline-block;
+  margin-left: .8rem;
 }
 
-.Button.postCard{
-  background-color: transparent;
-  color:black;
-  padding: .375rem .75rem;
-  line-height: 0.5rem;
-  margin:0.1rem;
-  border-radius: 0.25rem;
-  border: 1px solid transparent;
+.publishLinks span:hover{
+ cursor: pointer;
+ color: var(--mainLightBlueColorHover);
+}
+
+.postCard.favourites{
+  color: var(--mainLightBlueColor);
   font-weight: bolder;
-  font-size: 0.5rem;
-  transition: all 0.2s ease-in-out;
-}
-
-.Button.postCard.favourites{
-  background-color: transparent;
-  color:var(--mainLightBlueColorHover);
-  padding: .1rem .1rem;
-  line-height:normal;
-  margin:0.1rem;
-  border-radius: 0.25rem;
-  border: 1px solid transparent;
-  font-weight: bolder;
-  font-size: 1.7rem;
+  font-size: 2rem;
   transition: all 0.1s ease-in-out;
+  margin-bottom: .25rem;
 }
 
+.publishInfos-title{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
 
-.Button.postCard:hover{
-  background-color: transparent;
+.publishInfos-title-name{
+  font-weight: 800;
+  font-size: .8rem;
+  color: var(--grey);
+}
+
+.publishInfos-title-name:hover{
   cursor: pointer;
-  transform: scale(1.2);
+  color: var(--mainLightBlueColorHover);
 }
+
+.postCard-body{
+  display: flex;
+  align-items: center;
+  padding-top: .5rem;
+}
+
+.postCard-body-image{
+  height: fit-content;
+  padding-right: 1rem;
+}
+
+.postCard-body-content{
+  width: 60%;
+  line-height: 1.8;
+}
+
+
+.FeedPostCard img {
+  height: 200px;
+  width: auto;
+}
+

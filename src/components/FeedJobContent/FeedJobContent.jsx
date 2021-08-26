@@ -19,7 +19,9 @@ export class FeedJobContent extends Component {
 
   //toggle job form
   showJobForm = (event) => {
-    event.preventDefault();
+    event.preventDefault(); 
+    if(this.props.showAddJobForm) return this.props.closeJobForm()
+
     this.props.showJobForm('create');
   };
 
@@ -28,7 +30,6 @@ export class FeedJobContent extends Component {
   }
 
   render() {
-    console.log('rendered');
     if (this.props.jobsInfo === []) {
       return <div className="FeedJobContent">Loading...</div>;
     }

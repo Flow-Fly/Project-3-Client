@@ -113,6 +113,8 @@ export class Feed extends Component {
                 posts={this.props.posts}
                 loadPosts={this.props.loadPosts}
                 showPostForm={this.props.showPostForm}
+                showAddPostForm={this.props.showAddPostForm}
+                closePostForm={this.props.closePostForm}
                 onPostDeleted={this.props.onPostDeleted}
                 clickOnProfile={this.clickOnProfile}
                 user={this.state.currentUser}
@@ -124,8 +126,10 @@ export class Feed extends Component {
                 jobs={this.props.jobs}
                 // loadJobs={this.props.loadJobs}
                 showJobForm={this.props.showJobForm}
+                showAddJobForm={this.props.showAddJobForm}
                 handleJobDelete={this.props.handleJobDelete}
                 handleEditStart={this.props.handleEditStart}
+                closeJobForm={this.props.closeJobForm}
                 clickOnProfile={this.clickOnProfile}
                 searchingJob={this.props.toJob}
                 user={this.state.currentUser}

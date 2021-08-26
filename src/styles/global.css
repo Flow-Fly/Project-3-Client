@@ -1,6 +1,8 @@
 :root {
   --mainLightBlueColor: #2BC5FA;
   --mainLightBlueColorHover: #007cb1;
+  --grey: #525252; 
+  --blobColor: #00567A;
   --cadetBlue: #35a4b2;
   --blueMansel: #008b9c;
   --greenSheen: #77c0bb;

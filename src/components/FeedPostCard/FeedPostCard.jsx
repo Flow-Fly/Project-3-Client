@@ -4,7 +4,7 @@ import Avatar from '../Base/Avatar/Avatar';
 import { Link } from 'react-router-dom'
 import apiHandler from "../../api/apiHandler"
 import Button from '../Base/Button/Button';
-
+import { format } from 'timeago.js';
 
 export class  FeedPostCard extends Component {
 
@@ -35,7 +35,7 @@ export class  FeedPostCard extends Component {
       : ''
     : '';
     this.createdAt = this.post.createdAt
-    ? this.post.createdAt.replace('T', ' ').slice(0, 16)
+    ? format(this.post.createdAt.replace('T', ' ').slice(0, 16))
     : '';
   }
 
@@ -76,50 +76,73 @@ export class  FeedPostCard extends Component {
     return (
       <div className={'FeedPostCard'+" "+ (this.state.favouritedState?'favourite':"") +" "+ (this.props.color && "highlighted")  } >
         <div className="postCardPublish">
+
           <div className="publishInfos">
             <div className="wrapper-avatar" onClick={this.props.clickOnProfile}>
-              <Avatar url={this.userImage} size="tiny" id={this.postUserID} />
+              <Avatar url={this.userImage} size="small" id={this.postUserID} />
             </div>
-            Published by: {this.firstName + ' ' + this.lastName} at {this.createdAt}
+            <div className="publishInfos-title">
+            <span className='publishInfos-title-name'>{this.firstName + ' ' + this.lastName}</span> 
+            <span>{this.createdAt}</span>
+            </div>
+            
           </div>
+
           <div className="publishLinks">
           {this.ownPost === true && (
             <div >
-              <Button className="postCard" onClick={this.editCard}>Edit</Button>
-              <Button className="postCard" onClick={this.deleteCard}>Delete</Button>
+              <span className="postCard" onClick={this.editCard}>Edit</span>
+              <span className="postCard" onClick={this.deleteCard}>Delete</span>
             </div>
           )}
+          
           {
             this.state.favouritedState === false ?(
-              <Button className="postCard favourites" onClick={this.addToFavourites}>☆</Button>
+              <span className="postCard favourites" onClick={this.addToFavourites}>☆</span>
             ) :
             (
-              <Button className="postCard favourites" onClick={this.removeFromFavourites}>★</Button>
+              <span className="postCard favourites" onClick={this.removeFromFavourites}>★</span>
             )
           }
           </div>
   
         </div>
-        {this.post.title !== null && this.post.title !== undefined && this.post.title !== '' ? (
+     
+        <div className="postCard-body">
+          <div className="postCard-body-image">
+          {this.post.image !== null && this.post.image !== undefined && this.post.image !== '' ? (
+            <img alt="" src={this.post.image}></img>
+          ) : null}
+          </div>
+
+          <div className="postCard-body-content">
+          {this.post.title !== null && this.post.title !== undefined && this.post.title !== '' ? (
           <Link to={`/post/#${this.postId}`}><div className="postCardTitle">{this.post.title}</div></Link>
         ) : null}
-        {this.post.content !== null &&
-        this.post.content !== undefined &&
-        this.post.content !== '' ? (
-          <p>{this.post.content}</p>
-        ) : null}
-        {this.post.image !== null && this.post.image !== undefined && this.post.image !== '' ? (
-          <img alt="" src={this.post.image}></img>
-        ) : null}
-  
+
         {this.post.link !== null && this.post.link !== undefined && this.post.link !== '' ? (
           <a className="postCardLink" href={this.post.link}>
             {this.post.link}
           </a>
         ) : null}
+
+        {this.post.content !== null &&
+        this.post.content !== undefined &&
+        this.post.content !== '' ? (
+          <p>{this.post.content}</p>
+        ) : null}
+
+          </div>
+        </div>
+        
+  
+  
         {this.post.type !== null && this.post.type !== undefined && this.post.type !== '' ? (
           <div className={"postCardType"+" "+this.post.type.replaceAll(' ', '')}>{this.post.type}</div>
         ) : null}
+
+
+
       </div>
     );
 
