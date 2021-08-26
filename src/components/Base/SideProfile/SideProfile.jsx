@@ -1,43 +1,71 @@
-import React from 'react'
+import React from 'react';
 import { withUser } from '../../Auth/withUser';
-import Avatar from '../Avatar/Avatar'
-import './SideProfile.css'
-import {Link} from 'react-router-dom'
+import Avatar from '../Avatar/Avatar';
+import './SideProfile.css';
+import { Link } from 'react-router-dom';
+import FavoriteDetails from './FavoriteDetails';
+import FavouriteList from '../../FavouriteList/FavouriteList';
 
+class SideProfile extends React.Component {
+  state = {
+    displayFavs: false,
+  };
 
-const SideProfile = (props) => {
-    const picture = null || props.context.user?.profileImg
-    const firstName = null || props.context.user?.firstName
-    const lastName = null || props.context.user?.lastName
-    const type = null || props.context.user?.type
-    const graduationYear = null || props.context.user?.graduationYear
-    const location = null || props.context.user?.location
-
+  render() {
+    const picture = null || this.props.context.user?.profileImg;
+    const firstName = null || this.props.context.user?.firstName;
+    const lastName = null || this.props.context.user?.lastName;
+    const type = null || this.props.context.user?.type;
+    const graduationYear = null || this.props.context.user?.graduationYear;
+    const location = null || this.props.context.user?.location;
     return (
-        <>
+      <>
         <div className="side-profile-container">
-            <div className="wrapper-picture-and-name">
-
-            <Avatar url={picture} size='big' />
+          <div className="wrapper-picture-and-name">
+            <Avatar url={picture} size="big" />
             <h5>
-                {firstName}&nbsp;{lastName}
+              {firstName}&nbsp;{lastName}
             </h5>
             {type && <h6>{type}</h6>}
+          </div>
+          <div className="informations">
+            {graduationYear && (
+              <p>
+                Graduated in: <span>{graduationYear}</span>
+              </p>
+            )}
+            {location && (
+              <p>
+                From: <span>{location} Campus</span>
+              </p>
+            )}
+          </div>
+          <div
+            className={'favorites ' + (this.state.displayFavs ? 'active' : '')}
+          >
+            <div
+              className={'arrow ' + (this.state.displayFavs ? 'active' : '')}
+              onClick={() =>
+                this.setState({ displayFavs: !this.state.displayFavs })
+              }
+            >
+              <span>|</span>
+              <span>|</span>
             </div>
-            <div className="informations">
-                {graduationYear && <p>
-                    Graduated in: <span>{graduationYear}</span>
-                </p>}
-                {location && <p>
-                    From: <span>{location} Campus</span>
-                    </p>}
-            </div>
-            <div className="edit-link">
-            <Link to='/edit'>Edit my profile</Link>
-            </div>
+            {this.state.displayFavs && (
+              <>
+                <FavouriteList type="Post" />
+                <FavouriteList type="Job" />
+              </>
+            )}
+          </div>
+          <div className="edit-link">
+            <Link to="/edit">Edit my profile</Link>
+          </div>
         </div>
-        </>
-    )
+      </>
+    );
+  }
 }
 
-export default withUser(SideProfile)
+export default withUser(SideProfile);
