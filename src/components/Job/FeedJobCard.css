@@ -62,6 +62,10 @@
   text-align: left;
 }
 
+.flash {
+  cursor: pointer;
+}
+
 .flash:hover {
   color: var(--mainLightBlueColor);
 }
@@ -79,4 +83,25 @@
 
 .job-content {
   margin: 0 2rem;
+}
+
+.publish-links-wrapper {
+  display: flex;
+  margin-right: 0.8rem;
+}
+
+.publishLinks {
+  align-items: center;
+  font-size: 0.9rem;
+  margin-left: 0.8rem;
+}
+
+.publishLinks span {
+  display: inline-block;
+  margin-left: 0.8rem;
+}
+
+.publishLinks:hover {
+  cursor: pointer;
+  color: var(--mainLightBlueColorHover);
 }

@@ -12,11 +12,10 @@ export class Feed extends Component {
     toggledTab: 'posts',
     displayProfile: false,
     user: null,
-    currentUser:null,
+    currentUser: null,
   };
 
   clickOnProfile = async (e) => {
-
     const id = e.target.getAttribute('data-id');
     if (!id) return console.log('id: ', id);
     try {
@@ -35,7 +34,7 @@ export class Feed extends Component {
         displayProfile: true,
         user: profile,
         filteredJobs,
-        filteredPosts
+        filteredPosts,
       });
     } catch (e) {
       console.error(e);
@@ -50,7 +49,6 @@ export class Feed extends Component {
   };
 
   async componentDidMount() {
-
     try {
       const profile = await apiHandler.getUser(this.props.context.user._id);
       this.setState({
@@ -61,16 +59,15 @@ export class Feed extends Component {
     }
 
     if (this.props.toJob) {
-      this.props.toggleFilterTab('jobs')
+      this.props.toggleFilterTab('jobs');
     }
   }
 
   toggleTab = (event) => {
-    this.props.toggleFilterTab(event.target.id)
+    this.props.toggleFilterTab(event.target.id);
   };
 
   render() {
-   
     return (
       <>
         {this.state.displayProfile && (
@@ -98,7 +95,7 @@ export class Feed extends Component {
               onClick={this.toggleTab}
               id="jobs"
               className={
-                this.state.filterTab === 'jobs' ? 'tabs active' : 'tabs right'
+                this.props.filterTab === 'jobs' ? 'tabs active' : 'tabs right'
               }
             >
               Jobs

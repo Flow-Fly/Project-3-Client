@@ -105,6 +105,11 @@
   font-size: 2rem;
   transition: all 0.1s ease-in-out;
   margin-bottom: 0.25rem;
+  cursor: pointer;
+}
+
+.postCard.favourites:hover {
+  color: var(--mainLightBlueColorHover);
 }
 
 .publishInfos-title {

@@ -5,22 +5,21 @@ import FormJob from '../FormJob/FormJob';
 import '../FormJob/FormJob.css';
 import { withUser } from '../Auth/withUser';
 
-
 export class FeedJobContent extends Component {
   state = {
     showJobDetails: {},
   };
 
   componentDidMount() {
-    if(this.props.searchingJob) {
+    if (this.props.searchingJob) {
       //TODO
     }
   }
 
   //toggle job form
   showJobForm = (event) => {
-    event.preventDefault(); 
-    if(this.props.showAddJobForm) return this.props.closeJobForm()
+    event.preventDefault();
+    if (this.props.showAddJobForm) return this.props.closeJobForm();
 
     this.props.showJobForm('create');
   };
@@ -52,8 +51,12 @@ export class FeedJobContent extends Component {
               key={job._id}
               job={job}
               showJobForm={this.props.showJobForm}
-              handleEditStart={() => {this.props.handleEditStart(job); }}
-              handleJobDelete={() => {this.props.handleJobDelete(job._id);}}
+              handleEditStart={() => {
+                this.props.handleEditStart(job);
+              }}
+              handleJobDelete={() => {
+                this.props.handleJobDelete(job._id);
+              }}
               clickOnProfile={this.props.clickOnProfile}
               userID={this.props.context.user._id}
               user={this.props.user}

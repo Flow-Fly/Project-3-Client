@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import apiHandler from '../../api/apiHandler'
 import '../FilterJobs/FilterJobs.css';
 import FilterTag from '../Base/FilterTag/FilterTag';
 
@@ -58,18 +57,9 @@ export class FilterPost extends Component {
   };
 
   render() {
-    // if (this.state.isOriginalLoaded===false && this.props.originalPosts.length>0){
-    //     let filtersTemp=[];
-    //     this.props.posts.forEach((post)=>{
-    //     if (filtersTemp.includes(post.type)===false) filtersTemp.push(post.type);
-    //     })
-
-    //     this.setState({originalFilters:filtersTemp,isOriginalLoaded:true})
-    // }
-
     return (
       <div className="filterPostWrapper">
-        <h5>Filter posts by post</h5>
+        <h6>Filter posts by post</h6>
         <div className="filerPostTag">
           {this.state.originalFilters.map((filter) => {
             return (
