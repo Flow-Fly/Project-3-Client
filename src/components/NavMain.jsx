@@ -38,7 +38,7 @@ const NavMain = (props) => {
           {context.isLoggedIn && (
             <React.Fragment>
               <li>
-                <NavLink to="/profile">
+                <NavLink to="/edit">
                   {context.user && (
                     <Avatar url={context.user.profileImg} size="tiny" />
                   )}

@@ -71,9 +71,6 @@ class SideProfile extends React.Component {
               </>
             )}
           </div>
-          <div className="edit-link">
-            <Link to="/edit">Edit my profile</Link>
-          </div>
         </div>
       </>
     );
