@@ -19,6 +19,7 @@ const initial = {
     type: -1,
   },
   edited: false,
+  usedEmail: false,
 };
 export class FormEditProfile extends Component {
   state = { ...initial };
@@ -41,6 +42,19 @@ export class FormEditProfile extends Component {
     }
     const key = event.target.name;
     this.setState({ user: { ...this.state.user, [key]: value } });
+  };
+
+  checkEmail = async (e) => {
+    try {
+      const email = await apiHandler.getUserByMail(e.target.value);
+      if (email.length === 1) {
+        this.setState({ usedEmail: true });
+      } else {
+        this.setState({ usedEmail: false });
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   handleSubmit = async (event) => {
@@ -83,9 +97,6 @@ export class FormEditProfile extends Component {
         <div className="form-container">
           <Form className="form" onSubmit={this.handleSubmit}>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="firstName" hidden>
-                First name:
-              </Label>
               <Input
                 className="input"
                 id="firstName"
@@ -98,9 +109,6 @@ export class FormEditProfile extends Component {
               />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="lastName" hidden>
-                Last name:
-              </Label>
               <Input
                 className="input"
                 id="lastName"
@@ -113,19 +121,20 @@ export class FormEditProfile extends Component {
               />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="email" hidden>
-                Email:
-              </Label>
               <Input
                 className="input"
                 id="email"
                 name="email"
                 value={this.state.user.email}
                 onChange={this.handleChange}
+                onBlur={this.checkEmail}
                 type="text"
                 placeholder="Email"
                 required
               />
+              {this.state.usedEmail && (
+                <span className="feedback">This email is already used</span>
+              )}
             </FormGroup>
             <Uploader
               ref={this.imageRef}
@@ -140,9 +149,6 @@ export class FormEditProfile extends Component {
             </Uploader>
 
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="phoneNumber">
-                Phone number:{' '}
-              </Label>
               <Input
                 className="input"
                 id="phoneNumber"
@@ -155,9 +161,6 @@ export class FormEditProfile extends Component {
             </FormGroup>
 
             <FormGroup className="form-group">
-              <Label className="label" htmlFor="graduationYear">
-                Graduation year:{' '}
-              </Label>
               <Input
                 className="input"
                 id="graduationYear"
@@ -171,15 +174,6 @@ export class FormEditProfile extends Component {
               />
             </FormGroup>
             <FormGroup className="form-group">
-              <Label
-                className="label"
-                htmlFor="location"
-                value={this.state.user.location}
-                onChange={this.handleChange}
-              >
-                Location:{' '}
-              </Label>
-
               <Input
                 name="location"
                 id="location"
@@ -203,15 +197,6 @@ export class FormEditProfile extends Component {
             </FormGroup>
 
             <FormGroup className="form-group">
-              <Label
-                className="label"
-                htmlFor="type"
-                value={this.state.user.type}
-                onChange={this.handleChange}
-              >
-                Field of work:{' '}
-              </Label>
-
               <Input
                 name="type"
                 id="type"
@@ -228,7 +213,8 @@ export class FormEditProfile extends Component {
               </Input>
             </FormGroup>
 
-            <Button>Save Edits</Button>
+            {this.state.usedEmail && <Button disabled>Verify inputs</Button>}
+            {!this.state.usedEmail && <Button>Save Edits</Button>}
           </Form>
         </div>
       </>

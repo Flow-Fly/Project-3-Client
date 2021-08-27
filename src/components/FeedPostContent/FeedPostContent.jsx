@@ -6,11 +6,10 @@ import { withUser } from '../Auth/withUser';
 
 export class FeedPostContent extends Component {
   state = {
-    searchedPost:null,
-    allPosts:null,
+    searchedPost: null,
+    allPosts: null,
   };
-  componentDidMount(){
-
+  componentDidMount() {
     if (this.props.searchingPost && this.props.posts.length !== 0) {
       let str = this.props.path.substring(1);
 
@@ -23,12 +22,10 @@ export class FeedPostContent extends Component {
         allPosts: allPosts,
       });
     }
-
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps !== this.props) {
-
       if (this.props.searchingPost && this.props.posts.length !== 0) {
         let str = this.props.path.substring(1);
 
@@ -42,15 +39,12 @@ export class FeedPostContent extends Component {
         });
       }
     }
-
   }
-
- 
 
   createNewButton = (event) => {
     event.preventDefault();
-    if(this.props.showAddPostForm) return this.props.closePostForm();
-    
+    if (this.props.showAddPostForm) return this.props.closePostForm();
+
     this.props.showPostForm('create');
   };
 
@@ -76,7 +70,7 @@ export class FeedPostContent extends Component {
             post={this.state.searchedPost}
             clickOnProfile={this.props.clickOnProfile}
             userID={this.props.context.user._id}
-            color='yellow'
+            color="yellow"
             user={this.props.user}
           />
         )}

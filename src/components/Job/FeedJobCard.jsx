@@ -109,7 +109,10 @@ class FeedJobCard extends Component {
     }
 
     return (
-      <div className="FeedJobCard" id={this.jobId}>
+      <div
+        className={`FeedJobCard ${this.props.color && 'highlighted'}`}
+        id={this.jobId}
+      >
         <div className="flex-wrapper">
           <div className="job-publish-info-left">
             <div className="wrapper-avatar" onClick={this.props.clickOnProfile}>

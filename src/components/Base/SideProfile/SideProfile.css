@@ -28,13 +28,6 @@
     font-weight: 500;
 }
 
-.edit-link {
-    width: 100%;
-    margin-top: 0.5rem;
-    border-top: 2px solid rgba(0, 0, 0, 0.233);
-    justify-self: flex-end;
-}
-
 .informations{
     width: 100%;
     display: flex;

@@ -168,7 +168,12 @@ export class FeedPostCard extends Component {
             {this.state.post.link !== null &&
             this.state.post.link !== undefined &&
             this.state.post.link !== '' ? (
-              <a className="postCardLink" href={this.state.post.link}>
+              <a
+                className="postCardLink"
+                href={this.state.post.link}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 {this.state.post.link}
               </a>
             ) : null}

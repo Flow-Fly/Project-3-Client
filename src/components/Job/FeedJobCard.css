@@ -17,6 +17,10 @@
   box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
 }
 
+.FeedJobCard.highlighted {
+  box-shadow: 0px 0px 6px 4px rgba(228, 162, 19, 0.856);
+}
+
 .button-edit-delete-wrapper {
   margin-left: 30%;
   display: flex;
