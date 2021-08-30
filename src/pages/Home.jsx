@@ -209,7 +209,6 @@ import FilterPost from '../components/FilterPost/FilterPost';
     if(!this.props.context.isLoggedIn) return
 
     try {
-      console.log('try')
       let posts = await apiHandler.getAllPost();
       let jobsInfo = await apiHandler.getJobs();
       
@@ -257,7 +256,6 @@ import FilterPost from '../components/FilterPost/FilterPost';
     if(prevProps === this.props) return
     if(!this.props.context.isLoggedIn) return
     try {
-      console.log('TRYTRY')
       let posts = await apiHandler.getAllPost();
       let jobsInfo = await apiHandler.getJobs();
       
