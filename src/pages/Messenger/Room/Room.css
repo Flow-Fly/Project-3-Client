@@ -5,6 +5,7 @@
     justify-content: flex-start;
     align-items: center;
     margin-bottom: .7rem;
+    padding: .5rem;
 }
 
 .roomCard:hover{
@@ -18,7 +19,7 @@
 }
 
 .read{
-    opacity: .7;
+    opacity: .5;
 }
 
 .status{
@@ -38,3 +39,9 @@
 .offline{
     background-color: rgba(45, 53, 76)
 }
+
+.activeRoom{
+    background-color: rgb(232, 242, 248);
+
+  }
+  

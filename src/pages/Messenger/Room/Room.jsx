@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Avatar from '../../../components/Base/Avatar/Avatar'
+import { withMessenger } from '../../../components/MessengerCtx/withMessenger'
 import './Room.css'
 
 class Room extends Component {
@@ -23,7 +24,7 @@ class Room extends Component {
 
     render() {
         return (
-            <div className='roomCard'>
+            <div className={this.props.room._id === this.props.messengerContext.currentRoom?._id ? 'roomCard activeRoom' : 'roomCard'}>
                 <Avatar size="small" url={this.state.friend?.profileImg} type={this.state.friend?.type}>
                     <div className={this.isConnected() ? "status online" : "status offline"}></div>
                 </Avatar>
@@ -41,4 +42,4 @@ class Room extends Component {
     }
 }
 
-export default Room
+export default withMessenger(Room)

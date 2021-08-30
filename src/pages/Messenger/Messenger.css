@@ -182,6 +182,3 @@
   transform: rotate(-45deg);
 }
 
-.activeRoom{
-  border: solid 2px var(--mainLightBlueColor);
-}

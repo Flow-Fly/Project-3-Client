@@ -207,7 +207,6 @@ class Messenger extends Component {
                             return (
                                 <div 
                                     key={index} 
-                                    className={room._id === this.props.messengerContext.currentRoom?._id ? 'activeRoom' : ''}
                                     onClick={() => this.openRoom(room)}>
                                     <Room 
                                         room={room} 
