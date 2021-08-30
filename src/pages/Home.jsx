@@ -20,7 +20,7 @@ import FormSignup from '../components/Forms/FormSignup';
 import FilterJobs from '../components/FilterJobs/FilterJobs';
 import FilterPost from '../components/FilterPost/FilterPost';
 
-class Home extends React.Component {
+  class Home extends React.Component {
   state = {
     displayedJob: null,
     jobs: [],
@@ -205,10 +205,14 @@ class Home extends React.Component {
   blob2Ref = React.createRef();
 
   async componentDidMount() {
+
+    if(!this.props.context.isLoggedIn) return
+
     try {
+      console.log('try')
       let posts = await apiHandler.getAllPost();
       let jobsInfo = await apiHandler.getJobs();
-
+      
       this.setState({
         originalJobs: jobsInfo,
         jobs: jobsInfo,
@@ -231,7 +235,7 @@ class Home extends React.Component {
   //   }
   // };
 
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps, prevState) {
     if (this.props.context.isLoggedIn === false) {
       if (this.state.blobStarted === false) {
         const tween = KUTE.fromTo(
@@ -250,6 +254,23 @@ class Home extends React.Component {
       this.setState({hashPath:this.props.location.hash})
     }
     
+    if(prevProps === this.props) return
+    if(!this.props.context.isLoggedIn) return
+    try {
+      console.log('TRYTRY')
+      let posts = await apiHandler.getAllPost();
+      let jobsInfo = await apiHandler.getJobs();
+      
+      this.setState({
+        originalJobs: jobsInfo,
+        jobs: jobsInfo,
+        posts: posts,
+        originalPosts: posts,
+        hashPath:this.props.location.hash //test
+      });
+    } catch (error) {
+      console.log(error);
+    }
 
   }
 
