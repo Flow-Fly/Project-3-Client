@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormGroup, Label, Input } from 'reactstrap';
+import { Form, FormGroup, Input } from 'reactstrap';
 import Button from '../Base/Button/Button';
 import utils from '../../utils/helpers';
 import Uploader from '../Base/Uploader/Uploader';

@@ -135,14 +135,14 @@ export class FeedPostCard extends Component {
                 className="postCard favourites"
                 onClick={this.addToFavourites}
               >
-                <i class="far fa-star"></i>
+                <i className="far fa-star"></i>
               </span>
             ) : (
               <span
                 className="postCard favourites"
                 onClick={this.removeFromFavourites}
               >
-                <i class="fas fa-star"></i>
+                <i className="fas fa-star"></i>
               </span>
             )}
           </div>

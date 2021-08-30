@@ -14,7 +14,6 @@ class Messenger extends Component {
         super(props)
         
         this.state = {
-            currentRoom: null,
             messages: [],
             writtingMessage : '',
             socket: null,
@@ -62,8 +61,8 @@ class Messenger extends Component {
     }
 
     async openRoom(room){
-
         this.isLoading = false
+        
         try{
             await this.props.messengerContext.openRoom(room)
         }
@@ -206,7 +205,10 @@ class Messenger extends Component {
                 <div className="roomsList">
                         {this.props.messengerContext.rooms.map((room, index) => {
                             return (
-                                <div key={index} onClick={() => this.openRoom(room)}>
+                                <div 
+                                    key={index} 
+                                    className={room._id === this.props.messengerContext.currentRoom?._id ? 'activeRoom' : ''}
+                                    onClick={() => this.openRoom(room)}>
                                     <Room 
                                         room={room} 
                                         me={this.user} 

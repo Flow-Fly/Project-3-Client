@@ -173,9 +173,15 @@
   width: 2px;
   background-color: white;
 }
+
 .messenger-close:before {
   transform: rotate(45deg);
 }
+
 .messenger-close:after {
   transform: rotate(-45deg);
+}
+
+.activeRoom{
+  border: solid 2px var(--mainLightBlueColor);
 }
