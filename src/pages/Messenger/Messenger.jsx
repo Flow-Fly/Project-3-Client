@@ -40,7 +40,6 @@ class Messenger extends Component {
         try{
             const emails = await apiHandler.getUsersEmail()
             this.setState({suggestedEmails: emails.map(email => email.email)})
-            
         }
         catch(err){
             console.error(err)
