@@ -66,3 +66,7 @@
   font-weight: 800;
   text-transform: uppercase;
 }
+
+.tabs:not(.active) {
+  background-color: rgb(232, 242, 248);
+}

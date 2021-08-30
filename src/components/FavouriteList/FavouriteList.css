@@ -5,8 +5,17 @@
     align-items: flex-start;
 }
 
+.remove {
+    position: absolute;
+    left: 25px;
+    color: var(--grey)
+}
+
 .remove:hover{
     cursor: pointer;
-    background-color: black;
-    color: white;
+    color: rgb(143, 52, 52);
+}
+
+.favList ul {
+    text-align: left;
 }

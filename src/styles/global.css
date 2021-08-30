@@ -134,15 +134,15 @@ ul {
 
 
 
-.WebDev {
+.WebDev:not(.avatar) {
   background-color: rgb(226, 245, 226);
 }
-.UI\/UX {
+.UI\/UX:not(.avatar) {
   background-color: rgb(228, 228, 245);
 }
-.CyberSecurity {
+.CyberSecurity:not(.avatar) {
   background-color: rgb(243, 225, 225);
 }
-.DataAnalyst {
+.DataAnalyst:not(.avatar) {
   background-color: rgb(247, 231, 247);
 }

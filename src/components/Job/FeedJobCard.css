@@ -18,7 +18,8 @@
 }
 
 .FeedJobCard.highlighted {
-  box-shadow: 0px 0px 6px 4px rgba(228, 162, 19, 0.856);
+  box-shadow: 0px 0px 6px 4px var(--peachCrayola);
+  background-color: rgb(255, 255, 255);
 }
 
 .button-edit-delete-wrapper {

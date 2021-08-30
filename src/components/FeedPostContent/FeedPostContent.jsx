@@ -12,7 +12,7 @@ export class FeedPostContent extends Component {
   componentDidMount() {
     if (this.props.searchingPost && this.props.posts.length !== 0) {
       let str = this.props.path.substring(1);
-
+  
       const searchedPost = this.props.posts.filter(
         (e) => e._id.toString() === str
       );

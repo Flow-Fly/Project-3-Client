@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './FavouriteList.css';
 import apiHandler from '../../api/apiHandler';
+import { Link } from 'react-router-dom';
 
 export class FavouriteList extends Component {
   state = {
@@ -11,7 +12,6 @@ export class FavouriteList extends Component {
     apiHandler
       .getFavourites()
       .then((dbRes) => {
-        console.log(dbRes.favouritePosts);
         if (this.props.type === 'Post') {
           this.setState({ elements: dbRes.favouritePosts });
         } else if (this.props.type === 'Job') {
@@ -37,8 +37,9 @@ export class FavouriteList extends Component {
   };
 
   render() {
-    if (this.state.elements === null)
+    if (this.state.elements === null) {
       return <div className="loading">Loading...</div>;
+    }
     return (
       <div className="favList">
         <h6>Favourite {this.props.type}s:</h6>
@@ -46,15 +47,23 @@ export class FavouriteList extends Component {
           {this.state.elements.map((element) => {
             return (
               <li>
-                {element.title}{' '}
                 <span
                   className="remove"
                   onClick={() => {
                     this.removeFromFavourites(element._id);
                   }}
                 >
-                  X
+                 <i class="fas fa-minus-circle"></i>
                 </span>
+                <Link
+                  to={
+                    (this.props.type === 'Post' ? '/post/#' : '/job/#') +
+                    element._id
+                  }
+                >
+                  {element.title}{' '}
+                </Link>
+                
               </li>
             );
           })}

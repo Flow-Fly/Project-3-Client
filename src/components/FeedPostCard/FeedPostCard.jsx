@@ -107,6 +107,7 @@ export class FeedPostCard extends Component {
                 url={this.userImage}
                 size="small"
                 id={this.state.postUserID}
+                type={this.state.post.creator.type}
               />
             </div>
             <div className="publishInfos-title">
@@ -134,14 +135,14 @@ export class FeedPostCard extends Component {
                 className="postCard favourites"
                 onClick={this.addToFavourites}
               >
-                ☆
+                <i class="far fa-star"></i>
               </span>
             ) : (
               <span
                 className="postCard favourites"
                 onClick={this.removeFromFavourites}
               >
-                ★
+                <i class="fas fa-star"></i>
               </span>
             )}
           </div>

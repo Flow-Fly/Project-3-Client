@@ -40,7 +40,7 @@ export class Profile extends Component {
             <div className="profile-container">
               <div className="main-infos">
                     <div className="profilHeader">
-                    <Avatar url={user.profileImg} size="huge" />    
+                    <Avatar url={user.profileImg} size="huge" type={user.type} />    
                         <div className="infoDiv">
                           <h5>{user.firstName} {user.lastName}</h5>
                         </div>
