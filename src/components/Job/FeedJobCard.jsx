@@ -102,6 +102,7 @@ class FeedJobCard extends Component {
           <span className="flash"> more details </span>
         </p>
       );
+      console.log(this.state.job.creator)
     } else {
       details = (
         <JobDetailsCard job={this.state.job} onClose={this.hideJobDetails} />
@@ -120,6 +121,7 @@ class FeedJobCard extends Component {
                 url={this.userImage}
                 size="small"
                 id={this.jobCreatorId}
+                type={this.state.job.creator.type}
               />
             </div>
 
@@ -155,14 +157,14 @@ class FeedJobCard extends Component {
                 className="postCard favourites"
                 onClick={this.addToFavourites}
               >
-                ☆
+                <i class="far fa-star"></i>
               </span>
             ) : (
               <span
                 className="postCard favourites"
                 onClick={this.removeFromFavourites}
               >
-                ★
+                <i class="fas fa-star"></i>
               </span>
             )}
           </div>

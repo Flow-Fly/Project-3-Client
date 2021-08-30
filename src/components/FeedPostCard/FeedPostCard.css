@@ -11,26 +11,26 @@
 }
 
 .FeedPostCard.highlighted {
-  box-shadow: 0px 0px 6px 4px rgba(228, 162, 19, 0.856);
+  box-shadow: 0px 0px 6px 4px var(--peachCrayola);
 }
 
 .postCardType {
   align-self: flex-end;
-  padding: 0.1rem 0.3rem;
+  padding: .2rem .6rem;
   font-weight: bolder;
-  border-radius: 0.2rem;
+  border-radius: .4rem;
 }
 .postCardType.WebDev {
-  background-color: rgb(168, 245, 168);
+  border: 2px solid rgb(168, 245, 168);
 }
 .postCardType.UI\/UX {
-  background-color: rgb(160, 160, 241);
+  border: 2px solid rgb(160, 160, 241);
 }
 .postCardType.CyberSecurity {
-  background-color: rgb(238, 141, 141);
+  border: 2px solid rgb(238, 141, 141);
 }
 .postCardType.DataAnalyst {
-  background-color: rgb(245, 122, 245);
+  border: 2px solid rgb(245, 122, 245);
 }
 
 .FeedPostCard p {
@@ -94,22 +94,26 @@
   margin-left: 0.8rem;
 }
 
-.publishLinks span:hover {
+.publishLinks .postCard:hover:not(.favourites) {
   cursor: pointer;
   color: var(--mainLightBlueColorHover);
 }
 
 .postCard.favourites {
-  color: var(--mainLightBlueColor);
-  font-weight: bolder;
-  font-size: 2rem;
-  transition: all 0.1s ease-in-out;
+  color: var(--peachCrayola);
+  font-size: 1.5rem;
+  font-weight: 100;
+  transition: all 0.3s ease-in-out;
   margin-bottom: 0.25rem;
   cursor: pointer;
 }
 
 .postCard.favourites:hover {
-  color: var(--mainLightBlueColorHover);
+  color: var(--orangeYellowCrayola);
+}
+
+.fas.fa-star {
+  color: var(--orangeYellowCrayola);
 }
 
 .publishInfos-title {

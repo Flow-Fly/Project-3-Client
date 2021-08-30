@@ -1,42 +1,79 @@
 .side-profile-container {
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    padding: 1em;
-    background-color: white;
-    border-radius: .5rem;
-    box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
-    text-align: center;
+  position: relative;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 1em;
+  background-color: white;
+  border-radius: 0.5rem;
+  box-shadow: 0 0 8px 4px rgba(0, 0, 0, 0.048);
+  text-align: center;
 }
 
-.wrapper-picture-and-name {
+.arrow {
+  display: inline-block;
+  position: absolute;
+  width: 20px;
+  height: 15px;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
+
+.arrow::before,
+.arrow::after {
+  content: '';
+  position: absolute;
+  width: 10.3px;
+  height: 2px;
+  background-color: var(--mainLightBlueColorHover);
+  display: inline-block;
+  transition: all .4s ease-in-out;
+}
+
+.arrow::before {
+  left: 1.2px;
+  transform-origin: 0% 0%;
+  transform: rotate(30deg);
+}
+.arrow::after {
+  right: 1.2px;
+  transform-origin: 100% 100%;
+  transform: rotate(-30deg);
+}
+
+.arrow.active::before {
+  transform: rotate(-30deg);
+}
+.arrow.active::after {
+  transform: rotate(30deg);
 }
 
 .side-profile-container .informations {
-    margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .side-profile-container .informations p {
-    font-style: italic;
+  font-style: italic;
 }
 
 .side-profile-container .informations span {
-    font-style: normal;
-    font-weight: 500;
+  font-style: normal;
+  font-weight: 500;
 }
 
-.informations{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-
+.informations {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-bottom: 0.5em;
 }
 
-.arrow{
+/* .arrow{
     font-size: 1.5rem;
     cursor: pointer;
     transition: all 0.1s ease-in-out    ;
@@ -46,4 +83,4 @@
     transform: scale(1.2);
     color:var(--mainLightBlueColorHover);
     cursor: pointer;
-}
+} */

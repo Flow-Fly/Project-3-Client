@@ -15,7 +15,7 @@ function Message(props) {
         <div className={`messageComponent ${isMine() ? 'mine' : ''}`}>
                 
             <div className={`messageContentWrapper ${isMine() ? 'mine' : ''}`}>
-                <Avatar size='tiny' url={isMine() ? props.context.user.profileImg : props.message.sender.profileImg}/>
+                <Avatar size='tiny' url={isMine() ? props.context.user.profileImg : props.message.sender.profileImg} type={isMine() ? props.context.user?.type : props.message.sender?.type}/>
                 <div className={`message ${isMine() ? 'mine' : ''}`}>
                     <div className={`messageContent ${isMine() ? 'mine' : ''}`}>
                         {props.message.content}

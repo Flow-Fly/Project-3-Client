@@ -40,7 +40,7 @@ const NavMain = (props) => {
               <li>
                 <NavLink to="/edit">
                   {context.user && (
-                    <Avatar url={context.user.profileImg} size="tiny" />
+                    <Avatar url={context.user.profileImg} size="tiny" type={context.user.type} />
                   )}
                 </NavLink>
               </li>

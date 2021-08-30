@@ -60,3 +60,7 @@
 .tabs.right {
   border-left: 1px solid var(--mainLightBlueColor);
 }
+
+.tabs:not(.active) {
+  background-color: rgb(232, 242, 248);
+}

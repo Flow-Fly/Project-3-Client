@@ -24,7 +24,7 @@ class SideProfile extends React.Component {
       <>
         <div className="side-profile-container">
           <div className="wrapper-picture-and-name">
-            <Avatar url={picture} size="big" />
+            <Avatar url={picture} size="big" type={type} />
             <h5>
               {firstName}&nbsp;{lastName}
             </h5>
@@ -62,7 +62,6 @@ class SideProfile extends React.Component {
                 this.setState({ displayFavs: !this.state.displayFavs })
               }
             >
-              {this.state.displayFavs ?"⇧" :"⇩"}
             </div>
             {this.state.displayFavs && (
               <>

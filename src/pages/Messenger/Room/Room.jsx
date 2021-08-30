@@ -24,7 +24,7 @@ class Room extends Component {
     render() {
         return (
             <div className='roomCard'>
-                <Avatar size="small" url={this.state.friend?.profileImg}>
+                <Avatar size="small" url={this.state.friend?.profileImg} type={this.state.friend?.type}>
                     <div className={this.isConnected() ? "status online" : "status offline"}></div>
                 </Avatar>
                 <span 
